@@ -22,44 +22,58 @@ TARGET_AUDIT_EMAIL = "science.boa@gmail.com"
 # 2. Dynamic Git Data Layer Ingestion
 quiz_id = st.query_params.get("quiz", "101")
 
-# Added a 10-second TTL cache behavior so it auto-refreshes frequently during testing
-@st.cache_data(ttl=10, show_spinner="Loading Assignment Resource File...")
+# Set cache TTL to 1 second so updates are pulled from GitHub instantly during testing
+@st.cache_data(ttl=1, show_spinner="Loading Assignment Resource File...")
 def fetch_quiz_schema(q_id):
-    # Note: verify if your GitHub folder is named 'quizzes' or 'quizs'
-    raw_git_url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_{q_id}.yaml"
-    try:
-        response = requests.get(raw_git_url)
-        if response.status_code == 200:
-            return yaml.safe_load(response.text)
-    except Exception:
-        return None
+    # Auto-check both common path naming conventions to prevent route errors
+    paths_to_test = [
+        f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_{q_id}.yaml",
+        f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizs/QUIZ_{q_id}.yaml"
+    ]
+    
+    st.session_state["attempted_urls"] = paths_to_test
+    
+    for url in paths_to_test:
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                st.session_state["active_url"] = url
+                return yaml.safe_load(response.text)
+        except Exception:
+            pass
     return None
 
 quiz_data = fetch_quiz_schema(quiz_id)
 
-# 🛠️ DIAGNOSTIC SIDEBAR PANEL
-st.sidebar.header("⚙️ System Diagnostics")
-if quiz_data is None:
-    st.sidebar.error("❌ Data Status: quiz_data is completely empty (None). The URL request failed or returned a 404.")
-else:
-    st.sidebar.success("✅ Data Status: YAML loaded successfully!")
-    st.sidebar.write("**Keys detected in this file:**", list(quiz_data.keys()))
-    
-    if "long_answer" in quiz_data:
-        st.sidebar.success("🎯 'long_answer' key found!")
-        st.sidebar.write(quiz_data["long_answer"])
-    else:
-        st.sidebar.error("❌ 'long_answer' key is MISSING from this cached file version.")
+# ─── 🛠️ MAIN PAGE DIAGNOSTIC PANEL (Bypasses Sidebar Entirely) ───
+st.info("🔧 SYSTEM DIAGNOSTIC PANEL (Temporary Deployment tool)")
+diag_col1, diag_col2 = st.columns(2)
 
-# Manual clear mechanism right on the screen
-if st.sidebar.button("🔄 Force Clear Cache & Reload"):
-    st.cache_data.clear()
-    st.rerun()
+with diag_col1:
+    if quiz_data is None:
+        st.error("❌ Data Status: quiz_data is completely empty (None). Both tested paths failed.")
+        st.write("Attempted Paths:", st.session_state.get("attempted_urls"))
+    else:
+        st.success("✅ Data Status: YAML loaded successfully!")
+        st.write(f"**Connected Path:** `{st.session_state.get('active_url')}`")
+        st.write("**Keys found inside this file version:**", list(quiz_data.keys()))
+
+with diag_col2:
+    if quiz_data and "long_answer" in quiz_data:
+        st.success("🎯 'long_answer' key detected! The text box code should fire.")
+    else:
+        st.error("❌ 'long_answer' key is MISSING from the currently fetched file structure.")
+    
+    if st.button("🔄 Force Global Cache Clear & Refresh App", use_container_width=True):
+        st.cache_data.clear()
+        st.rerun()
+
+st.markdown("---")
 
 
 # 3. View Interface Architecture Rendering
 if not quiz_data:
-    st.error(f"⚠️ Unable to load Assignment ID: **{quiz_id}**. Please check the URL link or contact your teacher.")
+    st.error(f"⚠️ Unable to load Assignment ID: **{quiz_id}**. Please verify your GitHub file paths.")
 else:
     st.title(quiz_data.get("title", f"Quiz Portal (ID: {quiz_id})"))
     
@@ -69,13 +83,12 @@ else:
     # ─── LEFT COLUMN: Media Anchor Panel ───
     with col_left:
         st.subheader("📺 Video Source Material")
-        
         if quiz_data.get("video_url") and quiz_data["video_url"].strip() != "":
             st.video(quiz_data["video_url"])
             st.info("💡 Pro-Tip: You can pause or scrub this timeline freely while filling out your answers on the right side panel.")
         else:
             st.warning("⚠️ No instructional video link was provided for this assignment. Proceed directly to the questions.")
-            
+        
         st.subheader("👤 Your Identity Details")
         student_email = st.text_input("Enter your institutional email address:", placeholder="e.g., student@school.ac.uk")
     
@@ -84,8 +97,9 @@ else:
         st.subheader("📝 Assignment Questions")
         
         mc_user_selections = {}
-        student_long_text = ""  # Safe fallback initialization to avoid NameErrors
+        student_long_text = ""  # Initialized to block NameError crashes
         
+        # Fixed height scroll pane
         with st.container(height=620):
             
             # Phase A: Render Multiple Choice Questions
@@ -136,7 +150,7 @@ else:
                     mc_possible = 0
                     mc_breakdown_html = "<h3>Part 1: Multiple Choice Results</h3><ul>"
                     
-                    for item in quiz_data["multiple_choice"]:
+                    for item in quiz_data.get("multiple_choice", []):
                         q_num = item["question_num"]
                         points_allotted = item.get("points", 5)
                         mc_possible += points_allotted
