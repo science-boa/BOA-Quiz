@@ -1,0 +1,178 @@
+quiz_id: 101
+video_url: ''
+title: Cardiovascular Diseases and Treatments
+multiple_choice:
+- question_num: 1
+  text: What are cardiovascular diseases?
+  A: Diseases of the heart and blood vessels.
+  B: Infectious diseases passed from person to person.
+  C: Diseases caused by lack of exercise.
+  D: Diseases only affecting the lungs.
+  answer: A
+  points: 5
+  explanation: The text states, 'Now, cardiovascular diseases are diseases of the
+    heart and blood vessels.'
+- question_num: 2
+  text: 'A key feature of cardiovascular diseases mentioned in the text is that they
+    are:'
+  A: Communicable.
+  B: Infectious.
+  C: Non-communicable.
+  D: Always fatal.
+  answer: C
+  points: 5
+  explanation: The text states, 'A key feature of these is that they are non-communicable;
+    in other words, they're not infectious, they cannot be passed from person to person.'
+- question_num: 3
+  text: What is the purpose of the coronary arteries?
+  A: To carry deoxygenated blood away from the heart.
+  B: To provide oxygen to the muscle cells of the heart.
+  C: To pump blood to the rest of the body.
+  D: To filter waste products from the blood.
+  answer: B
+  points: 5
+  explanation: The text states, 'The purpose of the coronary arteries is to provide
+    oxygen to the muscle cells of the heart.'
+- question_num: 4
+  text: What happens in coronary heart disease?
+  A: The heart muscle enlarges.
+  B: Layers of fatty material build up inside the coronary arteries.
+  C: The heart valves become leaky.
+  D: The heart stops pumping blood.
+  answer: B
+  points: 5
+  explanation: The text states, 'In coronary heart disease, layers of fatty material
+    build up inside the coronary arteries.'
+- question_num: 5
+  text: What is a potential extreme consequence of coronary heart disease?
+  A: Enlarged heart.
+  B: Increased blood flow.
+  C: Heart attack.
+  D: Stronger heart contractions.
+  answer: C
+  points: 5
+  explanation: The text states, 'In extreme cases, this can result in a heart attack
+    where the heart is starved of oxygen, and this can be fatal.'
+- question_num: 6
+  text: How do statins help treat coronary heart disease?
+  A: They open up blocked arteries directly.
+  B: They reduce the level of cholesterol in the blood.
+  C: They replace faulty heart valves.
+  D: They strengthen the heart muscle.
+  answer: B
+  points: 5
+  explanation: The text states, 'Statins are drugs which reduce the level of cholesterol
+    in the blood.'
+- question_num: 7
+  text: What is a disadvantage of statins mentioned in the text?
+  A: They are not effective.
+  B: They cause blood clots.
+  C: They can cause liver problems.
+  D: They do not slow down fatty material buildup.
+  answer: C
+  points: 5
+  explanation: The text states, 'However, statins do have some unwanted side effects;
+    for example, they can cause liver problems.'
+- question_num: 8
+  text: What is a stent used for in coronary heart disease?
+  A: To replace a faulty heart valve.
+  B: To reduce cholesterol levels.
+  C: To keep a coronary artery open.
+  D: To provide oxygen to the heart muscle.
+  answer: C
+  points: 5
+  explanation: The text states, 'A stent is a tube which is inserted into the coronary
+    artery to keep it open.'
+- question_num: 9
+  text: What is a limitation of using a stent?
+  A: It prevents all future narrowing of arteries.
+  B: It treats the underlying causes of the disease.
+  C: It does not prevent other regions of the coronary arteries from narrowing.
+  D: It requires patients to take anti-clotting drugs.
+  answer: C
+  points: 5
+  explanation: The text states, 'However, a stent will not prevent other regions of
+    the coronary arteries from narrowing, and it does not treat the underlying causes
+    of the disease.'
+- question_num: 10
+  text: What happens if heart valves do not fully open?
+  A: The heart has to pump extra hard.
+  B: The heart muscle receives too much oxygen.
+  C: Blood clots form easily.
+  D: The patient feels energetic.
+  answer: A
+  points: 5
+  explanation: The text states, 'Sometimes these valves do not fully open, so the
+    heart has to pump extra hard to get the blood through.'
+- question_num: 11
+  text: What is a characteristic of mechanical heart valves?
+  A: They do not last long.
+  B: They are made from animal tissue.
+  C: They increase the risk of blood clots.
+  D: Patients do not need to take drugs.
+  answer: C
+  points: 5
+  explanation: The text states, 'Mechanical valves can last a lifetime, but they increase
+    the risk of blood clots, so patients have to take anti-clotting drugs.'
+- question_num: 12
+  text: What is a characteristic of heart valves from animals?
+  A: They last a lifetime.
+  B: They increase the risk of blood clots.
+  C: Patients do not need to take drugs.
+  D: They are made of metal.
+  answer: C
+  points: 5
+  explanation: The text states, 'Valves from animals do not last as long and may need
+    to be replaced, however, patients do not need to take drugs.'
+- question_num: 13
+  text: What is 'heart failure' as described in the text?
+  A: When the heart is starved of oxygen.
+  B: When the heart cannot pump enough blood around the body.
+  C: When fatty material builds up in arteries.
+  D: When heart valves are leaky.
+  answer: B
+  points: 5
+  explanation: The text states, 'In some patients with cardiovascular disease, the
+    heart cannot pump enough blood around the body. This is called heart failure.'
+- question_num: 14
+  text: What is a problem associated with donated hearts for transplant?
+  A: They are too expensive.
+  B: There are not enough available.
+  C: They always cause blood clots.
+  D: The patient does not need to take drugs.
+  answer: B
+  points: 5
+  explanation: The text states, 'Firstly, there are not enough donated hearts available
+    to treat every patient.'
+- question_num: 15
+  text: Why are artificial hearts generally not a long-term solution?
+  A: They are too heavy.
+  B: They increase the risk of blood clotting and can only be used for a relatively
+    short time.
+  C: They are rejected by the body's immune system.
+  D: They cannot pump enough blood.
+  answer: B
+  points: 5
+  explanation: The text states, 'Artificial hearts increase the risk of blood clotting
+    and they're not a long-term solution to heart failure. They can only be used for
+    a relatively short time.'
+long_answer:
+  question_num: 1
+  text: Compare and contrast the use of statins and stents as treatments for coronary
+    heart disease, including their advantages and disadvantages.
+  points: 6
+  rubric: "To achieve full points, the answer should:\n-   **Statins (2 points):**\n\
+    \    -   Identify that statins are drugs that reduce cholesterol levels in the\
+    \ blood, slowing the buildup of fatty materials (1 point).\n    -   Mention an\
+    \ advantage, such as being proven to reduce the risk of coronary heart disease\
+    \ (effective treatment) (0.5 points).\n    -   Mention a disadvantage, such as\
+    \ unwanted side effects like liver problems (0.5 points).\n-   **Stents (2 points):**\n\
+    \    -   Identify that stents are tubes inserted into coronary arteries to keep\
+    \ them open (1 point).\n    -   Mention an advantage, such as allowing blood to\
+    \ flow normally through the artery (0.5 points).\n    -   Mention a disadvantage,\
+    \ such as not preventing narrowing in other regions or not treating the underlying\
+    \ causes of the disease (0.5 points).\n-   **Comparison/Contrast (2 points):**\n\
+    \    -   Clearly differentiate between statins as a systemic, drug-based treatment\
+    \ addressing cholesterol and stents as a localized, physical intervention for\
+    \ blockages (1 point).\n    -   Highlight that statins aim to slow disease progression,\
+    \ while stents aim to immediately restore blood flow in a specific area (1 point)."
