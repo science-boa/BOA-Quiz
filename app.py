@@ -60,7 +60,7 @@ if st.session_state.page == 3:
             for item in quiz_data.get("multiple_choice", []):
                 q = item["question_num"]
                 ans = st.session_state.mc_answers.get(q)
-                correct_ans = item.get("correct", "N/A")
+                correct_ans = item.get("answer", "N/A")
                 st.markdown(f"**Q{q}:** {item['text']}")
                 st.write(f"Your choice: {ans} | Correct: {correct_ans}")
                 if ans != correct_ans:
@@ -103,7 +103,9 @@ else:
             with st.container(height=650):
                 for item in quiz_data.get("multiple_choice", []):
                     q = item["question_num"]
-                    ans = st.radio(item["text"], ["A", "B", "C", "D"], index=None, key=f"mc_{q}")
+                    # FIX: Using the actual values from YAML as options
+                    options = [item["A"], item["B"], item["C"], item["D"]]
+                    ans = st.radio(item["text"], options, index=None, key=f"mc_{q}")
                     st.session_state.mc_answers[q] = ans
                 if st.button("Next", type="primary", key="next_btn", use_container_width=True):
                     if not st.session_state.student_email or "@" not in st.session_state.student_email:
