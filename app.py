@@ -22,10 +22,10 @@ TARGET_AUDIT_EMAIL = "science.boa@gmail.com"
 # 2. Dynamic Git Data Layer Ingestion
 quiz_id = st.query_params.get("quiz", "101")
 
-# FIX 1: Added ttl=60 so Streamlit re-fetches from GitHub when you update the YAML file
-@st.cache_data(ttl=60, show_spinner="Loading Assignment Resource File...")
+# Added a 10-second TTL cache behavior so it auto-refreshes frequently during testing
+@st.cache_data(ttl=10, show_spinner="Loading Assignment Resource File...")
 def fetch_quiz_schema(q_id):
-    # Note: Double-check if your GitHub folder is named 'quizzes' or 'quizs' and match it here
+    # Note: verify if your GitHub folder is named 'quizzes' or 'quizs'
     raw_git_url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_{q_id}.yaml"
     try:
         response = requests.get(raw_git_url)
@@ -37,32 +37,45 @@ def fetch_quiz_schema(q_id):
 
 quiz_data = fetch_quiz_schema(quiz_id)
 
+# 🛠️ DIAGNOSTIC SIDEBAR PANEL
+st.sidebar.header("⚙️ System Diagnostics")
+if quiz_data is None:
+    st.sidebar.error("❌ Data Status: quiz_data is completely empty (None). The URL request failed or returned a 404.")
+else:
+    st.sidebar.success("✅ Data Status: YAML loaded successfully!")
+    st.sidebar.write("**Keys detected in this file:**", list(quiz_data.keys()))
+    
+    if "long_answer" in quiz_data:
+        st.sidebar.success("🎯 'long_answer' key found!")
+        st.sidebar.write(quiz_data["long_answer"])
+    else:
+        st.sidebar.error("❌ 'long_answer' key is MISSING from this cached file version.")
+
+# Manual clear mechanism right on the screen
+if st.sidebar.button("🔄 Force Clear Cache & Reload"):
+    st.cache_data.clear()
+    st.rerun()
+
+
 # 3. View Interface Architecture Rendering
 if not quiz_data:
     st.error(f"⚠️ Unable to load Assignment ID: **{quiz_id}**. Please check the URL link or contact your teacher.")
 else:
     st.title(quiz_data.get("title", f"Quiz Portal (ID: {quiz_id})"))
     
-    # 🔍 DIAGNOSTIC SIDEBAR: Shows you exactly what keys Streamlit sees in your YAML file
-    st.sidebar.header("🛠️ System Diagnostics")
-    st.sidebar.write("Keys found in current cache:", list(quiz_data.keys()))
-    if "long_answer" in quiz_data:
-        st.sidebar.success("✅ 'long_answer' key detected!")
-    else:
-        st.sidebar.error("❌ 'long_answer' key NOT found in cache. Use the top right menu (...) -> 'Clear cache' to force a fresh download.")
-
     # Implementing Layout 2: Two-Column Split Screen Workspace
     col_left, col_right = st.columns([2, 3], gap="large")
     
     # ─── LEFT COLUMN: Media Anchor Panel ───
     with col_left:
         st.subheader("📺 Video Source Material")
+        
         if quiz_data.get("video_url") and quiz_data["video_url"].strip() != "":
             st.video(quiz_data["video_url"])
             st.info("💡 Pro-Tip: You can pause or scrub this timeline freely while filling out your answers on the right side panel.")
         else:
             st.warning("⚠️ No instructional video link was provided for this assignment. Proceed directly to the questions.")
-        
+            
         st.subheader("👤 Your Identity Details")
         student_email = st.text_input("Enter your institutional email address:", placeholder="e.g., student@school.ac.uk")
     
@@ -71,11 +84,9 @@ else:
         st.subheader("📝 Assignment Questions")
         
         mc_user_selections = {}
-        # FIX 2: Pre-initialize variable to prevent NameError scope crashes
-        student_long_text = "" 
+        student_long_text = ""  # Safe fallback initialization to avoid NameErrors
         
-        # Enforcing fixed height container translates this panel into a sleek scroll pane
-        with st.container(height=650):
+        with st.container(height=620):
             
             # Phase A: Render Multiple Choice Questions
             if "multiple_choice" in quiz_data and quiz_data["multiple_choice"]:
@@ -115,7 +126,6 @@ else:
         if submit_trigger:
             if not student_email or "@" not in student_email:
                 st.error("❌ Submission Failed: You must provide a valid email address to receive your grades.")
-            # FIX 3: Safe conditional validation check
             elif "long_answer" in quiz_data and not student_long_text.strip():
                 st.error("❌ Submission Failed: Please write a response for the long answer question before finalizing.")
             else:
@@ -181,7 +191,6 @@ else:
                     total_marks_earned = mc_score + la_score
                     total_marks_possible = mc_possible + (la_data.get('points', 10) if "long_answer" in quiz_data else 0)
                     
-                    # Construct HTML Email Layout Payload
                     email_html_body = f"""
                     <html>
                     <body style="font-family: sans-serif; color: #333; line-height: 1.5;">
@@ -225,7 +234,7 @@ else:
                         server.quit()
                         
                         st.balloons()
-                        st.success(f"🎉 Quiz Submitted! Immediate feedback has been dispatched to (**{student_email}**).")
+                        st.success(f"🎉 Quiz Submitted! Immediate feedback has been dispatched. Check your email (**{student_email}**).")
                         
                         st.markdown("### 📊 Summary View of Results")
                         st.markdown(f"**Total Marks: {total_marks_earned} / {total_marks_possible}**")
