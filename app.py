@@ -47,11 +47,16 @@ else:
     # Implementing Layout 2: Two-Column Split Screen Workspace
     col_left, col_right = st.columns([2, 3], gap="large")
     
-    # ─── LEFT COLUMN: Media Anchor Panel ───
-    with col_left:
-        st.subheader("📺 Video Source Material")
+# ─── LEFT COLUMN: Media Anchor Panel ───
+with col_left:
+    st.subheader("📺 Video Source Material")
+    
+    # Safety Check: Only attempt to render if the URL string is not empty
+    if quiz_data.get("video_url") and quiz_data["video_url"].strip() != "":
         st.video(quiz_data["video_url"])
         st.info("💡 Pro-Tip: You can pause or scrub this timeline freely while filling out your answers on the right side panel.")
+    else:
+        st.warning("⚠️ No instructional video link was provided for this assignment. Proceed directly to the questions.")
         
         st.subheader("👤 Your Identity Details")
         student_email = st.text_input("Enter your institutional email address:", placeholder="e.g., student@school.ac.uk")
