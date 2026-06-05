@@ -109,20 +109,35 @@ else:
                         st.session_state.email_error = True
                         st.rerun()
                     else:
+                        st.session_state.email_error = False
                         st.session_state.page = 2
                         st.rerun()
         else:
             st.subheader("Part 2: Long Answer")
             la_data = quiz_data.get("long_answer", {})
             st.markdown(la_data.get("text", ""))
-            st.text_area("Your response:", key="la_input")
+            la_input = st.text_area("Your response:", key="la_input")
             if st.button("Submit Assignment", type="primary", key="submit_btn"):
                 with st.spinner("Grading..."):
                     try:
-                        prompt = f"Rubric: {la_data.get('rubric')}. Resp: {st.session_state.la_input}. Output JSON: {{'score': 0, 'feedback': ''}}"
+                        prompt = f"Rubric: {la_data.get('rubric')}. Resp: {la_input}. Output JSON: {{'score': 0, 'feedback': ''}}"
                         try: res = model_primary.generate_content(prompt).text
                         except: res = model_fallback.generate_content(prompt).text
+                        
                         st.session_state.grading_results = json.loads(res)
+                        
+                        # SMTP Logic
+                        msg = MIMEMultipart()
+                        msg["Subject"] = f"Assignment Results: {quiz_data['title']}"
+                        msg["To"] = st.session_state.student_email
+                        msg.attach(MIMEText(f"Your score: {st.session_state.grading_results.get('score')}<br>Feedback: {st.session_state.grading_results.get('feedback')}", "html"))
+                        
+                        server = smtplib.SMTP(st.secrets["SMTP_SERVER"], st.secrets["SMTP_PORT"])
+                        server.starttls()
+                        server.login(st.secrets["SMTP_USERNAME"], st.secrets["SMTP_PASSWORD"])
+                        server.sendmail(st.secrets["SMTP_USERNAME"], [st.session_state.student_email, "science.boa@gmail.com"], msg.as_string())
+                        server.quit()
+                        
                         st.session_state.page = 3
                         st.rerun()
                     except Exception as e:
