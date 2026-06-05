@@ -60,9 +60,10 @@ if st.session_state.page == 3:
             for item in quiz_data.get("multiple_choice", []):
                 q = item["question_num"]
                 ans = st.session_state.mc_answers.get(q)
+                correct_ans = item.get("answer", "N/A")
                 st.markdown(f"**Q{q}:** {item['text']}")
-                st.write(f"Your choice: {ans} | Correct: {item['correct']}")
-                if ans != item['correct']:
+                st.write(f"Your choice: {ans} | Correct: {correct_ans}")
+                if ans != correct_ans:
                     st.error(f"Explanation: {item.get('explanation', 'No explanation provided.')}")
                 else:
                     st.success("Correct!")
