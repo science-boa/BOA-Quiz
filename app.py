@@ -26,8 +26,8 @@ quiz_id = st.query_params.get("quiz", "101")
 @st.cache_data(show_spinner="Loading Assignment Resource File...")
 def fetch_quiz_schema(q_id):
     # Adjust this path matching your target public GitHub configuration profile
-    # Format: https://raw.githubusercontent.com/[USER]/[REPO]/main/quizs/QUIZ_[ID].yaml
-    raw_git_url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizs/QUIZ_{q_id}.yaml"
+    # Format: https://raw.githubusercontent.com/[USER]/[REPO]/main/quizzes/QUIZ_[ID].yaml
+    raw_git_url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_{q_id}.yaml"
     try:
         response = requests.get(raw_git_url)
         if response.status_code == 200:
@@ -149,78 +149,4 @@ else:
                         INPUT SPECIFICATIONS:
                         - Question Target: {la_data['text']}
                         - Evaluation Rubric: {la_data['rubric']}
-                        - Max Points Available: {la_data['points']}
-                        - Student Written Input: {student_long_text}
-                        """
-                        
-                        ai_raw_payload = model.generate_content(ai_grading_prompt).text
-                        ai_parsed_data = json.loads(ai_raw_payload)
-                        
-                        la_score = int(ai_parsed_data.get("score", 0))
-                        la_feedback = ai_parsed_data.get("feedback", "No comment provided.")
-                    except Exception as e:
-                        la_score = 0
-                        la_feedback = f"Automated grading connection timeout. Raw log details: {str(e)}"
-                    
-                    # Step C: Formulate Email and Execute Outbound SMTP Transmission
-                    total_marks_earned = mc_score + la_score
-                    total_marks_possible = mc_possible + la_data.get('points', 10)
-                    
-                    # Construct an elegant HTML Email Layout Payload
-                    email_html_body = f"""
-                    <html>
-                    <body style="font-family: sans-serif; color: #333; line-height: 1.5;">
-                        <div style="background-color: #0f172a; color: white; padding: 20px; border-radius: 6px 6px 0 0;">
-                            <h2 style="margin: 0;">Assignment Performance Ledger</h2>
-                            <p style="margin: 5px 0 0 0; color: #94a3b8;">Quiz ID Reference: {quiz_id} | Student: {student_email}</p>
-                        </div>
-                        <div style="padding: 20px; border: 1px solid #cbd5e1; border-top: none; border-radius: 0 0 6px 6px; background-color: #f8fafc;">
-                            <h2 style="color: #0284c7; margin-top: 0;">Overall Grade: {total_marks_earned} / {total_marks_possible} Marks</h2>
-                            <hr style="border: 0; border-top: 1px solid #cbd5e1; margin: 20px 0;">
-                            
-                            {mc_breakdown_html}
-                            
-                            <hr style="border: 0; border-top: 1px solid #cbd5e1; margin: 20px 0;">
-                            <h3>Part 2: Long Answer Assessment Details</h3>
-                            <p><b>Question:</b> {la_data['text']}</p>
-                            <p><b>Student Response:</b> <i>"{student_long_text}"</i></p>
-                            <p><b>Score Awarded: {la_score} / {la_data.get('points', 10)} Marks</b></p>
-                            <div style="background-color: #f1f5f9; padding: 12px; border-left: 4px solid #0284c7; font-style: italic;">
-                                <b>Gemini Teacher Evaluation:</b> {la_feedback}
-                            </div>
-                        </div>
-                    </body>
-                    </html>
-                    """
-                    
-                    # Dispatch via background server mail pipelines
-                    try:
-                        msg = MIMEMultipart("alternative")
-                        msg["Subject"] = f"📚 Homework Feedback - Quiz {quiz_id} Results"
-                        msg["From"] = st.secrets["SMTP_USERNAME"]
-                        msg["To"] = student_email
-                        msg["Bcc"] = TARGET_AUDIT_EMAIL # Forwards record payload to database tracker silently
-                        
-                        msg.attach(MIMEText(email_html_body, "html"))
-                        
-                        # Establish SMTP Handshake connection
-                        server = smtplib.SMTP(st.secrets["SMTP_SERVER"], st.secrets["SMTP_PORT"])
-                        server.starttls() # Secures line via cryptographic wrapping
-                        server.login(st.secrets["SMTP_USERNAME"], st.secrets["SMTP_PASSWORD"])
-                        
-                        # Broadcast message across system recipients
-                        recipients = [student_email, TARGET_AUDIT_EMAIL]
-                        server.sendmail(st.secrets["SMTP_USERNAME"], recipients, msg.as_string())
-                        server.quit()
-                        
-                        st.balloons()
-                        st.success(f"🎉 Quiz Submitted! Immediate feedback has been dispatched. Check your email (**{student_email}**).")
-                        
-                        # Render results live on-screen for the student as secondary validation
-                        st.markdown("### 📊 Summary View of Results")
-                        st.markdown(f"**Total Marks: {total_marks_earned} / {total_marks_possible}**")
-                        st.markdown(f"**Long Answer Score:** {la_score} Marks")
-                        st.info(f"**Gemini Marker Review:** {la_feedback}")
-                        
-                    except Exception as smtp_err:
-                        st.error(f"Data tabulated successfully, but transaction email delivery failed. System log: {str(smtp_err)}")
+                        - Max Points Available
