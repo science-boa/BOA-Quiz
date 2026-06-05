@@ -20,13 +20,12 @@ else:
 TARGET_AUDIT_EMAIL = "science.boa@gmail.com"
 
 # 2. Dynamic Git Data Layer Ingestion
-# Reads '?quiz=XYZ' from the URL bar, defaults to quiz number '101' if omitted
 quiz_id = st.query_params.get("quiz", "101")
 
-@st.cache_data(show_spinner="Loading Assignment Resource File...")
+# FIX 1: Added ttl=60 so Streamlit re-fetches from GitHub when you update the YAML file
+@st.cache_data(ttl=60, show_spinner="Loading Assignment Resource File...")
 def fetch_quiz_schema(q_id):
-    # Adjust this path matching your target public GitHub configuration profile
-    # Format: https://raw.githubusercontent.com/[USER]/[REPO]/main/quizzes/QUIZ_[ID].yaml
+    # Note: Double-check if your GitHub folder is named 'quizzes' or 'quizs' and match it here
     raw_git_url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_{q_id}.yaml"
     try:
         response = requests.get(raw_git_url)
@@ -38,46 +37,45 @@ def fetch_quiz_schema(q_id):
 
 quiz_data = fetch_quiz_schema(quiz_id)
 
-# 🔍 DIAGNOSTIC SIDEBAR: Tells you exactly what sections Python reads from GitHub
-if quiz_data:
-    st.sidebar.header("🛠️ System Diagnostics")
-    st.sidebar.write("Found keys in YAML:", list(quiz_data.keys()))
-
 # 3. View Interface Architecture Rendering
 if not quiz_data:
     st.error(f"⚠️ Unable to load Assignment ID: **{quiz_id}**. Please check the URL link or contact your teacher.")
 else:
     st.title(quiz_data.get("title", f"Quiz Portal (ID: {quiz_id})"))
     
+    # 🔍 DIAGNOSTIC SIDEBAR: Shows you exactly what keys Streamlit sees in your YAML file
+    st.sidebar.header("🛠️ System Diagnostics")
+    st.sidebar.write("Keys found in current cache:", list(quiz_data.keys()))
+    if "long_answer" in quiz_data:
+        st.sidebar.success("✅ 'long_answer' key detected!")
+    else:
+        st.sidebar.error("❌ 'long_answer' key NOT found in cache. Use the top right menu (...) -> 'Clear cache' to force a fresh download.")
+
     # Implementing Layout 2: Two-Column Split Screen Workspace
     col_left, col_right = st.columns([2, 3], gap="large")
     
     # ─── LEFT COLUMN: Media Anchor Panel ───
     with col_left:
         st.subheader("📺 Video Source Material")
-        
-        # Safety Check: Only attempt to render if the URL string is not empty
         if quiz_data.get("video_url") and quiz_data["video_url"].strip() != "":
             st.video(quiz_data["video_url"])
             st.info("💡 Pro-Tip: You can pause or scrub this timeline freely while filling out your answers on the right side panel.")
         else:
             st.warning("⚠️ No instructional video link was provided for this assignment. Proceed directly to the questions.")
-            
-        # FIXED: Pushed outside the video if/else condition so it always shows up!
+        
         st.subheader("👤 Your Identity Details")
         student_email = st.text_input("Enter your institutional email address:", placeholder="e.g., student@school.ac.uk")
     
     # ─── RIGHT COLUMN: Bounded Scrollable Question Panel ───
-    # FIXED: Re-aligned to be a sibling of col_left, not nested inside it!
     with col_right:
         st.subheader("📝 Assignment Questions")
         
         mc_user_selections = {}
-        student_long_text = ""  # Safety initialization fallback to prevent crashes
+        # FIX 2: Pre-initialize variable to prevent NameError scope crashes
+        student_long_text = "" 
         
         # Enforcing fixed height container translates this panel into a sleek scroll pane
-        # Raised to 750 to accommodate 15 multiple-choice questions cleanly
-        with st.container(height=750):
+        with st.container(height=650):
             
             # Phase A: Render Multiple Choice Questions
             if "multiple_choice" in quiz_data and quiz_data["multiple_choice"]:
@@ -86,14 +84,12 @@ else:
                     q_num = item["question_num"]
                     st.markdown(f"**Question {q_num}:** {item['text']} *({item.get('points', 5)} Marks)*")
                     
-                    # Dynamically collect option texts
                     options_list = [item["A"], item["B"], item["C"], item["D"]]
                     
-                    # Store user response natively
                     mc_user_selections[q_num] = st.radio(
                         label=f"Options for Q{q_num}",
                         options=options_list,
-                        index=None,  # Forces radio to be unselected by default
+                        index=None,  
                         label_visibility="collapsed",
                         key=f"mc_radio_{q_num}"
                     )
@@ -119,6 +115,7 @@ else:
         if submit_trigger:
             if not student_email or "@" not in student_email:
                 st.error("❌ Submission Failed: You must provide a valid email address to receive your grades.")
+            # FIX 3: Safe conditional validation check
             elif "long_answer" in quiz_data and not student_long_text.strip():
                 st.error("❌ Submission Failed: Please write a response for the long answer question before finalizing.")
             else:
@@ -135,8 +132,8 @@ else:
                         mc_possible += points_allotted
                         
                         selected_string = mc_user_selections[q_num]
-                        correct_letter = item["answer"]  # e.g., 'B'
-                        correct_string = item[correct_letter] # e.g., option content matching 'B'
+                        correct_letter = item["answer"]  
+                        correct_string = item[correct_letter] 
                         
                         if selected_string == correct_string:
                             mc_score += points_allotted
@@ -147,40 +144,44 @@ else:
                     mc_breakdown_html += f"</ul><p><b>Multiple Choice Total: {mc_score} / {mc_possible} Marks</b></p>"
                     
                     # Step B: Tabulate Long Answer via Gemini 1.5 Flash Model API Call
-                    try:
-                        model = genai.GenerativeModel(
-                            'gemini-1.5-flash',
-                            generation_config={"response_mime_type": "application/json"}
-                        )
-                        
-                        ai_grading_prompt = f"""
-                        You are a professional educational assessment engine. Grade the student's open-ended response against the provided rubric parameters.
-                        
-                        CRITICAL: Return your final response in valid JSON matching exactly these two root keys:
-                        "score": An integer data value representing marks awarded. It cannot exceed the max available points.
-                        "feedback": A short paragraph explaining item criteria met or missing, offering direct improvement suggestions.
-                        
-                        INPUT SPECIFICATIONS:
-                        - Question Target: {la_data['text']}
-                        - Evaluation Rubric: {la_data['rubric']}
-                        - Max Points Available: {la_data['points']}
-                        - Student Written Input: {student_long_text}
-                        """
-                        
-                        ai_raw_payload = model.generate_content(ai_grading_prompt).text
-                        ai_parsed_data = json.loads(ai_raw_payload)
-                        
-                        la_score = int(ai_parsed_data.get("score", 0))
-                        la_feedback = ai_parsed_data.get("feedback", "No comment provided.")
-                    except Exception as e:
-                        la_score = 0
-                        la_feedback = f"Automated grading connection timeout. Raw log details: {str(e)}"
+                    la_score = 0
+                    la_feedback = "No open-ended component structured for evaluation."
+                    
+                    if "long_answer" in quiz_data and quiz_data["long_answer"]:
+                        try:
+                            model = genai.GenerativeModel(
+                                'gemini-1.5-flash',
+                                generation_config={"response_mime_type": "application/json"}
+                            )
+                            
+                            ai_grading_prompt = f"""
+                            You are a professional educational assessment engine. Grade the student's open-ended response against the provided rubric parameters.
+                            
+                            CRITICAL: Return your final response in valid JSON matching exactly these two root keys:
+                            "score": An integer data value representing marks awarded. It cannot exceed the max available points.
+                            "feedback": A short paragraph explaining item criteria met or missing, offering direct improvement suggestions.
+                            
+                            INPUT SPECIFICATIONS:
+                            - Question Target: {la_data['text']}
+                            - Evaluation Rubric: {la_data['rubric']}
+                            - Max Points Available: {la_data['points']}
+                            - Student Written Input: {student_long_text}
+                            """
+                            
+                            ai_raw_payload = model.generate_content(ai_grading_prompt).text
+                            ai_parsed_data = json.loads(ai_raw_payload)
+                            
+                            la_score = int(ai_parsed_data.get("score", 0))
+                            la_feedback = ai_parsed_data.get("feedback", "No comment provided.")
+                        except Exception as e:
+                            la_score = 0
+                            la_feedback = f"Automated grading connection timeout. Raw log details: {str(e)}"
                     
                     # Step C: Formulate Email and Execute Outbound SMTP Transmission
                     total_marks_earned = mc_score + la_score
-                    total_marks_possible = mc_possible + la_data.get('points', 10)
+                    total_marks_possible = mc_possible + (la_data.get('points', 10) if "long_answer" in quiz_data else 0)
                     
-                    # Construct an elegant HTML Email Layout Payload
+                    # Construct HTML Email Layout Payload
                     email_html_body = f"""
                     <html>
                     <body style="font-family: sans-serif; color: #333; line-height: 1.5;">
@@ -196,9 +197,8 @@ else:
                             
                             <hr style="border: 0; border-top: 1px solid #cbd5e1; margin: 20px 0;">
                             <h3>Part 2: Long Answer Assessment Details</h3>
-                            <p><b>Question:</b> {la_data['text']}</p>
                             <p><b>Student Response:</b> <i>"{student_long_text}"</i></p>
-                            <p><b>Score Awarded: {la_score} / {la_data.get('points', 10)} Marks</b></p>
+                            <p><b>Score Awarded: {la_score} Marks</b></p>
                             <div style="background-color: #f1f5f9; padding: 12px; border-left: 4px solid #0284c7; font-style: italic;">
                                 <b>Gemini Teacher Evaluation:</b> {la_feedback}
                             </div>
@@ -207,30 +207,26 @@ else:
                     </html>
                     """
                     
-                    # Dispatch via background server mail pipelines
                     try:
                         msg = MIMEMultipart("alternative")
                         msg["Subject"] = f"📚 Homework Feedback - Quiz {quiz_id} Results"
                         msg["From"] = st.secrets["SMTP_USERNAME"]
                         msg["To"] = student_email
-                        msg["Bcc"] = TARGET_AUDIT_EMAIL # Forwards record payload to database tracker silently
+                        msg["Bcc"] = TARGET_AUDIT_EMAIL 
                         
                         msg.attach(MIMEText(email_html_body, "html"))
                         
-                        # Establish SMTP Handshake connection
                         server = smtplib.SMTP(st.secrets["SMTP_SERVER"], st.secrets["SMTP_PORT"])
-                        server.starttls() # Secures line via cryptographic wrapping
+                        server.starttls() 
                         server.login(st.secrets["SMTP_USERNAME"], st.secrets["SMTP_PASSWORD"])
                         
-                        # Broadcast message across system recipients
                         recipients = [student_email, TARGET_AUDIT_EMAIL]
                         server.sendmail(st.secrets["SMTP_USERNAME"], recipients, msg.as_string())
                         server.quit()
                         
                         st.balloons()
-                        st.success(f"🎉 Quiz Submitted! Immediate feedback has been dispatched. Check your email (**{student_email}**).")
+                        st.success(f"🎉 Quiz Submitted! Immediate feedback has been dispatched to (**{student_email}**).")
                         
-                        # Render results live on-screen for the student as secondary validation
                         st.markdown("### 📊 Summary View of Results")
                         st.markdown(f"**Total Marks: {total_marks_earned} / {total_marks_possible}**")
                         st.markdown(f"**Long Answer Score:** {la_score} Marks")
