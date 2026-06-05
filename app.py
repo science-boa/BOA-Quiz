@@ -10,85 +10,88 @@ from email.mime.multipart import MIMEMultipart
 # 1. Page Configuration
 st.set_page_config(page_title="Homework Evaluation Portal", layout="wide")
 
-# Initialize Session State
+# 2. State & Config Init
 if "page" not in st.session_state: st.session_state.page = 1
 if "email_error" not in st.session_state: st.session_state.email_error = False
-if "student_email" not in st.session_state: st.session_state.student_email = ""
 if "mc_answers" not in st.session_state: st.session_state.mc_answers = {}
 if "grading_results" not in st.session_state: st.session_state.grading_results = None
 
-# Configure Gemini
 if "GEMINI_API_KEY" in st.secrets:
     genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
     config = {"response_mime_type": "application/json"}
     model_primary = genai.GenerativeModel('gemini-3.5-flash', generation_config=config)
     model_fallback = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
 
-# 2. Data Ingestion
-@st.cache_data(show_spinner="Loading Assignment...")
+# 3. Data
+@st.cache_data(show_spinner="Loading...")
 def fetch_quiz_schema(q_id):
     url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_{q_id}.yaml"
     try:
         response = requests.get(url)
-        return yaml.safe_load(response.text) if response.status_code == 200 else None
+        return yaml.safe_load(response.text)
     except: return None
 
 quiz_id = st.query_params.get("quiz", "101")
 quiz_data = fetch_quiz_schema(quiz_id)
 
-# 3. CSS
-st.markdown("""
-    <style>
-        #next_btn { background-color: #22c55e !important; color: white !important; }
-        #back_btn { background-color: #22c55e !important; color: white !important; }
-        #submit_btn { background-color: #ef4444 !important; color: white !important; }
-    </style>
-""", unsafe_allow_html=True)
+if not quiz_data:
+    st.error("Invalid Quiz ID.")
+    st.stop()
 
-# Main Logic Flow
+# 4. Styling
+st.markdown("""<style>
+    #next_btn, #back_btn { background-color: #22c55e !important; color: white !important; }
+    #submit_btn { background-color: #ef4444 !important; color: white !important; }
+</style>""", unsafe_allow_html=True)
+
+# 5. Routing
 if st.session_state.page == 3:
     st.title("Assignment Results")
-    col1, col2 = st.columns([1, 1], gap="large")
-    
-    with col1:
-        st.subheader("Multiple Choice Review")
+    c1, c2 = st.columns(2)
+    with c1:
         with st.container(height=600):
             for item in quiz_data.get("multiple_choice", []):
-                q_num = item["question_num"]
-                user_ans = st.session_state.mc_answers.get(q_num)
-                correct_ans = item["correct"]
-                st.markdown(f"**Q{q_num}:** {item['text']}")
-                st.write(f"Your choice: {user_ans}")
-                if user_ans == correct_ans:
-                    st.success("Correct!")
-                else:
-                    st.error(f"Incorrect. Correct answer: {correct_ans}")
-                    st.info(f"Explanation: {item.get('explanation', 'No explanation provided.')}")
+                q = item["question_num"]
+                ans = st.session_state.mc_answers.get(q)
+                st.write(f"**Q{q}:** {item['text']}")
+                st.write(f"Your answer: {ans} | Correct: {item['correct']}")
+                if ans != item['correct']: st.warning(f"Exp: {item.get('explanation')}")
                 st.divider()
-
-    with col2:
-        st.subheader("Long Answer Review")
-        la = quiz_data.get("long_answer", {})
-        st.markdown(f"**Q:** {la.get('text')}")
-        st.info(f"Your response: {st.session_state.get('la_input', 'N/A')}")
-        if st.session_state.grading_results:
-            st.markdown(f"**Rubric:** {la.get('rubric')}")
-            st.write(f"**Score:** {st.session_state.grading_results['score']}")
-            st.write(f"**Feedback:** {st.session_state.grading_results['feedback']}")
-    
-    if st.button("Close App"):
-        st.write("You may now close this tab.")
+    with c2:
+        res = st.session_state.grading_results
+        st.write(f"**Score:** {res.get('score')}")
+        st.write(f"**Feedback:** {res.get('feedback')}")
+    if st.button("Close"): st.info("You may close the tab.")
 
 else:
-    # Pages 1 & 2 Logic...
-    col_left, col_right = st.columns([1, 1], gap="large")
+    col_left, col_right = st.columns(2)
     with col_left:
-        # [Render Quiz Title/Video/Email/Back button as before]
-        pass
+        st.title(quiz_data.get("title"))
+        st.video(quiz_data.get("video_url"))
+        if st.session_state.page == 1:
+            st.text_input("Enter your school email", key="student_email")
+        elif st.button("Back", key="back_btn"):
+            st.session_state.page = 1; st.rerun()
+
     with col_right:
-        # [Render MC (Page 1) or LA (Page 2) as before]
-        # In Page 2 Submit Button:
-        # st.session_state.grading_results = grading
-        # st.session_state.page = 3
-        # st.rerun()
-        pass
+        if st.session_state.page == 1:
+            with st.container(height=600):
+                for item in quiz_data.get("multiple_choice", []):
+                    q = item["question_num"]
+                    st.session_state.mc_answers[q] = st.radio(item["text"], ["A", "B", "C", "D"], index=None, key=f"r{q}")
+                if st.button("Next", type="primary", key="next_btn"):
+                    if not st.session_state.get("student_email"): st.session_state.email_error = True
+                    else: st.session_state.page = 2; st.rerun()
+        else:
+            la_data = quiz_data.get("long_answer", {})
+            st.write(la_data.get("text"))
+            la_text = st.text_area("Response", key="la_input")
+            if st.button("Submit", type="primary", key="submit_btn"):
+                with st.spinner("Grading..."):
+                    try:
+                        prompt = f"Rubric: {la_data.get('rubric')}. Resp: {la_text}. Output JSON: {{'score': 0, 'feedback': ''}}"
+                        try: res = model_primary.generate_content(prompt).text
+                        except: res = model_fallback.generate_content(prompt).text
+                        st.session_state.grading_results = json.loads(res)
+                        st.session_state.page = 3; st.rerun()
+                    except Exception as e: st.error(str(e))
