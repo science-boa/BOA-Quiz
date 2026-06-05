@@ -38,6 +38,11 @@ def fetch_quiz_schema(q_id):
 
 quiz_data = fetch_quiz_schema(quiz_id)
 
+# 🔍 DIAGNOSTIC SIDEBAR: Tells you exactly what sections Python reads from GitHub
+if quiz_data:
+    st.sidebar.header("🛠️ System Diagnostics")
+    st.sidebar.write("Found keys in YAML:", list(quiz_data.keys()))
+
 # 3. View Interface Architecture Rendering
 if not quiz_data:
     st.error(f"⚠️ Unable to load Assignment ID: **{quiz_id}**. Please check the URL link or contact your teacher.")
@@ -63,14 +68,15 @@ else:
         student_email = st.text_input("Enter your institutional email address:", placeholder="e.g., student@school.ac.uk")
     
     # ─── RIGHT COLUMN: Bounded Scrollable Question Panel ───
-    # FIXED: Re-aligned to be a sibling of col_left, not a child!
+    # FIXED: Re-aligned to be a sibling of col_left, not nested inside it!
     with col_right:
         st.subheader("📝 Assignment Questions")
         
         mc_user_selections = {}
-        student_long_text = ""  # Safety initialization fallback
+        student_long_text = ""  # Safety initialization fallback to prevent crashes
         
         # Enforcing fixed height container translates this panel into a sleek scroll pane
+        # Raised to 750 to accommodate 15 multiple-choice questions cleanly
         with st.container(height=750):
             
             # Phase A: Render Multiple Choice Questions
