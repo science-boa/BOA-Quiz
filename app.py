@@ -27,7 +27,7 @@ quiz_id = st.query_params.get("quiz", "101")
 def fetch_quiz_schema(q_id):
     # Adjust this path matching your target public GitHub configuration profile
     # Format: https://raw.githubusercontent.com/[USER]/[REPO]/main/quizs/QUIZ_[ID].yaml
-    raw_git_url = f"https://raw.githubusercontent.com/science-boa/quiz-repo/main/quizs/QUIZ_{q_id}.yaml"
+    raw_git_url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizs/QUIZ_{q_id}.yaml"
     try:
         response = requests.get(raw_git_url)
         if response.status_code == 200:
