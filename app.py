@@ -76,7 +76,7 @@ else:
     
     col_left, col_right = st.columns([2, 3], gap="large")
     
-    # ─── LEFT COLUMN: Media Anchor Panel ───
+    # ─── LEFT COLUMN: Media Anchor Panel (Sticky) ───
     with col_left:
         st.subheader("📺 Video Source Material")
         if quiz_data.get("video_url") and quiz_data["video_url"].strip() != "":
@@ -88,56 +88,55 @@ else:
         st.subheader("👤 Your Identity Details")
         student_email = st.text_input("Enter your institutional email address:", placeholder="e.g., student@school.ac.uk")
     
-    # ─── RIGHT COLUMN: Assignment Questions ───
+    # ─── RIGHT COLUMN: Assignment Questions (Scrollable) ───
     with col_right:
         st.subheader("📝 Assignment Questions")
         
         mc_user_selections = {}
         student_long_text = ""  # Initialized to block NameError crashes
         
-        # REMOVED fixed height container so the whole column scrolls naturally.
-        
-        # Phase A: Render Multiple Choice Questions
-        if "multiple_choice" in quiz_data and quiz_data["multiple_choice"]:
-            st.markdown("### Part 1: Quick-Check Selection Questions")
-            for item in quiz_data["multiple_choice"]:
-                q_num = item["question_num"]
-                st.markdown(f"**Question {q_num}:** {item['text']} *({item.get('points', 5)} Marks)*")
+        # 🔄 REINSTATED: Fixed height container to create an independent scroll bar
+        with st.container(height=750):
+            
+            # Phase A: Render Multiple Choice Questions
+            if "multiple_choice" in quiz_data and quiz_data["multiple_choice"]:
+                st.markdown("### Part 1: Quick-Check Selection Questions")
+                for item in quiz_data["multiple_choice"]:
+                    q_num = item["question_num"]
+                    st.markdown(f"**Question {q_num}:** {item['text']} *({item.get('points', 5)} Marks)*")
+                    
+                    options_list = [item["A"], item["B"], item["C"], item["D"]]
+                    
+                    mc_user_selections[q_num] = st.radio(
+                        label=f"Options for Q{q_num}",
+                        options=options_list,
+                        index=None,  
+                        label_visibility="collapsed",
+                        key=f"mc_radio_{q_num}"
+                    )
+                    st.write("")
+            
+            # Phase B: Render Long Answer Question
+            if "long_answer" in quiz_data and isinstance(quiz_data["long_answer"], dict):
+                st.divider() 
+                st.markdown("### Part 2: Long-Form Written Explanation")
                 
-                options_list = [item["A"], item["B"], item["C"], item["D"]]
+                la_q_num = quiz_data["long_answer"].get("question_num", "N/A")
+                la_text = quiz_data["long_answer"].get("text", "Question text missing.")
+                la_points = quiz_data["long_answer"].get("points", 10)
                 
-                mc_user_selections[q_num] = st.radio(
-                    label=f"Options for Q{q_num}",
-                    options=options_list,
-                    index=None,  
-                    label_visibility="collapsed",
-                    key=f"mc_radio_{q_num}"
+                st.markdown(f"**Question {la_q_num}:** {la_text} *({la_points} Marks)*")
+                
+                student_long_text = st.text_area(
+                    label="Type your complete analytical response below:", 
+                    placeholder="Provide detailed explanations or evidence...",
+                    height=220, 
+                    key="student_long_answer_input" 
                 )
-                st.write("")
-        
-        # Phase B: REWRITTEN Long Answer Question
-        # Uses explicit dictionary checks and a native UI divider for a clean break
-        if "long_answer" in quiz_data and isinstance(quiz_data["long_answer"], dict):
-            st.divider() 
-            st.markdown("### Part 2: Long-Form Written Explanation")
             
-            # Safely extract dictionary elements
-            la_q_num = quiz_data["long_answer"].get("question_num", "N/A")
-            la_text = quiz_data["long_answer"].get("text", "Question text missing.")
-            la_points = quiz_data["long_answer"].get("points", 10)
-            
-            st.markdown(f"**Question {la_q_num}:** {la_text} *({la_points} Marks)*")
-            
-            student_long_text = st.text_area(
-                label="Type your complete analytical response below:", 
-                placeholder="Provide detailed explanations or evidence...",
-                height=220, # Added vertical space for detailed writing
-                key="student_long_answer_input" # Unique key to prevent conflict
-            )
-        
-        st.write("")
-        # Submit button flows naturally underneath the long answer box
-        submit_trigger = st.button("Finalize and Submit Assignment", type="primary", use_container_width=True)
+            st.write("")
+            # The submit button is safely INSIDE the scroll container now
+            submit_trigger = st.button("Finalize and Submit Assignment", type="primary", use_container_width=True)
 
         # 4. Grading Evaluation & SMTP Delivery Runtime Block
         if submit_trigger:
