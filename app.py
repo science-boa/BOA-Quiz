@@ -45,22 +45,20 @@ def fetch_quiz_schema(q_id):
 
 quiz_data = fetch_quiz_schema(quiz_id)
 
-# ─── 🛠️ MAIN PAGE DIAGNOSTIC PANEL (Bypasses Sidebar Entirely) ───
+# ─── 🛠️ MAIN PAGE DIAGNOSTIC PANEL ───
 st.info("🔧 SYSTEM DIAGNOSTIC PANEL (Temporary Deployment tool)")
 diag_col1, diag_col2 = st.columns(2)
 
 with diag_col1:
     if quiz_data is None:
-        st.error("❌ Data Status: quiz_data is completely empty (None). Both tested paths failed.")
-        st.write("Attempted Paths:", st.session_state.get("attempted_urls"))
+        st.error("❌ Data Status: quiz_data is empty. Both tested paths failed.")
     else:
         st.success("✅ Data Status: YAML loaded successfully!")
         st.write(f"**Connected Path:** `{st.session_state.get('active_url')}`")
-        st.write("**Keys found inside this file version:**", list(quiz_data.keys()))
 
 with diag_col2:
     if quiz_data and "long_answer" in quiz_data:
-        st.success("🎯 'long_answer' key detected! The text box code should fire.")
+        st.success("🎯 'long_answer' key detected! Rendering logic is active.")
     else:
         st.error("❌ 'long_answer' key is MISSING from the currently fetched file structure.")
     
@@ -70,14 +68,12 @@ with diag_col2:
 
 st.markdown("---")
 
-
 # 3. View Interface Architecture Rendering
 if not quiz_data:
     st.error(f"⚠️ Unable to load Assignment ID: **{quiz_id}**. Please verify your GitHub file paths.")
 else:
     st.title(quiz_data.get("title", f"Quiz Portal (ID: {quiz_id})"))
     
-    # Implementing Layout 2: Two-Column Split Screen Workspace
     col_left, col_right = st.columns([2, 3], gap="large")
     
     # ─── LEFT COLUMN: Media Anchor Panel ───
@@ -92,49 +88,56 @@ else:
         st.subheader("👤 Your Identity Details")
         student_email = st.text_input("Enter your institutional email address:", placeholder="e.g., student@school.ac.uk")
     
-    # ─── RIGHT COLUMN: Bounded Scrollable Question Panel ───
+    # ─── RIGHT COLUMN: Assignment Questions ───
     with col_right:
         st.subheader("📝 Assignment Questions")
         
         mc_user_selections = {}
         student_long_text = ""  # Initialized to block NameError crashes
         
-        # Fixed height scroll pane
-        with st.container(height=620):
-            
-            # Phase A: Render Multiple Choice Questions
-            if "multiple_choice" in quiz_data and quiz_data["multiple_choice"]:
-                st.markdown("### Part 1: Quick-Check Selection Questions")
-                for item in quiz_data["multiple_choice"]:
-                    q_num = item["question_num"]
-                    st.markdown(f"**Question {q_num}:** {item['text']} *({item.get('points', 5)} Marks)*")
-                    
-                    options_list = [item["A"], item["B"], item["C"], item["D"]]
-                    
-                    mc_user_selections[q_num] = st.radio(
-                        label=f"Options for Q{q_num}",
-                        options=options_list,
-                        index=None,  
-                        label_visibility="collapsed",
-                        key=f"mc_radio_{q_num}"
-                    )
-                    st.write("")
-            
-            # Phase B: Render Long Answer Question
-            if "long_answer" in quiz_data and quiz_data["long_answer"]:
-                la_data = quiz_data["long_answer"]
-                st.markdown("---")
-                st.markdown("### Part 2: Long-Form Written Explanation")
-                st.markdown(f"**Question {la_data['question_num']}:** {la_data['text']} *({la_data.get('points', 10)} Marks)*")
-                student_long_text = st.text_area(
-                    "Type your complete analytical response below:", 
-                    placeholder="Provide detailed explanations or evidence...",
-                    height=180,
-                    key="student_long_answer"
+        # REMOVED fixed height container so the whole column scrolls naturally.
+        
+        # Phase A: Render Multiple Choice Questions
+        if "multiple_choice" in quiz_data and quiz_data["multiple_choice"]:
+            st.markdown("### Part 1: Quick-Check Selection Questions")
+            for item in quiz_data["multiple_choice"]:
+                q_num = item["question_num"]
+                st.markdown(f"**Question {q_num}:** {item['text']} *({item.get('points', 5)} Marks)*")
+                
+                options_list = [item["A"], item["B"], item["C"], item["D"]]
+                
+                mc_user_selections[q_num] = st.radio(
+                    label=f"Options for Q{q_num}",
+                    options=options_list,
+                    index=None,  
+                    label_visibility="collapsed",
+                    key=f"mc_radio_{q_num}"
                 )
+                st.write("")
+        
+        # Phase B: REWRITTEN Long Answer Question
+        # Uses explicit dictionary checks and a native UI divider for a clean break
+        if "long_answer" in quiz_data and isinstance(quiz_data["long_answer"], dict):
+            st.divider() 
+            st.markdown("### Part 2: Long-Form Written Explanation")
             
-            st.write("")
-            submit_trigger = st.button("Finalize and Submit Assignment", type="primary", use_container_width=True)
+            # Safely extract dictionary elements
+            la_q_num = quiz_data["long_answer"].get("question_num", "N/A")
+            la_text = quiz_data["long_answer"].get("text", "Question text missing.")
+            la_points = quiz_data["long_answer"].get("points", 10)
+            
+            st.markdown(f"**Question {la_q_num}:** {la_text} *({la_points} Marks)*")
+            
+            student_long_text = st.text_area(
+                label="Type your complete analytical response below:", 
+                placeholder="Provide detailed explanations or evidence...",
+                height=220, # Added vertical space for detailed writing
+                key="student_long_answer_input" # Unique key to prevent conflict
+            )
+        
+        st.write("")
+        # Submit button flows naturally underneath the long answer box
+        submit_trigger = st.button("Finalize and Submit Assignment", type="primary", use_container_width=True)
 
         # 4. Grading Evaluation & SMTP Delivery Runtime Block
         if submit_trigger:
@@ -171,7 +174,9 @@ else:
                     la_score = 0
                     la_feedback = "No open-ended component structured for evaluation."
                     
-                    if "long_answer" in quiz_data and quiz_data["long_answer"]:
+                    if "long_answer" in quiz_data and isinstance(quiz_data["long_answer"], dict):
+                        la_rubric = quiz_data["long_answer"].get("rubric", "")
+                        
                         try:
                             model = genai.GenerativeModel(
                                 'gemini-1.5-flash',
@@ -186,9 +191,9 @@ else:
                             "feedback": A short paragraph explaining item criteria met or missing, offering direct improvement suggestions.
                             
                             INPUT SPECIFICATIONS:
-                            - Question Target: {la_data['text']}
-                            - Evaluation Rubric: {la_data['rubric']}
-                            - Max Points Available: {la_data['points']}
+                            - Question Target: {la_text}
+                            - Evaluation Rubric: {la_rubric}
+                            - Max Points Available: {la_points}
                             - Student Written Input: {student_long_text}
                             """
                             
@@ -203,7 +208,7 @@ else:
                     
                     # Step C: Formulate Email and Execute Outbound SMTP Transmission
                     total_marks_earned = mc_score + la_score
-                    total_marks_possible = mc_possible + (la_data.get('points', 10) if "long_answer" in quiz_data else 0)
+                    total_marks_possible = mc_possible + (la_points if "long_answer" in quiz_data else 0)
                     
                     email_html_body = f"""
                     <html>
