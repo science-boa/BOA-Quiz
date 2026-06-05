@@ -96,7 +96,7 @@ else:
         student_long_text = ""  # Initialized to block NameError crashes
         
         # 🔄 REINSTATED: Fixed height container to create an independent scroll bar
-        with st.container(height=750):
+        with st.container(height=1000):
             
             # Phase A: Render Multiple Choice Questions
             if "multiple_choice" in quiz_data and quiz_data["multiple_choice"]:
