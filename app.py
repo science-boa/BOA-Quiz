@@ -103,7 +103,6 @@ else:
             with st.container(height=650):
                 for item in quiz_data.get("multiple_choice", []):
                     q = item["question_num"]
-                    # FIX: Using the actual values from YAML as options
                     options = [item["A"], item["B"], item["C"], item["D"]]
                     ans = st.radio(item["text"], options, index=None, key=f"mc_{q}")
                     st.session_state.mc_answers[q] = ans
@@ -121,27 +120,42 @@ else:
             st.markdown(la_data.get("text", ""))
             la_input = st.text_area("Your response:", key="la_input")
             if st.button("Submit Assignment", type="primary", key="submit_btn"):
-                with st.spinner("Grading..."):
-                    try:
-                        prompt = f"Rubric: {la_data.get('rubric')}. Resp: {la_input}. Output JSON: {{'score': 0, 'feedback': ''}}"
-                        try: res = model_primary.generate_content(prompt).text
-                        except: res = model_fallback.generate_content(prompt).text
-                        
-                        st.session_state.grading_results = json.loads(res)
-                        
-                        # SMTP Logic
-                        msg = MIMEMultipart()
-                        msg["Subject"] = f"Assignment Results: {quiz_data['title']}"
-                        msg["To"] = st.session_state.student_email
-                        msg.attach(MIMEText(f"Your score: {st.session_state.grading_results.get('score')}<br>Feedback: {st.session_state.grading_results.get('feedback')}", "html"))
-                        
-                        server = smtplib.SMTP(st.secrets["SMTP_SERVER"], st.secrets["SMTP_PORT"])
-                        server.starttls()
-                        server.login(st.secrets["SMTP_USERNAME"], st.secrets["SMTP_PASSWORD"])
-                        server.sendmail(st.secrets["SMTP_USERNAME"], [st.session_state.student_email, "science.boa@gmail.com"], msg.as_string())
-                        server.quit()
-                        
-                        st.session_state.page = 3
-                        st.rerun()
-                    except Exception as e:
-                        st.error(f"Submission failed: {e}")
+                if not la_input:
+                    st.warning("Please provide an answer.")
+                else:
+                    with st.spinner("Grading..."):
+                        try:
+                            # Improved prompt with explicit instructions
+                            prompt = (
+                                f"Act as a teacher. Evaluate the following student answer based on the rubric.\n"
+                                f"Question: {la_data.get('text')}\n"
+                                f"Rubric: {la_data.get('rubric')}\n"
+                                f"Student Answer: {la_input}\n"
+                                f"Return a JSON object with keys 'score' (integer 0-10) and 'feedback' (string explanation)."
+                            )
+                            
+                            try: 
+                                response = model_primary.generate_content(prompt)
+                                res = response.text
+                            except: 
+                                response = model_fallback.generate_content(prompt)
+                                res = response.text
+                            
+                            st.session_state.grading_results = json.loads(res)
+                            
+                            # SMTP Logic
+                            msg = MIMEMultipart()
+                            msg["Subject"] = f"Assignment Results: {quiz_data['title']}"
+                            msg["To"] = st.session_state.student_email
+                            msg.attach(MIMEText(f"Your score: {st.session_state.grading_results.get('score')}<br>Feedback: {st.session_state.grading_results.get('feedback')}", "html"))
+                            
+                            server = smtplib.SMTP(st.secrets["SMTP_SERVER"], st.secrets["SMTP_PORT"])
+                            server.starttls()
+                            server.login(st.secrets["SMTP_USERNAME"], st.secrets["SMTP_PASSWORD"])
+                            server.sendmail(st.secrets["SMTP_USERNAME"], [st.session_state.student_email, "science.boa@gmail.com"], msg.as_string())
+                            server.quit()
+                            
+                            st.session_state.page = 3
+                            st.rerun()
+                        except Exception as e:
+                            st.error(f"Grading or submission failed: {e}")
