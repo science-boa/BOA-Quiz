@@ -47,28 +47,31 @@ else:
     # Implementing Layout 2: Two-Column Split Screen Workspace
     col_left, col_right = st.columns([2, 3], gap="large")
     
-# ─── LEFT COLUMN: Media Anchor Panel ───
-with col_left:
-    st.subheader("📺 Video Source Material")
-    
-    # Safety Check: Only attempt to render if the URL string is not empty
-    if quiz_data.get("video_url") and quiz_data["video_url"].strip() != "":
-        st.video(quiz_data["video_url"])
-        st.info("💡 Pro-Tip: You can pause or scrub this timeline freely while filling out your answers on the right side panel.")
-    else:
-        st.warning("⚠️ No instructional video link was provided for this assignment. Proceed directly to the questions.")
+    # ─── LEFT COLUMN: Media Anchor Panel ───
+    with col_left:
+        st.subheader("📺 Video Source Material")
         
+        # Safety Check: Only attempt to render if the URL string is not empty
+        if quiz_data.get("video_url") and quiz_data["video_url"].strip() != "":
+            st.video(quiz_data["video_url"])
+            st.info("💡 Pro-Tip: You can pause or scrub this timeline freely while filling out your answers on the right side panel.")
+        else:
+            st.warning("⚠️ No instructional video link was provided for this assignment. Proceed directly to the questions.")
+            
+        # FIXED: Pushed outside the video if/else condition so it always shows up!
         st.subheader("👤 Your Identity Details")
         student_email = st.text_input("Enter your institutional email address:", placeholder="e.g., student@school.ac.uk")
     
     # ─── RIGHT COLUMN: Bounded Scrollable Question Panel ───
+    # FIXED: Re-aligned to be a sibling of col_left, not a child!
     with col_right:
         st.subheader("📝 Assignment Questions")
         
         mc_user_selections = {}
+        student_long_text = ""  # Safety initialization fallback
         
         # Enforcing fixed height container translates this panel into a sleek scroll pane
-        with st.container(height=620):
+        with st.container(height=750):
             
             # Phase A: Render Multiple Choice Questions
             if "multiple_choice" in quiz_data and quiz_data["multiple_choice"]:
@@ -110,7 +113,7 @@ with col_left:
         if submit_trigger:
             if not student_email or "@" not in student_email:
                 st.error("❌ Submission Failed: You must provide a valid email address to receive your grades.")
-            elif not student_long_text.strip():
+            elif "long_answer" in quiz_data and not student_long_text.strip():
                 st.error("❌ Submission Failed: Please write a response for the long answer question before finalizing.")
             else:
                 with st.spinner("Processing submissions and invoking automated semantic grader..."):
