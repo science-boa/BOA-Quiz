@@ -8,7 +8,7 @@ multiple_choice:
   B: Infectious diseases passed from person to person.
   C: Diseases caused by lack of exercise.
   D: Diseases only affecting the lungs.
-  answer: A
+  correct: A
   points: 5
   explanation: The text states, 'Now, cardiovascular diseases are diseases of the
     heart and blood vessels.'
@@ -19,7 +19,7 @@ multiple_choice:
   B: Infectious.
   C: Non-communicable.
   D: Always fatal.
-  answer: C
+  correct: C
   points: 5
   explanation: The text states, 'A key feature of these is that they are non-communicable;
     in other words, they're not infectious, they cannot be passed from person to person.'
@@ -29,7 +29,7 @@ multiple_choice:
   B: To provide oxygen to the muscle cells of the heart.
   C: To pump blood to the rest of the body.
   D: To filter waste products from the blood.
-  answer: B
+  correct: B
   points: 5
   explanation: The text states, 'The purpose of the coronary arteries is to provide
     oxygen to the muscle cells of the heart.'
@@ -39,7 +39,7 @@ multiple_choice:
   B: Layers of fatty material build up inside the coronary arteries.
   C: The heart valves become leaky.
   D: The heart stops pumping blood.
-  answer: B
+  correct: B
   points: 5
   explanation: The text states, 'In coronary heart disease, layers of fatty material
     build up inside the coronary arteries.'
@@ -49,7 +49,7 @@ multiple_choice:
   B: Increased blood flow.
   C: Heart attack.
   D: Stronger heart contractions.
-  answer: C
+  correct: C
   points: 5
   explanation: The text states, 'In extreme cases, this can result in a heart attack
     where the heart is starved of oxygen, and this can be fatal.'
@@ -59,7 +59,7 @@ multiple_choice:
   B: They reduce the level of cholesterol in the blood.
   C: They replace faulty heart valves.
   D: They strengthen the heart muscle.
-  answer: B
+  correct: B
   points: 5
   explanation: The text states, 'Statins are drugs which reduce the level of cholesterol
     in the blood.'
@@ -69,7 +69,7 @@ multiple_choice:
   B: They cause blood clots.
   C: They can cause liver problems.
   D: They do not slow down fatty material buildup.
-  answer: C
+  correct: C
   points: 5
   explanation: The text states, 'However, statins do have some unwanted side effects;
     for example, they can cause liver problems.'
@@ -79,7 +79,7 @@ multiple_choice:
   B: To reduce cholesterol levels.
   C: To keep a coronary artery open.
   D: To provide oxygen to the heart muscle.
-  answer: C
+  correct: C
   points: 5
   explanation: The text states, 'A stent is a tube which is inserted into the coronary
     artery to keep it open.'
@@ -89,7 +89,7 @@ multiple_choice:
   B: It treats the underlying causes of the disease.
   C: It does not prevent other regions of the coronary arteries from narrowing.
   D: It requires patients to take anti-clotting drugs.
-  answer: C
+  correct: C
   points: 5
   explanation: The text states, 'However, a stent will not prevent other regions of
     the coronary arteries from narrowing, and it does not treat the underlying causes
@@ -100,7 +100,7 @@ multiple_choice:
   B: The heart muscle receives too much oxygen.
   C: Blood clots form easily.
   D: The patient feels energetic.
-  answer: A
+  correct: A
   points: 5
   explanation: The text states, 'Sometimes these valves do not fully open, so the
     heart has to pump extra hard to get the blood through.'
@@ -110,7 +110,7 @@ multiple_choice:
   B: They are made from animal tissue.
   C: They increase the risk of blood clots.
   D: Patients do not need to take drugs.
-  answer: C
+  correct: C
   points: 5
   explanation: The text states, 'Mechanical valves can last a lifetime, but they increase
     the risk of blood clots, so patients have to take anti-clotting drugs.'
@@ -120,7 +120,7 @@ multiple_choice:
   B: They increase the risk of blood clots.
   C: Patients do not need to take drugs.
   D: They are made of metal.
-  answer: C
+  correct: C
   points: 5
   explanation: The text states, 'Valves from animals do not last as long and may need
     to be replaced, however, patients do not need to take drugs.'
@@ -130,7 +130,7 @@ multiple_choice:
   B: When the heart cannot pump enough blood around the body.
   C: When fatty material builds up in arteries.
   D: When heart valves are leaky.
-  answer: B
+  correct: B
   points: 5
   explanation: The text states, 'In some patients with cardiovascular disease, the
     heart cannot pump enough blood around the body. This is called heart failure.'
@@ -140,7 +140,7 @@ multiple_choice:
   B: There are not enough available.
   C: They always cause blood clots.
   D: The patient does not need to take drugs.
-  answer: B
+  correct: B
   points: 5
   explanation: The text states, 'Firstly, there are not enough donated hearts available
     to treat every patient.'
@@ -151,17 +151,17 @@ multiple_choice:
     short time.
   C: They are rejected by the body's immune system.
   D: They cannot pump enough blood.
-  answer: B
+  correct: B
   points: 5
   explanation: The text states, 'Artificial hearts increase the risk of blood clotting
     and they're not a long-term solution to heart failure. They can only be used for
     a relatively short time.'
-long_answer:
+long_correct:
   question_num: 16
   text: Compare and contrast the use of statins and stents as treatments for coronary
     heart disease, including their advantages and disadvantages.
   points: 6
-  rubric: "To achieve full points, the answer should:\n-   **Statins (2 points):**\n\
+  rubric: "To achieve full points, the correct should:\n-   **Statins (2 points):**\n\
     \    -   Identify that statins are drugs that reduce cholesterol levels in the\
     \ blood, slowing the buildup of fatty materials (1 point).\n    -   Mention an\
     \ advantage, such as being proven to reduce the risk of coronary heart disease\
