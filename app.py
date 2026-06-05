@@ -85,23 +85,37 @@ with col_right:
         st.markdown(f"**Q{la_data.get('question_num')}:** {la_data.get('text')}")
         student_long_text = st.text_area("Your response:", height=300, key="la_input")
         
-        if st.button("Submit Assignment", type="primary", key="submit_btn"):
+     if st.button("Submit Assignment", type="primary", key="submit_btn"):
             with st.spinner("Grading..."):
-                # Grading Logic
-                prompt = f"""Grade the student response for '{la_data['text']}'. 
+                # 1. Improved Prompt for Strict JSON
+                prompt = f"""
+                Grade the student response for '{la_data['text']}'. 
                 Rubric: {la_data.get('rubric', 'General evaluation')}. 
                 Response: {student_long_text}. 
-                Return JSON: {{"score": int, "feedback": "str"}}."""
+                
+                CRITICAL: Return ONLY raw JSON. No markdown, no backticks, no conversational text.
+                Format: {{"score": 0, "feedback": "your feedback here"}}
+                """
                 
                 ai_response = model.generate_content(prompt).text
-                grading = json.loads(ai_response)
                 
-                # SMTP Dispatch
-                msg = MIMEMultipart()
-                msg["Subject"] = f"Assignment Results: {quiz_data['title']}"
-                msg["To"] = st.session_state.email_input
-                msg.attach(MIMEText(f"Your score: {grading['score']}<br>Feedback: {grading['feedback']}", "html"))
-                
-                # server = smtplib.SMTP(...) # Insert your SMTP logic here
-                
-                st.success("🎉 Assignment submitted! Results sent to your email.")
+                # 2. Cleanup & Parsing
+                try:
+                    # Remove potential markdown code blocks
+                    cleaned_response = ai_response.replace("```json", "").replace("```", "").strip()
+                    grading = json.loads(cleaned_response)
+                    
+                    # 3. SMTP Dispatch (Ensure your credentials are in st.secrets)
+                    msg = MIMEMultipart()
+                    msg["Subject"] = f"Assignment Results: {quiz_data['title']}"
+                    msg["To"] = st.session_state.email_input
+                    body = f"Your score: {grading['score']}<br>Feedback: {grading['feedback']}"
+                    msg.attach(MIMEText(body, "html"))
+                    
+                    # ... [Insert your existing smtplib logic here] ...
+                    
+                    st.success("🎉 Assignment submitted! Results sent to your email.")
+                    
+                except json.JSONDecodeError:
+                    st.error("The AI returned an invalid response. Please try submitting again.")
+                    st.code(ai_response) # Shows you exactly what the AI returned so we can debug
