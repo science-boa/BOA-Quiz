@@ -10,13 +10,11 @@ from email.mime.multipart import MIMEMultipart
 # 1. Page Configuration
 st.set_page_config(page_title="Homework Evaluation Portal", layout="wide")
 
-# Configure Gemini 3.5 Flash with forced JSON mode
+# Configure Gemini Clients
 if "GEMINI_API_KEY" in st.secrets:
     genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-    model = genai.GenerativeModel(
-        'gemini-3.5-flash',
-        generation_config={"response_mime_type": "application/json"}
-    )
+    model_primary = genai.GenerativeModel('gemini-3.5-flash', generation_config={"response_mime_type": "application/json"})
+    model_fallback = genai.GenerativeModel('gemini-2.5-flash', generation_config={"response_mime_type": "application/json"})
 else:
     st.error("Missing Gemini API Key.")
 
@@ -40,7 +38,7 @@ if not quiz_data:
     st.error("Unable to load quiz data.")
     st.stop()
 
-# 3. Custom CSS
+# 3. CSS Styling
 border_color = "#ef4444" if st.session_state.email_error else "#333"
 st.markdown(f"""
     <style>
@@ -54,7 +52,6 @@ st.markdown(f"""
 # Layout
 col_left, col_right = st.columns([1, 1], gap="large")
 
-# --- LEFT PANEL ---
 with col_left:
     st.title(quiz_data.get("title", "Quiz Portal"))
     if quiz_data.get("video_url"): st.video(quiz_data["video_url"])
@@ -68,7 +65,6 @@ with col_left:
             st.session_state.page = 1
             st.rerun()
 
-# --- RIGHT PANEL ---
 with col_right:
     if st.session_state.page == 1:
         st.subheader("Part 1: Multiple Choice")
@@ -99,9 +95,17 @@ with col_right:
         if st.button("Submit Assignment", type="primary", key="submit_btn"):
             with st.spinner("Grading..."):
                 try:
-                    # AI Grading
                     prompt = f"Grade student response: '{student_long_text}'. Rubric: {la_data.get('rubric')}. Output JSON: {{'score': int, 'feedback': 'str'}}"
-                    ai_response = model.generate_content(prompt).text
+                    
+                    # Fallback Logic
+                    try:
+                        ai_response = model_primary.generate_content(prompt).text
+                    except Exception as e:
+                        if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+                            ai_response = model_fallback.generate_content(prompt).text
+                        else:
+                            raise e
+                    
                     grading = json.loads(ai_response)
                     
                     # Email Logic
@@ -110,7 +114,6 @@ with col_right:
                     msg["To"] = st.session_state.email_input
                     msg.attach(MIMEText(f"Your score: {grading['score']}<br>Feedback: {grading['feedback']}", "html"))
                     
-                    # Note: Ensure these secrets exist in your Streamlit dashboard
                     server = smtplib.SMTP(st.secrets["SMTP_SERVER"], st.secrets["SMTP_PORT"])
                     server.starttls()
                     server.login(st.secrets["SMTP_USERNAME"], st.secrets["SMTP_PASSWORD"])
