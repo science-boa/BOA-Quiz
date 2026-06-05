@@ -42,7 +42,7 @@ st.markdown("""
             background-color: #22c55e !important;
             color: white !important;
         }
-        /* Back button green */
+        /* Back button green (Updated) */
         div.stButton > button#back_btn {
             background-color: #22c55e !important;
             color: white !important;
@@ -73,6 +73,7 @@ with col_left:
         st.markdown("**Enter your school email**")
         student_email = st.text_input("", key="email_input", label_visibility="collapsed")
     else:
+        # Green Back button
         if st.button("Back", key="back_btn"):
             st.session_state.page = 1
             st.rerun()
@@ -90,7 +91,6 @@ with col_right:
                          index=None, label_visibility="collapsed", key=f"mc_{q_num}")
                 st.write("")
             
-            # Next button
             if st.button("Next", type="primary", key="next_btn", use_container_width=True):
                 st.session_state.page = 2
                 st.rerun()
@@ -101,5 +101,6 @@ with col_right:
         st.markdown(f"**Q{la_data.get('question_num')}:** {la_data.get('text')}")
         student_long_text = st.text_area("Your response:", height=300, key="la_input")
         
+        # Red Submit button
         if st.button("Submit Assignment", type="primary", key="submit_btn"):
             st.success("Assignment submitted!")
