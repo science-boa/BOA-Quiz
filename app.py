@@ -15,6 +15,7 @@ if "page" not in st.session_state: st.session_state.page = 1
 if "email_error" not in st.session_state: st.session_state.email_error = False
 if "student_email" not in st.session_state: st.session_state.student_email = ""
 if "mc_answers" not in st.session_state: st.session_state.mc_answers = {}
+if "la_input" not in st.session_state: st.session_state.la_input = ""
 if "grading_results" not in st.session_state: st.session_state.grading_results = None
 
 # Configure Gemini
@@ -74,23 +75,36 @@ def send_feedback_email(mc_results, la_data, la_input, grading):
     server.sendmail(st.secrets["SMTP_USERNAME"], [st.session_state.student_email, "science.boa@gmail.com"], msg.as_string())
     server.quit()
 
-# 3. CSS Styling
-st.markdown("""
-    <style>
-        #next_btn { background-color: #22c55e !important; color: white !important; }
-        #back_btn { background-color: #22c55e !important; color: white !important; }
-        #submit_btn { background-color: #ef4444 !important; color: white !important; }
-    </style>
-""", unsafe_allow_html=True)
-
 # --- PAGE 3: RESULTS ---
 if st.session_state.page == 3:
     st.title("Assignment Results")
     st.write("Your results have been calculated and sent to your email.")
-    if st.session_state.grading_results:
-        st.subheader("Feedback Summary")
+    
+    col_res_l, col_res_r = st.columns([1, 1], gap="large")
+    
+    with col_res_l:
+        st.subheader("Multiple Choice Review")
+        for item in quiz_data.get("multiple_choice", []):
+            q_num = item["question_num"]
+            user_ans = st.session_state.mc_answers.get(q_num)
+            correct = item.get("correct")
+            st.markdown(f"**Question {q_num}:** {item['text']}")
+            st.write(f"Your Answer: {user_ans}")
+            if user_ans == correct:
+                st.success("Correct")
+            else:
+                st.error(f"The correct answer was: {correct}")
+                st.caption(f"Explanation: {item.get('explanation')}")
+            st.divider()
+
+    with col_res_r:
+        st.subheader("Long Answer Feedback")
+        la_data = quiz_data.get("long_answer", {})
+        st.markdown(f"**Question:** {la_data.get('text')}")
+        st.markdown(f"**Your Answer:** {st.session_state.la_input}")
+        st.info(f"**AI Feedback:** {st.session_state.grading_results.get('feedback')}")
         st.write(f"**Score:** {st.session_state.grading_results.get('score')}")
-        st.write(f"**Feedback:** {st.session_state.grading_results.get('feedback')}")
+
     if st.button("Close App"): st.stop()
 
 # --- PAGES 1 & 2 ---
