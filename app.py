@@ -39,11 +39,17 @@ def fetch_quiz_schema(q_id):
 quiz_id = st.query_params.get("quiz", "101")
 quiz_data = fetch_quiz_schema(quiz_id)
 
+# Safety check: Prevent app crash if file is missing or cached as None
+if quiz_data is None:
+    st.error(f"⚠️ Could not load Quiz {quiz_id}. Please ensure it is pushed to the 'quizzes' folder on GitHub and clear your Streamlit cache.")
+    st.stop()
+
 # --- EMAIL FORMATTING LOGIC ---
 def send_feedback_email(mc_results, la_data, la_input, grading):
     total_questions = len(quiz_data.get('multiple_choice', []))
+    # Swapped from item.get('correct') to item.get('answer')
     correct_count = sum(1 for item in quiz_data.get('multiple_choice', []) 
-                       if mc_results.get(item['question_num']) == item.get('correct'))
+                       if mc_results.get(item['question_num']) == item.get('answer'))
     
     percent = round((correct_count / total_questions) * 100) if total_questions > 0 else 0
     
@@ -52,7 +58,8 @@ def send_feedback_email(mc_results, la_data, la_input, grading):
     for item in quiz_data.get('multiple_choice', []):
         q_num = item['question_num']
         user_ans = mc_results.get(q_num)
-        correct = item.get('correct')
+        # Swapped from item.get('correct') to item.get('answer')
+        correct = item.get('answer')
         
         body += f"Question Number: {item['text']}<br>"
         body += f"Your Answer: {user_ans}<br>"
@@ -90,7 +97,8 @@ if st.session_state.page == 3:
         for item in quiz_data.get("multiple_choice", []):
             q_num = item["question_num"]
             user_ans = st.session_state.mc_answers.get(q_num)
-            correct = item.get("correct")
+            # Swapped from item.get('correct') to item.get('answer')
+            correct = item.get("answer")
             st.markdown(f"**Question {q_num}:** {item['text']}")
             st.write(f"Your Answer: {user_ans}")
             if user_ans == correct:
@@ -152,25 +160,21 @@ else:
                     st.warning("Please provide an answer.")
                 else:
                     with st.spinner("Grading..."):
-                        # Dynamic model indicator below the spinner
                         model_status = st.empty()
                         try:
                             prompt = (f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. "
                                       f"Answer: {la_input}. JSON: {{'score': 0, 'feedback': ''}}")
                             
-                            # Tier 1 Attempt
                             try:
                                 model_status.caption("Using model: `gemini-3.1-flash-lite`...")
                                 res = model_primary.generate_content(prompt).text
                                 active_model = "gemini-3.1-flash-lite"
                             except Exception as e1:
-                                # Tier 2 Attempt
                                 try:
                                     model_status.caption("Using fallback model: `gemini-3.5-flash`...")
                                     res = model_fallback_1.generate_content(prompt).text
                                     active_model = "gemini-3.5-flash"
                                 except Exception as e2:
-                                    # Tier 3 Attempt
                                     model_status.caption("Using fallback model: `gemini-2.5-flash`...")
                                     res = model_fallback_2.generate_content(prompt).text
                                     active_model = "gemini-2.5-flash"
