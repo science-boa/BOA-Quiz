@@ -86,7 +86,11 @@ st.markdown("""
 # --- PAGE 3: RESULTS ---
 if st.session_state.page == 3:
     st.title("Assignment Results")
-    st.write("Results have been sent to your email.")
+    st.write("Your results have been calculated and sent to your email.")
+    if st.session_state.grading_results:
+        st.subheader("Feedback Summary")
+        st.write(f"**Score:** {st.session_state.grading_results.get('score')}")
+        st.write(f"**Feedback:** {st.session_state.grading_results.get('feedback')}")
     if st.button("Close App"): st.stop()
 
 # --- PAGES 1 & 2 ---
