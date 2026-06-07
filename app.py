@@ -6,6 +6,7 @@ import google.generativeai as genai
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.header import Header
 
 # 1. Page Configuration
 st.set_page_config(page_title="Homework Evaluation Portal", layout="wide")
@@ -76,20 +77,20 @@ def send_feedback_email(mc_results, la_data, la_input, grading):
     student_email = st.session_state.student_email.strip()
     admin_email = "science.boa@gmail.com"
     
-    # 1. Prepare Feedback Email for the Student
+    # 1. Prepare Feedback Email for the Student with proper UTF-8 headers and payload
     msg_student = MIMEMultipart()
-    msg_student["Subject"] = f"Feedback from quiz {quiz_data.get('title')}"
+    msg_student["Subject"] = Header(f"Feedback from quiz {quiz_data.get('title')}", "utf-8")
     msg_student["From"] = sender_email
     msg_student["To"] = student_email
-    msg_student.attach(MIMEText(body, "html"))
+    msg_student.attach(MIMEText(body, "html", "utf-8"))
     
-    # 2. Prepare Duplicated Admin Record Email
+    # 2. Prepare Duplicated Admin Record Email with proper UTF-8 headers and payload
     msg_admin = MIMEMultipart()
     q_id_val = quiz_data.get('quiz_id', quiz_id)
-    msg_admin["Subject"] = f"Result-{q_id_val}-{student_email}"
+    msg_admin["Subject"] = Header(f"Result-{q_id_val}-{student_email}", "utf-8")
     msg_admin["From"] = sender_email
     msg_admin["To"] = admin_email
-    msg_admin.attach(MIMEText(body, "html"))
+    msg_admin.attach(MIMEText(body, "html", "utf-8"))
     
     # Send both messages over a single SMTP connection
     server = smtplib.SMTP(st.secrets["SMTP_SERVER"], st.secrets["SMTP_PORT"])
