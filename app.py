@@ -47,7 +47,6 @@ if quiz_data is None:
 # --- EMAIL FORMATTING LOGIC ---
 def send_feedback_email(mc_results, la_data, la_input, grading):
     total_questions = len(quiz_data.get('multiple_choice', []))
-    # Swapped from item.get('correct') to item.get('answer')
     correct_count = sum(1 for item in quiz_data.get('multiple_choice', []) 
                        if mc_results.get(item['question_num']) == item.get('answer'))
     
@@ -58,7 +57,6 @@ def send_feedback_email(mc_results, la_data, la_input, grading):
     for item in quiz_data.get('multiple_choice', []):
         q_num = item['question_num']
         user_ans = mc_results.get(q_num)
-        # Swapped from item.get('correct') to item.get('answer')
         correct = item.get('answer')
         
         body += f"Question Number: {item['text']}<br>"
@@ -68,20 +66,35 @@ def send_feedback_email(mc_results, la_data, la_input, grading):
         else:
             body += f"The correct answer was: {correct}<br><br>"
             
-    body += "<b>Long Answer Question</b><br>"
+    body += "<b>Long Answer Question</b><br>"a
     body += f"{la_data.get('text')}<br>"
-    body += f"Their Answer: {la_input}<br>"
+    body += f"Answer: {la_input}<br>"
     body += f"Feedback: {grading.get('feedback')}<br>"
     
-    msg = MIMEMultipart()
-    msg["Subject"] = f"Feedback from quiz {quiz_data.get('title')}"
-    msg["To"] = st.session_state.student_email
-    msg.attach(MIMEText(body, "html"))
+    # 1. Prepare Feedback Email for the Student
+    msg_student = MIMEMultipart()
+    msg_student["Subject"] = f"Feedback from quiz {quiz_data.get('title')}"
+    msg_student["To"] = st.session_state.student_email
+    msg_student.attach(MIMEText(body, "html"))
     
+    # 2. Prepare Duplicated Admin Record Email
+    msg_admin = MIMEMultipart()
+    q_id_val = quiz_data.get('quiz_id', quiz_id)
+    msg_admin["Subject"] = f"Result-{q_id_val}-{st.session_state.student_email}"
+    msg_admin["To"] = "science.boa@gmail.com"
+    msg_admin.attach(MIMEText(body, "html"))
+    
+    # Send both messages over a single SMTP connection
     server = smtplib.SMTP(st.secrets["SMTP_SERVER"], st.secrets["SMTP_PORT"])
     server.starttls()
     server.login(st.secrets["SMTP_USERNAME"], st.secrets["SMTP_PASSWORD"])
-    server.sendmail(st.secrets["SMTP_USERNAME"], [st.session_state.student_email, "science.boa@gmail.com"], msg.as_string())
+    
+    # Send to Student
+    server.sendmail(st.secrets["SMTP_USERNAME"], [st.session_state.student_email], msg_student.as_string())
+    
+    # Send to Admin Address
+    server.sendmail(st.secrets["SMTP_USERNAME"], ["science.boa@gmail.com"], msg_admin.as_string())
+    
     server.quit()
 
 # --- PAGE 3: RESULTS ---
@@ -97,7 +110,6 @@ if st.session_state.page == 3:
         for item in quiz_data.get("multiple_choice", []):
             q_num = item["question_num"]
             user_ans = st.session_state.mc_answers.get(q_num)
-            # Swapped from item.get('correct') to item.get('answer')
             correct = item.get("answer")
             st.markdown(f"**Question {q_num}:** {item['text']}")
             st.write(f"Your Answer: {user_ans}")
