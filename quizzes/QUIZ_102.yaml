@@ -1,0 +1,158 @@
+quiz_id: 102
+video_url: https://www.youtube.com/watch?v=TQ_iCf8mzMA
+title: 'GCSE Biology Assessment: DNA, Genes, and the Human Genome'
+multiple_choice:
+- question_num: 1
+  text: Where in a eukaryotic cell are chromosomes located?
+  A: In the cytoplasm
+  B: In the nucleus
+  C: On the ribosomes
+  D: Inside the cell membrane
+  answer: In the nucleus
+  points: 1
+  explanation: In eukaryotic cells, chromosomes containing the genetic material are
+    enclosed within the nucleus.
+- question_num: 2
+  text: Which molecule makes up chromosomes and acts as the genetic material?
+  A: Protein
+  B: RNA
+  C: DNA
+  D: Carbohydrate
+  answer: DNA
+  points: 1
+  explanation: Chromosomes are made of DNA, which is the genetic material because
+    it determines inherited features.
+- question_num: 3
+  text: What is the structural shape of a DNA molecule?
+  A: A single straight strand
+  B: A triple helix
+  C: A double helix
+  D: A circular ring
+  answer: A double helix
+  points: 1
+  explanation: DNA consists of two strands that wrap around each other to form a double
+    helix structure.
+- question_num: 4
+  text: What is a gene?
+  A: A small section of DNA on a chromosome that codes for a specific protein
+  B: The entire genetic material of an organism
+  C: A single strand of amino acids
+  D: A protein that determines inherited features
+  answer: A small section of DNA on a chromosome that codes for a specific protein
+  points: 1
+  explanation: A gene is defined as a small section of DNA on a chromosome. Each gene
+    encodes a specific sequence of amino acids to make a specific protein.
+- question_num: 5
+  text: Which of the following statements is true regarding genes on a pair of chromosomes?
+  A: Both chromosomes in a pair contain completely different genes.
+  B: Only one chromosome in a pair contains genes.
+  C: Both chromosomes in a pair have the same genes.
+  D: Genes are only found on chromosome number nine.
+  answer: Both chromosomes in a pair have the same genes.
+  points: 1
+  explanation: Chromosomes exist in pairs, and both chromosomes in a pair carry the
+    same genes, meaning there are two copies of each gene (such as the gene for blood
+    type on chromosome nine).
+- question_num: 6
+  text: Proteins are polymers made by joining together which smaller molecules?
+  A: Nucleotides
+  B: Fatty acids
+  C: Glucose molecules
+  D: Amino acids
+  answer: Amino acids
+  points: 1
+  explanation: Proteins are synthesized by linking together specific sequences of
+    amino acids.
+- question_num: 7
+  text: How does a gene determine the structure of a specific protein?
+  A: By encoding the sequence of amino acids
+  B: By directly folding into a protein shape
+  C: By absorbing proteins from the cytoplasm
+  D: By converting glucose into amino acids
+  answer: By encoding the sequence of amino acids
+  points: 1
+  explanation: Each gene contains the genetic code that determines the specific sequence
+    of amino acids required to build a particular protein.
+- question_num: 8
+  text: What is meant by the term 'genome'?
+  A: The study of proteins in a cell
+  B: The entire genetic material of an organism
+  C: The physical appearance of an organism
+  D: The process of cell division
+  answer: The entire genetic material of an organism
+  points: 1
+  explanation: The genome is defined as the entire genetic material of an organism.
+- question_num: 9
+  text: How does understanding the human genome help in the field of medicine regarding
+    non-communicable diseases?
+  A: It allows scientists to cure all infectious diseases instantly.
+  B: It helps search for genes linked to different types of disease, such as cancer.
+  C: It eliminates the need for lifestyle changes to prevent disease.
+  D: It allows scientists to change a person's blood type.
+  answer: It helps search for genes linked to different types of disease, such as
+    cancer.
+  points: 1
+  explanation: Mapping the human genome helps scientists identify specific genes that
+    increase the risk of developing diseases like cancer or Alzheimer's disease.
+- question_num: 10
+  text: Which of the following is an inherited disorder that scientists can better
+    understand and treat by studying the human genome?
+  A: Influenza
+  B: Scurvy
+  C: Cystic fibrosis
+  D: Type 2 diabetes
+  answer: Cystic fibrosis
+  points: 1
+  explanation: Cystic fibrosis is an inherited disorder caused by a faulty gene, which
+    can be studied and targeted for treatment using genomic data.
+- question_num: 11
+  text: How can the human genome be used to study human history?
+  A: By predicting future human evolution
+  B: By tracing human migration patterns from the past
+  C: By determining the exact diet of ancient humans
+  D: By calculating the exact age of fossilized bones
+  answer: By tracing human migration patterns from the past
+  points: 1
+  explanation: By analyzing genetic variations in the human genome, scientists can
+    trace human migration patterns from the past to help people discover their ancestry.
+- question_num: 12
+  text: On which human chromosome is the gene that determines blood type located?
+  A: Chromosome 1
+  B: Chromosome 9
+  C: Chromosome 21
+  D: The X chromosome
+  answer: Chromosome 9
+  points: 1
+  explanation: The gene responsible for determining ABO blood groups is located on
+    chromosome number nine.
+- question_num: 13
+  text: Which of the following correctly ranks genetic structures from smallest to
+    largest?
+  A: Gene -> Chromosome -> Nucleus -> Genome
+  B: Genome -> Chromosome -> Gene -> Nucleus
+  C: Chromosome -> Gene -> Genome -> Nucleus
+  D: Nucleus -> Genome -> Chromosome -> Gene
+  answer: Gene -> Chromosome -> Nucleus -> Genome
+  points: 1
+  explanation: A gene is a small section of DNA on a chromosome. Chromosomes are located
+    inside the nucleus. The genome represents the entire genetic material of the organism
+    (which includes all chromosomes).
+long_answer:
+  question_num: 1
+  text: Explain the relationship between DNA, genes, and proteins, and describe how
+    mapping the entire human genome is beneficial to modern medicine and science.
+  points: 6
+  rubric: "Level 1 (1-2 marks): Simple statements showing a basic understanding of\
+    \ DNA, genes, or the genome, with little or no logical structure.\nLevel 2 (3-4\
+    \ marks): Clear descriptions of how genes relate to proteins, or some clear benefits\
+    \ of mapping the human genome, with some logical scientific linkages.\nLevel 3\
+    \ (5-6 marks): Detailed, structured, and logical scientific explanation linking\
+    \ DNA, genes, and proteins, alongside a comprehensive discussion of the medical\
+    \ and scientific benefits of mapping the human genome.\n\nIndicative Content:\n\
+    - DNA is a double-helix polymer made of two strands.\n- A gene is a small section\
+    \ of DNA on a chromosome.\n- Each gene codes for a specific sequence of amino\
+    \ acids to make a specific protein.\n- The genome is the entire genetic material\
+    \ of an organism.\n- Benefits of mapping the genome:\n  1. Searching for genes\
+    \ linked to different types of disease (e.g., cancer, Alzheimer's).\n  2. Understanding\
+    \ and treating inherited disorders (e.g., cystic fibrosis).\n  3. Tracing human\
+    \ migration patterns from the past to understand ancestry."
