@@ -71,29 +71,36 @@ def send_feedback_email(mc_results, la_data, la_input, grading):
     body += f"Answer: {la_input}<br>"
     body += f"Feedback: {grading.get('feedback')}<br>"
     
+    # Strictly strip and clean all email addresses to prevent SMTP 555 errors
+    sender_email = st.secrets["SMTP_USERNAME"].strip()
+    student_email = st.session_state.student_email.strip()
+    admin_email = "science.boa@gmail.com"
+    
     # 1. Prepare Feedback Email for the Student
     msg_student = MIMEMultipart()
     msg_student["Subject"] = f"Feedback from quiz {quiz_data.get('title')}"
-    msg_student["To"] = st.session_state.student_email
+    msg_student["From"] = sender_email
+    msg_student["To"] = student_email
     msg_student.attach(MIMEText(body, "html"))
     
     # 2. Prepare Duplicated Admin Record Email
     msg_admin = MIMEMultipart()
     q_id_val = quiz_data.get('quiz_id', quiz_id)
-    msg_admin["Subject"] = f"Result-{q_id_val}-{st.session_state.student_email}"
-    msg_admin["To"] = "science.boa@gmail.com"
+    msg_admin["Subject"] = f"Result-{q_id_val}-{student_email}"
+    msg_admin["From"] = sender_email
+    msg_admin["To"] = admin_email
     msg_admin.attach(MIMEText(body, "html"))
     
     # Send both messages over a single SMTP connection
     server = smtplib.SMTP(st.secrets["SMTP_SERVER"], st.secrets["SMTP_PORT"])
     server.starttls()
-    server.login(st.secrets["SMTP_USERNAME"], st.secrets["SMTP_PASSWORD"])
+    server.login(sender_email, st.secrets["SMTP_PASSWORD"])
     
     # Send to Student
-    server.sendmail(st.secrets["SMTP_USERNAME"], [st.session_state.student_email], msg_student.as_string())
+    server.sendmail(sender_email, [student_email], msg_student.as_string())
     
     # Send to Admin Address
-    server.sendmail(st.secrets["SMTP_USERNAME"], ["science.boa@gmail.com"], msg_admin.as_string())
+    server.sendmail(sender_email, [admin_email], msg_admin.as_string())
     
     server.quit()
 
