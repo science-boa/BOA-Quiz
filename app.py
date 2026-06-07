@@ -141,7 +141,11 @@ else:
         if quiz_data.get("video_url"): st.video(quiz_data["video_url"])
         if st.session_state.page == 1:
             st.markdown("**Enter your school email**")
-            st.text_input("School Email", key="student_email", label_visibility="collapsed")
+            
+            # Decoupled Widget: key="email_widget" prevents Streamlit from deleting "student_email"
+            email_val = st.text_input("School Email Address", value=st.session_state.student_email, key="email_widget", label_visibility="collapsed")
+            st.session_state.student_email = email_val
+            
             if st.session_state.email_error: st.warning("⚠️ Enter a valid email.")
         else:
             if st.button("Back", key="back_btn"):
@@ -155,7 +159,7 @@ else:
                 for item in quiz_data.get("multiple_choice", []):
                     q = item["question_num"]
                     options = [item["A"], item["B"], item["C"], item["D"]]
-                    ans = st.radio(item["text"], options, index=None, key=f"mc_{q}")
+                    ans = st.radio(item["text"], options, index=None, key=f"mc_widget_{q}")
                     st.session_state.mc_answers[q] = ans
                 if st.button("Next", type="primary", key="next_btn", use_container_width=True):
                     if not st.session_state.student_email or "@" not in st.session_state.student_email:
@@ -169,16 +173,20 @@ else:
             st.subheader("Part 2: Long Answer")
             la_data = quiz_data.get("long_answer", {})
             st.markdown(la_data.get("text", ""))
-            la_input = st.text_area("Your response:", key="la_input")
+            
+            # Decoupled Widget: Prevents the answer from disappearing on Page 3
+            la_val = st.text_area("Your response:", value=st.session_state.la_input, key="la_widget")
+            st.session_state.la_input = la_val
+            
             if st.button("Submit Assignment", type="primary", key="submit_btn"):
-                if not la_input:
+                if not st.session_state.la_input:
                     st.warning("Please provide an answer.")
                 else:
                     with st.spinner("Grading..."):
                         model_status = st.empty()
                         try:
                             prompt = (f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. "
-                                      f"Answer: {la_input}. JSON: {{'score': 0, 'feedback': ''}}")
+                                      f"Answer: {st.session_state.la_input}. JSON: {{'score': 0, 'feedback': ''}}")
                             
                             try:
                                 model_status.caption("Using model: `gemini-3.1-flash-lite`...")
@@ -195,7 +203,7 @@ else:
                                     active_model = "gemini-2.5-flash"
                             
                             grading = json.loads(res)
-                            send_feedback_email(st.session_state.mc_answers, la_data, la_input, grading)
+                            send_feedback_email(st.session_state.mc_answers, la_data, st.session_state.la_input, grading)
                             st.session_state.grading_results = grading
                             st.session_state.model_used = active_model
                             st.session_state.page = 3
