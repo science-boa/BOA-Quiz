@@ -148,6 +148,9 @@ else:
             
             if st.session_state.email_error: st.warning("⚠️ Enter a valid email.")
         else:
+            # Display the collected student email on Page 2
+            st.info(f"👤 **Student:** {st.session_state.student_email}")
+            
             if st.button("Back", key="back_btn"):
                 st.session_state.page = 1
                 st.rerun()
