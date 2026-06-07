@@ -147,7 +147,6 @@ else:
                 if not la_input:
                     st.warning("Please provide an answer.")
                 else:
-                    st.session_state.la_input = la_input
                     with st.spinner("Grading..."):
                         try:
                             prompt = (f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. "
