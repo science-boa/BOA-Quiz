@@ -17,13 +17,15 @@ if "student_email" not in st.session_state: st.session_state.student_email = ""
 if "mc_answers" not in st.session_state: st.session_state.mc_answers = {}
 if "la_input" not in st.session_state: st.session_state.la_input = ""
 if "grading_results" not in st.session_state: st.session_state.grading_results = None
+if "model_used" not in st.session_state: st.session_state.model_used = None
 
 # Configure Gemini
 if "GEMINI_API_KEY" in st.secrets:
     genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
     config = {"response_mime_type": "application/json"}
     model_primary = genai.GenerativeModel('gemini-3.1-flash-lite', generation_config=config)
-    # model_fallback = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
+    model_fallback_1 = genai.GenerativeModel('gemini-3.5-flash', generation_config=config)
+    model_fallback_2 = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
 
 # 2. Data Ingestion
 @st.cache_data(show_spinner="Loading Assignment...")
@@ -105,6 +107,8 @@ if st.session_state.page == 3:
         st.markdown(f"**Your Answer:** {st.session_state.la_input}")
         st.info(f"**AI Feedback:** {st.session_state.grading_results.get('feedback')}")
         st.write(f"**Score:** {st.session_state.grading_results.get('score')}")
+        if st.session_state.model_used:
+            st.caption(f"Graded using: `{st.session_state.model_used}`")
 
 # --- PAGES 1 & 2 ---
 else:
@@ -148,15 +152,33 @@ else:
                     st.warning("Please provide an answer.")
                 else:
                     with st.spinner("Grading..."):
+                        # Dynamic model indicator below the spinner
+                        model_status = st.empty()
                         try:
                             prompt = (f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. "
                                       f"Answer: {la_input}. JSON: {{'score': 0, 'feedback': ''}}")
-                            try: res = model_primary.generate_content(prompt).text
-                            except: res = model_fallback.generate_content(prompt).text
+                            
+                            # Tier 1 Attempt
+                            try:
+                                model_status.caption("Using model: `gemini-3.1-flash-lite`...")
+                                res = model_primary.generate_content(prompt).text
+                                active_model = "gemini-3.1-flash-lite"
+                            except Exception as e1:
+                                # Tier 2 Attempt
+                                try:
+                                    model_status.caption("Using fallback model: `gemini-3.5-flash`...")
+                                    res = model_fallback_1.generate_content(prompt).text
+                                    active_model = "gemini-3.5-flash"
+                                except Exception as e2:
+                                    # Tier 3 Attempt
+                                    model_status.caption("Using fallback model: `gemini-2.5-flash`...")
+                                    res = model_fallback_2.generate_content(prompt).text
+                                    active_model = "gemini-2.5-flash"
                             
                             grading = json.loads(res)
                             send_feedback_email(st.session_state.mc_answers, la_data, la_input, grading)
                             st.session_state.grading_results = grading
+                            st.session_state.model_used = active_model
                             st.session_state.page = 3
                             st.rerun()
                         except Exception as e:
