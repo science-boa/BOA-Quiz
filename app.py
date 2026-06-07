@@ -141,7 +141,7 @@ else:
         if quiz_data.get("video_url"): st.video(quiz_data["video_url"])
         if st.session_state.page == 1:
             st.markdown("**Enter your school email**")
-            st.text_input("", key="student_email", label_visibility="collapsed")
+            st.text_input("School Email", key="student_email", label_visibility="collapsed")
             if st.session_state.email_error: st.warning("⚠️ Enter a valid email.")
         else:
             if st.button("Back", key="back_btn"):
