@@ -1,5 +1,5 @@
 quiz_id: 105
-video_url: 'https://www.youtube.com/watch?v=ubdoUqmNF9'
+video_url: https://www.youtube.com/watch?v=ubdoUqmNF9
 title: 'Potato!'
 multiple_choice:
 - question_num: 1
