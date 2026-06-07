@@ -66,7 +66,7 @@ def send_feedback_email(mc_results, la_data, la_input, grading):
         else:
             body += f"The correct answer was: {correct}<br><br>"
             
-    body += "<b>Long Answer Question</b><br>"a
+    body += "<b>Long Answer Question</b><br>"
     body += f"{la_data.get('text')}<br>"
     body += f"Answer: {la_input}<br>"
     body += f"Feedback: {grading.get('feedback')}<br>"
