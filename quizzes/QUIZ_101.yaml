@@ -9,7 +9,7 @@ multiple_choice:
   C: Diseases caused by lack of exercise.
   D: Diseases only affecting the lungs.
   correct: A
-  points: 5
+  points: 1
   explanation: The text states, 'Now, cardiovascular diseases are diseases of the
     heart and blood vessels.'
 - question_num: 2
@@ -20,7 +20,7 @@ multiple_choice:
   C: Non-communicable.
   D: Always fatal.
   correct: C
-  points: 5
+  points: 1
   explanation: The text states, 'A key feature of these is that they are non-communicable;
     in other words, they're not infectious, they cannot be passed from person to person.'
 - question_num: 3
@@ -30,7 +30,7 @@ multiple_choice:
   C: To pump blood to the rest of the body.
   D: To filter waste products from the blood.
   correct: B
-  points: 5
+  points: 1
   explanation: The text states, 'The purpose of the coronary arteries is to provide
     oxygen to the muscle cells of the heart.'
 - question_num: 4
@@ -40,7 +40,7 @@ multiple_choice:
   C: The heart valves become leaky.
   D: The heart stops pumping blood.
   correct: B
-  points: 5
+  points: 1
   explanation: The text states, 'In coronary heart disease, layers of fatty material
     build up inside the coronary arteries.'
 - question_num: 5
@@ -50,7 +50,7 @@ multiple_choice:
   C: Heart attack.
   D: Stronger heart contractions.
   correct: C
-  points: 5
+  points: 1
   explanation: The text states, 'In extreme cases, this can result in a heart attack
     where the heart is starved of oxygen, and this can be fatal.'
 - question_num: 6
@@ -60,7 +60,7 @@ multiple_choice:
   C: They replace faulty heart valves.
   D: They strengthen the heart muscle.
   correct: B
-  points: 5
+  points: 1
   explanation: The text states, 'Statins are drugs which reduce the level of cholesterol
     in the blood.'
 - question_num: 7
@@ -70,7 +70,7 @@ multiple_choice:
   C: They can cause liver problems.
   D: They do not slow down fatty material buildup.
   correct: C
-  points: 5
+  points: 1
   explanation: The text states, 'However, statins do have some unwanted side effects;
     for example, they can cause liver problems.'
 - question_num: 8
@@ -80,7 +80,7 @@ multiple_choice:
   C: To keep a coronary artery open.
   D: To provide oxygen to the heart muscle.
   correct: C
-  points: 5
+  points: 1
   explanation: The text states, 'A stent is a tube which is inserted into the coronary
     artery to keep it open.'
 - question_num: 9
@@ -90,7 +90,7 @@ multiple_choice:
   C: It does not prevent other regions of the coronary arteries from narrowing.
   D: It requires patients to take anti-clotting drugs.
   correct: C
-  points: 5
+  points: 1
   explanation: The text states, 'However, a stent will not prevent other regions of
     the coronary arteries from narrowing, and it does not treat the underlying causes
     of the disease.'
@@ -101,7 +101,7 @@ multiple_choice:
   C: Blood clots form easily.
   D: The patient feels energetic.
   correct: A
-  points: 5
+  points: 1
   explanation: The text states, 'Sometimes these valves do not fully open, so the
     heart has to pump extra hard to get the blood through.'
 - question_num: 11
@@ -111,7 +111,7 @@ multiple_choice:
   C: They increase the risk of blood clots.
   D: Patients do not need to take drugs.
   correct: C
-  points: 5
+  points: 1
   explanation: The text states, 'Mechanical valves can last a lifetime, but they increase
     the risk of blood clots, so patients have to take anti-clotting drugs.'
 - question_num: 12
@@ -121,7 +121,7 @@ multiple_choice:
   C: Patients do not need to take drugs.
   D: They are made of metal.
   correct: C
-  points: 5
+  points: 1
   explanation: The text states, 'Valves from animals do not last as long and may need
     to be replaced, however, patients do not need to take drugs.'
 - question_num: 13
@@ -131,7 +131,7 @@ multiple_choice:
   C: When fatty material builds up in arteries.
   D: When heart valves are leaky.
   correct: B
-  points: 5
+  points: 1
   explanation: The text states, 'In some patients with cardiovascular disease, the
     heart cannot pump enough blood around the body. This is called heart failure.'
 - question_num: 14
@@ -141,7 +141,7 @@ multiple_choice:
   C: They always cause blood clots.
   D: The patient does not need to take drugs.
   correct: B
-  points: 5
+  points: 1
   explanation: The text states, 'Firstly, there are not enough donated hearts available
     to treat every patient.'
 - question_num: 15
@@ -152,7 +152,7 @@ multiple_choice:
   C: They are rejected by the body's immune system.
   D: They cannot pump enough blood.
   correct: B
-  points: 5
+  points: 1
   explanation: The text states, 'Artificial hearts increase the risk of blood clotting
     and they're not a long-term solution to heart failure. They can only be used for
     a relatively short time.'
