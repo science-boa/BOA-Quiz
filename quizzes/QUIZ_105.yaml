@@ -1,0 +1,160 @@
+quiz_id: 105
+video_url: ''
+title: 'GCSE Biology Assessment: DNA, Genes, and the Human Genome'
+multiple_choice:
+- question_num: 1
+  text: What is a gene?
+  A: A small section of DNA on a chromosome that codes for a specific protein
+  B: The entire genetic material of an organism
+  C: A single strand of amino acids
+  D: A protein that determines inherited features
+  answer: A small section of DNA on a chromosome that codes for a specific protein
+  points: 1
+  explanation: A gene is defined as a short section of DNA on a chromosome. Each gene
+    contains the code for a specific sequence of amino acids, which fold to form a
+    specific protein.
+- question_num: 2
+  text: DNA is a polymer. What are the individual repeating units (monomers) that
+    join together to form DNA strands?
+  A: Amino acids
+  B: Nucleotides
+  C: Fatty acids
+  D: Monosaccharides
+  answer: Nucleotides
+  points: 1
+  explanation: DNA is a polymer made of repeating monomer units called nucleotides,
+    each consisting of a sugar, a phosphate group, and a nitrogenous base.
+- question_num: 3
+  text: What does each gene specifically encode?
+  A: A specific sequence of amino acids to make a specific protein
+  B: A specific sequence of fatty acids to make a lipid
+  C: A specific sequence of glucose molecules to make starch
+  D: A specific sequence of nucleotides to make a chromosome
+  answer: A specific sequence of amino acids to make a specific protein
+  points: 1
+  explanation: Genes contain the genetic code that determines the order in which amino
+    acids are joined together to synthesize a specific protein.
+- question_num: 4
+  text: In human body cells, chromosomes are found in pairs. Which of the following
+    is true about a pair of chromosomes?
+  A: They contain completely different genes.
+  B: Both chromosomes in a pair carry the same genes.
+  C: One chromosome is made of DNA and the other is made of protein.
+  D: They only contain genes for determining biological sex.
+  answer: Both chromosomes in a pair carry the same genes.
+  points: 1
+  explanation: Homologous chromosomes in a pair carry the same genes in the same positions
+    (loci), although they may carry different versions (alleles) of those genes.
+- question_num: 5
+  text: What is meant by the term 'genome'?
+  A: The total number of proteins in a cell
+  B: The entire genetic material of an organism
+  C: The physical appearance of an organism
+  D: The section of DNA that codes for a single characteristic
+  answer: The entire genetic material of an organism
+  points: 1
+  explanation: The genome is defined as the entire genetic material of that organism,
+    including all of its chromosomes and DNA.
+- question_num: 6
+  text: How does understanding the human genome help in the field of medicine?
+  A: It allows scientists to create new species of humans.
+  B: It helps scientists search for genes linked to different types of disease, such
+    as cancer.
+  C: It eliminates the need for any future drug trials.
+  D: It allows cells to replicate without using DNA.
+  answer: It helps scientists search for genes linked to different types of disease,
+    such as cancer.
+  points: 1
+  explanation: Mapping the human genome allows scientists to identify specific genes
+    associated with increased risks of developing diseases like cancer or Alzheimer's,
+    aiding in early detection and targeted therapies.
+- question_num: 7
+  text: Which of the following inherited disorders can be better understood and treated
+    by studying the human genome?
+  A: Type 2 diabetes
+  B: Scurvy
+  C: Cystic fibrosis
+  D: Influenza
+  answer: Cystic fibrosis
+  points: 1
+  explanation: Cystic fibrosis is a classic example of an inherited disorder caused
+    by a faulty gene. Understanding the genome helps scientists identify these mutations
+    and develop gene therapies or targeted treatments.
+- question_num: 8
+  text: How can scientists use the human genome to study human history?
+  A: By predicting future migration patterns of modern populations
+  B: By tracing human migration patterns from the past to discover ancestry
+  C: By determining the exact language spoken by ancient ancestors
+  D: By calculating the exact age of fossilized bones
+  answer: By tracing human migration patterns from the past to discover ancestry
+  points: 1
+  explanation: By analyzing genetic markers and variations in the genome of different
+    populations, scientists can map out how humans migrated across the globe over
+    tens of thousands of years.
+- question_num: 9
+  text: Approximately how many genes are found on a single human chromosome, such
+    as chromosome nine?
+  A: Only one gene
+  B: Exactly two genes
+  C: Hundreds of different genes
+  D: Millions of different genes
+  answer: Hundreds of different genes
+  points: 1
+  explanation: Human chromosomes are large structures containing many genes. For example,
+    chromosome nine contains well over 700 different genes.
+- question_num: 10
+  text: Proteins are polymers. What are the monomer units that join together to form
+    a protein?
+  A: Nucleotides
+  B: Amino acids
+  C: Glycerol molecules
+  D: Monosaccharides
+  answer: Amino acids
+  points: 1
+  explanation: Proteins are made of long chains of amino acids folded into specific
+    3D shapes. The sequence of these amino acids is determined by the gene's DNA sequence.
+- question_num: 11
+  text: On which chromosome is the gene that determines human ABO blood type located?
+  A: Chromosome 1
+  B: Chromosome 9
+  C: Chromosome 21
+  D: The X chromosome
+  answer: Chromosome 9
+  points: 1
+  explanation: The gene responsible for determining the ABO blood group system is
+    located on chromosome number nine.
+- question_num: 12
+  text: Why is DNA classified as the genetic material of an organism?
+  A: It provides energy for cellular respiration.
+  B: It forms the structural boundary of the cell.
+  C: It determines the inherited features of an organism.
+  D: It acts as an enzyme to speed up chemical reactions.
+  answer: It determines the inherited features of an organism.
+  points: 1
+  explanation: DNA is the genetic material because it contains the instructions (genes)
+    that determine the inherited characteristics and traits of an organism.
+long_answer:
+  question_num: 1
+  text: Explain the relationship between DNA, genes, chromosomes, and proteins, and
+    describe how mapping the human genome is of great benefit to modern medicine and
+    science.
+  points: 6
+  rubric: "Level 1 (1-2 marks): Simple statements identifying some of the structures\
+    \ (e.g., DNA is in chromosomes, genes make proteins) or mentioning a benefit of\
+    \ the genome project without clear scientific linkage.\n\nLevel 2 (3-4 marks):\
+    \ Clear descriptions showing how some structures relate (e.g., chromosomes contain\
+    \ DNA, genes are sections of DNA that code for proteins) and at least one clear\
+    \ benefit of mapping the genome (e.g., finding disease genes or tracing migration).\n\
+    \nLevel 3 (5-6 marks): Detailed, structured, and logical scientific explanation\
+    \ showing the hierarchical relationship from chromosome to protein, and a comprehensive\
+    \ discussion of multiple benefits of mapping the human genome (medical diagnosis,\
+    \ treatment of inherited disorders, and tracing evolutionary/migration history).\n\
+    \nIndicative Content:\n- Chromosomes are found in the nucleus of cells and are\
+    \ made of DNA.\n- DNA is a double-helix polymer made of two strands.\n- A gene\
+    \ is a small section of DNA on a chromosome.\n- Each gene codes for a specific\
+    \ sequence of amino acids to make a specific protein.\n- The genome is the entire\
+    \ genetic material of an organism.\n- Benefits of mapping the genome include:\n\
+    \  1. Searching for genes linked to different types of disease (e.g., cancer,\
+    \ Alzheimer's).\n  2. Understanding and treating inherited disorders (e.g., cystic\
+    \ fibrosis).\n  3. Tracing human migration patterns from the past to discover\
+    \ ancestry."
