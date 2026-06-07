@@ -22,8 +22,8 @@ if "grading_results" not in st.session_state: st.session_state.grading_results =
 if "GEMINI_API_KEY" in st.secrets:
     genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
     config = {"response_mime_type": "application/json"}
-    model_primary = genai.GenerativeModel('gemini-3.5-flash', generation_config=config)
-    model_fallback = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
+    model_primary = genai.GenerativeModel('gemini-3.1-flash-lite', generation_config=config)
+    # model_fallback = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
 
 # 2. Data Ingestion
 @st.cache_data(show_spinner="Loading Assignment...")
