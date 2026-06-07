@@ -6,6 +6,7 @@ import google.generativeai as genai
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from streamlit.components.v1 import html
 
 # 1. Page Configuration
 st.set_page_config(page_title="Homework Evaluation Portal", layout="wide")
@@ -77,7 +78,17 @@ def send_feedback_email(mc_results, la_data, la_input, grading):
 
 # --- PAGE 3: RESULTS ---
 if st.session_state.page == 3:
-    st.title("Assignment Results")
+    col_t1, col_t2 = st.columns([4, 1])
+    with col_t1:
+        st.title("Assignment Results")
+    with col_t2:
+        # Button to close the window
+        html("""
+            <button onclick="window.close()" style="padding: 10px 20px; background-color: #ef4444; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Close App
+            </button>
+        """)
+        
     st.write("Your results have been calculated and sent to your email.")
     
     col_res_l, col_res_r = st.columns([1, 1], gap="large")
@@ -104,8 +115,6 @@ if st.session_state.page == 3:
         st.markdown(f"**Your Answer:** {st.session_state.la_input}")
         st.info(f"**AI Feedback:** {st.session_state.grading_results.get('feedback')}")
         st.write(f"**Score:** {st.session_state.grading_results.get('score')}")
-
-    if st.button("Close App"): st.stop()
 
 # --- PAGES 1 & 2 ---
 else:
@@ -148,6 +157,7 @@ else:
                 if not la_input:
                     st.warning("Please provide an answer.")
                 else:
+                    st.session_state.la_input = la_input
                     with st.spinner("Grading..."):
                         try:
                             prompt = (f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. "
