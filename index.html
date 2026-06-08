@@ -20,14 +20,14 @@
         </header>
 
         <!-- Main Content Area -->
-        <main class="flex-1 overflow-hidden">
+        <main class="flex-1 overflow-hidden relative">
             <div id="loading" class="text-center py-12">
                 <p class="text-xl font-semibold text-gray-600 animate-pulse">Loading Assignment...</p>
             </div>
 
             <div id="error-container" class="hidden p-6 text-red-700">Error loading assignment.</div>
 
-            <!-- Portal Grid: Fixed Height, internal scroll for right side -->
+            <!-- Portal Grid -->
             <div id="portal" class="hidden h-full flex flex-col md:flex-row">
                 
                 <!-- Fixed Sidebar (Left) -->
@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- Scrollable Content (Right) -->
-                <div class="w-full md:w-1/2 overflow-y-auto p-8 bg-white border-l border-gray-100 h-full">
+                <div class="w-full md:w-1/2 h-full overflow-y-auto p-8 bg-white border-l border-gray-100">
                     <div class="max-w-xl mx-auto space-y-8 pb-20">
                         <div id="mc-section" class="space-y-6">
                             <h2 class="text-xl font-bold border-b pb-2 text-indigo-900">Part 1: Multiple Choice</h2>
@@ -124,20 +124,20 @@
 
         async function submitAssignment() {
             const btn = document.getElementById('submit-btn');
-            let seconds = 3;
+            let seconds = 0;
             btn.disabled = true;
             
             const timer = setInterval(() => {
-                seconds--;
-                if (seconds > 0) {
-                    btn.innerText = `Submitting in ${seconds}...`;
-                } else {
+                seconds++;
+                btn.innerText = `Submitting... ${seconds}s`;
+                
+                if (seconds >= 5) {
                     clearInterval(timer);
                     performSubmit();
                 }
             }, 1000);
             
-            btn.innerText = `Submitting in 3...`;
+            btn.innerText = `Submitting... 0s`;
 
             async function performSubmit() {
                 const payload = {
