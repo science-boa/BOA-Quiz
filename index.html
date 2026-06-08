@@ -124,51 +124,45 @@
 
         async function submitAssignment() {
             const btn = document.getElementById('submit-btn');
-            let seconds = 0;
             btn.disabled = true;
+            btn.innerText = "Submitting... 0s";
             
+            let seconds = 0;
             const timer = setInterval(() => {
                 seconds++;
                 btn.innerText = `Submitting... ${seconds}s`;
-                
-                if (seconds >= 5) {
-                    clearInterval(timer);
-                    performSubmit();
-                }
             }, 1000);
-            
-            btn.innerText = `Submitting... 0s`;
 
-            async function performSubmit() {
-                const payload = {
-                    quiz_id: quizId,
-                    student_email: document.getElementById('student-email').value,
-                    mc_answers: {}, 
-                    la_input: document.getElementById('la-input').value,
-                    quiz_schema: quizData
-                };
+            const payload = {
+                quiz_id: quizId,
+                student_email: document.getElementById('student-email').value,
+                mc_answers: {}, 
+                la_input: document.getElementById('la-input').value,
+                quiz_schema: quizData
+            };
+            
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload)
+                });
                 
-                btn.innerText = "Sending to Server...";
+                clearInterval(timer);
                 
-                try {
-                    const response = await fetch(BACKEND_URL, {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(payload)
-                    });
-                    if (response.ok) {
-                        document.getElementById('portal').classList.add('hidden');
-                        document.getElementById('results-portal').classList.remove('hidden');
-                    } else {
-                        alert("Submission failed.");
-                        btn.disabled = false;
-                        btn.innerText = "Submit Assignment";
-                    }
-                } catch (err) { 
-                    alert("Network error."); 
+                if (response.ok) {
+                    document.getElementById('portal').classList.add('hidden');
+                    document.getElementById('results-portal').classList.remove('hidden');
+                } else {
+                    alert("Submission failed.");
                     btn.disabled = false;
                     btn.innerText = "Submit Assignment";
                 }
+            } catch (err) { 
+                clearInterval(timer);
+                alert("Network error."); 
+                btn.disabled = false;
+                btn.innerText = "Submit Assignment";
             }
         }
 
