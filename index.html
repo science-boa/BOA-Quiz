@@ -13,9 +13,12 @@
         <!-- Header -->
         <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shrink-0">
             <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">Science BOA Portal</h1>
-            <div id="server-status-container" class="flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-gray-150 text-sm">
-                <span id="status-dot" class="inline-block rounded-full h-2.5 w-2.5 bg-yellow-500"></span>
-                <span id="status-text" class="font-medium text-gray-600">Connecting...</span>
+            <div class="flex items-center space-x-4">
+                <a href="#" onclick="toggleLayout()" class="text-indigo-600 font-semibold underline text-sm">Rotate View</a>
+                <div id="server-status-container" class="flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-gray-150 text-sm">
+                    <span id="status-dot" class="inline-block rounded-full h-2.5 w-2.5 bg-yellow-500"></span>
+                    <span id="status-text" class="font-medium text-gray-600">Connecting...</span>
+                </div>
             </div>
         </header>
 
@@ -28,10 +31,10 @@
             <div id="error-container" class="hidden p-6 text-red-700">Error loading assignment.</div>
 
             <!-- Portal Grid -->
-            <div id="portal" class="hidden h-full flex flex-col md:flex-row">
+            <div id="portal" class="hidden h-full flex flex-col md:flex-row overflow-y-auto" id="main-layout-container">
                 
                 <!-- Fixed Sidebar (Left) -->
-                <div class="w-full md:w-1/2 p-8 bg-gray-50 flex flex-col gap-6 shrink-0 md:h-full">
+                <div id="left-panel" class="w-full md:w-1/2 p-8 bg-gray-50 flex flex-col gap-6 shrink-0 md:h-full">
                     <h1 id="quiz-title" class="text-3xl font-black tracking-tight text-gray-900">Quiz Portal</h1>
                     <div id="video-container" class="hidden aspect-video w-full rounded-xl overflow-hidden shadow-md bg-black">
                         <iframe id="quiz-video" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
@@ -43,7 +46,7 @@
                 </div>
 
                 <!-- Scrollable Content (Right) -->
-                <div class="w-full md:w-1/2 h-full overflow-y-auto p-8 bg-white border-l border-gray-100">
+                <div id="right-panel" class="w-full md:w-1/2 h-full overflow-y-auto p-8 bg-white border-l border-gray-100">
                     <div class="max-w-xl mx-auto space-y-8 pb-20">
                         <div id="mc-section" class="space-y-6">
                             <h2 class="text-xl font-bold border-b pb-2 text-indigo-900">Part 1: Multiple Choice</h2>
@@ -73,9 +76,35 @@
         const BACKEND_URL = "https://boa-quiz.onrender.com/submit"; 
         let quizData = null;
         let quizId = "101";
+        let isStacked = false;
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('quiz')) quizId = urlParams.get('quiz').trim();
+
+        function toggleLayout() {
+            isStacked = !isStacked;
+            const container = document.getElementById('portal');
+            const left = document.getElementById('left-panel');
+            const right = document.getElementById('right-panel');
+            
+            if (isStacked) {
+                container.classList.remove('md:flex-row');
+                container.classList.add('flex-col');
+                left.classList.remove('md:h-full');
+                left.classList.remove('w-1/2');
+                left.classList.add('w-full');
+                right.classList.remove('w-1/2');
+                right.classList.add('w-full');
+            } else {
+                container.classList.add('md:flex-row');
+                container.classList.remove('flex-col');
+                left.classList.add('md:h-full');
+                left.classList.add('w-1/2');
+                left.classList.remove('w-full');
+                right.classList.add('w-1/2');
+                right.classList.remove('w-full');
+            }
+        }
 
         async function checkServerStatus() {
             const statusDot = document.getElementById('status-dot');
@@ -126,13 +155,11 @@
             const btn = document.getElementById('submit-btn');
             const email = document.getElementById('student-email').value;
 
-            // Validation: Email
             if (!email || !email.includes('@')) {
                 alert("Please enter a valid school email address.");
                 return;
             }
 
-            // Validation: MCQ Completion
             const mc_answers = {};
             let allAnswered = true;
             quizData.multiple_choice?.forEach(q => {
@@ -149,7 +176,6 @@
                 return;
             }
 
-            // Validation: Long Answer
             if (!document.getElementById('la-input').value.trim()) {
                 alert("Please provide a response for the long answer question.");
                 return;
