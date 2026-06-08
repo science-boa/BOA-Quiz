@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Evaluation Portal</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans h-screen overflow-hidden">
+
+    <div class="h-full flex flex-col">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shrink-0">
+            <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">Science BOA Portal</h1>
+            <div id="server-status-container" class="flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-gray-150 text-sm">
+                <span id="status-dot" class="inline-block rounded-full h-2.5 w-2.5 bg-yellow-500"></span>
+                <span id="status-text" class="font-medium text-gray-600">Connecting...</span>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-hidden">
+            <div id="loading" class="text-center py-12">
+                <p class="text-xl font-semibold text-gray-600 animate-pulse">Loading Assignment...</p>
+            </div>
+
+            <div id="error-container" class="hidden p-6 text-red-700">Error loading assignment.</div>
+
+            <!-- Portal Grid: Fixed Height, Internal Scrolling -->
+            <div id="portal" class="hidden h-full flex flex-col md:flex-row">
+                
+                <!-- Fixed Sidebar (Left) -->
+                <div class="w-full md:w-1/2 p-8 bg-gray-50 flex flex-col gap-6 shrink-0">
+                    <h1 id="quiz-title" class="text-3xl font-black tracking-tight text-gray-900">Quiz Portal</h1>
+                    <div id="video-container" class="hidden aspect-video w-full rounded-xl overflow-hidden shadow-md bg-black">
+                        <iframe id="quiz-video" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-xs border border-gray-100">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">School Email Address</label>
+                        <input type="email" id="student-email" placeholder="you@school.edu" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                </div>
+
+                <!-- Scrollable Content (Right) -->
+                <div class="w-full md:w-1/2 overflow-y-auto p-8 bg-white border-l border-gray-100">
+                    <div class="max-w-xl mx-auto space-y-8 pb-20">
+                        <div id="mc-section" class="space-y-6">
+                            <h2 class="text-xl font-bold border-b pb-2 text-indigo-900">Part 1: Multiple Choice</h2>
+                            <div id="mc-questions" class="space-y-6"></div>
+                        </div>
+
+                        <div id="la-section" class="space-y-4 pt-6 border-t border-gray-100">
+                            <h2 class="text-xl font-bold text-indigo-900">Part 2: Long Answer</h2>
+                            <p id="la-text" class="text-gray-700 font-medium"></p>
+                            <textarea id="la-input" rows="5" placeholder="Type your full analysis here..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                        </div>
+
+                        <button id="submit-btn" onclick="submitAssignment()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition">
+                            Submit Assignment
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="results-portal" class="hidden p-12 text-center space-y-4">
+                <h2 class="text-2xl font-black text-gray-900">Assignment Submitted Successfully!</h2>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const BACKEND_URL = "https://boa-quiz.onrender.com/submit"; 
+        let quizData = null;
+        let quizId = "101";
+        let isServerOnline = false;
+
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('quiz')) quizId = urlParams.get('quiz').trim();
+
+        async function checkServerStatus() {
+            const statusDot = document.getElementById('status-dot');
+            const statusText = document.getElementById('status-text');
+            try {
+                const response = await fetch("https://boa-quiz.onrender.com/health");
+                if (response.ok) {
+                    isServerOnline = true;
+                    statusDot.className = "inline-block rounded-full h-2.5 w-2.5 bg-green-500";
+                    statusText.innerText = "Server: Online";
+                }
+            } catch (err) {
+                statusDot.className = "inline-block rounded-full h-2.5 w-2.5 bg-red-500";
+                statusText.innerText = "Server: Offline";
+            }
+        }
+
+        async function loadQuiz() {
+            const url = `https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_${quizId}.yaml`;
+            try {
+                const response = await fetch(url);
+                quizData = jsyaml.load(await response.text());
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('portal').classList.remove('hidden');
+                renderQuiz();
+            } catch (err) {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('error-container').classList.remove('hidden');
+            }
+        }
+
+        function renderQuiz() {
+            document.getElementById('quiz-title').innerText = quizData.title || "Quiz Portal";
+            if (quizData.video_url) {
+                document.getElementById('quiz-video').src = quizData.video_url.replace("watch?v=", "embed/");
+                document.getElementById('video-container').classList.remove('hidden');
+            }
+            const mcContainer = document.getElementById('mc-questions');
+            quizData.multiple_choice?.forEach(q => {
+                const qDiv = document.createElement('div');
+                qDiv.innerHTML = `<p class="font-semibold text-gray-900">${q.question_num}. ${q.text}</p>
+                    ${['A', 'B', 'C', 'D'].map(l => `<label class="flex items-center space-x-3 p-2 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="mc_${q.question_num}" value="${l}"><span>${l}: ${q[l]}</span></label>`).join('')}`;
+                mcContainer.appendChild(qDiv);
+            });
+            if (quizData.long_answer) document.getElementById('la-text').innerText = quizData.long_answer.text;
+        }
+
+        async function submitAssignment() {
+            const payload = {
+                quiz_id: quizId,
+                student_email: document.getElementById('student-email').value,
+                mc_answers: {},
+                la_input: document.getElementById('la-input').value,
+                quiz_schema: quizData
+            };
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.innerText = "Submitting...";
+            
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload)
+                });
+                if (response.ok) {
+                    document.getElementById('portal').classList.add('hidden');
+                    document.getElementById('results-portal').classList.remove('hidden');
+                } else alert("Submission failed.");
+            } catch (err) { alert("Network error."); }
+            btn.disabled = false;
+            btn.innerText = "Submit Assignment";
+        }
+
+        window.onload = () => { loadQuiz(); checkServerStatus(); };
+    </script>
+</body>
+</html>
