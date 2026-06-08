@@ -119,28 +119,6 @@ multiple_choice:
   explanation: 'Flagella (singular: flagellum) are tail-like protein structures that
     rotate like a propeller to allow the bacterial cell to move through liquid environments.'
 - question_num: 12
-  text: Why does a plant cell have a rigid cell wall made of cellulose?
-  A: To control which substances enter and leave the cell
-  B: To absorb light energy for photosynthesis
-  C: To provide support and prevent the cell from bursting when water enters
-  D: To store genetic information
-  answer: To provide support and prevent the cell from bursting when water enters
-  points: 1
-  explanation: The cellulose cell wall provides mechanical strength and turgor pressure
-    support, preventing the plant cell from lysing (bursting) when it absorbs water
-    by osmosis.
-- question_num: 13
-  text: Where do most of the chemical reactions take place within a cell?
-  A: Nucleus
-  B: Cytoplasm
-  C: Cell membrane
-  D: Vacuole
-  answer: Cytoplasm
-  points: 1
-  explanation: The cytoplasm is a gel-like substance containing enzymes, nutrients,
-    and organelles. It is the site where most of the cell's metabolic chemical reactions
-    occur.
-- question_num: 14
   text: Which of the following is a key difference between eukaryotic and prokaryotic
     cells?
   A: Prokaryotes have a nucleus, whereas eukaryotes do not.
@@ -152,16 +130,6 @@ multiple_choice:
   explanation: A defining difference is that eukaryotic cells contain their genetic
     material enclosed within a membrane-bound nucleus, whereas prokaryotic cells have
     free-floating DNA and no nucleus.
-- question_num: 15
-  text: Approximately how many cells make up an adult human body?
-  A: 40 million
-  B: 40 billion
-  C: 40 trillion
-  D: 40 quadrillion
-  answer: 40 trillion
-  points: 1
-  explanation: An adult human body is highly multicellular, consisting of approximately
-    40 trillion specialized cells working together.
 long_answer:
   question_num: 1
   text: Compare the structure of a eukaryotic plant cell with the structure of a prokaryotic
