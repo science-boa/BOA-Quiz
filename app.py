@@ -70,13 +70,41 @@ def fetch_quiz_schema(q_id):
             
     return {"data": None, "errors": errors}
 
-quiz_id = st.query_params.get("quiz", "101")
+# Robust case-insensitive query parameter extraction
+raw_params = st.query_params
+quiz_id = None
+for key in raw_params:
+    if key.lower() == "quiz":
+        val = raw_params[key]
+        if isinstance(val, list):
+            quiz_id = val[0] if val else None
+        else:
+            quiz_id = val
+        break
+
+# If no quiz ID is provided in the URL, don't silently default to "101"
+if not quiz_id:
+    st.warning("📋 No Quiz Specified")
+    st.markdown("""
+    To view a specific homework assignment, please append `?quiz=YOUR_QUIZ_CODE` to the URL.
+    
+    **Alternatively, you can manually enter your Quiz ID below to load the portal:**
+    """)
+    
+    manual_input = st.text_input("Enter Quiz ID (e.g., B101, 101):", placeholder="B101")
+    if st.button("Load Quiz", type="primary"):
+        if manual_input.strip():
+            st.query_params["quiz"] = manual_input.strip()
+            st.rerun()
+    st.stop()
+
+# Fetch the specified quiz
 quiz_result = fetch_quiz_schema(quiz_id)
 quiz_data = quiz_result.get("data")
 
 # Safety check: Prevent app crash if file is missing or cached as None
 if quiz_data is None:
-    st.error(f"⚠️ Could not load Quiz {quiz_id}.")
+    st.error(f"⚠️ Could not load Quiz '{quiz_id}'.")
     st.markdown("### 🔍 Live Fetch Diagnostics")
     st.write("We attempted to fetch the quiz file from your GitHub repository using multiple variations, but all attempts failed:")
     for err in quiz_result.get("errors", []):
