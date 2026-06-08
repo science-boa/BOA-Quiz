@@ -1,8 +1,7 @@
 import os
 import json
-import smtplib
-from email.message import EmailMessage
-from fastapi import FastAPI, HTTPException
+import requests
+from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from google import genai
@@ -10,10 +9,10 @@ from google.genai import types
 
 app = FastAPI(title="Homework Portal Backend")
 
-# Enable CORS globally to ensure the GitHub Pages frontend can access all endpoints (including /health and /submit)
+# Enable CORS globally to ensure the GitHub Pages frontend can access all endpoints cleanly
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In a highly restricted production environment, swap with ["https://science-boa.github.io"]
+    allow_origins=["*"],  # In production, swap with ["https://science-boa.github.io"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -26,64 +25,84 @@ class SubmissionPayload(BaseModel):
     la_input: str
     quiz_schema: dict
 
-def send_feedback_email(payload: SubmissionPayload, grading: dict):
-    quiz_data = payload.quiz_schema
-    total_questions = len(quiz_data.get('multiple_choice', []))
-    correct_count = sum(1 for item in quiz_data.get('multiple_choice', []) 
-                       if payload.mc_answers.get(str(item['question_num'])) == item.get('answer'))
-    
-    percent = round((correct_count / total_questions) * 100) if total_questions > 0 else 0
-    body = f"Multiple Choice Score: {percent}%<br><br>"
-    
-    for item in quiz_data.get('multiple_choice', []):
-        q_num = str(item['question_num'])
-        user_ans = payload.mc_answers.get(q_num)
-        correct = item.get('answer')
+def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict):
+    """
+    HTTP Email Delivery Engine. 
+    Instead of SMTP, this opens a standard web request (Port 443) to your private Google Apps Script.
+    Because it behaves like standard web browsing, Render's firewall will never block it.
+    """
+    try:
+        quiz_data = payload.quiz_schema
+        total_questions = len(quiz_data.get('multiple_choice', []))
+        correct_count = sum(1 for item in quiz_data.get('multiple_choice', []) 
+                           if payload.mc_answers.get(str(item['question_num'])) == item.get('answer'))
         
-        body += f"Question Number: {item['text']}<br>"
-        body += f"Your Answer: {user_ans}<br>"
-        if user_ans == correct:
-            body += "Correct<br><br>"
-        else:
-            body += f"The correct answer was: {correct}<br><br>"
+        percent = round((correct_count / total_questions) * 100) if total_questions > 0 else 0
+        body = f"Multiple Choice Score: {percent}%<br><br>"
+        
+        for item in quiz_data.get('multiple_choice', []):
+            q_num = str(item['question_num'])
+            user_ans = payload.mc_answers.get(q_num)
+            correct = item.get('answer')
             
-    la_data = quiz_data.get('long_answer', {})
-    body += "<b>Long Answer Question</b><br>"
-    body += f"{la_data.get('text')}<br>"
-    body += f"Answer: {payload.la_input}<br>"
-    body += f"Feedback: {grading.get('feedback')}<br>"
-    
-    sender_email = os.environ.get("SMTP_USERNAME", "").strip()
-    student_email = payload.student_email.strip()
-    admin_email = "science.boa@gmail.com"
-    
-    # 1. Feedback Email for the student
-    msg_student = EmailMessage()
-    msg_student.set_content(body, subtype="html")
-    msg_student["Subject"] = f"Feedback from quiz {quiz_data.get('title')}"
-    msg_student["From"] = sender_email
-    msg_student["To"] = student_email
-    
-    # 2. Administrative copy to archive record
-    msg_admin = EmailMessage()
-    msg_admin.set_content(body, subtype="html")
-    msg_admin["Subject"] = f"Result-{payload.quiz_id}-{student_email}"
-    msg_admin["From"] = sender_email
-    msg_admin["To"] = admin_email
-    
-    # Secure SMTP Transmission
-    server = smtplib.SMTP(os.environ.get("SMTP_SERVER"), int(os.environ.get("SMTP_PORT", 587)))
-    server.starttls()
-    server.login(sender_email, os.environ.get("SMTP_PASSWORD"))
-    server.send_message(msg_student)
-    server.send_message(msg_admin)
-    server.quit()
+            body += f"Question Number: {item['text']}<br>"
+            body += f"Your Answer: {user_ans}<br>"
+            if user_ans == correct:
+                body += "Correct<br><br>"
+            else:
+                body += f"The correct answer was: {correct}<br><br>"
+                
+        la_data = quiz_data.get('long_answer', {})
+        body += "<b>Long Answer Question</b><br>"
+        body += f"{la_data.get('text')}<br>"
+        body += f"Answer: {payload.la_input}<br>"
+        body += f"Feedback: {grading.get('feedback')}<br>"
+        
+        # Load HTTP Bridge credentials from Render environment variables
+        bridge_url = os.environ.get("GMAIL_BRIDGE_URL", "").strip()
+        bridge_key = os.environ.get("GMAIL_BRIDGE_KEY", "").strip()
+        
+        if not bridge_url or not bridge_key:
+            print("CONFIG ERROR: GMAIL_BRIDGE_URL or GMAIL_BRIDGE_KEY environment variables are missing.")
+            return
+
+        student_email = payload.student_email.strip()
+        admin_email = "science.boa@gmail.com"
+
+        # 1. Dispatch Email to Student
+        student_payload = {
+            "key": bridge_key,
+            "to": student_email,
+            "subject": f"Feedback from quiz {quiz_data.get('title')}",
+            "body": body
+        }
+        
+        # 2. Dispatch Administrative archive copy
+        admin_payload = {
+            "key": bridge_key,
+            "to": admin_email,
+            "subject": f"Result-{payload.quiz_id}-{student_email}",
+            "body": body
+        }
+
+        # Fire off standard HTTP POST requests directly to Google (Port 443)
+        response_student = requests.post(bridge_url, json=student_payload, timeout=15)
+        response_admin = requests.post(bridge_url, json=admin_payload, timeout=15)
+
+        if response_student.status_code == 200 and response_admin.status_code == 200:
+            print(f"SUCCESS: Result emails successfully dispatched via Google HTTP Web App to {student_email} and {admin_email}")
+        else:
+            print(f"DELIVERY ERROR: Google Web App returned statuses: Student({response_student.status_code}), Admin({response_admin.status_code})")
+            print(f"Details: {response_student.text}")
+
+    except Exception as http_err:
+        print(f"HTTP MAIL ERROR: Failed to dispatch emails for quiz {payload.quiz_id} to {payload.student_email}. Details: {http_err}")
 
 @app.api_route("/", methods=["GET", "HEAD"])
 async def root():
     """
-    Satisfies Render's default health checking. Supporting HEAD prevents 
-    Render from marking the deploy as failed and shutting down.
+    Root endpoint added to satisfy Render's default health checking.
+    Supports both GET and HEAD methods to avoid 405 Method Not Allowed exceptions.
     """
     return {"message": "Homework Portal Backend is online and running successfully."}
 
@@ -96,25 +115,22 @@ async def health_check():
     return {"status": "healthy"}
 
 @app.post("/submit")
-async def process_submission(payload: SubmissionPayload):
+async def process_submission(payload: SubmissionPayload, background_tasks: BackgroundTasks):
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise HTTPException(status_code=500, detail="Gemini API Key missing on server container.")
         
     la_data = payload.quiz_schema.get("long_answer")
     if not la_data:
-        # If there's no long-answer section in the YAML schema, skip AI grading
         grading = {"score": "N/A", "feedback": "No long answer validation required."}
     else:
         try:
-            # Initialize unified Google GenAI Client
             ai_client = genai.Client(api_key=api_key)
             prompt = (f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. "
                       f"Answer: {payload.la_input}. JSON format: {{'score': 0, 'feedback': ''}}")
             
             gen_config = types.GenerateContentConfig(response_mime_type="application/json")
             
-            # 1. Primary Model: gemini-2.5-flash
             try:
                 response = ai_client.models.generate_content(
                     model='gemini-2.5-flash',
@@ -123,7 +139,6 @@ async def process_submission(payload: SubmissionPayload):
                 )
                 grading = json.loads(response.text)
             except Exception:
-                # 2. First Fallback: gemini-2.5-pro
                 try:
                     response = ai_client.models.generate_content(
                         model='gemini-2.5-pro',
@@ -132,7 +147,6 @@ async def process_submission(payload: SubmissionPayload):
                     )
                     grading = json.loads(response.text)
                 except Exception:
-                    # 3. Second Fallback: gemini-1.5-flash
                     response = ai_client.models.generate_content(
                         model='gemini-1.5-flash',
                         contents=prompt,
@@ -142,9 +156,7 @@ async def process_submission(payload: SubmissionPayload):
         except Exception as e:
             raise HTTPException(status_code=502, detail=f"AI Evaluator failed: {str(e)}")
             
-    try:
-        send_feedback_email(payload, grading)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Evaluation complete, but email delivery failed: {str(e)}")
+    # Queue the HTTP email delivery in an isolated background task
+    background_tasks.add_task(send_feedback_email_via_http, payload, grading)
         
     return {"status": "success"}
