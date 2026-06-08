@@ -17,6 +17,7 @@ if "mc_answers" not in st.session_state: st.session_state.mc_answers = {}
 if "la_input" not in st.session_state: st.session_state.la_input = ""
 if "grading_results" not in st.session_state: st.session_state.grading_results = None
 if "model_used" not in st.session_state: st.session_state.model_used = None
+if "diagnostic_passed" not in st.session_state: st.session_state.diagnostic_passed = False
 
 # Configure Gemini
 if "GEMINI_API_KEY" in st.secrets:
@@ -25,6 +26,15 @@ if "GEMINI_API_KEY" in st.secrets:
     model_primary = genai.GenerativeModel('gemini-3.1-flash-lite', generation_config=config)
     model_fallback_1 = genai.GenerativeModel('gemini-3.5-flash', generation_config=config)
     model_fallback_2 = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
+
+# --- DIAGNOSTIC GATEWAY ---
+if not st.session_state.diagnostic_passed:
+    st.warning("🔍 Running Diagnostic Test")
+    if st.button("You can see this right?"):
+        st.session_state.diagnostic_passed = True
+        st.rerun()
+    else:
+        st.stop()
 
 # 2. Data Ingestion
 @st.cache_data(show_spinner="Loading Assignment...")
