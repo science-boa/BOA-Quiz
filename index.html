@@ -126,8 +126,32 @@
             const btn = document.getElementById('submit-btn');
             const email = document.getElementById('student-email').value;
 
+            // Validation: Email
             if (!email || !email.includes('@')) {
-                alert("Please enter a valid email address.");
+                alert("Please enter a valid school email address.");
+                return;
+            }
+
+            // Validation: MCQ Completion
+            const mc_answers = {};
+            let allAnswered = true;
+            quizData.multiple_choice?.forEach(q => {
+                const selected = document.querySelector(`input[name="mc_${q.question_num}"]:checked`);
+                if (!selected) {
+                    allAnswered = false;
+                } else {
+                    mc_answers[q.question_num] = selected.value;
+                }
+            });
+
+            if (!allAnswered) {
+                alert("Please answer all multiple-choice questions.");
+                return;
+            }
+
+            // Validation: Long Answer
+            if (!document.getElementById('la-input').value.trim()) {
+                alert("Please provide a response for the long answer question.");
                 return;
             }
 
@@ -139,12 +163,6 @@
                 seconds++;
                 btn.innerText = `Submitting... ${seconds}s`;
             }, 1000);
-
-            const mc_answers = {};
-            quizData.multiple_choice?.forEach(q => {
-                const selected = document.querySelector(`input[name="mc_${q.question_num}"]:checked`);
-                mc_answers[q.question_num] = selected ? selected.value : null;
-            });
 
             const payload = {
                 quiz_id: quizId,
@@ -168,7 +186,7 @@
                     document.getElementById('results-portal').classList.remove('hidden');
                 } else {
                     const errorText = await response.text();
-                    alert(`Submission failed (${response.status}): ${errorText}`);
+                    alert(`Submission failed: ${errorText}`);
                     btn.disabled = false;
                     btn.innerText = "Submit Assignment";
                 }
