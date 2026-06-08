@@ -79,6 +79,14 @@ def send_feedback_email(payload: SubmissionPayload, grading: dict):
     server.send_message(msg_admin)
     server.quit()
 
+@app.get("/")
+async def root():
+    """
+    Root endpoint added to satisfy Render's default health checking.
+    This prevents Render from marking the deploy as failed and shutting down.
+    """
+    return {"message": "Homework Portal Backend is online and running successfully."}
+
 @app.get("/health")
 async def health_check():
     """
