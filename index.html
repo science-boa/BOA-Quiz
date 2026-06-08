@@ -10,6 +10,21 @@
 <body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col justify-between">
 
     <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- Live Status Header Section -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-200">
+            <div class="text-center sm:text-left">
+                <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">Science BOA Portal</h1>
+            </div>
+            <!-- Live Server Status Badge -->
+            <div id="server-status-container" class="flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-xs border border-gray-150 text-sm">
+                <span class="relative flex h-3 w-3">
+                    <span id="status-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                    <span id="status-dot" class="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+                </span>
+                <span id="status-text" class="font-medium text-gray-600">Connecting to server...</span>
+            </div>
+        </div>
+
         <div id="loading" class="text-center py-12">
             <p class="text-xl font-semibold text-gray-600 animate-pulse">Loading Assignment...</p>
         </div>
@@ -67,6 +82,50 @@
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('quiz')) {
             quizId = urlParams.get('quiz').trim();
+        }
+
+        // Live Server Health Check
+        async function checkServerStatus() {
+            const statusDot = document.getElementById('status-dot');
+            const statusPing = document.getElementById('status-ping');
+            const statusText = document.getElementById('status-text');
+            
+            // Extract root domain from submission endpoint to ping
+            const rootUrl = "https://boa-quiz.onrender.com/";
+            
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 7000); // 7 seconds timeout limit for immediate check
+                
+                const response = await fetch(rootUrl, { method: 'GET', signal: controller.signal });
+                clearTimeout(timeoutId);
+                
+                // If any response returns (including 404 because '/' has no custom path), the server is awake and active!
+                statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
+                statusPing.className = "absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
+                statusText.innerText = "Evaluation Server: Online";
+                statusText.className = "font-medium text-green-700";
+            } catch (err) {
+                // If connection fails or times out, it is highly likely sleeping (or blocked by browser)
+                statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-amber-500 animate-pulse";
+                statusPing.className = "hidden";
+                statusText.innerText = "Evaluation Server: Sleeping (Waking it up...)";
+                statusText.className = "font-medium text-amber-600";
+                
+                // Fire off a persistent background fetch to force Render to start spin-up sequence
+                try {
+                    await fetch(rootUrl, { method: 'GET' });
+                    statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
+                    statusPing.className = "absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
+                    statusText.innerText = "Evaluation Server: Online";
+                    statusText.className = "font-medium text-green-700";
+                } catch (retryErr) {
+                    statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-red-500";
+                    statusPing.className = "hidden";
+                    statusText.innerText = "Evaluation Server: Offline or Blocked";
+                    statusText.className = "font-medium text-red-600";
+                }
+            }
         }
 
         // Fetching the raw assignment schema out of GitHub natively
@@ -225,7 +284,11 @@
             }
         }
 
-        window.onload = loadQuiz;
+        // Initialize both the quiz layout and the active status check simultaneously
+        window.onload = function() {
+            loadQuiz();
+            checkServerStatus();
+        };
     </script>
 </body>
 </html>
