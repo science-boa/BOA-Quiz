@@ -26,28 +26,66 @@ if "GEMINI_API_KEY" in st.secrets:
     model_fallback_1 = genai.GenerativeModel('gemini-3.5-flash', generation_config=config)
     model_fallback_2 = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
 
-# 2. Data Ingestion (With GitHub Authentication)
+# 2. Data Ingestion (With GitHub Authentication & Robust Diagnostics)
 @st.cache_data(show_spinner="Loading Assignment...")
 def fetch_quiz_schema(q_id):
-    url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_{q_id}.yaml"
+    q_id_str = str(q_id).strip()
+    candidates = []
     
+    # Generate variations of the quiz ID to circumvent raw.githubusercontent's strict case sensitivity
+    variations = [q_id_str]
+    if q_id_str.upper() not in variations:
+        variations.append(q_id_str.upper())
+    if q_id_str.lower() not in variations:
+        variations.append(q_id_str.lower())
+        
+    # Combine variations with potential extensions and prefixes
+    for var in variations:
+        for ext in ["yaml", "yml"]:
+            for prefix in ["QUIZ_", "quiz_"]:
+                filename = f"{prefix}{var}.{ext}"
+                if filename not in candidates:
+                    candidates.append(filename)
+                    
     headers = {}
-    # If a GitHub token is configured in Streamlit Secrets, attach it to authenticate the request
     if "GITHUB_TOKEN" in st.secrets:
         headers["Authorization"] = f"token {st.secrets['GITHUB_TOKEN']}"
         
-    try:
-        response = requests.get(url, headers=headers)
-        return yaml.safe_load(response.text) if response.status_code == 200 else None
-    except: 
-        return None
+    errors = []
+    for filename in candidates:
+        url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/{filename}"
+        try:
+            response = requests.get(url, headers=headers, timeout=10)
+            if response.status_code == 200:
+                try:
+                    # Attempt parsing the schema structure
+                    data = yaml.safe_load(response.text)
+                    return {"data": data, "errors": None}
+                except Exception as parse_err:
+                    errors.append(f"{filename} ➡️ YAML Parsing Error: {str(parse_err)}")
+            else:
+                errors.append(f"{filename} ➡️ HTTP Status {response.status_code}")
+        except Exception as conn_err:
+            errors.append(f"{filename} ➡️ Connection Error: {str(conn_err)}")
+            
+    return {"data": None, "errors": errors}
 
 quiz_id = st.query_params.get("quiz", "101")
-quiz_data = fetch_quiz_schema(quiz_id)
+quiz_result = fetch_quiz_schema(quiz_id)
+quiz_data = quiz_result.get("data")
 
 # Safety check: Prevent app crash if file is missing or cached as None
 if quiz_data is None:
-    st.error(f"⚠️ Could not load Quiz {quiz_id}. Please ensure it is pushed to the 'quizzes' folder on GitHub and clear your Streamlit cache.")
+    st.error(f"⚠️ Could not load Quiz {quiz_id}.")
+    st.markdown("### 🔍 Live Fetch Diagnostics")
+    st.write("We attempted to fetch the quiz file from your GitHub repository using multiple variations, but all attempts failed:")
+    for err in quiz_result.get("errors", []):
+        st.code(err)
+    st.info("💡 **Common Troubleshooting Steps:**\n\n"
+            "1. **Confirm File Path:** Is the quiz document pushed to the `quizzes` folder in the `main` branch of `science-boa/BOA-Quiz`?\n"
+            "2. **Check File Extension:** Is it saved exactly as a `.yaml` or `.yml` file (all lowercase)?\n"
+            "3. **YAML Syntax Validation:** If you see a `YAML Parsing Error` above, your quiz file has an indentation or spacing mismatch. Correcting the formatting in your IDE and pushing it will solve the problem.\n"
+            "4. **Private Repository Token:** If the repository is private, verify your Streamlit `GITHUB_TOKEN` secret is configured correctly.")
     st.stop()
 
 # --- EMAIL FORMATTING LOGIC ---
