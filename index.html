@@ -7,9 +7,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans h-screen overflow-hidden">
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen">
 
-    <div class="h-full flex flex-col">
+    <div class="min-h-screen flex flex-col">
         <!-- Header -->
         <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shrink-0">
             <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">Science BOA Portal</h1>
@@ -20,18 +20,18 @@
         </header>
 
         <!-- Main Content Area -->
-        <main class="flex-1 overflow-hidden">
+        <main class="flex-1 flex flex-col">
             <div id="loading" class="text-center py-12">
                 <p class="text-xl font-semibold text-gray-600 animate-pulse">Loading Assignment...</p>
             </div>
 
             <div id="error-container" class="hidden p-6 text-red-700">Error loading assignment.</div>
 
-            <!-- Portal Grid: Fixed Height, Internal Scrolling -->
-            <div id="portal" class="hidden h-full flex flex-col md:flex-row">
+            <!-- Portal Grid: Using flex-grow to ensure it takes available space -->
+            <div id="portal" class="hidden flex-grow flex flex-col md:flex-row">
                 
-                <!-- Fixed Sidebar (Left) -->
-                <div class="w-full md:w-1/2 p-8 bg-gray-50 flex flex-col gap-6 shrink-0">
+                <!-- Sidebar (Left) -->
+                <div class="w-full md:w-1/2 p-8 bg-gray-50 flex flex-col gap-6">
                     <h1 id="quiz-title" class="text-3xl font-black tracking-tight text-gray-900">Quiz Portal</h1>
                     <div id="video-container" class="hidden aspect-video w-full rounded-xl overflow-hidden shadow-md bg-black">
                         <iframe id="quiz-video" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- Scrollable Content (Right) -->
-                <div class="w-full md:w-1/2 overflow-y-auto p-8 bg-white border-l border-gray-100">
+                <div class="w-full md:w-1/2 p-8 bg-white border-l border-gray-100">
                     <div class="max-w-xl mx-auto space-y-8 pb-20">
                         <div id="mc-section" class="space-y-6">
                             <h2 class="text-xl font-bold border-b pb-2 text-indigo-900">Part 1: Multiple Choice</h2>
