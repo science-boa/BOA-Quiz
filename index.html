@@ -166,15 +166,34 @@
 
             const btn = document.getElementById('submit-btn');
             btn.disabled = true;
-            btn.innerText = "Processing Submission...";
+            btn.innerText = "Connecting to Server...";
+
+            // Create AbortController to handle a max 90-second timeout window (Render spin-up)
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 90000);
+
+            // Increment visual timer so students see active progress
+            let secondsElapsed = 0;
+            const timerInterval = setInterval(() => {
+                secondsElapsed += 2;
+                if (secondsElapsed < 45) {
+                    btn.innerText = `Waking up evaluation server... (~${secondsElapsed}s)`;
+                } else {
+                    btn.innerText = `AI Grading & Emailing... (~${secondsElapsed}s)`;
+                }
+            }, 2000);
 
             try {
-                // Using clean standard HTTP POST instead of stateful WebSockets
+                // Pass the timeout signal to the fetch request
                 const response = await fetch(BACKEND_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(payload),
+                    signal: controller.signal
                 });
+
+                clearInterval(timerInterval);
+                clearTimeout(timeoutId);
 
                 if (response.ok) {
                     document.getElementById('portal').classList.add('hidden');
@@ -193,7 +212,14 @@
                     btn.innerText = "Submit Assignment";
                 }
             } catch (err) {
-                alert(`Network error connecting to evaluation service: ${err.message}`);
+                clearInterval(timerInterval);
+                clearTimeout(timeoutId);
+                
+                if (err.name === 'AbortError') {
+                    alert("Submission timed out. The server is taking a little while to wake up from its sleep cycle. The server should be awake now—please click 'Submit Assignment' again to complete your submission.");
+                } else {
+                    alert(`Network error connecting to evaluation service: ${err.message}`);
+                }
                 btn.disabled = false;
                 btn.innerText = "Submit Assignment";
             }
