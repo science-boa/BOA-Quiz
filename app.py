@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import yaml
 import json
-import google.genai as genAI
+import google-genai as genAI
 import smtplib
 from email.message import EmailMessage
 
