@@ -58,7 +58,7 @@
     </div>
 
     <script>
-        // FIXED: Added '/submit' routing extension directly to the API endpoint
+        // Ensure trailing slash behavior on route configurations matches ASGI/FastAPI exactly
         const BACKEND_URL = "https://boa-quiz.onrender.com/submit"; 
         let quizData = null;
         let quizId = "101";
@@ -180,8 +180,15 @@
                     document.getElementById('portal').classList.add('hidden');
                     document.getElementById('results-portal').classList.remove('hidden');
                 } else {
-                    const resData = await response.json();
-                    alert(`Submission failed: ${resData.detail || "Unknown error"}`);
+                    // Try to extract rich backend exception message if available
+                    let errorText = "Unknown error";
+                    try {
+                        const resData = await response.json();
+                        errorText = resData.detail || JSON.stringify(resData);
+                    } catch (e) {
+                        errorText = `HTTP Status ${response.status} (${response.statusText})`;
+                    }
+                    alert(`Submission failed: ${errorText}`);
                     btn.disabled = false;
                     btn.innerText = "Submit Assignment";
                 }
