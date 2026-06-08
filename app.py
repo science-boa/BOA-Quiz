@@ -26,14 +26,21 @@ if "GEMINI_API_KEY" in st.secrets:
     model_fallback_1 = genai.GenerativeModel('gemini-3.5-flash', generation_config=config)
     model_fallback_2 = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
 
-# 2. Data Ingestion
+# 2. Data Ingestion (With GitHub Authentication)
 @st.cache_data(show_spinner="Loading Assignment...")
 def fetch_quiz_schema(q_id):
     url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_{q_id}.yaml"
+    
+    headers = {}
+    # If a GitHub token is configured in Streamlit Secrets, attach it to authenticate the request
+    if "GITHUB_TOKEN" in st.secrets:
+        headers["Authorization"] = f"token {st.secrets['GITHUB_TOKEN']}"
+        
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
         return yaml.safe_load(response.text) if response.status_code == 200 else None
-    except: return None
+    except: 
+        return None
 
 quiz_id = st.query_params.get("quiz", "101")
 quiz_data = fetch_quiz_schema(quiz_id)
