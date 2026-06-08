@@ -1,4 +1,19 @@
 import streamlit as st
+
+# --- IMMEDIATE DIAGNOSTIC GATEWAY ---
+# Initialize and check diagnostic status before loading other imports to isolate environment issues
+if "diagnostic_passed" not in st.session_state: 
+    st.session_state.diagnostic_passed = False
+
+if not st.session_state.diagnostic_passed:
+    st.warning("🔍 Running Immediate Diagnostic Test")
+    if st.button("You can see this right?"):
+        st.session_state.diagnostic_passed = True
+        st.rerun()
+    else:
+        st.stop()
+
+# --- OTHER IMPORTS ---
 import requests
 import yaml
 import json
@@ -17,17 +32,6 @@ if "mc_answers" not in st.session_state: st.session_state.mc_answers = {}
 if "la_input" not in st.session_state: st.session_state.la_input = ""
 if "grading_results" not in st.session_state: st.session_state.grading_results = None
 if "model_used" not in st.session_state: st.session_state.model_used = None
-if "diagnostic_passed" not in st.session_state: st.session_state.diagnostic_passed = False
-
-# --- DIAGNOSTIC GATEWAY ---
-# Executed before configuring Gemini to isolate configuration errors
-if not st.session_state.diagnostic_passed:
-    st.warning("🔍 Running Diagnostic Test")
-    if st.button("You can see this right?"):
-        st.session_state.diagnostic_passed = True
-        st.rerun()
-    else:
-        st.stop()
 
 # Configure Gemini
 if "GEMINI_API_KEY" in st.secrets:
