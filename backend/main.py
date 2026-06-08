@@ -31,6 +31,7 @@ def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict):
     Instead of SMTP, this opens a standard web request (Port 443) to your private Google Apps Script.
     Because it behaves like standard web browsing, Render's firewall will never block it.
     """
+    print("\n--- STARTING DIAGNOSTIC EMAIL DISPATCH ---")
     try:
         quiz_data = payload.quiz_schema
         total_questions = len(quiz_data.get('multiple_choice', []))
@@ -62,8 +63,18 @@ def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict):
         bridge_url = os.environ.get("GMAIL_BRIDGE_URL", "").strip()
         bridge_key = os.environ.get("GMAIL_BRIDGE_KEY", "").strip()
         
+        # DIAGNOSTIC LOG 1: Check environment variables
+        if not bridge_url:
+            print("[DIAGNOSTIC] CONFIG ERROR: GMAIL_BRIDGE_URL environment variable is empty or missing.")
+        else:
+            print(f"[DIAGNOSTIC] Loaded URL: {bridge_url[:25]}... (length: {len(bridge_url)})")
+            
+        if not bridge_key:
+            print("[DIAGNOSTIC] CONFIG ERROR: GMAIL_BRIDGE_KEY environment variable is empty or missing.")
+        else:
+            print(f"[DIAGNOSTIC] Loaded Key: {bridge_key[:3]}... (length: {len(bridge_key)})")
+
         if not bridge_url or not bridge_key:
-            print("CONFIG ERROR: GMAIL_BRIDGE_URL or GMAIL_BRIDGE_KEY environment variables are missing.")
             return
 
         student_email = payload.student_email.strip()
@@ -85,18 +96,29 @@ def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict):
             "body": body
         }
 
-        # Fire off standard HTTP POST requests directly to Google (Port 443)
+        # Fire off standard HTTP POST requests directly to Google (Port 443) with explicit redirect handling
+        print("[DIAGNOSTIC] Dispatching student feedback email request to Google Web App...")
         response_student = requests.post(bridge_url, json=student_payload, timeout=15)
+        print(f"[DIAGNOSTIC] Student Email Response: Code {response_student.status_code}")
+        print(f"[DIAGNOSTIC] Student Email Body: {response_student.text}")
+
+        print("[DIAGNOSTIC] Dispatching administrative feedback email request to Google Web App...")
         response_admin = requests.post(bridge_url, json=admin_payload, timeout=15)
+        print(f"[DIAGNOSTIC] Admin Email Response: Code {response_admin.status_code}")
+        print(f"[DIAGNOSTIC] Admin Email Body: {response_admin.text}")
 
         if response_student.status_code == 200 and response_admin.status_code == 200:
-            print(f"SUCCESS: Result emails successfully dispatched via Google HTTP Web App to {student_email} and {admin_email}")
+            if "Success" in response_student.text and "Success" in response_admin.text:
+                print(f"SUCCESS: Result emails successfully processed and sent by Google to {student_email} and {admin_email}")
+            else:
+                print("WARNING: Requests completed but Google returned script errors. Check the bodies printed above.")
         else:
-            print(f"DELIVERY ERROR: Google Web App returned statuses: Student({response_student.status_code}), Admin({response_admin.status_code})")
-            print(f"Details: {response_student.text}")
+            print(f"DELIVERY ERROR: Google Web App returned non-200 statuses.")
 
     except Exception as http_err:
-        print(f"HTTP MAIL ERROR: Failed to dispatch emails for quiz {payload.quiz_id} to {payload.student_email}. Details: {http_err}")
+        print(f"HTTP MAIL ERROR: Failed to dispatch emails. Details: {http_err}")
+    finally:
+        print("--- END OF DIAGNOSTIC EMAIL DISPATCH ---\n")
 
 @app.api_route("/", methods=["GET", "HEAD"])
 async def root():
