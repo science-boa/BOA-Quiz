@@ -8,12 +8,12 @@ from pydantic import BaseModel
 from google import genai
 from google.genai import types
 
-app = FastAPI(title="Homework Portal Stateless Evaluator")
+app = FastAPI(title="Homework Portal Backend")
 
-# Critical for security: Allows your GitHub Pages frontend to communicate with this API safely
+# Enable CORS globally to ensure the GitHub Pages frontend can access all endpoints (including /health and /submit)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, swap with ["https://science-boa.github.io"]
+    allow_origins=["*"],  # In a highly restricted production environment, swap with ["https://science-boa.github.io"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -57,24 +57,35 @@ def send_feedback_email(payload: SubmissionPayload, grading: dict):
     student_email = payload.student_email.strip()
     admin_email = "science.boa@gmail.com"
     
+    # 1. Feedback Email for the student
     msg_student = EmailMessage()
     msg_student.set_content(body, subtype="html")
     msg_student["Subject"] = f"Feedback from quiz {quiz_data.get('title')}"
     msg_student["From"] = sender_email
     msg_student["To"] = student_email
     
+    # 2. Administrative copy to archive record
     msg_admin = EmailMessage()
     msg_admin.set_content(body, subtype="html")
     msg_admin["Subject"] = f"Result-{payload.quiz_id}-{student_email}"
     msg_admin["From"] = sender_email
     msg_admin["To"] = admin_email
     
+    # Secure SMTP Transmission
     server = smtplib.SMTP(os.environ.get("SMTP_SERVER"), int(os.environ.get("SMTP_PORT", 587)))
     server.starttls()
     server.login(sender_email, os.environ.get("SMTP_PASSWORD"))
     server.send_message(msg_student)
     server.send_message(msg_admin)
     server.quit()
+
+@app.get("/health")
+async def health_check():
+    """
+    Dedicated endpoint used by the Canvas frontend to verify the server status.
+    Returns 200 OK with full CORS headers passing through the middleware chain cleanly.
+    """
+    return {"status": "healthy"}
 
 @app.post("/submit")
 async def process_submission(payload: SubmissionPayload):
@@ -84,21 +95,42 @@ async def process_submission(payload: SubmissionPayload):
         
     la_data = payload.quiz_schema.get("long_answer")
     if not la_data:
-        # Quiz doesn't have a long answer component, grade MC directly
+        # If there's no long-answer section in the YAML schema, skip AI grading
         grading = {"score": "N/A", "feedback": "No long answer validation required."}
     else:
         try:
-            # Modern unified SDK implementation
+            # Initialize unified Google GenAI Client
             ai_client = genai.Client(api_key=api_key)
             prompt = (f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. "
                       f"Answer: {payload.la_input}. JSON format: {{'score': 0, 'feedback': ''}}")
             
-            response = ai_client.models.generate_content(
-                model='gemini-2.5-flash',
-                contents=prompt,
-                config=types.GenerateContentConfig(response_mime_type="application/json")
-            )
-            grading = json.loads(response.text)
+            gen_config = types.GenerateContentConfig(response_mime_type="application/json")
+            
+            # 1. Primary Model: gemini-2.5-flash
+            try:
+                response = ai_client.models.generate_content(
+                    model='gemini-2.5-flash',
+                    contents=prompt,
+                    config=gen_config
+                )
+                grading = json.loads(response.text)
+            except Exception:
+                # 2. First Fallback: gemini-2.5-pro
+                try:
+                    response = ai_client.models.generate_content(
+                        model='gemini-2.5-pro',
+                        contents=prompt,
+                        config=gen_config
+                    )
+                    grading = json.loads(response.text)
+                except Exception:
+                    # 3. Second Fallback: gemini-1.5-flash
+                    response = ai_client.models.generate_content(
+                        model='gemini-1.5-flash',
+                        contents=prompt,
+                        config=gen_config
+                    )
+                    grading = json.loads(response.text)
         except Exception as e:
             raise HTTPException(status_code=502, detail=f"AI Evaluator failed: {str(e)}")
             
