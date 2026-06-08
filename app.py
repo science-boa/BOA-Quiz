@@ -1,19 +1,4 @@
 import streamlit as st
-
-# --- IMMEDIATE DIAGNOSTIC GATEWAY ---
-# Initialize and check diagnostic status before loading other imports to isolate environment issues
-if "diagnostic_passed" not in st.session_state: 
-    st.session_state.diagnostic_passed = False
-
-if not st.session_state.diagnostic_passed:
-    st.warning("🔍 Running Immediate Diagnostic Test")
-    if st.button("You can see this right?"):
-        st.session_state.diagnostic_passed = True
-        st.rerun()
-    else:
-        st.stop()
-
-# --- OTHER IMPORTS ---
 import requests
 import yaml
 import json
