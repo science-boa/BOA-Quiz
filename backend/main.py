@@ -1,7 +1,7 @@
 import os
 import json
 import requests
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from google import genai
@@ -9,7 +9,7 @@ from google.genai import types
 
 app = FastAPI(title="Homework Portal Backend")
 
-# Enable CORS globally to ensure the GitHub Pages frontend can access all endpoints cleanly
+# Enable CORS globally
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -25,9 +25,9 @@ class SubmissionPayload(BaseModel):
     la_input: str
     quiz_schema: dict
 
-def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict):
+async def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict):
     """
-    HTTP Email Delivery Engine with aggressive diagnostic logging.
+    HTTP Email Delivery Engine. Now explicitly awaited to ensure logs are captured.
     """
     print("\n--- STARTING DIAGNOSTIC EMAIL DISPATCH ---")
     try:
@@ -64,22 +64,14 @@ def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict):
             print("[DIAGNOSTIC] ERROR: Missing GMAIL_BRIDGE_URL or GMAIL_BRIDGE_KEY.")
             return
 
-        # Prepare payloads
         student_payload = {"key": bridge_key, "to": payload.student_email.strip(), "subject": f"Feedback: {quiz_data.get('title')}", "body": body}
         admin_payload = {"key": bridge_key, "to": "science.boa@gmail.com", "subject": f"Result-{payload.quiz_id}", "body": body}
 
-        # Dispatch with explicit connection verification
         for label, p in [("Student", student_payload), ("Admin", admin_payload)]:
             print(f"[DIAGNOSTIC] Sending {label} email to {p['to']}...")
-            try:
-                response = requests.post(bridge_url, json=p, timeout=20)
-                print(f"[DIAGNOSTIC] {label} Response Code: {response.status_code}")
-                print(f"[DIAGNOSTIC] {label} Raw Response Text: {response.text}")
-                
-                if response.status_code != 200:
-                    print(f"[DIAGNOSTIC] ALERT: {label} request failed with status {response.status_code}")
-            except requests.exceptions.RequestException as e:
-                print(f"[DIAGNOSTIC] ALERT: {label} request raised exception: {e}")
+            response = requests.post(bridge_url, json=p, timeout=20)
+            print(f"[DIAGNOSTIC] {label} Response Code: {response.status_code}")
+            print(f"[DIAGNOSTIC] {label} Raw Response Text: {response.text}")
 
     except Exception as e:
         print(f"HTTP MAIL ERROR: {str(e)}")
@@ -95,7 +87,7 @@ async def health_check():
     return {"status": "healthy"}
 
 @app.post("/submit")
-async def process_submission(payload: SubmissionPayload, background_tasks: BackgroundTasks):
+async def process_submission(payload: SubmissionPayload):
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise HTTPException(status_code=500, detail="Gemini API Key missing.")
@@ -116,5 +108,6 @@ async def process_submission(payload: SubmissionPayload, background_tasks: Backg
         except Exception as e:
             raise HTTPException(status_code=502, detail=f"AI Evaluator failed: {str(e)}")
             
-    background_tasks.add_task(send_feedback_email_via_http, payload, grading)
+    # Await the email logic directly. The request will now finish only after email delivery is attempted.
+    await send_feedback_email_via_http(payload, grading)
     return {"status": "success"}
