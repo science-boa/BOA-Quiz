@@ -77,6 +77,7 @@
         const BACKEND_URL = "https://boa-quiz.onrender.com/submit"; 
         let quizData = null;
         let quizId = "101";
+        let isServerOnline = false; // Track server state to avoid visual mismatch on submission
 
         // Parse query parameter (?quiz=B101)
         const urlParams = new URLSearchParams(window.location.search);
@@ -101,12 +102,14 @@
                 clearTimeout(timeoutId);
                 
                 // If any response returns (including 404 because '/' has no custom path), the server is awake and active!
+                isServerOnline = true;
                 statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
                 statusPing.className = "absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
                 statusText.innerText = "Evaluation Server: Online";
                 statusText.className = "font-medium text-green-700";
             } catch (err) {
                 // If connection fails or times out, it is highly likely sleeping (or blocked by browser)
+                isServerOnline = false;
                 statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-amber-500 animate-pulse";
                 statusPing.className = "hidden";
                 statusText.innerText = "Evaluation Server: Sleeping (Waking it up...)";
@@ -115,11 +118,13 @@
                 // Fire off a persistent background fetch to force Render to start spin-up sequence
                 try {
                     await fetch(rootUrl, { method: 'GET' });
+                    isServerOnline = true;
                     statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
                     statusPing.className = "absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
                     statusText.innerText = "Evaluation Server: Online";
                     statusText.className = "font-medium text-green-700";
                 } catch (retryErr) {
+                    isServerOnline = false;
                     statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-red-500";
                     statusPing.className = "hidden";
                     statusText.innerText = "Evaluation Server: Offline or Blocked";
@@ -225,7 +230,13 @@
 
             const btn = document.getElementById('submit-btn');
             btn.disabled = true;
-            btn.innerText = "Connecting to Server...";
+            
+            // Set initial state correctly based on current live server status
+            if (isServerOnline) {
+                btn.innerText = "AI Grading & Emailing... (~2s)";
+            } else {
+                btn.innerText = "Connecting to Server...";
+            }
 
             // Create AbortController to handle a max 90-second timeout window (Render spin-up)
             const controller = new AbortController();
@@ -235,8 +246,12 @@
             let secondsElapsed = 0;
             const timerInterval = setInterval(() => {
                 secondsElapsed += 2;
-                if (secondsElapsed < 45) {
-                    btn.innerText = `Waking up evaluation server... (~${secondsElapsed}s)`;
+                if (!isServerOnline) {
+                    if (secondsElapsed < 45) {
+                        btn.innerText = `Waking up evaluation server... (~${secondsElapsed}s)`;
+                    } else {
+                        btn.innerText = `AI Grading & Emailing... (~${secondsElapsed}s)`;
+                    }
                 } else {
                     btn.innerText = `AI Grading & Emailing... (~${secondsElapsed}s)`;
                 }
