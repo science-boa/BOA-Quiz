@@ -7,306 +7,151 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col justify-between">
+<body class="bg-gray-50 text-gray-800 font-sans h-screen overflow-hidden">
 
-    <div class="container mx-auto px-4 py-8 max-w-5xl">
-        <!-- Live Status Header Section -->
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 pb-6 border-b border-gray-200">
-            <div class="text-center sm:text-left">
-                <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">Science BOA Portal</h1>
+    <div class="h-full flex flex-col">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shrink-0">
+            <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">Science BOA Portal</h1>
+            <div id="server-status-container" class="flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-gray-150 text-sm">
+                <span id="status-dot" class="inline-block rounded-full h-2.5 w-2.5 bg-yellow-500"></span>
+                <span id="status-text" class="font-medium text-gray-600">Connecting...</span>
             </div>
-            <!-- Live Server Status Badge -->
-            <div id="server-status-container" class="flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-xs border border-gray-150 text-sm">
-                <span class="relative flex h-3 w-3">
-                    <span id="status-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                    <span id="status-dot" class="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
-                </span>
-                <span id="status-text" class="font-medium text-gray-600">Connecting to server...</span>
-            </div>
-        </div>
+        </header>
 
-        <div id="loading" class="text-center py-12">
-            <p class="text-xl font-semibold text-gray-600 animate-pulse">Loading Assignment...</p>
-        </div>
-
-        <div id="error-container" class="hidden bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg shadow-sm my-4">
-            <h3 class="text-lg font-bold text-red-800">⚠️ Assignment Load Error</h3>
-            <p id="error-message" class="text-red-700 mt-2"></p>
-        </div>
-
-        <div id="portal" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="space-y-6">
-                <h1 id="quiz-title" class="text-3xl font-black tracking-tight text-gray-900">Quiz Portal</h1>
-                <div id="video-container" class="hidden aspect-video w-full rounded-xl overflow-hidden shadow-md bg-black">
-                    <iframe id="quiz-video" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-xs border border-gray-100">
-                    <label class="block text-sm font-bold text-gray-700 mb-2">School Email Address</label>
-                    <input type="email" id="student-email" placeholder="you@school.edu" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
-                </div>
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-hidden">
+            <div id="loading" class="text-center py-12">
+                <p class="text-xl font-semibold text-gray-600 animate-pulse">Loading Assignment...</p>
             </div>
 
-            <div class="bg-white p-6 rounded-xl shadow-xs border border-gray-100 space-y-6">
-                <div id="mc-section" class="space-y-6">
-                    <h2 class="text-xl font-bold border-b pb-2 border-gray-100 text-indigo-900">Part 1: Multiple Choice</h2>
-                    <div id="mc-questions" class="space-y-6"></div>
+            <div id="error-container" class="hidden p-6 text-red-700">Error loading assignment.</div>
+
+            <!-- Portal Grid: Fixed Height, Internal Scrolling -->
+            <div id="portal" class="hidden h-full flex flex-col md:flex-row">
+                
+                <!-- Fixed Sidebar (Left) -->
+                <div class="w-full md:w-1/2 p-8 bg-gray-50 flex flex-col gap-6 shrink-0">
+                    <h1 id="quiz-title" class="text-3xl font-black tracking-tight text-gray-900">Quiz Portal</h1>
+                    <div id="video-container" class="hidden aspect-video w-full rounded-xl overflow-hidden shadow-md bg-black">
+                        <iframe id="quiz-video" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-xs border border-gray-100">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">School Email Address</label>
+                        <input type="email" id="student-email" placeholder="you@school.edu" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
                 </div>
 
-                <div id="la-section" class="space-y-4 pt-4 border-t border-gray-100">
-                    <h2 class="text-xl font-bold text-indigo-900">Part 2: Long Answer</h2>
-                    <p id="la-text" class="text-gray-700 font-medium"></p>
-                    <textarea id="la-input" rows="5" placeholder="Type your full analysis here..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"></textarea>
-                </div>
+                <!-- Scrollable Content (Right) -->
+                <div class="w-full md:w-1/2 overflow-y-auto p-8 bg-white border-l border-gray-100">
+                    <div class="max-w-xl mx-auto space-y-8 pb-20">
+                        <div id="mc-section" class="space-y-6">
+                            <h2 class="text-xl font-bold border-b pb-2 text-indigo-900">Part 1: Multiple Choice</h2>
+                            <div id="mc-questions" class="space-y-6"></div>
+                        </div>
 
-                <button id="submit-btn" onclick="submitAssignment()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition dynamic-btn">
-                    Submit Assignment
-                </button>
+                        <div id="la-section" class="space-y-4 pt-6 border-t border-gray-100">
+                            <h2 class="text-xl font-bold text-indigo-900">Part 2: Long Answer</h2>
+                            <p id="la-text" class="text-gray-700 font-medium"></p>
+                            <textarea id="la-input" rows="5" placeholder="Type your full analysis here..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                        </div>
+
+                        <button id="submit-btn" onclick="submitAssignment()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition">
+                            Submit Assignment
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-        <div id="results-portal" class="hidden bg-white p-8 rounded-xl shadow-md border border-gray-100 max-w-2xl mx-auto text-center space-y-4">
-            <div class="text-5xl">🎉</div>
-            <h2 class="text-2xl font-black text-gray-900">Assignment Submitted Successfully!</h2>
-            <p class="text-gray-600">Your answers have been securely logged. A detailed breakdown alongside AI feedback is being compiled and dispatched to your email address right now.</p>
-            <p class="text-sm text-gray-400">You can safely close this browser window.</p>
-        </div>
+            
+            <div id="results-portal" class="hidden p-12 text-center space-y-4">
+                <h2 class="text-2xl font-black text-gray-900">Assignment Submitted Successfully!</h2>
+            </div>
+        </main>
     </div>
 
     <script>
         const BACKEND_URL = "https://boa-quiz.onrender.com/submit"; 
         let quizData = null;
         let quizId = "101";
-        let isServerOnline = false; // Track server state to avoid visual mismatch on submission
+        let isServerOnline = false;
 
-        // Parse query parameter (?quiz=B101)
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('quiz')) {
-            quizId = urlParams.get('quiz').trim();
-        }
+        if (urlParams.has('quiz')) quizId = urlParams.get('quiz').trim();
 
-        // Live Server Health Check
         async function checkServerStatus() {
             const statusDot = document.getElementById('status-dot');
-            const statusPing = document.getElementById('status-ping');
             const statusText = document.getElementById('status-text');
-            
-            // Querying a dedicated /health endpoint to bypass any FastAPI unhandled 404 CORS stripping
-            const healthUrl = "https://boa-quiz.onrender.com/health";
-            
             try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 7000); // 7-second timeout threshold
-                
-                const response = await fetch(healthUrl, { method: 'GET', signal: controller.signal });
-                clearTimeout(timeoutId);
-                
+                const response = await fetch("https://boa-quiz.onrender.com/health");
                 if (response.ok) {
                     isServerOnline = true;
-                    statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
-                    statusPing.className = "absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
-                    statusText.innerText = "Evaluation Server: Online";
-                    statusText.className = "font-medium text-green-700";
-                } else {
-                    throw new Error("Server returned non-200 status");
+                    statusDot.className = "inline-block rounded-full h-2.5 w-2.5 bg-green-500";
+                    statusText.innerText = "Server: Online";
                 }
             } catch (err) {
-                isServerOnline = false;
-                statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-amber-500 animate-pulse";
-                statusPing.className = "hidden";
-                statusText.innerText = "Evaluation Server: Sleeping (Waking it up...)";
-                statusText.className = "font-medium text-amber-600";
-                
-                // Background attempt to wake up the server if asleep
-                try {
-                    const response = await fetch(healthUrl, { method: 'GET' });
-                    if (response.ok) {
-                        isServerOnline = true;
-                        statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
-                        statusPing.className = "absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
-                        statusText.innerText = "Evaluation Server: Online";
-                        statusText.className = "font-medium text-green-700";
-                    }
-                } catch (retryErr) {
-                    isServerOnline = false;
-                    statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-red-500";
-                    statusPing.className = "hidden";
-                    statusText.innerText = "Evaluation Server: Offline or Blocked";
-                    statusText.className = "font-medium text-red-600";
-                }
+                statusDot.className = "inline-block rounded-full h-2.5 w-2.5 bg-red-500";
+                statusText.innerText = "Server: Offline";
             }
         }
 
-        // Fetching the raw assignment schema out of GitHub natively
         async function loadQuiz() {
-            const filename = `QUIZ_${quizId}.yaml`;
-            const url = `https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/${filename}`;
-            
+            const url = `https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_${quizId}.yaml`;
             try {
                 const response = await fetch(url);
-                if (!response.ok) throw new Error(`HTTP Status ${response.status} - File not found.`);
-                const text = await response.text();
-                quizData = jsyaml.load(text);
+                quizData = jsyaml.load(await response.text());
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('portal').classList.remove('hidden');
                 renderQuiz();
             } catch (err) {
                 document.getElementById('loading').classList.add('hidden');
-                document.getElementById('error-message').innerText = `Could not load configuration for quiz '${quizId}'. Ensure file matches structure 'quizzes/QUIZ_${quizId}.yaml' exactly.\n\nDetails: ${err.message}`;
                 document.getElementById('error-container').classList.remove('hidden');
             }
         }
 
         function renderQuiz() {
-            document.getElementById('loading').classList.add('hidden');
-            document.getElementById('portal').classList.remove('hidden');
             document.getElementById('quiz-title').innerText = quizData.title || "Quiz Portal";
-
-            // Process Video if URL exists
             if (quizData.video_url) {
-                let videoUrl = quizData.video_url;
-                if (videoUrl.includes("watch?v=")) {
-                    videoUrl = videoUrl.replace("watch?v=", "embed/");
-                }
-                document.getElementById('quiz-video').src = videoUrl;
+                document.getElementById('quiz-video').src = quizData.video_url.replace("watch?v=", "embed/");
                 document.getElementById('video-container').classList.remove('hidden');
             }
-
-            // Render Multiple Choice
             const mcContainer = document.getElementById('mc-questions');
-            if (quizData.multiple_choice && quizData.multiple_choice.length > 0) {
-                quizData.multiple_choice.forEach(q => {
-                    const qDiv = document.createElement('div');
-                    qDiv.className = "space-y-2";
-                    qDiv.innerHTML = `
-                        <p class="font-semibold text-gray-900">${q.question_num}. ${q.text}</p>
-                        <div class="grid grid-cols-1 gap-2 pl-2">
-                            ${['A', 'B', 'C', 'D'].map(letter => `
-                                <label class="flex items-center space-x-3 p-2 rounded-lg border border-gray-100 hover:bg-gray-50 cursor-pointer">
-                                    <input type="radio" name="mc_${q.question_num}" value="${letter}" class="text-indigo-600 focus:ring-indigo-500 h-4 w-4">
-                                    <span class="text-sm font-medium text-gray-700"><span class="font-bold">${letter}:</span> ${q[letter]}</span>
-                                </label>
-                            `).join('')}
-                        </div>
-                    `;
-                    mcContainer.appendChild(qDiv);
-                });
-            } else {
-                document.getElementById('mc-section').classList.add('hidden');
-            }
-
-            // Render Long Answer
-            if (quizData.long_answer) {
-                document.getElementById('la-text').innerText = quizData.long_answer.text;
-            } else {
-                document.getElementById('la-section').classList.add('hidden');
-            }
+            quizData.multiple_choice?.forEach(q => {
+                const qDiv = document.createElement('div');
+                qDiv.innerHTML = `<p class="font-semibold text-gray-900">${q.question_num}. ${q.text}</p>
+                    ${['A', 'B', 'C', 'D'].map(l => `<label class="flex items-center space-x-3 p-2 border rounded-lg cursor-pointer hover:bg-gray-50"><input type="radio" name="mc_${q.question_num}" value="${l}"><span>${l}: ${q[l]}</span></label>`).join('')}`;
+                mcContainer.appendChild(qDiv);
+            });
+            if (quizData.long_answer) document.getElementById('la-text').innerText = quizData.long_answer.text;
         }
 
         async function submitAssignment() {
-            const email = document.getElementById('student-email').value.trim();
-            const laInput = document.getElementById('la-input').value.trim();
-            
-            if (!email || !email.includes('@')) {
-                alert("Please provide a valid school email address.");
-                return;
-            }
-
-            // Pack Multiple Choice Answers
-            const mcAnswers = {};
-            if (quizData.multiple_choice) {
-                quizData.multiple_choice.forEach(q => {
-                    const selected = document.querySelector(`input[name="mc_${q.question_num}"]:checked`);
-                    mcAnswers[q.question_num] = selected ? selected.value : null;
-                });
-            }
-
-            if (quizData.long_answer && !laInput) {
-                alert("Please write a response for the long answer question.");
-                return;
-            }
-
             const payload = {
                 quiz_id: quizId,
-                student_email: email,
-                mc_answers: mcAnswers,
-                la_input: laInput,
+                student_email: document.getElementById('student-email').value,
+                mc_answers: {},
+                la_input: document.getElementById('la-input').value,
                 quiz_schema: quizData
             };
-
             const btn = document.getElementById('submit-btn');
             btn.disabled = true;
+            btn.innerText = "Submitting...";
             
-            // Set initial state correctly based on current live server status
-            if (isServerOnline) {
-                btn.innerText = "AI Grading & Emailing... (~2s)";
-            } else {
-                btn.innerText = "Connecting to Server...";
-            }
-
-            // Create AbortController to handle a max 90-second timeout window (Render spin-up)
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 90000);
-
-            // Increment visual timer so students see active progress
-            let secondsElapsed = 0;
-            const timerInterval = setInterval(() => {
-                secondsElapsed += 2;
-                if (!isServerOnline) {
-                    if (secondsElapsed < 45) {
-                        btn.innerText = `Waking up evaluation server... (~${secondsElapsed}s)`;
-                    } else {
-                        btn.innerText = `AI Grading & Emailing... (~${secondsElapsed}s)`;
-                    }
-                } else {
-                    btn.innerText = `AI Grading & Emailing... (~${secondsElapsed}s)`;
-                }
-            }, 2000);
-
             try {
-                // Pass the timeout signal to the fetch request
                 const response = await fetch(BACKEND_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                    signal: controller.signal
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload)
                 });
-
-                clearInterval(timerInterval);
-                clearTimeout(timeoutId);
-
                 if (response.ok) {
                     document.getElementById('portal').classList.add('hidden');
                     document.getElementById('results-portal').classList.remove('hidden');
-                } else {
-                    // Try to extract rich backend exception message if available
-                    let errorText = "Unknown error";
-                    try {
-                        const resData = await response.json();
-                        errorText = resData.detail || JSON.stringify(resData);
-                    } catch (e) {
-                        errorText = `HTTP Status ${response.status} (${response.statusText})`;
-                    }
-                    alert(`Submission failed: ${errorText}`);
-                    btn.disabled = false;
-                    btn.innerText = "Submit Assignment";
-                }
-            } catch (err) {
-                clearInterval(timerInterval);
-                clearTimeout(timeoutId);
-                
-                if (err.name === 'AbortError') {
-                    alert("Submission timed out. The server is taking a little while to wake up from its sleep cycle. The server should be awake now—please click 'Submit Assignment' again to complete your submission.");
-                } else {
-                    alert(`Network error connecting to evaluation service: ${err.message}`);
-                }
-                btn.disabled = false;
-                btn.innerText = "Submit Assignment";
-            }
+                } else alert("Submission failed.");
+            } catch (err) { alert("Network error."); }
+            btn.disabled = false;
+            btn.innerText = "Submit Assignment";
         }
 
-        // Initialize both the quiz layout and the active status check simultaneously
-        window.onload = function() {
-            loadQuiz();
-            checkServerStatus();
-        };
+        window.onload = () => { loadQuiz(); checkServerStatus(); };
     </script>
 </body>
 </html>
