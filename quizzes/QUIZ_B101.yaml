@@ -1,0 +1,191 @@
+quiz_id: B101
+video_url: https://www.youtube.com/watch?v=qHkUOlC8Nbo
+title: 'GCSE Biology Assessment: Cell Structure and Subcellular Organelles'
+multiple_choice:
+- question_num: 1
+  text: What type of cells are animal and plant cells?
+  A: Prokaryotic cells
+  B: Eukaryotic cells
+  C: Unicellular cells
+  D: Bacterial cells
+  answer: Eukaryotic cells
+  points: 1
+  explanation: Eukaryotic cells are complex cells that contain a nucleus and membrane-bound
+    organelles, such as mitochondria. Animal and plant cells are classic examples
+    of eukaryotic cells.
+- question_num: 2
+  text: Which subcellular structure controls the movement of substances into and out
+    of the cell?
+  A: Cell wall
+  B: Cytoplasm
+  C: Cell membrane
+  D: Vacuole
+  answer: Cell membrane
+  points: 1
+  explanation: The cell membrane is a partially permeable barrier that regulates the
+    entry and exit of substances, such as dissolved nutrients and waste products,
+    maintaining cellular homeostasis.
+- question_num: 3
+  text: What is the primary function of the mitochondria?
+  A: Protein synthesis
+  B: Photosynthesis
+  C: Aerobic respiration to release energy
+  D: Storing genetic material
+  answer: Aerobic respiration to release energy
+  points: 1
+  explanation: Mitochondria are the sites of aerobic respiration, where glucose and
+    oxygen react to release energy in the form of ATP for cellular processes.
+- question_num: 4
+  text: Which of these structures is found in plant cells but NOT in animal cells?
+  A: Mitochondria
+  B: Ribosomes
+  C: Cell membrane
+  D: Cellulose cell wall
+  answer: Cellulose cell wall
+  points: 1
+  explanation: Plant cells have a rigid cell wall made of cellulose to provide structural
+    support. Animal cells do not have a cell wall, only a cell membrane.
+- question_num: 5
+  text: What is the function of ribosomes in both eukaryotic and prokaryotic cells?
+  A: Aerobic respiration
+  B: Protein synthesis
+  C: Photosynthesis
+  D: Controlling cell division
+  answer: Protein synthesis
+  points: 1
+  explanation: Ribosomes are the site of translation in protein synthesis, where amino
+    acids are joined together to form specific proteins based on genetic instructions.
+- question_num: 6
+  text: What does the permanent vacuole of a plant cell contain?
+  A: Chlorophyll
+  B: Pure water only
+  C: Cell sap (sugars, salts, and water)
+  D: Dissolved oxygen and glucose
+  answer: Cell sap (sugars, salts, and water)
+  points: 1
+  explanation: The permanent vacuole contains cell sap, a weak solution of sugar,
+    salts, and water, which helps keep the cell turgid and supports the plant's structure.
+- question_num: 7
+  text: Which substance inside chloroplasts absorbs the light energy required for
+    photosynthesis?
+  A: Cellulose
+  B: Chlorophyll
+  C: Cytoplasm
+  D: Mitochondria
+  answer: Chlorophyll
+  points: 1
+  explanation: Chloroplasts contain the green pigment chlorophyll, which absorbs light
+    energy from the Sun to drive the chemical reaction of photosynthesis.
+- question_num: 8
+  text: How is the genetic material of a bacterium structured?
+  A: Enclosed within a distinct nucleus
+  B: As a single, free-floating circular strand of DNA
+  C: Inside the mitochondria
+  D: Only within plasmids
+  answer: As a single, free-floating circular strand of DNA
+  points: 1
+  explanation: Bacteria are prokaryotes and lack a nucleus. Their main genetic material
+    is a single, circular chromosome that floats freely in the cytoplasm.
+- question_num: 9
+  text: What are plasmids?
+  A: Thread-like structures used for movement
+  B: Small, additional rings of DNA carrying extra genes
+  C: Organelles where aerobic respiration occurs
+  D: The site of protein synthesis in bacteria
+  answer: Small, additional rings of DNA carrying extra genes
+  points: 1
+  explanation: Plasmids are small, circular loops of DNA found in the cytoplasm of
+    prokaryotes. They carry non-essential but beneficial genes, such as those for
+    antibiotic resistance.
+- question_num: 10
+  text: Which of the following structures is absent in bacterial cells?
+  A: Cell wall
+  B: Ribosomes
+  C: Mitochondria
+  D: Cell membrane
+  answer: Mitochondria
+  points: 1
+  explanation: Bacteria are prokaryotes and do not contain membrane-bound organelles
+    such as mitochondria or chloroplasts. They rely on alternative pathways in their
+    cytoplasm for energy release.
+- question_num: 11
+  text: What is the function of the flagella found in some bacteria?
+  A: To transfer genetic material between cells
+  B: To rotate and propel the cell to enable movement
+  C: To synthesize proteins
+  D: To prevent the cell from bursting
+  answer: To rotate and propel the cell to enable movement
+  points: 1
+  explanation: 'Flagella (singular: flagellum) are tail-like protein structures that
+    rotate like a propeller to allow the bacterial cell to move through liquid environments.'
+- question_num: 12
+  text: Why does a plant cell have a rigid cell wall made of cellulose?
+  A: To control which substances enter and leave the cell
+  B: To absorb light energy for photosynthesis
+  C: To provide support and prevent the cell from bursting when water enters
+  D: To store genetic information
+  answer: To provide support and prevent the cell from bursting when water enters
+  points: 1
+  explanation: The cellulose cell wall provides mechanical strength and turgor pressure
+    support, preventing the plant cell from lysing (bursting) when it absorbs water
+    by osmosis.
+- question_num: 13
+  text: Where do most of the chemical reactions take place within a cell?
+  A: Nucleus
+  B: Cytoplasm
+  C: Cell membrane
+  D: Vacuole
+  answer: Cytoplasm
+  points: 1
+  explanation: The cytoplasm is a gel-like substance containing enzymes, nutrients,
+    and organelles. It is the site where most of the cell's metabolic chemical reactions
+    occur.
+- question_num: 14
+  text: Which of the following is a key difference between eukaryotic and prokaryotic
+    cells?
+  A: Prokaryotes have a nucleus, whereas eukaryotes do not.
+  B: Eukaryotes have a nucleus, whereas prokaryotes do not.
+  C: Only prokaryotes contain ribosomes.
+  D: Only eukaryotes have a cell membrane.
+  answer: Eukaryotes have a nucleus, whereas prokaryotes do not.
+  points: 1
+  explanation: A defining difference is that eukaryotic cells contain their genetic
+    material enclosed within a membrane-bound nucleus, whereas prokaryotic cells have
+    free-floating DNA and no nucleus.
+- question_num: 15
+  text: Approximately how many cells make up an adult human body?
+  A: 40 million
+  B: 40 billion
+  C: 40 trillion
+  D: 40 quadrillion
+  answer: 40 trillion
+  points: 1
+  explanation: An adult human body is highly multicellular, consisting of approximately
+    40 trillion specialized cells working together.
+long_answer:
+  question_num: 1
+  text: Compare the structure of a eukaryotic plant cell with the structure of a prokaryotic
+    bacterial cell. Your answer should highlight both similarities and differences
+    in their subcellular structures.
+  points: 6
+  rubric: "Level 1 (1-2 marks): Simple statements identifying one or two structures\
+    \ in either plant or bacterial cells. The response is disjointed with little or\
+    \ no direct comparison.\nLevel 2 (3-4 marks): Clear description of several structures\
+    \ in both cell types, with some direct comparisons made (e.g., identifying structures\
+    \ they both have or structures only one has). Shows logical scientific linkage.\n\
+    Level 3 (5-6 marks): Detailed, structured, and logical comparison. Clearly distinguishes\
+    \ between eukaryotic and prokaryotic features, systematically comparing shared\
+    \ structures and unique structures.\n\nIndicative Content:\n- Similarities:\n\
+    \  * Both plant and bacterial cells possess a cell membrane to control the entry\
+    \ and exit of substances.\n  * Both contain cytoplasm where chemical reactions\
+    \ take place.\n  * Both contain ribosomes for protein synthesis.\n  * Both possess\
+    \ a cell wall for structural support (though plant cell walls are made of cellulose,\
+    \ whereas bacterial cell walls are not).\n- Differences:\n  * Plant cells are\
+    \ eukaryotic and contain a distinct nucleus enclosing their DNA, whereas bacterial\
+    \ cells are prokaryotic and have a single, free-floating circular strand of DNA\
+    \ (no nucleus).\n  * Plant cells contain membrane-bound organelles such as mitochondria\
+    \ (for aerobic respiration) and chloroplasts (for photosynthesis), which are completely\
+    \ absent in bacterial cells.\n  * Plant cells contain a permanent vacuole filled\
+    \ with cell sap, which is absent in bacteria.\n  * Bacterial cells may contain\
+    \ plasmids (small rings of DNA) and flagella (for movement), which are not found\
+    \ in plant cells."
