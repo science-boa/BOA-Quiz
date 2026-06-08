@@ -10,7 +10,7 @@
 <body class="bg-gray-50 text-gray-800 font-sans h-screen overflow-hidden">
 
     <div class="h-screen flex flex-col">
-        <!-- Header -->
+        <!-- Header (Fixed) -->
         <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shrink-0">
             <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">Science BOA Portal</h1>
             <div class="flex items-center space-x-4">
@@ -23,7 +23,7 @@
         </header>
 
         <!-- Main Content Area -->
-        <main class="flex-1 overflow-hidden relative">
+        <main id="scroll-container" class="flex-1 overflow-y-auto relative">
             <div id="loading" class="text-center py-12">
                 <p class="text-xl font-semibold text-gray-600 animate-pulse">Loading Assignment...</p>
             </div>
@@ -31,9 +31,9 @@
             <div id="error-container" class="hidden p-6 text-red-700">Error loading assignment.</div>
 
             <!-- Portal Grid -->
-            <div id="portal" class="hidden h-full flex flex-col md:flex-row overflow-y-auto" id="main-layout-container">
+            <div id="portal" class="hidden h-full flex flex-col md:flex-row">
                 
-                <!-- Fixed Sidebar (Left) -->
+                <!-- Fixed/Sidebar Content -->
                 <div id="left-panel" class="w-full md:w-1/2 p-8 bg-gray-50 flex flex-col gap-6 shrink-0 md:h-full">
                     <h1 id="quiz-title" class="text-3xl font-black tracking-tight text-gray-900">Quiz Portal</h1>
                     <div id="video-container" class="hidden aspect-video w-full rounded-xl overflow-hidden shadow-md bg-black">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <!-- Scrollable Content (Right) -->
+                <!-- Scrollable Content -->
                 <div id="right-panel" class="w-full md:w-1/2 h-full overflow-y-auto p-8 bg-white border-l border-gray-100">
                     <div class="max-w-xl mx-auto space-y-8 pb-20">
                         <div id="mc-section" class="space-y-6">
@@ -84,25 +84,18 @@
         function toggleLayout() {
             isStacked = !isStacked;
             const container = document.getElementById('portal');
-            const left = document.getElementById('left-panel');
-            const right = document.getElementById('right-panel');
+            const main = document.getElementById('scroll-container');
             
             if (isStacked) {
-                container.classList.remove('md:flex-row');
+                // Stacked View: Portal container becomes full flow, scroll is on the main element
+                container.classList.remove('md:flex-row', 'h-full');
                 container.classList.add('flex-col');
-                left.classList.remove('md:h-full');
-                left.classList.remove('w-1/2');
-                left.classList.add('w-full');
-                right.classList.remove('w-1/2');
-                right.classList.add('w-full');
+                main.classList.add('overflow-y-auto');
             } else {
-                container.classList.add('md:flex-row');
+                // Split View: Reset to side-by-side
+                container.classList.add('md:flex-row', 'h-full');
                 container.classList.remove('flex-col');
-                left.classList.add('md:h-full');
-                left.classList.add('w-1/2');
-                left.classList.remove('w-full');
-                right.classList.add('w-1/2');
-                right.classList.remove('w-full');
+                main.classList.remove('overflow-y-auto');
             }
         }
 
