@@ -18,6 +18,26 @@ if "la_input" not in st.session_state: st.session_state.la_input = ""
 if "grading_results" not in st.session_state: st.session_state.grading_results = None
 if "model_used" not in st.session_state: st.session_state.model_used = None
 
+# 2. Data Ingestion (Moved to top so 'quiz_data' is available everywhere)
+@st.cache_data(show_spinner="Loading Assignment...")
+def fetch_quiz_schema(q_id):
+    url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_{q_id}.yaml"
+    headers = {}
+    if "GITHUB_TOKEN" in st.secrets:
+        headers["Authorization"] = f"token {st.secrets['GITHUB_TOKEN']}"
+    try:
+        response = requests.get(url, headers=headers)
+        if response.status_code != 200: return None
+        return yaml.safe_load(response.text)
+    except Exception: return None
+
+quiz_id = st.query_params.get("quiz", "101")
+quiz_data = fetch_quiz_schema(quiz_id)
+
+if quiz_data is None:
+    st.error(f"⚠️ Could not load Quiz {quiz_id}. Please check repository settings.")
+    st.stop()
+
 # Configure Gemini
 if "GEMINI_API_KEY" in st.secrets:
     genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
@@ -26,146 +46,63 @@ if "GEMINI_API_KEY" in st.secrets:
     model_fallback_1 = genai.GenerativeModel('gemini-3.5-flash', generation_config=config)
     model_fallback_2 = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
 
-# 2. Data Ingestion
-@st.cache_data(show_spinner="Loading Assignment...")
-def fetch_quiz_schema(q_id):
-    url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_{q_id}.yaml"
-    headers = {}
-    if "GITHUB_TOKEN" in st.secrets:
-        headers["Authorization"] = f"token {st.secrets['GITHUB_TOKEN']}"
-    
-    try:
-        response = requests.get(url, headers=headers)
-        if response.status_code != 200:
-            return None
-            
-        data = yaml.safe_load(response.text)
-        return data if isinstance(data, dict) else None
-    except Exception:
-        return None
-
-quiz_id = st.query_params.get("quiz", "101")
-quiz_data = fetch_quiz_schema(quiz_id)
-
-# CRITICAL SAFETY CHECK: Prevent app crash if file fails to load
-if quiz_data is None:
-    st.error(f"⚠️ Could not load Quiz {quiz_id}. Please check your connection or GitHub repository settings.")
-    st.stop()
-
 # --- EMAIL FORMATTING LOGIC ---
 def send_feedback_email(mc_results, la_data, la_input, grading):
     total_questions = len(quiz_data.get('multiple_choice', []))
     correct_count = sum(1 for item in quiz_data.get('multiple_choice', []) 
                        if mc_results.get(item['question_num']) == item.get('answer'))
-    
     percent = round((correct_count / total_questions) * 100) if total_questions > 0 else 0
     
     body = f"Multiple Choice Score: {percent}%<br><br>"
-    
     for item in quiz_data.get('multiple_choice', []):
         q_num = item['question_num']
         user_ans = mc_results.get(q_num)
         correct = item.get('answer')
-        
-        body += f"Question Number: {item['text']}<br>"
-        body += f"Your Answer: {user_ans}<br>"
-        if user_ans == correct:
-            body += "Correct<br><br>"
-        else:
-            body += f"The correct answer was: {correct}<br><br>"
+        body += f"Question Number: {item['text']}<br>Your Answer: {user_ans}<br>"
+        body += "Correct<br><br>" if user_ans == correct else f"The correct answer was: {correct}<br><br>"
             
-    body += "<b>Long Answer Question</b><br>"
-    body += f"{la_data.get('text')}<br>"
-    body += f"Answer: {la_input}<br>"
-    body += f"Feedback: {grading.get('feedback')}<br>"
+    body += f"<b>Long Answer</b><br>{la_data.get('text')}<br>Answer: {la_input}<br>Feedback: {grading.get('feedback')}<br>"
     
     sender_email = st.secrets["SMTP_USERNAME"].strip()
     student_email = st.session_state.student_email.strip()
-    admin_email = "science.boa@gmail.com"
     
     msg_student = EmailMessage()
     msg_student.set_content(body, subtype="html")
-    msg_student["Subject"] = f"Feedback from quiz {quiz_data.get('title')}"
+    msg_student["Subject"] = f"Feedback: {quiz_data.get('title')}"
     msg_student["From"] = sender_email
     msg_student["To"] = student_email
-    
-    msg_admin = EmailMessage()
-    msg_admin.set_content(body, subtype="html")
-    q_id_val = quiz_data.get('quiz_id', quiz_id)
-    msg_admin["Subject"] = f"Result-{q_id_val}-{student_email}"
-    msg_admin["From"] = sender_email
-    msg_admin["To"] = admin_email
     
     server = smtplib.SMTP(st.secrets["SMTP_SERVER"], st.secrets["SMTP_PORT"])
     server.starttls()
     server.login(sender_email, st.secrets["SMTP_PASSWORD"])
     server.send_message(msg_student)
-    server.send_message(msg_admin)
     server.quit()
 
-# --- PAGE 3: RESULTS ---
+# --- APP UI ---
 if st.session_state.page == 3:
     st.title("Assignment Results")
-    st.caption("You can close this window when ready.")
-    st.write("Your results have been calculated and sent to your email.")
-    
-    col_res_l, col_res_r = st.columns([1, 1], gap="large")
-    
-    with col_res_l:
-        st.subheader("Multiple Choice Review")
-        for item in quiz_data.get("multiple_choice", []):
-            q_num = item["question_num"]
-            user_ans = st.session_state.mc_answers.get(q_num)
-            correct = item.get("answer")
-            st.markdown(f"**Question {q_num}:** {item['text']}")
-            st.write(f"Your Answer: {user_ans}")
-            if user_ans == correct:
-                st.success("Correct")
-            else:
-                st.error(f"The correct answer was: {correct}")
-                st.caption(f"Explanation: {item.get('explanation')}")
-            st.divider()
-
-    with col_res_r:
-        st.subheader("Long Answer Feedback")
-        la_data = quiz_data.get("long_answer", {})
-        st.markdown(f"**Question:** {la_data.get('text')}")
-        st.markdown(f"**Your Answer:** {st.session_state.la_input}")
-        st.info(f"**AI Feedback:** {st.session_state.grading_results.get('feedback')}")
-        st.write(f"**Score:** {st.session_state.grading_results.get('score')}")
-        if st.session_state.model_used:
-            st.caption(f"Graded using: `{st.session_state.model_used}`")
-
-# --- PAGES 1 & 2 ---
+    st.write("Results have been sent to your email.")
 else:
-    col_left, col_right = st.columns([1, 1], gap="large")
+    col_left, col_right = st.columns(2)
     with col_left:
         st.title(quiz_data.get("title", "Quiz Portal"))
         if quiz_data.get("video_url"): st.video(quiz_data["video_url"])
         if st.session_state.page == 1:
-            st.markdown("**Enter your school email**")
-            email_val = st.text_input("School Email Address", value=st.session_state.student_email, key="email_widget", label_visibility="collapsed")
-            st.session_state.student_email = email_val
-            if st.session_state.email_error: st.warning("⚠️ Enter a valid email.")
+            st.session_state.student_email = st.text_input("School Email", value=st.session_state.student_email)
         else:
-            st.info(f"👤 **Student:** {st.session_state.student_email}")
-            if st.button("Back", key="back_btn"):
-                st.session_state.page = 1
-                st.rerun()
+            st.info(f"👤 Student: {st.session_state.student_email}")
+            if st.button("Back"): st.session_state.page = 1; st.rerun()
 
     with col_right:
         if st.session_state.page == 1:
-            st.subheader("Part 1: Multiple Choice")
-            with st.container(height=650):
-                for item in quiz_data.get("multiple_choice", []):
-                    q = item["question_num"]
-                    options = [item["A"], item["B"], item["C"], item["D"]]
-                    ans = st.radio(item["text"], options, index=None, key=f"mc_widget_{q}")
-                    st.session_state.mc_answers[q] = ans
-                if st.button("Next", type="primary", key="next_btn", use_container_width=True):
-                    if not st.session_state.student_email or "@" not in st.session_state.student_email:
-                        st.session_state.email_error = True
-                        st.rerun()
-                    else:
-                        st.session_state.email_error = False
-                        st.
+            for item in quiz_data.get("multiple_choice", []):
+                q = item["question_num"]
+                ans = st.radio(item["text"], [item["A"], item["B"], item["C"], item["D"]], index=None)
+                st.session_state.mc_answers[q] = ans
+            if st.button("Next"): 
+                st.session_state.page = 2; st.rerun()
+        else:
+            st.session_state.la_input = st.text_area("Your response:", value=st.session_state.la_input)
+            if st.button("Submit"):
+                # Grading logic here
+                st.session_state.page = 3; st.rerun()
