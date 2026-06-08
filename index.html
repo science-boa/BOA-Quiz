@@ -73,7 +73,6 @@
     </div>
 
     <script>
-        // Ensure trailing slash behavior on route configurations matches ASGI/FastAPI exactly
         const BACKEND_URL = "https://boa-quiz.onrender.com/submit"; 
         let quizData = null;
         let quizId = "101";
@@ -91,38 +90,42 @@
             const statusPing = document.getElementById('status-ping');
             const statusText = document.getElementById('status-text');
             
-            // Extract root domain from submission endpoint to ping
-            const rootUrl = "https://boa-quiz.onrender.com/";
+            // Querying a dedicated /health endpoint to bypass any FastAPI unhandled 404 CORS stripping
+            const healthUrl = "https://boa-quiz.onrender.com/health";
             
             try {
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 7000); // 7 seconds timeout limit for immediate check
+                const timeoutId = setTimeout(() => controller.abort(), 7000); // 7-second timeout threshold
                 
-                const response = await fetch(rootUrl, { method: 'GET', signal: controller.signal });
+                const response = await fetch(healthUrl, { method: 'GET', signal: controller.signal });
                 clearTimeout(timeoutId);
                 
-                // If any response returns (including 404 because '/' has no custom path), the server is awake and active!
-                isServerOnline = true;
-                statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
-                statusPing.className = "absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
-                statusText.innerText = "Evaluation Server: Online";
-                statusText.className = "font-medium text-green-700";
+                if (response.ok) {
+                    isServerOnline = true;
+                    statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
+                    statusPing.className = "absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
+                    statusText.innerText = "Evaluation Server: Online";
+                    statusText.className = "font-medium text-green-700";
+                } else {
+                    throw new Error("Server returned non-200 status");
+                }
             } catch (err) {
-                // If connection fails or times out, it is highly likely sleeping (or blocked by browser)
                 isServerOnline = false;
                 statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-amber-500 animate-pulse";
                 statusPing.className = "hidden";
                 statusText.innerText = "Evaluation Server: Sleeping (Waking it up...)";
                 statusText.className = "font-medium text-amber-600";
                 
-                // Fire off a persistent background fetch to force Render to start spin-up sequence
+                // Background attempt to wake up the server if asleep
                 try {
-                    await fetch(rootUrl, { method: 'GET' });
-                    isServerOnline = true;
-                    statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
-                    statusPing.className = "absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
-                    statusText.innerText = "Evaluation Server: Online";
-                    statusText.className = "font-medium text-green-700";
+                    const response = await fetch(healthUrl, { method: 'GET' });
+                    if (response.ok) {
+                        isServerOnline = true;
+                        statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-green-500";
+                        statusPing.className = "absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75";
+                        statusText.innerText = "Evaluation Server: Online";
+                        statusText.className = "font-medium text-green-700";
+                    }
                 } catch (retryErr) {
                     isServerOnline = false;
                     statusDot.className = "relative inline-flex rounded-full h-3 w-3 bg-red-500";
