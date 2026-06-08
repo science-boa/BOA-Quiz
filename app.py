@@ -19,15 +19,8 @@ if "grading_results" not in st.session_state: st.session_state.grading_results =
 if "model_used" not in st.session_state: st.session_state.model_used = None
 if "diagnostic_passed" not in st.session_state: st.session_state.diagnostic_passed = False
 
-# Configure Gemini
-if "GEMINI_API_KEY" in st.secrets:
-    genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-    config = {"response_mime_type": "application/json"}
-    model_primary = genai.GenerativeModel('gemini-3.1-flash-lite', generation_config=config)
-    model_fallback_1 = genai.GenerativeModel('gemini-3.5-flash', generation_config=config)
-    model_fallback_2 = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
-
 # --- DIAGNOSTIC GATEWAY ---
+# Executed before configuring Gemini to isolate configuration errors
 if not st.session_state.diagnostic_passed:
     st.warning("🔍 Running Diagnostic Test")
     if st.button("You can see this right?"):
@@ -35,6 +28,14 @@ if not st.session_state.diagnostic_passed:
         st.rerun()
     else:
         st.stop()
+
+# Configure Gemini
+if "GEMINI_API_KEY" in st.secrets:
+    genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+    config = {"response_mime_type": "application/json"}
+    model_primary = genai.GenerativeModel('gemini-3.1-flash-lite', generation_config=config)
+    model_fallback_1 = genai.GenerativeModel('gemini-3.5-flash', generation_config=config)
+    model_fallback_2 = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
 
 # 2. Data Ingestion
 @st.cache_data(show_spinner="Loading Assignment...")
