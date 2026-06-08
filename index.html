@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homework Evaluation Portal</title>
+    <title>BOA Science Portal</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 </head>
@@ -12,7 +12,7 @@
     <div class="h-screen flex flex-col">
         <!-- Header (Fixed) -->
         <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shrink-0">
-            <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">Science BOA Portal</h1>
+            <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">BOA Science Portal</h1>
             <div class="flex items-center space-x-4">
                 <a href="#" onclick="toggleLayout()" class="text-indigo-600 font-semibold underline text-sm">Rotate View</a>
                 <div id="server-status-container" class="flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-gray-150 text-sm">
@@ -122,6 +122,11 @@
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('portal').classList.remove('hidden');
                 renderQuiz();
+                
+                // Auto-detect mobile and stack if necessary
+                if (window.innerWidth < 768) {
+                    toggleLayout();
+                }
             } catch (err) {
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('error-container').classList.remove('hidden');
