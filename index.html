@@ -133,10 +133,17 @@
                 btn.innerText = `Submitting... ${seconds}s`;
             }, 1000);
 
+            // Collect MCQ answers dynamically
+            const mc_answers = {};
+            quizData.multiple_choice?.forEach(q => {
+                const selected = document.querySelector(`input[name="mc_${q.question_num}"]:checked`);
+                mc_answers[q.question_num] = selected ? selected.value : null;
+            });
+
             const payload = {
                 quiz_id: quizId,
                 student_email: document.getElementById('student-email').value,
-                mc_answers: {}, 
+                mc_answers: mc_answers, 
                 la_input: document.getElementById('la-input').value,
                 quiz_schema: quizData
             };
@@ -154,7 +161,7 @@
                     document.getElementById('portal').classList.add('hidden');
                     document.getElementById('results-portal').classList.remove('hidden');
                 } else {
-                    alert("Submission failed.");
+                    alert("Submission failed. Please ensure all fields are filled.");
                     btn.disabled = false;
                     btn.innerText = "Submit Assignment";
                 }
