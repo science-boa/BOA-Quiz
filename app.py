@@ -37,20 +37,20 @@ def fetch_quiz_schema(q_id):
     try:
         response = requests.get(url, headers=headers)
         if response.status_code != 200:
-            st.error(f"GitHub Fetch Error: {response.status_code} for URL: {url}")
             return None
             
         data = yaml.safe_load(response.text)
-        
-        # Debugging: if the file has multiple quiz_id definitions, this helps identify them
-        if not data or not isinstance(data, dict):
-            st.error(f"YAML Parsing Error: Expected dictionary, got {type(data)}")
-            return None
-            
-        return data
-    except Exception as e:
-        st.error(f"Unexpected Load Error: {e}")
+        return data if isinstance(data, dict) else None
+    except Exception:
         return None
+
+quiz_id = st.query_params.get("quiz", "101")
+quiz_data = fetch_quiz_schema(quiz_id)
+
+# CRITICAL SAFETY CHECK: Prevent app crash if file fails to load
+if quiz_data is None:
+    st.error(f"⚠️ Could not load Quiz {quiz_id}. Please check your connection or GitHub repository settings.")
+    st.stop()
 
 # --- EMAIL FORMATTING LOGIC ---
 def send_feedback_email(mc_results, la_data, la_input, grading):
@@ -83,14 +83,12 @@ def send_feedback_email(mc_results, la_data, la_input, grading):
     student_email = st.session_state.student_email.strip()
     admin_email = "science.boa@gmail.com"
     
-    # 1. Prepare Feedback Email using modern EmailMessage class
     msg_student = EmailMessage()
     msg_student.set_content(body, subtype="html")
     msg_student["Subject"] = f"Feedback from quiz {quiz_data.get('title')}"
     msg_student["From"] = sender_email
     msg_student["To"] = student_email
     
-    # 2. Prepare Duplicated Admin Record Email
     msg_admin = EmailMessage()
     msg_admin.set_content(body, subtype="html")
     q_id_val = quiz_data.get('quiz_id', quiz_id)
@@ -98,15 +96,11 @@ def send_feedback_email(mc_results, la_data, la_input, grading):
     msg_admin["From"] = sender_email
     msg_admin["To"] = admin_email
     
-    # Send both messages using the safe send_message method
     server = smtplib.SMTP(st.secrets["SMTP_SERVER"], st.secrets["SMTP_PORT"])
     server.starttls()
     server.login(sender_email, st.secrets["SMTP_PASSWORD"])
-    
-    # send_message extracts the raw envelope paths cleanly, avoiding 555 errors
     server.send_message(msg_student)
     server.send_message(msg_admin)
-    
     server.quit()
 
 # --- PAGE 3: RESULTS ---
@@ -150,16 +144,11 @@ else:
         if quiz_data.get("video_url"): st.video(quiz_data["video_url"])
         if st.session_state.page == 1:
             st.markdown("**Enter your school email**")
-            
-            # Decoupled Widget: key="email_widget" prevents Streamlit from deleting "student_email"
             email_val = st.text_input("School Email Address", value=st.session_state.student_email, key="email_widget", label_visibility="collapsed")
             st.session_state.student_email = email_val
-            
             if st.session_state.email_error: st.warning("⚠️ Enter a valid email.")
         else:
-            # Display the collected student email on Page 2
             st.info(f"👤 **Student:** {st.session_state.student_email}")
-            
             if st.button("Back", key="back_btn"):
                 st.session_state.page = 1
                 st.rerun()
@@ -179,46 +168,4 @@ else:
                         st.rerun()
                     else:
                         st.session_state.email_error = False
-                        st.session_state.page = 2
-                        st.rerun()
-        else:
-            st.subheader("Part 2: Long Answer")
-            la_data = quiz_data.get("long_answer", {})
-            st.markdown(la_data.get("text", ""))
-            
-            # Decoupled Widget: Prevents the answer from disappearing on Page 3
-            la_val = st.text_area("Your response:", value=st.session_state.la_input, key="la_widget")
-            st.session_state.la_input = la_val
-            
-            if st.button("Submit Assignment", type="primary", key="submit_btn"):
-                if not st.session_state.la_input:
-                    st.warning("Please provide an answer.")
-                else:
-                    with st.spinner("Grading..."):
-                        model_status = st.empty()
-                        try:
-                            prompt = (f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. "
-                                      f"Answer: {st.session_state.la_input}. JSON: {{'score': 0, 'feedback': ''}}")
-                            
-                            try:
-                                model_status.caption("Using model: `gemini-3.1-flash-lite`...")
-                                res = model_primary.generate_content(prompt).text
-                                active_model = "gemini-3.1-flash-lite"
-                            except Exception as e1:
-                                try:
-                                    model_status.caption("Using fallback model: `gemini-3.5-flash`...")
-                                    res = model_fallback_1.generate_content(prompt).text
-                                    active_model = "gemini-3.5-flash"
-                                except Exception as e2:
-                                    model_status.caption("Using fallback model: `gemini-2.5-flash`...")
-                                    res = model_fallback_2.generate_content(prompt).text
-                                    active_model = "gemini-2.5-flash"
-                            
-                            grading = json.loads(res)
-                            send_feedback_email(st.session_state.mc_answers, la_data, st.session_state.la_input, grading)
-                            st.session_state.grading_results = grading
-                            st.session_state.model_used = active_model
-                            st.session_state.page = 3
-                            st.rerun()
-                        except Exception as e:
-                            st.error(f"Grading/Submission failed: {e}")
+                        st.
