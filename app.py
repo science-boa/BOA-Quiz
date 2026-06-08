@@ -30,18 +30,27 @@ if "GEMINI_API_KEY" in st.secrets:
 @st.cache_data(show_spinner="Loading Assignment...")
 def fetch_quiz_schema(q_id):
     url = f"https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_{q_id}.yaml"
+    headers = {}
+    if "GITHUB_TOKEN" in st.secrets:
+        headers["Authorization"] = f"token {st.secrets['GITHUB_TOKEN']}"
+    
     try:
-        response = requests.get(url)
-        return yaml.safe_load(response.text) if response.status_code == 200 else None
-    except: return None
-
-quiz_id = st.query_params.get("quiz", "101")
-quiz_data = fetch_quiz_schema(quiz_id)
-
-# Safety check: Prevent app crash if file is missing or cached as None
-if quiz_data is None:
-    st.error(f"⚠️ Could not load Quiz {quiz_id}. Please ensure it is pushed to the 'quizzes' folder on GitHub and clear your Streamlit cache.")
-    st.stop()
+        response = requests.get(url, headers=headers)
+        if response.status_code != 200:
+            st.error(f"GitHub Fetch Error: {response.status_code} for URL: {url}")
+            return None
+            
+        data = yaml.safe_load(response.text)
+        
+        # Debugging: if the file has multiple quiz_id definitions, this helps identify them
+        if not data or not isinstance(data, dict):
+            st.error(f"YAML Parsing Error: Expected dictionary, got {type(data)}")
+            return None
+            
+        return data
+    except Exception as e:
+        st.error(f"Unexpected Load Error: {e}")
+        return None
 
 # --- EMAIL FORMATTING LOGIC ---
 def send_feedback_email(mc_results, la_data, la_input, grading):
