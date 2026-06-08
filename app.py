@@ -2,7 +2,8 @@ import streamlit as st
 import requests
 import yaml
 import json
-import google-genai as genAI
+from google import genai
+from google.genai import types
 import smtplib
 from email.message import EmailMessage
 
@@ -18,13 +19,11 @@ if "la_input" not in st.session_state: st.session_state.la_input = ""
 if "grading_results" not in st.session_state: st.session_state.grading_results = None
 if "model_used" not in st.session_state: st.session_state.model_used = None
 
-# Configure Gemini
+# Configure Gemini using the modern google-genai SDK
+ai_client = None
 if "GEMINI_API_KEY" in st.secrets:
-    genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-    config = {"response_mime_type": "application/json"}
-    model_primary = genai.GenerativeModel('gemini-3.1-flash-lite', generation_config=config)
-    model_fallback_1 = genai.GenerativeModel('gemini-3.5-flash', generation_config=config)
-    model_fallback_2 = genai.GenerativeModel('gemini-2.5-flash', generation_config=config)
+    # Initialize the modern unified GenAI client
+    ai_client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
 # 2. Data Ingestion (With GitHub Authentication & Robust Diagnostics)
 @st.cache_data(show_spinner="Loading Assignment...")
@@ -257,6 +256,8 @@ else:
             if st.button("Submit Assignment", type="primary", key="submit_btn"):
                 if not st.session_state.la_input:
                     st.warning("Please provide an answer.")
+                elif ai_client is None:
+                    st.error("⚠️ AI Evaluation Service is currently unconfigured. Please ensure GEMINI_API_KEY is present in your Streamlit secrets.")
                 else:
                     with st.spinner("Grading..."):
                         model_status = st.empty()
@@ -264,19 +265,39 @@ else:
                             prompt = (f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. "
                                       f"Answer: {st.session_state.la_input}. JSON: {{'score': 0, 'feedback': ''}}")
                             
+                            # Construct GenerateContentConfig using the modern google-genai structures
+                            gen_config = types.GenerateContentConfig(
+                                response_mime_type="application/json"
+                            )
+                            
                             try:
-                                model_status.caption("Using model: `gemini-3.1-flash-lite`...")
-                                res = model_primary.generate_content(prompt).text
-                                active_model = "gemini-3.1-flash-lite"
+                                model_status.caption("Using model: `gemini-2.5-flash`...")
+                                response = ai_client.models.generate_content(
+                                    model='gemini-2.5-flash',
+                                    contents=prompt,
+                                    config=gen_config
+                                )
+                                res = response.text
+                                active_model = "gemini-2.5-flash"
                             except Exception as e1:
                                 try:
-                                    model_status.caption("Using fallback model: `gemini-3.5-flash`...")
-                                    res = model_fallback_1.generate_content(prompt).text
-                                    active_model = "gemini-3.5-flash"
+                                    model_status.caption("Using fallback model: `gemini-2.5-pro`...")
+                                    response = ai_client.models.generate_content(
+                                        model='gemini-2.5-pro',
+                                        contents=prompt,
+                                        config=gen_config
+                                    )
+                                    res = response.text
+                                    active_model = "gemini-2.5-pro"
                                 except Exception as e2:
-                                    model_status.caption("Using fallback model: `gemini-2.5-flash`...")
-                                    res = model_fallback_2.generate_content(prompt).text
-                                    active_model = "gemini-2.5-flash"
+                                    model_status.caption("Using fallback model: `gemini-1.5-flash`...")
+                                    response = ai_client.models.generate_content(
+                                        model='gemini-1.5-flash',
+                                        contents=prompt,
+                                        config=gen_config
+                                    )
+                                    res = response.text
+                                    active_model = "gemini-1.5-flash"
                             
                             grading = json.loads(res)
                             send_feedback_email(st.session_state.mc_answers, la_data, st.session_state.la_input, grading)
