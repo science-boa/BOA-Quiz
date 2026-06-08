@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Evaluation Portal</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <div id="loading" class="text-center py-12">
+            <p class="text-xl font-semibold text-gray-600 animate-pulse">Loading Assignment...</p>
+        </div>
+
+        <div id="error-container" class="hidden bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg shadow-sm my-4">
+            <h3 class="text-lg font-bold text-red-800">⚠️ Assignment Load Error</h3>
+            <p id="error-message" class="text-red-700 mt-2"></p>
+        </div>
+
+        <div id="portal" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-6">
+                <h1 id="quiz-title" class="text-3xl font-black tracking-tight text-gray-900">Quiz Portal</h1>
+                <div id="video-container" class="hidden aspect-video w-full rounded-xl overflow-hidden shadow-md bg-black">
+                    <iframe id="quiz-video" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xs border border-gray-100">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">School Email Address</label>
+                    <input type="email" id="student-email" placeholder="you@school.edu" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-xs border border-gray-100 space-y-6">
+                <div id="mc-section" class="space-y-6">
+                    <h2 class="text-xl font-bold border-b pb-2 border-gray-100 text-indigo-900">Part 1: Multiple Choice</h2>
+                    <div id="mc-questions" class="space-y-6"></div>
+                </div>
+
+                <div id="la-section" class="space-y-4 pt-4 border-t border-gray-100">
+                    <h2 class="text-xl font-bold text-indigo-900">Part 2: Long Answer</h2>
+                    <p id="la-text" class="text-gray-700 font-medium"></p>
+                    <textarea id="la-input" rows="5" placeholder="Type your full analysis here..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"></textarea>
+                </div>
+
+                <button id="submit-btn" onclick="submitAssignment()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition dynamic-btn">
+                    Submit Assignment
+                </button>
+            </div>
+        </div>
+        
+        <div id="results-portal" class="hidden bg-white p-8 rounded-xl shadow-md border border-gray-100 max-w-2xl mx-auto text-center space-y-4">
+            <div class="text-5xl">🎉</div>
+            <h2 class="text-2xl font-black text-gray-900">Assignment Submitted Successfully!</h2>
+            <p class="text-gray-600">Your answers have been securely logged. A detailed breakdown alongside AI feedback is being compiled and dispatched to your email address right now.</p>
+            <p class="text-sm text-gray-400">You can safely close this browser window.</p>
+        </div>
+    </div>
+
+    <script>
+        // CHANGE THIS URL once you deploy your backend on Render/Railway
+        const BACKEND_URL = "https://YOUR-BACKEND-SERVICE.onrender.com/submit"; 
+        let quizData = null;
+        let quizId = "101";
+
+        // Parse query parameter (?quiz=B101)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('quiz')) {
+            quizId = urlParams.get('quiz').trim();
+        }
+
+        // Fetching the raw assignment schema out of GitHub natively
+        async function loadQuiz() {
+            const filename = `QUIZ_${quizId}.yaml`;
+            const url = `https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/${filename}`;
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP Status ${response.status} - File not found.`);
+                const text = await response.text();
+                quizData = jsyaml.load(text);
+                renderQuiz();
+            } catch (err) {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('error-message').innerText = `Could not load configuration for quiz '${quizId}'. Ensure file matches structure 'quizzes/QUIZ_${quizId}.yaml' exactly.\n\nDetails: ${err.message}`;
+                document.getElementById('error-container').classList.remove('hidden');
+            }
+        }
+
+        function renderQuiz() {
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('portal').classList.remove('hidden');
+            document.getElementById('quiz-title').innerText = quizData.title || "Quiz Portal";
+
+            // Process Video if URL exists
+            if (quizData.video_url) {
+                let videoUrl = quizData.video_url;
+                if (videoUrl.includes("watch?v=")) {
+                    videoUrl = videoUrl.replace("watch?v=", "embed/");
+                }
+                document.getElementById('quiz-video').src = videoUrl;
+                document.getElementById('video-container').classList.remove('hidden');
+            }
+
+            // Render Multiple Choice
+            const mcContainer = document.getElementById('mc-questions');
+            if (quizData.multiple_choice && quizData.multiple_choice.length > 0) {
+                quizData.multiple_choice.forEach(q => {
+                    const qDiv = document.createElement('div');
+                    qDiv.className = "space-y-2";
+                    qDiv.innerHTML = `
+                        <p class="font-semibold text-gray-900">${q.question_num}. ${q.text}</p>
+                        <div class="grid grid-cols-1 gap-2 pl-2">
+                            ${['A', 'B', 'C', 'D'].map(letter => `
+                                <label class="flex items-center space-x-3 p-2 rounded-lg border border-gray-100 hover:bg-gray-50 cursor-pointer">
+                                    <input type="radio" name="mc_${q.question_num}" value="${letter}" class="text-indigo-600 focus:ring-indigo-500 h-4 w-4">
+                                    <span class="text-sm font-medium text-gray-700"><span class="font-bold">${letter}:</span> ${q[letter]}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    `;
+                    mcContainer.appendChild(qDiv);
+                });
+            } else {
+                document.getElementById('mc-section').classList.add('hidden');
+            }
+
+            // Render Long Answer
+            if (quizData.long_answer) {
+                document.getElementById('la-text').innerText = quizData.long_answer.text;
+            } else {
+                document.getElementById('la-section').classList.add('hidden');
+            }
+        }
+
+        async function submitAssignment() {
+            const email = document.getElementById('student-email').value.trim();
+            const laInput = document.getElementById('la-input').value.trim();
+            
+            if (!email || !email.includes('@')) {
+                alert("Please provide a valid school email address.");
+                return;
+            }
+
+            // Pack Multiple Choice Answers
+            const mcAnswers = {};
+            if (quizData.multiple_choice) {
+                quizData.multiple_choice.forEach(q => {
+                    const selected = document.querySelector(`input[name="mc_${q.question_num}"]:checked`);
+                    mcAnswers[q.question_num] = selected ? selected.value : null;
+                });
+            }
+
+            if (quizData.long_answer && !laInput) {
+                alert("Please write a response for the long answer question.");
+                return;
+            }
+
+            const payload = {
+                quiz_id: quizId,
+                student_email: email,
+                mc_answers: mcAnswers,
+                la_input: laInput,
+                quiz_schema: quizData
+            };
+
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.innerText = "Processing Submission...";
+
+            try {
+                // Using clean standard HTTP POST instead of stateful WebSockets
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    document.getElementById('portal').classList.add('hidden');
+                    document.getElementById('results-portal').classList.remove('hidden');
+                } else {
+                    const resData = await response.json();
+                    alert(`Submission failed: ${resData.detail || "Unknown error"}`);
+                    btn.disabled = false;
+                    btn.innerText = "Submit Assignment";
+                }
+            } catch (err) {
+                alert(`Network error connecting to evaluation service: ${err.message}`);
+                btn.disabled = false;
+                btn.innerText = "Submit Assignment";
+            }
+        }
+
+        window.onload = loadQuiz;
+    </script>
+</body>
+</html>
