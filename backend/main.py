@@ -94,6 +94,7 @@ async def process_submission(payload: SubmissionPayload):
         
     la_data = payload.quiz_schema.get("long_answer")
     grading = {"score": "N/A", "feedback": "No long answer validation."}
+    active_model = "none"
     
     if la_data:
         ai_client = genai.Client(api_key=api_key)
@@ -114,15 +115,16 @@ async def process_submission(payload: SubmissionPayload):
                 )
                 grading = json.loads(response.text)
                 success = True
-                print(f"[AI EVALUATOR] Success with model: {model_name}")
+                active_model = model_name
+                print(f"[AI EVALUATOR] SUCCESS: Evaluated using model: {active_model}")
                 break
             except Exception as e:
                 last_error = str(e)
-                print(f"[AI EVALUATOR] Failed model {model_name}: {last_error}")
+                print(f"[AI EVALUATOR] FAILED model {model_name}: {last_error}")
                 continue
         
         if not success:
             raise HTTPException(status_code=502, detail=f"All AI models failed. Last error: {last_error}")
             
     await send_feedback_email_via_http(payload, grading)
-    return {"status": "success"}
+    return {"status": "success", "model_used": active_model}
