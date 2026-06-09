@@ -65,7 +65,7 @@ async def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict
             return
 
         student_payload = {"key": bridge_key, "to": payload.student_email.strip(), "subject": f"Feedback: {quiz_data.get('title')}", "body": body}
-        admin_payload = {"key": bridge_key, "to": "science.boa@gmail.com", "subject": f"Result-{payload.quiz_id}", "body": body}
+        admin_payload = {"key": bridge_key, "to": "science.boa@gmail.com", "subject": f"Result-{payload.quiz_id} from {payload.student_email.strip()}", "body": body}
 
         for label, p in [("Student", student_payload), ("Admin", admin_payload)]:
             print(f"[DIAGNOSTIC] Sending {label} email to {p['to']}...")
