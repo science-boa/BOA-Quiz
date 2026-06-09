@@ -57,6 +57,9 @@ async def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict
         body += f"Answer: {payload.la_input}<br>"
         body += f"Feedback: {grading.get('feedback')}<br>"
         
+        # Ensure the body ends with a single blank line
+        body = body.rstrip() + "<br>"
+        
         bridge_url = os.environ.get("GMAIL_BRIDGE_URL", "").strip()
         bridge_key = os.environ.get("GMAIL_BRIDGE_KEY", "").strip()
         
