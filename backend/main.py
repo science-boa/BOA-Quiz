@@ -101,7 +101,13 @@ async def process_submission(payload: SubmissionPayload):
         prompt = f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. Answer: {payload.la_input}. JSON format: {{'score': 0, 'feedback': ''}}"
         config = types.GenerateContentConfig(response_mime_type="application/json")
         
-        models_to_try = ['gemini-3.1-flash-lite', 'gemini-2.5-flash-lite', 'gemini-3-flash', 'gemini-2.5-flash']
+        models_to_try = [
+            'gemma-4-26b-a4b-it', 
+            'gemini-3.1-flash-lite', 
+            'gemini-2.5-flash-lite', 
+            'gemini-3-flash', 
+            'gemini-2.5-flash'
+        ]
         success = False
         last_error = ""
 
