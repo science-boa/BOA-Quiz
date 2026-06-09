@@ -27,7 +27,7 @@ class SubmissionPayload(BaseModel):
 
 async def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict):
     """
-    HTTP Email Delivery Engine. Now explicitly awaited to ensure logs are captured.
+    HTTP Email Delivery Engine.
     """
     print("\n--- STARTING DIAGNOSTIC EMAIL DISPATCH ---")
     try:
@@ -96,18 +96,33 @@ async def process_submission(payload: SubmissionPayload):
     grading = {"score": "N/A", "feedback": "No long answer validation."}
     
     if la_data:
-        try:
-            ai_client = genai.Client(api_key=api_key)
-            prompt = f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. Answer: {payload.la_input}. JSON format: {{'score': 0, 'feedback': ''}}"
-            response = ai_client.models.generate_content(
-                model='gemini-2.5-flash',
-                contents=prompt,
-                config=types.GenerateContentConfig(response_mime_type="application/json")
-            )
-            grading = json.loads(response.text)
-        except Exception as e:
-            raise HTTPException(status_code=502, detail=f"AI Evaluator failed: {str(e)}")
+        ai_client = genai.Client(api_key=api_key)
+        prompt = f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. Answer: {payload.la_input}. JSON format: {{'score': 0, 'feedback': ''}}"
+        config = types.GenerateContentConfig(response_mime_type="application/json")
+        
+        models_to_try = ['gemini-3.1-flash-lite', 'gemini-2.5-flash-lite', 'gemini-3-flash', 'gemini-2.5-flash']
+        success = False
+        last_error = ""
+
+        for model_name in models_to_try:
+            try:
+                print(f"[AI EVALUATOR] Attempting model: {model_name}")
+                response = ai_client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                    config=config
+                )
+                grading = json.loads(response.text)
+                success = True
+                print(f"[AI EVALUATOR] Success with model: {model_name}")
+                break
+            except Exception as e:
+                last_error = str(e)
+                print(f"[AI EVALUATOR] Failed model {model_name}: {last_error}")
+                continue
+        
+        if not success:
+            raise HTTPException(status_code=502, detail=f"All AI models failed. Last error: {last_error}")
             
-    # Await the email logic directly. The request will now finish only after email delivery is attempted.
     await send_feedback_email_via_http(payload, grading)
     return {"status": "success"}
