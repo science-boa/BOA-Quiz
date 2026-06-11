@@ -1,0 +1,184 @@
+long_answer:
+  points: 6
+  rubric: 'To achieve full marks (10 points), the response must cover:
+
+
+    1. Chlorine Test Method & Observation (2 points):
+
+    - Mentions using damp blue litmus paper (1 point).
+
+    - Identifies the color change from blue to white (bleached) (1 point).
+
+
+    2. Chlorine Acidic Explanation (2 points):
+
+    - Explains that the paper may briefly turn red before bleaching (1 point).
+
+    - Explains this is because chlorine dissolves in water to form acidic hydrochloric
+    acid (1 point).
+
+
+    3. Chlorine Safety Precaution (2 points):
+
+    - Explains that chlorine is poisonous (1 point).
+
+    - States it must be handled in a fume cupboard or while wearing a mask (1 point).
+
+
+    4. Carbon Dioxide Test Method & Observation (2 points):
+
+    - Mentions bubbling the gas through an aqueous solution of calcium hydroxide (lime
+    water) (1 point).
+
+    - Identifies that the lime water turns cloudy (1 point).
+
+
+    5. Carbon Dioxide Chemical Explanation (2 points):
+
+    - Explains that the cloudiness is caused by the formation of solid calcium carbonate
+    particles (1 point).
+
+    - Mentions this is due to the reaction between carbon dioxide and calcium hydroxide
+    (1 point).'
+  text: Explain how to test for both chlorine gas and carbon dioxide gas. In your
+    response, detail the testing methods, the observations made during positive tests
+    (including any temporary intermediate changes), the chemical explanations behind
+    these observations, and any necessary safety precautions.
+multiple_choice:
+- A: Red to blue
+  B: Blue to white
+  C: White to red
+  D: Blue to yellow
+  answer: B
+  explanation: According to the text, when exposed to chlorine, the damp blue litmus
+    paper turns from blue to white.
+  points: 1
+  text: What is the initial and final color change of damp litmus paper when it is
+    exposed to chlorine gas?
+- A: Chlorine is an alkaline gas.
+  B: Chlorine dissolves in water to form acidic hydrochloric acid.
+  C: The paper undergoes thermal decomposition.
+  D: Chlorine reacts with the paper to release oxygen gas.
+  answer: B
+  explanation: The text states that the paper may briefly turn red because chlorine
+    dissolves in water to form acidic hydrochloric acid.
+  points: 1
+  text: Why might damp blue litmus paper briefly turn red before bleaching white when
+    exposed to chlorine?
+- A: It must be handled using safety tongs.
+  B: It must be kept away from glowing splints.
+  C: It must be handled in a fume cupboard or while wearing a mask.
+  D: It must be dissolved in calcium hydroxide before disposal.
+  answer: C
+  explanation: The text explicitly states that chlorine is poisonous and must be handled
+    in a fume cupboard or while wearing a mask.
+  points: 1
+  text: Which safety precaution must be taken when handling chlorine gas?
+- A: It is highly flammable.
+  B: It is poisonous.
+  C: It is explosive.
+  D: It is highly corrosive to metals.
+  answer: B
+  explanation: The text explicitly states that chlorine is poisonous.
+  points: 1
+  text: What hazardous property of chlorine is mentioned in the text?
+- A: A burning splint
+  B: A glowing splint
+  C: Damp blue litmus paper
+  D: An aqueous solution of calcium hydroxide
+  answer: B
+  explanation: The text states that oxygen is identified using a glowing splint.
+  points: 1
+  text: What tool is used to identify the presence of oxygen gas?
+- A: The glowing splint produces a squeaky pop.
+  B: The glowing splint goes out.
+  C: The glowing splint relights.
+  D: The glowing splint turns white.
+  answer: C
+  explanation: According to the text, when placed into a sample of oxygen, the glowing
+    splint relights.
+  points: 1
+  text: What observation confirms the presence of oxygen gas during its test?
+- A: Oxygen is highly acidic.
+  B: Oxygen supports combustion.
+  C: Oxygen reacts with water.
+  D: Oxygen is highly explosive.
+  answer: B
+  explanation: The text states that the glowing splint relights because oxygen supports
+    combustion.
+  points: 1
+  text: Why does a glowing splint relight in the presence of oxygen?
+- A: A glowing splint
+  B: A burning splint
+  C: Damp blue litmus paper
+  D: Lime water
+  answer: B
+  explanation: The text states that hydrogen is identified using a burning splint.
+  points: 1
+  text: What tool is used to identify the presence of hydrogen gas?
+- A: A loud hiss
+  B: A crackling pop
+  C: A squeaky pop
+  D: A deep rumble
+  answer: C
+  explanation: The text states that when a burning splint is moved near hydrogen,
+    it produces a squeaky pop sound.
+  points: 1
+  text: What sound is produced when a burning splint is brought near hydrogen?
+- A: Hydrogen reacts with nitrogen to form ammonia.
+  B: Hydrogen dissolves in water to form an acid.
+  C: Hydrogen burns with oxygen to form water.
+  D: Hydrogen reacts with calcium hydroxide.
+  answer: C
+  explanation: The text explains that the squeaky pop sound occurs as the hydrogen
+    burns with oxygen to form water.
+  points: 1
+  text: Which reaction causes the squeaky pop sound in the hydrogen test?
+- A: By exposing it to damp blue litmus paper.
+  B: By bubbling the gas through an aqueous solution of calcium hydroxide.
+  C: By placing a glowing splint in the gas sample.
+  D: By mixing it with hydrogen to observe a squeaky pop.
+  answer: B
+  explanation: The text states that carbon dioxide is identified by bubbling the gas
+    through an aqueous solution of calcium hydroxide.
+  points: 1
+  text: How is carbon dioxide gas identified?
+- A: Hydrochloric acid
+  B: Lime water
+  C: Litmus water
+  D: Calcium carbonate
+  answer: B
+  explanation: According to the text, an aqueous solution of calcium hydroxide is
+    also known as lime water.
+  points: 1
+  text: What is another name for an aqueous solution of calcium hydroxide?
+- A: The lime water turns blue.
+  B: The lime water turns cloudy.
+  C: The lime water turns red.
+  D: The lime water turns completely clear.
+  answer: B
+  explanation: The text states that if carbon dioxide is present, the lime water turns
+    cloudy.
+  points: 1
+  text: What visual change indicates the presence of carbon dioxide?
+- A: The formation of solid calcium carbonate particles.
+  B: The production of hydrochloric acid.
+  C: The combustion of carbon dioxide.
+  D: The bleaching of calcium hydroxide.
+  answer: A
+  explanation: The text notes that the cloudiness is caused by the formation of solid
+    calcium carbonate particles.
+  points: 1
+  text: What chemically causes the cloudiness observed in the carbon dioxide test?
+- A: Hydrochloric acid
+  B: Calcium hydroxide
+  C: Water
+  D: Oxygen
+  answer: B
+  explanation: According to the text, the particles result from the reaction between
+    carbon dioxide and calcium hydroxide.
+  points: 1
+  text: The formation of solid calcium carbonate particles is a result of the reaction
+    between carbon dioxide and which substance?
+quiz_id: Test
+title: 'GCSE Science Assessment: Gas Identification and Chemical Tests'
