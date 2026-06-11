@@ -1,0 +1,217 @@
+quiz_id: TEST
+video_url: https://www.youtube.com/watch?v=QH-7X5STCO4
+title: 'Identifying Common Gases: GCSE Assessment'
+multiple_choice:
+- question_num: 1
+  text: Which gas is identified using damp blue litmus paper?
+  A: Oxygen
+  B: Hydrogen
+  C: Chlorine
+  D: Carbon dioxide
+  answer: Chlorine
+  points: 1
+  explanation: Chlorine gas is identified by its bleaching effect on damp blue litmus
+    paper. The paper initially turns red due to the formation of hydrochloric acid
+    when chlorine dissolves in water, then bleaches white.
+- question_num: 2
+  text: What is the initial colour change observed when damp blue litmus paper is
+    exposed to chlorine gas?
+  A: Blue to white
+  B: Blue to red
+  C: Red to white
+  D: Red to blue
+  answer: Blue to red
+  points: 1
+  explanation: When chlorine dissolves in the water on the damp litmus paper, it forms
+    hydrochloric acid. Acids turn blue litmus paper red, which is why this initial
+    colour change is observed before the bleaching effect.
+- question_num: 3
+  text: Why does damp blue litmus paper eventually turn white when exposed to chlorine?
+  A: Chlorine is a strong alkali.
+  B: Chlorine reacts with the litmus indicator to bleach it.
+  C: Chlorine evaporates the water from the paper.
+  D: Chlorine oxidises the paper itself.
+  answer: Chlorine reacts with the litmus indicator to bleach it.
+  points: 1
+  explanation: Chlorine acts as a bleaching agent. When it dissolves in water, it
+    forms chloric(I) acid (HOCl), which is responsible for oxidising and bleaching
+    the dye in the litmus paper, causing it to turn white.
+- question_num: 4
+  text: What is the test for oxygen gas?
+  A: Using a burning splint.
+  B: Using damp blue litmus paper.
+  C: Using a glowing splint.
+  D: Bubbling through limewater.
+  answer: Using a glowing splint.
+  points: 1
+  explanation: Oxygen is identified by its ability to relight a glowing splint. This
+    is because oxygen is a gas that supports combustion, meaning it helps other substances
+    burn.
+- question_num: 5
+  text: What observation confirms the presence of oxygen during its test?
+  A: A squeaky pop sound.
+  B: The splint is extinguished.
+  C: The splint relights.
+  D: The splint turns black.
+  answer: The splint relights.
+  points: 1
+  explanation: Oxygen supports combustion. When a glowing splint is introduced into
+    a sample of oxygen, the increased concentration of oxygen causes the smouldering
+    wood to burst into flame, or 'relight'.
+- question_num: 6
+  text: What is the test for hydrogen gas?
+  A: Using a glowing splint.
+  B: Using a burning splint.
+  C: Using damp blue litmus paper.
+  D: Bubbling through limewater.
+  answer: Using a burning splint.
+  points: 1
+  explanation: Hydrogen gas is identified using a burning splint. When a burning splint
+    is brought near hydrogen, it produces a characteristic 'squeaky pop' sound.
+- question_num: 7
+  text: What observation confirms the presence of hydrogen during its test?
+  A: A glowing splint relights.
+  B: A burning splint is extinguished.
+  C: A squeaky pop sound is produced.
+  D: Damp blue litmus paper turns white.
+  answer: A squeaky pop sound is produced.
+  points: 1
+  explanation: Hydrogen is a highly flammable gas. When ignited by a burning splint,
+    it rapidly combines with oxygen in the air to form water, releasing energy and
+    creating the distinctive 'squeaky pop' sound.
+- question_num: 8
+  text: What product is formed when hydrogen burns in oxygen, causing the 'squeaky
+    pop'?
+  A: Carbon dioxide
+  B: Water
+  C: Methane
+  D: Hydrogen peroxide
+  answer: Water
+  points: 1
+  explanation: Hydrogen gas burns vigorously in the presence of oxygen to produce
+    water (H₂O). The chemical reaction is 2H₂(g) + O₂(g) → 2H₂O(l).
+- question_num: 9
+  text: What is the chemical name for limewater?
+  A: Calcium chloride
+  B: Calcium carbonate
+  C: Calcium hydroxide
+  D: Calcium oxide
+  answer: Calcium hydroxide
+  points: 1
+  explanation: Limewater is the common name for an aqueous solution of calcium hydroxide,
+    Ca(OH)₂. It is used to test for carbon dioxide.
+- question_num: 10
+  text: How is carbon dioxide identified?
+  A: Using a glowing splint.
+  B: Using a burning splint.
+  C: Bubbling the gas through limewater.
+  D: Exposing damp blue litmus paper to the gas.
+  answer: Bubbling the gas through limewater.
+  points: 1
+  explanation: Carbon dioxide is identified by bubbling the gas through an aqueous
+    solution of calcium hydroxide (limewater). If carbon dioxide is present, the limewater
+    turns cloudy.
+- question_num: 11
+  text: What observation confirms the presence of carbon dioxide during its test?
+  A: A squeaky pop sound.
+  B: The limewater turns cloudy.
+  C: A glowing splint relights.
+  D: Damp blue litmus paper turns red.
+  answer: The limewater turns cloudy.
+  points: 1
+  explanation: When carbon dioxide is bubbled through limewater, it reacts with the
+    calcium hydroxide to form insoluble calcium carbonate, which appears as a white
+    precipitate, making the solution cloudy.
+- question_num: 12
+  text: What causes the cloudiness when carbon dioxide is bubbled through limewater?
+  A: Formation of soluble calcium bicarbonate.
+  B: Formation of solid calcium carbonate particles.
+  C: Evaporation of water from the limewater.
+  D: Reaction with oxygen in the air.
+  answer: Formation of solid calcium carbonate particles.
+  points: 1
+  explanation: The reaction between carbon dioxide and calcium hydroxide produces
+    calcium carbonate (CaCO₃) and water. Calcium carbonate is insoluble in water,
+    so it forms a fine white precipitate, causing the limewater to appear cloudy.
+- question_num: 13
+  text: Which gas is poisonous and requires handling in a fume cupboard or with a
+    mask?
+  A: Oxygen
+  B: Hydrogen
+  C: Carbon dioxide
+  D: Chlorine
+  answer: Chlorine
+  points: 1
+  explanation: Chlorine is a toxic gas that can cause respiratory problems and other
+    health issues. Therefore, it must be handled with appropriate safety precautions,
+    such as in a fume cupboard or while wearing a mask.
+- question_num: 14
+  text: A student tests an unknown gas with a glowing splint, and the splint relights.
+    Which gas is present?
+  A: Hydrogen
+  B: Oxygen
+  C: Chlorine
+  D: Carbon dioxide
+  answer: Oxygen
+  points: 1
+  explanation: The test for oxygen involves a glowing splint. If the splint relights,
+    it confirms the presence of oxygen, as oxygen supports combustion.
+- question_num: 15
+  text: A student bubbles an unknown gas through limewater, and the limewater turns
+    cloudy. Which gas is present?
+  A: Oxygen
+  B: Hydrogen
+  C: Chlorine
+  D: Carbon dioxide
+  answer: Carbon dioxide
+  points: 1
+  explanation: The test for carbon dioxide involves bubbling the gas through limewater
+    (calcium hydroxide solution). If carbon dioxide is present, it reacts to form
+    insoluble calcium carbonate, which makes the limewater turn cloudy.
+long_answer:
+  question_num: 1
+  text: Describe the tests for oxygen, hydrogen, and carbon dioxide, including the
+    observations and the scientific reasons for these observations. You should also
+    include any relevant safety precautions for handling these gases.
+  points: 6
+  rubric: 'This question assesses the student''s ability to recall and explain the
+    standard tests for common gases, linking observations to scientific principles
+    and including safety. Marks are awarded for clarity, accuracy, and completeness
+    of scientific explanation.
+
+
+    - Level 1 (1-2 marks): Simple statements or disjointed points. May describe one
+    or two tests with limited or incorrect observations/reasons. Safety may be omitted
+    or vague.
+
+    - Level 2 (3-4 marks): Clear descriptions of tests for at least two gases with
+    correct observations and some logical scientific linkages. May include some safety,
+    but explanations might lack detail or completeness for all gases.
+
+    - Level 3 (5-6 marks): Detailed, structured, and logical scientific explanations
+    for the tests of all three gases. Includes accurate observations and complete
+    sequential steps, with clear scientific reasons for each observation. Relevant
+    safety precautions are correctly identified and explained.
+
+
+    Indicative Content:
+
+    *   **Oxygen Test:** Introduce a glowing splint into the gas. Observation: The
+    glowing splint relights. Reason: Oxygen supports combustion, causing the smouldering
+    wood to reignite.
+
+    *   **Hydrogen Test:** Introduce a burning splint into the gas. Observation: A
+    ''squeaky pop'' sound is produced. Reason: Hydrogen is highly flammable and burns
+    rapidly in oxygen to form water, releasing energy and creating the characteristic
+    sound.
+
+    *   **Carbon Dioxide Test:** Bubble the gas through limewater (aqueous calcium
+    hydroxide). Observation: The limewater turns cloudy/milky. Reason: Carbon dioxide
+    reacts with calcium hydroxide to form insoluble calcium carbonate, which is a
+    white precipitate.
+
+    *   **Safety Precautions:** Mention that hydrogen is flammable and should be handled
+    away from naked flames. Chlorine (though not explicitly asked for in the main
+    description, it''s a gas mentioned in the text and relevant for general gas handling
+    safety) is poisonous and requires a fume cupboard or mask. General safety for
+    all gases includes good ventilation and avoiding inhalation.'
