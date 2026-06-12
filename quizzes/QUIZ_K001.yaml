@@ -1,0 +1,151 @@
+quiz_id: K001
+video_url: https://www.youtube.com/watch?v=evH0I7Coc54
+title: 'GCSE Biology Assessment: Stem Cells and Their Applications'
+multiple_choice:
+- question_num: 1
+  text: What is a stem cell?
+  A: A cell that has been specialized to perform a specific function.
+  B: An undifferentiated cell capable of giving rise to indefinitely more cells of
+    the same type.
+  C: A cell found only in the brain that transmits electrical impulses.
+  D: A dead cell used to protect the outer layers of the skin.
+  answer: An undifferentiated cell capable of giving rise to indefinitely more cells
+    of the same type.
+  points: 1
+  explanation: Stem cells are undifferentiated, meaning they have not yet specialized
+    to perform a specific function. They retain the ability to divide and differentiate
+    into various specialized cell types.
+- question_num: 2
+  text: What is the primary natural function of stem cells in an adult human body?
+  A: To fight off viral infections by producing antibodies.
+  B: To replace worn-out or damaged cells as they die.
+  C: To transmit electrical signals between the brain and muscles.
+  D: To transport oxygen from the lungs to respiring tissues.
+  answer: To replace worn-out or damaged cells as they die.
+  points: 1
+  explanation: In adult organisms, stem cells act as a repair system, dividing to
+    replenish and replace damaged or worn-out cells in specific tissues, such as the
+    skin or gut lining.
+- question_num: 3
+  text: What is the main goal of regenerative medicine?
+  A: To clone entire human beings for labor.
+  B: To use stem cells to create new tissue to replace damaged parts of organs.
+  C: To freeze bodies to revive them in the future.
+  D: To genetically modify crops to increase yield.
+  answer: To use stem cells to create new tissue to replace damaged parts of organs.
+  points: 1
+  explanation: Regenerative medicine focuses on repairing, replacing, or regenerating
+    damaged tissues and organs using stem cells to grow new, healthy tissue.
+- question_num: 4
+  text: What is the primary function of bone marrow in the human body?
+  A: To store calcium and phosphorus for bone strength.
+  B: To produce new blood cells.
+  C: To secrete digestive enzymes into the small intestine.
+  D: To filter toxins out of the blood.
+  answer: To produce new blood cells.
+  points: 1
+  explanation: Bone marrow is a spongy tissue inside bones containing adult stem cells
+    that differentiate into red blood cells, white blood cells, and platelets.
+- question_num: 5
+  text: Where are adult stem cells typically found and what is their role?
+  A: Only in the brain; they help store memories.
+  B: In small numbers in most body tissues; they replace worn-out cells in those specific
+    organs.
+  C: In the placenta; they can differentiate into any cell type in the body.
+  D: In the bloodstream; they carry oxygen to tissues.
+  answer: In small numbers in most body tissues; they replace worn-out cells in those
+    specific organs.
+  points: 1
+  explanation: Adult stem cells are tissue-specific. They exist in small quantities
+    in various organs (like skin, bone marrow, and intestines) to maintain and repair
+    those specific tissues.
+- question_num: 6
+  text: How are embryonic stem cells used in research and medicine typically obtained?
+  A: Harvested from adult bone marrow.
+  B: Extracted from the umbilical cord of newborn babies.
+  C: Created from leftover embryos donated by patients from fertility clinics.
+  D: Synthesized chemically in a laboratory without living cells.
+  answer: Created from leftover embryos donated by patients from fertility clinics.
+  points: 1
+  explanation: Embryonic stem cells are harvested from early-stage embryos (blastocysts)
+    that are typically left over from in vitro fertilization (IVF) treatments and
+    donated with consent.
+- question_num: 7
+  text: What does the term 'pluripotent' mean when describing embryonic stem cells?
+  A: They can only differentiate into one specific type of cell.
+  B: They have the potential to differentiate into any kind of body tissue.
+  C: They can divide only a limited number of times before dying.
+  D: They are resistant to all forms of cancer.
+  answer: They have the potential to differentiate into any kind of body tissue.
+  points: 1
+  explanation: Pluripotent stem cells have the unique ability to differentiate into
+    almost any cell type in the human body, making them highly valuable for medical
+    research and therapies.
+- question_num: 8
+  text: Besides medical treatments, why do scientists study stem cells in laboratories?
+  A: To find ways to make humans grow larger.
+  B: To understand the controlled mechanisms the body uses to develop and create new
+    tissue.
+  C: To create synthetic food products.
+  D: To study how plants perform photosynthesis.
+  answer: To understand the controlled mechanisms the body uses to develop and create
+    new tissue.
+  points: 1
+  explanation: Studying stem cells allows scientists to observe cell division and
+    differentiation in real-time, helping them understand how organisms develop and
+    how diseases disrupt normal cellular processes.
+- question_num: 9
+  text: What is a major goal of stem cell research regarding patient treatment?
+  A: To develop generalized treatments that work identically for all species.
+  B: To develop specialized, personalized medicine specific to an individual's body.
+  C: To eliminate the need for any physical exercise.
+  D: To replace all human organs with mechanical devices.
+  answer: To develop specialized, personalized medicine specific to an individual's
+    body.
+  points: 1
+  explanation: By using a patient's own cells (such as iPSCs), scientists aim to create
+    personalized therapies that match the patient's genetic profile, reducing the
+    risk of immune rejection.
+- question_num: 10
+  text: What is a key difference in differentiation potential between adult stem cells
+    and embryonic stem cells?
+  A: Adult stem cells can become any cell type, whereas embryonic stem cells are highly
+    limited.
+  B: Embryonic stem cells are pluripotent and can become any tissue, while adult stem
+    cells are generally limited to replacing cells in their specific tissue.
+  C: Neither type of cell can differentiate into other cell types.
+  D: Adult stem cells only differentiate in plants, while embryonic stem cells only
+    differentiate in animals.
+  answer: Embryonic stem cells are pluripotent and can become any tissue, while adult
+    stem cells are generally limited to replacing cells in their specific tissue.
+  points: 1
+  explanation: Embryonic stem cells are pluripotent and can differentiate into any
+    cell type in the body. Adult stem cells are multipotent, meaning they are limited
+    to differentiating into a narrow range of cell types related to their tissue of
+    origin.
+long_answer:
+  question_num: 1
+  text: Evaluate the use of embryonic stem cells compared to adult stem cells in medical
+    research and treatments. Your answer should include the advantages, disadvantages,
+    and ethical considerations associated with each type.
+  points: 6
+  rubric: "Level 1 (1-2 marks): Simple, isolated statements about one or two types\
+    \ of stem cells. Minimal scientific terminology or logical structure.\nLevel 2\
+    \ (3-4 marks): Clear descriptions comparing both types of stem cells. Some logical\
+    \ structure showing advantages or disadvantages, with appropriate scientific terms.\n\
+    Level 3 (5-6 marks): A detailed, well-structured, and balanced evaluation comparing\
+    \ both types of stem cells (embryonic, and adult). Clear logical links between\
+    \ their biological properties (e.g., pluripotency), clinical applications, and\
+    \ ethical implications.\n\nIndicative Content:\n- Embryonic Stem Cells:\n  * Pros:\
+    \ Pluripotent (can differentiate into any cell type), highly versatile for treating\
+    \ many diseases.\n  * Cons: Risk of immune rejection by the patient; risk of tumor\
+    \ formation.\n  * Ethical: Sourced from spare IVF embryos, which involves the\
+    \ destruction of a potential human life.\n- Adult Stem Cells:\n  * Pros: No ethical\
+    \ issues regarding embryo destruction; can be harvested from the patient themselves\
+    \ (no immune rejection).\n  * Cons: Multipotent (limited differentiation potential,\
+    \ e.g., bone marrow can only make blood cells); difficult to find and extract.\n\
+    - Induced Pluripotent Stem Cells (iPSCs):\n  * Pros: Pluripotent (can become any\
+    \ cell type); can be made from the patient's own body cells (no immune rejection);\
+    \ avoids the ethical issues of destroying embryos.\n  * Cons: Reprogramming technology\
+    \ is complex and still being researched; potential risk of tumor formation or\
+    \ genetic abnormalities during reprogramming."
