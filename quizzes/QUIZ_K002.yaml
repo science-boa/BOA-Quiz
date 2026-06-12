@@ -1,0 +1,183 @@
+quiz_id: K002
+video_url: https://www.youtube.com/watch?v=xazQRcSCRaY
+title: 'GCSE Chemistry: The History and Development of the Atomic Model'
+multiple_choice:
+- question_num: 1
+  text: What does the Greek word 'atomos', proposed by Democritus, translate to in
+    English?
+  A: Indivisible
+  B: Sphere of charge
+  C: Tiny particle
+  D: Empty space
+  answer: Indivisible
+  points: 1
+  explanation: Democritus used the term 'atomos' to describe fundamental particles
+    that could not be split or divided any further, which translates to 'indivisible'.
+- question_num: 2
+  text: Which four elements did Aristotle propose made up all matter, opposing Democritus's
+    atomic theory?
+  A: Carbon, hydrogen, oxygen, nitrogen
+  B: Earth, wind, water, fire
+  C: Solid, liquid, gas, plasma
+  D: Atoms, molecules, compounds, mixtures
+  answer: Earth, wind, water, fire
+  points: 1
+  explanation: 'Aristotle rejected the idea of empty space and atoms, arguing instead
+    that all matter was composed of four basic elements: earth, wind (air), water,
+    and fire.'
+- question_num: 3
+  text: In 1808, John Dalton challenged Aristotelian theory. What did Dalton conclude
+    about chemical compounds?
+  A: They are made of positive spheres with embedded electrons.
+  B: They are combinations of atoms of different elements in fixed proportions.
+  C: They are formed when atoms are split into smaller subatomic particles.
+  D: They consist of electrons orbiting a central nucleus.
+  answer: They are combinations of atoms of different elements in fixed proportions.
+  points: 1
+  explanation: Dalton's atomic theory stated that chemical compounds are formed when
+    atoms of different elements combine in simple, whole-number ratios.
+- question_num: 4
+  text: According to Dalton's atomic theory, what happens to atoms during a chemical
+    reaction?
+  A: They are converted into energy.
+  B: They are created to form new products.
+  C: They can be destroyed if the reaction is highly exothermic.
+  D: They cannot be created or destroyed, only rearranged.
+  answer: They cannot be created or destroyed, only rearranged.
+  points: 1
+  explanation: Dalton's theory incorporated the law of conservation of mass, stating
+    that atoms are indivisible and cannot be created or destroyed in chemical processes.
+- question_num: 5
+  text: Which subatomic particle did J.J. Thomson discover in 1897?
+  A: Proton
+  B: Neutron
+  C: Electron
+  D: Alpha particle
+  answer: Electron
+  points: 1
+  explanation: J.J. Thomson discovered the electron, a negatively charged subatomic
+    particle, which showed that atoms were not indivisible but had an internal structure.
+- question_num: 6
+  text: How did J.J. Thomson describe the structure of an atom in his 'plum pudding'
+    model?
+  A: A dense positive nucleus surrounded by orbiting electrons.
+  B: A cloud of probability where electrons behave as waves.
+  C: A uniformly packed sphere of positive matter containing embedded negative electrons.
+  D: Indivisible solid spheres of varying sizes and masses.
+  answer: A uniformly packed sphere of positive matter containing embedded negative
+    electrons.
+  points: 1
+  explanation: Thomson's plum pudding model represented the atom as a sphere of positive
+    charge (the 'pudding') with negatively charged electrons (the 'plums') scattered
+    throughout it.
+- question_num: 7
+  text: In Ernest Rutherford's alpha particle scattering experiment, what did most
+    of the alpha particles do when fired at the gold foil?
+  A: Bounced straight back towards the source.
+  B: Passed straight through the gold foil without deflection.
+  C: Were absorbed by the gold atoms, causing them to glow.
+  D: Deflected at very large angles.
+  answer: Passed straight through the gold foil without deflection.
+  points: 1
+  explanation: Most alpha particles passed straight through the gold foil, which led
+    Rutherford to conclude that the atom is mostly empty space.
+- question_num: 8
+  text: What did Rutherford conclude about the distribution of mass and charge in
+    an atom based on the particles that bounced back?
+  A: Mass and positive charge are concentrated in a dense central nucleus.
+  B: Mass is evenly distributed throughout a positive sphere.
+  C: Electrons contain most of the mass of the atom.
+  D: The positive charge is spread out in a diffuse cloud around the electrons.
+  answer: Mass and positive charge are concentrated in a dense central nucleus.
+  points: 1
+  explanation: Because a small fraction of the positively charged alpha particles
+    were deflected at large angles or bounced back, Rutherford concluded that the
+    positive charge and most of the mass must be concentrated in a tiny, dense center
+    called the nucleus.
+- question_num: 9
+  text: How did Niels Bohr adapt Rutherford's nuclear model of the atom in 1913?
+  A: He suggested that the nucleus contains neutral particles called neutrons.
+  B: He proposed that electrons orbit the nucleus at specific, fixed distances and
+    energy levels.
+  C: He proved that electrons are located in a uniform positive sphere.
+  D: He stated that electrons move randomly in the empty space around the nucleus.
+  answer: He proposed that electrons orbit the nucleus at specific, fixed distances
+    and energy levels.
+  points: 1
+  explanation: Bohr's model introduced quantized energy levels, proposing that electrons
+    can only orbit the nucleus in specific shells (or orbits) with fixed energies.
+- question_num: 10
+  text: What happens when an electron in an atom transitions from a higher energy
+    level to a lower energy level?
+  A: It absorbs a specific wavelength of light.
+  B: It releases energy in the form of a specific wavelength of light.
+  C: It gains mass and becomes a neutron.
+  D: It escapes the atom to become a free electron.
+  answer: It releases energy in the form of a specific wavelength of light.
+  points: 1
+  explanation: When an electron drops to a lower energy level, it loses energy, which
+    is emitted as an electromagnetic wave (a photon) of a specific wavelength and
+    color.
+- question_num: 11
+  text: What did subsequent experiments after Bohr's model reveal about the nature
+    of electrons?
+  A: They behave only as solid, discrete particles.
+  B: They have no mass or charge.
+  C: They behave simultaneously like waves and particles.
+  D: They are permanently fixed inside the nucleus.
+  answer: They behave simultaneously like waves and particles.
+  points: 1
+  explanation: Quantum mechanics revealed that electrons exhibit wave-particle duality,
+    meaning they have properties of both waves (such as diffraction) and discrete
+    particles.
+- question_num: 12
+  text: What is the electrical charge of the alpha particles used in Rutherford's
+    gold foil experiment?
+  A: Negative
+  B: Neutral (no charge)
+  C: Positive
+  D: Alternating positive and negative
+  answer: Positive
+  points: 1
+  explanation: Alpha particles are helium nuclei, consisting of two protons and two
+    neutrons, giving them a net positive charge. This positive charge caused them
+    to be repelled by the positive gold nuclei.
+- question_num: 13
+  text: Which of the following shows the correct chronological order of the development
+    of the atomic model?
+  A: Plum pudding model -> Nuclear model -> Bohr model
+  B: Bohr model -> Plum pudding model -> Nuclear model
+  C: Nuclear model -> Plum pudding model -> Bohr model
+  D: Plum pudding model -> Bohr model -> Nuclear model
+  answer: Plum pudding model -> Nuclear model -> Bohr model
+  points: 1
+  explanation: J.J. Thomson first proposed the plum pudding model (1897), followed
+    by Rutherford's nuclear model (1911), Bohr's planetary/shell model (1913)
+long_answer:
+  question_num: 1
+  text: Compare the 'plum pudding' model of the atom with the nuclear model of the
+    atom. Your answer should describe the similarities and differences between the
+    two models, and explain how experimental evidence led to the rejection of the
+    plum pudding model.
+  points: 6
+  rubric: "Level 1 (1-2 marks): Simple statements identifying features of one or both\
+    \ models, or a basic mention of the gold foil experiment without linking it to\
+    \ the change in model.\nLevel 2 (3-4 marks): Clear description of both models,\
+    \ identifying key differences (such as the distribution of charge and mass). Mentions\
+    \ the alpha particle scattering experiment and links some observations to the\
+    \ nuclear model.\nLevel 3 (5-6 marks): Detailed, structured, and logical comparison\
+    \ of both models. Explains clearly how the specific observations from Rutherford's\
+    \ alpha scattering experiment (most passing through, some deflected) directly\
+    \ contradicted the plum pudding model and supported the nuclear model.\n\nIndicative\
+    \ Content:\n- Plum pudding model: Atom is a sphere of positive charge with negative\
+    \ electrons embedded throughout; mass is evenly distributed; no empty space.\n\
+    - Nuclear model: Atom has a tiny, dense, positively charged nucleus at the center;\
+    \ electrons orbit around the outside; most of the atom is empty space; mass is\
+    \ concentrated in the nucleus.\n- Similarities: Both models contain negative electrons;\
+    \ both models have an overall neutral charge.\n- Experimental evidence (Rutherford's\
+    \ gold foil experiment):\n  * Most alpha particles passed straight through, showing\
+    \ the atom is mostly empty space (contradicting the solid plum pudding model).\n\
+    \  * Some alpha particles were deflected at large angles, showing a concentrated\
+    \ positive charge at the center (repelling the positive alpha particles).\n  *\
+    \ A very small number bounced straight back, showing the central mass is extremely\
+    \ dense."
