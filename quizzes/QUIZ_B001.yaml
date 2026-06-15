@@ -1,0 +1,150 @@
+quiz_id: B001
+video_url: https://www.youtube.com/watch?v=aeAL6xThfL8
+title: 'GCSE Biology Assessment: Genome Structure, DNA Packaging, and Gene Expression'
+multiple_choice:
+- question_num: 1
+  text: Where is the genome located within a human cell?
+  A: In the cytoplasm
+  B: In the cell nucleus
+  C: In the ribosomes
+  D: In the cell membrane
+  answer: In the cell nucleus
+  points: 1
+  explanation: In eukaryotic cells, such as human cells, the genetic material (DNA/genome)
+    is enclosed within a membrane-bound organelle called the nucleus.
+- question_num: 2
+  text: How many chromosomes are found in the complete genome of a normal human body
+    cell?
+  A: '23'
+  B: '46'
+  C: '92'
+  D: 20,000
+  answer: '46'
+  points: 1
+  explanation: Human somatic (body) cells contain 46 chromosomes in total, arranged
+    in 23 pairs.
+- question_num: 3
+  text: How many chromosomes does a human inherit from each parent?
+  A: '46'
+  B: '23'
+  C: '11.5'
+  D: 20,000
+  answer: '23'
+  points: 1
+  explanation: Gametes (sperm and egg cells) are haploid, meaning they contain 23
+    chromosomes. During fertilisation, they fuse to restore the diploid number of
+    46 chromosomes.
+- question_num: 4
+  text: Which combination of sex chromosomes typically determines a biological male?
+  A: XX
+  B: YY
+  C: XY
+  D: XO
+  answer: XY
+  points: 1
+  explanation: In humans, biological sex is determined by sex chromosomes. Females
+    typically inherit two X chromosomes (XX), while males typically inherit one X
+    and one Y chromosome (XY).
+- question_num: 5
+  text: What is a gene?
+  A: A protein that wraps around DNA
+  B: A section of DNA that contains instructions for making a specific protein
+  C: The entire set of genetic material in an organism
+  D: A single base pair in the DNA sequence
+  answer: A section of DNA that contains instructions for making a specific protein
+  points: 1
+  explanation: A gene is a small section of DNA on a chromosome that codes for a specific
+    sequence of amino acids, which make up a specific protein.
+- question_num: 6
+  text: Approximately how many individual genes are contained within the human genome?
+  A: 3.2 billion
+  B: 30 million
+  C: 20,000
+  D: '46'
+  answer: 20,000
+  points: 1
+  explanation: The human genome contains approximately 20,000 protein-coding genes,
+    which represent only a small fraction of the total DNA sequence.
+- question_num: 7
+  text: What are the non-coding sections of genetic material that are removed during
+    gene processing called?
+  A: Exons
+  B: Introns
+  C: Nucleosomes
+  D: Codons
+  answer: Introns
+  points: 1
+  explanation: Introns are non-coding regions of a gene that are transcribed but spliced
+    out (removed) before translation, whereas exons are the coding regions that are
+    kept and expressed.
+- question_num: 8
+  text: Which term describes the coding instructions in a gene that are kept and expressed?
+  A: Introns
+  B: Exons
+  C: Histones
+  D: Ribosomes
+  answer: Exons
+  points: 1
+  explanation: Exons are the coding sequences of DNA that remain in the mature messenger
+    RNA (mRNA) and are translated into proteins.
+- question_num: 9
+  text: Which of the following is a function of the extra genetic material found between
+    genes?
+  A: Coding for digestive enzymes
+  B: Protecting chromosome ends and serving regulatory functions
+  C: Directly translating into structural proteins
+  D: Replicating the cell nucleus
+  answer: Protecting chromosome ends and serving regulatory functions
+  points: 1
+  explanation: Non-coding DNA between genes does not code for proteins but has vital
+    roles, including protecting chromosome ends (telomeres) and regulating gene expression.
+- question_num: 10
+  text: Why do different types of specialized cells in the human body perform different
+    functions if they contain the same genome?
+  A: They contain different chromosomes.
+  B: They only express (read) specific genes relevant to their function.
+  C: They mutate their DNA to suit their environment.
+  D: They discard the genes they do not need.
+  answer: They only express (read) specific genes relevant to their function
+  points: 1
+  explanation: All somatic cells in the body contain the exact same genome, but cell
+    differentiation occurs because different cells turn specific genes on or off (using
+    chemical 'bookmarks' or transcription factors).
+long_answer:
+  question_num: 1
+  text: Explain how DNA is structured and packaged within the human cell nucleus,
+    and describe how specialized cells can perform different functions despite containing
+    the same genetic information.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Simple statements about DNA being in the nucleus,
+    chromosomes, or cells being different. Little or no logical structure.
+
+    Level 2 (3-4 marks): Clear description of DNA packaging (e.g., double helix, wrapping
+    around proteins/nucleosomes, chromosomes) OR a clear explanation of how cells
+    specialize by expressing only certain genes. Some logical scientific links.
+
+    Level 3 (5-6 marks): Detailed, structured, and logical explanation covering both
+    DNA packaging (wrapping around proteins to form nucleosomes, coiling into chromosomes)
+    AND cell specialization (all cells have the same genome but use regulatory mechanisms/''bookmarks''
+    to express only specific genes).
+
+
+    Indicative Content:
+
+    - DNA is a double helix structure containing genetic information.
+
+    - To fit into the microscopic nucleus, DNA wraps around proteins to form nucleosomes
+    (bead-like structures).
+
+    - These nucleosomes coil and fold further into dense structures called chromosomes.
+
+    - Humans have 46 chromosomes (23 pairs) in the nucleus of each somatic cell.
+
+    - All specialized cells in an individual contain the exact same complete genome
+    (all 20,000 genes).
+
+    - Cells differentiate and specialize by turning specific genes on or off (using
+    chemical ''bookmarks'' or regulatory factors).
+
+    - Only the genes required for a cell''s specific function are transcribed and
+    translated into proteins.'
