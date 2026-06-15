@@ -1,0 +1,222 @@
+quiz_id: K003
+video_url: https://www.youtube.com/watch?v=5gEWOh630b8
+title: 'GCSE Chemistry Assessment: Bonding, Structure, and Properties'
+multiple_choice:
+- question_num: 1
+  text: Between which types of atoms does ionic bonding typically occur?
+  A: Two non-metal atoms
+  B: Two metal atoms
+  C: A metal and a non-metal atom
+  D: A noble gas and a metal atom
+  answer: A metal and a non-metal atom
+  points: 1
+  explanation: Ionic bonding occurs when a metal atom transfers one or more electrons
+    to a non-metal atom, resulting in oppositely charged ions that attract each other.
+- question_num: 2
+  text: How many electrons do metal atoms typically have in their outer shell?
+  A: One to three
+  B: Four to six
+  C: Seven to eight
+  D: Exactly eight
+  answer: One to three
+  points: 1
+  explanation: Metal atoms generally have one, two, or three electrons in their outer
+    shell, which they lose to achieve a stable, full outer shell configuration.
+- question_num: 3
+  text: What happens to electrons during the formation of an ionic bond?
+  A: Electrons are shared equally between atoms.
+  B: Electrons are transferred from the metal atom to the non-metal atom.
+  C: Electrons are transferred from the non-metal atom to the metal atom.
+  D: Electrons are delocalized into a shared sea of electrons.
+  answer: Electrons are transferred from the metal atom to the non-metal atom.
+  points: 1
+  explanation: In ionic bonding, metal atoms lose electrons to become positive ions,
+    and non-metal atoms gain these electrons to become negative ions.
+- question_num: 4
+  text: What type of force holds oppositely charged ions together in an ionic compound?
+  A: Intermolecular forces of attraction
+  B: Electrostatic attraction
+  C: Gravitational attraction
+  D: Magnetic attraction
+  answer: Electrostatic attraction
+  points: 1
+  explanation: The ionic bond is the strong electrostatic attraction between oppositely
+    charged positive and negative ions.
+- question_num: 5
+  text: What type of structure do ionic compounds form when many ions congregate?
+  A: Simple molecular structure
+  B: Giant lattice structure
+  C: Double helix structure
+  D: Monomeric chain structure
+  answer: Giant lattice structure
+  points: 1
+  explanation: Ionic compounds form a giant ionic lattice, which is a regular, repeating
+    three-dimensional arrangement of alternating positive and negative ions.
+- question_num: 6
+  text: Why do ionic compounds have high melting points?
+  A: They contain weak intermolecular forces that require little energy to break.
+  B: They contain strong covalent bonds that are difficult to break.
+  C: Large amounts of energy are needed to overcome the strong electrostatic forces
+    acting in all directions within the giant lattice.
+  D: The delocalized electrons absorb heat energy rapidly.
+  answer: Large amounts of energy are needed to overcome the strong electrostatic
+    forces acting in all directions within the giant lattice.
+  points: 1
+  explanation: The giant ionic lattice is held together by strong electrostatic forces
+    of attraction between oppositely charged ions in all directions, requiring significant
+    thermal energy to overcome.
+- question_num: 7
+  text: Between which types of atoms does covalent bonding occur?
+  A: Metal atoms only
+  B: Non-metal atoms only
+  C: A metal and a non-metal atom
+  D: Transition metals only
+  answer: Non-metal atoms only
+  points: 1
+  explanation: Covalent bonding occurs between non-metal atoms when they share pairs
+    of electrons to achieve stable outer shells.
+- question_num: 8
+  text: What is a covalent bond?
+  A: The electrostatic attraction between positive metal ions and delocalized electrons.
+  B: The transfer of electrons from a metal to a non-metal.
+  C: The electrostatic attraction between shared negative electrons and the positive
+    nuclei of the atoms.
+  D: The weak force of attraction between different molecules.
+  answer: The electrostatic attraction between shared negative electrons and the positive
+    nuclei of the atoms.
+  points: 1
+  explanation: A covalent bond is the strong electrostatic attraction between the
+    shared pair of negative electrons and the positive nuclei of the bonded atoms.
+- question_num: 9
+  text: Why do simple covalent substances, like water, have low boiling points?
+  A: They have weak covalent bonds within the molecules.
+  B: They have weak intermolecular forces between the molecules that require little
+    energy to overcome.
+  C: They do not contain any covalent bonds.
+  D: They form giant lattice structures that easily collapse.
+  answer: They have weak intermolecular forces between the molecules that require
+    little energy to overcome.
+  points: 1
+  explanation: While the covalent bonds holding the atoms together inside simple molecules
+    are very strong, the forces between the molecules (intermolecular forces) are
+    weak and require very little energy to overcome during boiling.
+- question_num: 10
+  text: Why does diamond, a giant covalent structure, have a very high melting point?
+  A: It has weak intermolecular forces.
+  B: It contains a sea of delocalized electrons.
+  C: It is held together by many strong covalent bonds throughout the giant structure,
+    which require massive amounts of energy to break.
+  D: It is an ionic lattice held together by electrostatic attraction.
+  answer: It is held together by many strong covalent bonds throughout the giant structure,
+    which require massive amounts of energy to break.
+  points: 1
+  explanation: Giant covalent structures like diamond consist of a vast network of
+    atoms joined by strong covalent bonds. Melting requires breaking these strong
+    bonds, which requires a very high temperature.
+- question_num: 11
+  text: Which statement best describes metallic bonding?
+  A: The sharing of electron pairs between non-metal atoms.
+  B: The transfer of electrons from metal to non-metal atoms.
+  C: The electrostatic attraction between positive metal ions and a sea of delocalized
+    electrons.
+  D: The weak attraction between neutral molecules.
+  answer: The electrostatic attraction between positive metal ions and a sea of delocalized
+    electrons.
+  points: 1
+  explanation: Metallic bonding consists of a regular lattice of positive metal ions
+    surrounded by a 'sea' of delocalized electrons that are free to move throughout
+    the structure.
+- question_num: 12
+  text: What does the term 'delocalized electrons' mean in the context of metallic
+    bonding?
+  A: Electrons that are fixed to a specific atom.
+  B: Electrons that have been transferred to a non-metal atom.
+  C: Electrons that are free to move throughout the entire giant structure.
+  D: Electrons that are paired up in covalent bonds.
+  answer: Electrons that are free to move throughout the entire giant structure.
+  points: 1
+  explanation: Delocalized electrons are not bound to any single atom and can move
+    freely through the giant metallic lattice.
+- question_num: 13
+  text: Why do metals generally have high melting points?
+  A: They have weak intermolecular forces.
+  B: The electrostatic attraction between the positive nuclei and the sea of delocalized
+    electrons is very strong.
+  C: They contain covalent bonds that are easily broken.
+  D: They are made of small molecules.
+  answer: The electrostatic attraction between the positive nuclei and the sea of
+    delocalized electrons is very strong.
+  points: 1
+  explanation: The metallic bond is a strong electrostatic attraction between the
+    positive metal ions and the delocalized electrons, requiring large amounts of
+    energy to overcome.
+- question_num: 14
+  text: How many electrons do non-metal atoms typically have in their outer shell?
+  A: One to three
+  B: Four to eight
+  C: Exactly two
+  D: None
+  answer: Four to eight
+  points: 1
+  explanation: Non-metal atoms typically have four to eight electrons in their outer
+    shell and tend to gain or share electrons to achieve a stable full outer shell.
+- question_num: 15
+  text: Which of the following substances is held together by electrostatic attraction
+    between oppositely charged ions?
+  A: Water (H2O)
+  B: Diamond (C)
+  C: Sodium chloride (NaCl)
+  D: Copper metal (Cu)
+  answer: Sodium chloride (NaCl)
+  points: 1
+  explanation: Sodium chloride is an ionic compound formed from a metal (sodium) and
+    a non-metal (chlorine), held together by electrostatic attraction between Na+
+    and Cl- ions.
+long_answer:
+  question_num: 1
+  text: Compare the structures and bonding of sodium chloride (an ionic compound)
+    and water (a simple covalent compound). Explain how these differences in bonding
+    and structure lead to their different melting and boiling points.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Simple statements identifying the bonding types or
+    stating that sodium chloride has a high melting point and water has a low boiling
+    point, with no clear explanation of the forces involved.
+
+
+    Level 2 (3-4 marks): Clear descriptions of the structures (giant ionic lattice
+    vs. simple molecular) and bonding (ionic vs. covalent). Some logical linkage made
+    between the forces (electrostatic attraction vs. intermolecular forces) and the
+    energy required to overcome them.
+
+
+    Level 3 (5-6 marks): Detailed, structured, and logical comparison of both substances.
+    Explains that sodium chloride has a giant ionic lattice with strong electrostatic
+    forces of attraction between oppositely charged ions in all directions, requiring
+    substantial energy to break. Explains that water consists of simple molecules
+    with strong covalent bonds within molecules but weak intermolecular forces between
+    molecules, requiring very little energy to overcome.
+
+
+    Indicative Content:
+
+    - Sodium chloride is an ionic compound; water is a simple covalent compound.
+
+    - Sodium chloride forms a giant ionic lattice of alternating positive and negative
+    ions.
+
+    - The ionic bonds are strong electrostatic attractions between oppositely charged
+    ions acting in all directions.
+
+    - Breaking these strong ionic bonds requires a large amount of thermal energy,
+    resulting in a high melting point.
+
+    - Water consists of small, simple molecules.
+
+    - Within water molecules, atoms are held by strong covalent bonds (sharing electrons).
+
+    - Between water molecules, there are weak intermolecular forces.
+
+    - Boiling water only requires overcoming these weak intermolecular forces, not
+    breaking the strong covalent bonds.
+
+    - This requires relatively little energy, resulting in a low boiling/melting point.'
