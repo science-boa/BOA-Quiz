@@ -1,0 +1,175 @@
+quiz_id: B002
+video_url: https://www.youtube.com/watch?v=UC-YwiB_FFg
+title: 'GCSE Biology: Inheritance, Genetic Disorders, and Embryo Screening'
+multiple_choice:
+- question_num: 1
+  text: What is the definition of an allele?
+  A: A physical characteristic of an organism
+  B: A different form of a gene
+  C: A section of DNA that codes for a protein
+  D: A type of genetic disorder
+  answer: A different form of a gene
+  points: 1
+  explanation: Genes are sections of DNA that code for specific proteins, and alleles
+    are the different versions or variants of those genes.
+- question_num: 2
+  text: How many copies of a dominant allele are required for an individual to express
+    a dominant genetic disorder?
+  A: Zero
+  B: One
+  C: Two
+  D: Three
+  answer: One
+  points: 1
+  explanation: A dominant allele will express its phenotype even if only one copy
+    is present in the genotype.
+- question_num: 3
+  text: Which of the following describes a person who is a carrier for a recessive
+    genetic disorder?
+  A: They have two dominant alleles
+  B: They have two recessive alleles
+  C: They have one dominant and one recessive allele
+  D: They have no alleles for the disorder
+  answer: They have one dominant and one recessive allele
+  points: 1
+  explanation: A carrier is heterozygous; they possess the recessive allele but do
+    not show the disorder because the dominant allele masks it.
+- question_num: 4
+  text: What is the genotype of an individual who does not have polydactyly, given
+    that 'P' is the dominant allele for the disorder?
+  A: PP
+  B: Pp
+  C: pp
+  D: pP
+  answer: pp
+  points: 1
+  explanation: Since polydactyly is dominant, an individual must be homozygous recessive
+    (pp) to not express the condition.
+- question_num: 5
+  text: Cystic fibrosis is caused by a recessive allele. What genotype must an individual
+    have to express the disorder?
+  A: FF
+  B: Ff
+  C: ff
+  D: fF
+  answer: ff
+  points: 1
+  explanation: Recessive disorders are only expressed when an individual is homozygous
+    recessive, meaning they have two copies of the recessive allele.
+- question_num: 6
+  text: What is the primary purpose of embryo screening?
+  A: To increase the success rate of IVF
+  B: To prevent the birth of children with inherited genetic disorders
+  C: To select the gender of the child
+  D: To improve the physical health of the mother
+  answer: To prevent the birth of children with inherited genetic disorders
+  points: 1
+  explanation: Embryo screening is used to identify genetic abnormalities in embryos
+    created via IVF before they are implanted.
+- question_num: 7
+  text: During the embryo screening process, when is the genetic test performed?
+  A: Before fertilization occurs
+  B: When the embryo consists of a few cells
+  C: After the embryo has been implanted in the uterus
+  D: After the child is born
+  answer: When the embryo consists of a few cells
+  points: 1
+  explanation: A single cell is removed from the embryo at the early multi-cell stage
+    to be tested for specific genetic markers.
+- question_num: 8
+  text: Which of these is an ethical concern regarding embryo screening?
+  A: The procedure is too simple
+  B: The destruction of unused embryos
+  C: It guarantees the child will be healthy
+  D: It is always covered by public health insurance
+  answer: The destruction of unused embryos
+  points: 1
+  explanation: Many people object to embryo screening on the grounds that it involves
+    the disposal of embryos that are not selected for implantation.
+- question_num: 9
+  text: What does the term 'genotype' refer to?
+  A: The physical appearance of an organism
+  B: The entire genetic makeup of an organism
+  C: The specific alleles present for a particular characteristic
+  D: The environment in which an organism lives
+  answer: The specific alleles present for a particular characteristic
+  points: 1
+  explanation: Genotype refers to the genetic constitution of an individual organism,
+    specifically the alleles they carry.
+- question_num: 10
+  text: If two parents are carriers for a recessive disorder, what is the probability
+    of their child having the disorder?
+  A: 0%
+  B: 25%
+  C: 50%
+  D: 100%
+  answer: 25%
+  points: 1
+  explanation: Using a Punnett square (Ff x Ff), the possible offspring are FF, Ff,
+    Ff, and ff. Only ff expresses the disorder.
+- question_num: 11
+  text: What is the role of IVF in the embryo screening process?
+  A: To create embryos outside the body for testing
+  B: To cure the genetic disorder in the embryo
+  C: To increase the number of dominant alleles
+  D: To ensure the mother does not have the disorder
+  answer: To create embryos outside the body for testing
+  points: 1
+  explanation: IVF allows for the creation of embryos in a laboratory setting, which
+    is necessary to perform the biopsy for genetic screening.
+- question_num: 12
+  text: Which of the following is a potential economic issue associated with embryo
+    screening?
+  A: The procedure is very cheap
+  B: The high cost of the procedure
+  C: The lack of medical staff
+  D: The low demand for the procedure
+  answer: The high cost of the procedure
+  points: 1
+  explanation: Embryo screening is an expensive medical procedure, which raises questions
+    about resource allocation and accessibility.
+- question_num: 13
+  text: What is the phenotype of an individual with the genotype 'Pp' for polydactyly?
+  A: They do not have the disorder
+  B: They have the disorder
+  C: They are a carrier
+  D: They have a mild form of the disorder
+  answer: They have the disorder
+  points: 1
+  explanation: Because polydactyly is caused by a dominant allele, the presence of
+    one 'P' allele is sufficient to express the condition.
+- question_num: 14
+  text: Why is it impossible to be a 'carrier' for a dominant genetic disorder?
+  A: Because dominant alleles are always expressed
+  B: Because dominant alleles are always recessive
+  C: Because dominant alleles are only found in males
+  D: Because dominant alleles are never inherited
+  answer: Because dominant alleles are always expressed
+  points: 1
+  explanation: If an individual has a dominant allele, they will express the phenotype,
+    so they cannot 'carry' it without showing the disorder.
+- question_num: 15
+  text: What happens to embryos identified as carrying a genetic disorder during screening?
+  A: They are implanted into the mother
+  B: They are treated with gene therapy
+  C: They are not implanted into the mother
+  D: They are used for further research only
+  answer: They are not implanted into the mother
+  points: 1
+  explanation: The purpose of the screening is to select only healthy embryos for
+    implantation, so those with the disorder are discarded.
+long_answer:
+  question_num: 1
+  text: Explain the process of embryo screening and evaluate the ethical and economic
+    implications of using this technology to prevent inherited genetic disorders.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Simple statements about IVF or genetic testing. Mentions
+    that embryos are tested but lacks detail on the process or implications.
+
+    Level 2 (3-4 marks): Clear description of the IVF and screening process. Identifies
+    at least one ethical or economic issue with some explanation of why it is a concern.
+
+    Level 3 (5-6 marks): Detailed, structured explanation of the process (IVF, cell
+    removal, testing, selection). Provides a balanced evaluation of ethical concerns
+    (e.g., destruction of embryos) and economic factors (e.g., high costs vs. long-term
+    healthcare savings).'
