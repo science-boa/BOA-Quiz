@@ -1,0 +1,217 @@
+quiz_id: K004
+video_url: https://www.youtube.com/watch?v=PB97svr7Ye8
+title: 'GCSE Biology Assessment: Principles of Light Microscopy'
+multiple_choice:
+- question_num: 1
+  text: What is the primary function of the stage on a light microscope?
+  A: To reflect light through the specimen.
+  B: To hold the microscope slide in place.
+  C: To magnify the image of the specimen.
+  D: To adjust the focus of the image.
+  answer: To hold the microscope slide in place.
+  points: 1
+  explanation: The stage is the flat platform where the microscope slide containing
+    the specimen is placed and secured for viewing.
+- question_num: 2
+  text: Which component of a light microscope provides or directs light up through
+    the specimen?
+  A: The eyepiece lens
+  B: The coarse focusing knob
+  C: The lamp or mirror
+  D: The objective lens
+  answer: The lamp or mirror
+  points: 1
+  explanation: The light source, which can be an electrical lamp or a mirror reflecting
+    ambient light, is positioned at the base to direct light upwards through the specimen.
+- question_num: 3
+  text: How many objective lenses does a typical school light microscope feature,
+    and what is their nature?
+  A: One lens with variable magnification.
+  B: Two lenses with fixed magnification.
+  C: Typically three lenses with different magnifications.
+  D: Four lenses with identical magnifications.
+  answer: Typically three lenses with different magnifications.
+  points: 1
+  explanation: Standard school light microscopes usually have three objective lenses
+    mounted on a rotating nosepiece, each providing a different level of magnification
+    (typically x4, x10, and x40).
+- question_num: 4
+  text: Where is the eyepiece lens located on a light microscope, and what is its
+    magnification characteristic?
+  A: At the bottom, with variable magnification.
+  B: At the top, with a fixed magnification.
+  C: Under the stage, with variable magnification.
+  D: Inside the body tube, with no magnification.
+  answer: At the top, with a fixed magnification.
+  points: 1
+  explanation: The eyepiece lens is located at the very top of the body tube where
+    the observer looks through. It has a fixed magnification, commonly x10.
+- question_num: 5
+  text: Which parts of the microscope are adjusted to bring the image of the specimen
+    into clear focus?
+  A: The stage and the light source.
+  B: The eyepiece lens and the objective lens.
+  C: The coarse and fine focusing knobs.
+  D: The base and the arm.
+  answer: The coarse and fine focusing knobs.
+  points: 1
+  explanation: The coarse and fine focusing knobs move the stage or body tube up and
+    down to adjust the distance between the objective lens and the specimen, bringing
+    the image into sharp focus.
+- question_num: 6
+  text: In microscopy, what does the term 'object' refer to?
+  A: The visual representation seen through the eyepiece.
+  B: The glass slide used to hold the specimen.
+  C: The actual physical sample or real specimen being observed.
+  D: The magnification power of the lenses.
+  answer: The actual physical sample or real specimen being observed.
+  points: 1
+  explanation: In microscopy calculations and descriptions, the 'object' is the actual
+    physical specimen placed on the slide.
+- question_num: 7
+  text: What is meant by the term 'image' in the context of using a microscope?
+  A: The physical specimen placed on the stage.
+  B: The visual representation of the specimen seen through the microscope.
+  C: The light rays reflected by the mirror.
+  D: The photograph taken of the microscope.
+  answer: The visual representation of the specimen seen through the microscope.
+  points: 1
+  explanation: The 'image' is the magnified visual representation of the specimen
+    that reaches the observer's eye or camera.
+- question_num: 8
+  text: Which of the following correctly describes the path of light through a light
+    microscope to the observer's eye?
+  A: Eyepiece lens -> Objective lens -> Object -> Eye
+  B: Light source -> Object -> Objective lens -> Eyepiece lens -> Eye
+  C: Light source -> Eyepiece lens -> Object -> Objective lens -> Eye
+  D: Objective lens -> Object -> Light source -> Eyepiece lens -> Eye
+  answer: Light source -> Object -> Objective lens -> Eyepiece lens -> Eye
+  points: 1
+  explanation: Light is emitted or reflected from the light source, passes through
+    the specimen (object), travels through the objective lens, up the body tube, through
+    the eyepiece lens, and finally enters the observer's eye.
+- question_num: 9
+  text: How do the lenses in a light microscope make the specimen appear larger to
+    the observer?
+  A: By physically expanding the cells of the specimen.
+  B: By absorbing unwanted wavelengths of light.
+  C: By spreading light rays out.
+  D: By narrowing the beam of light.
+  answer: By spreading light rays out.
+  points: 1
+  explanation: Lenses bend (refract) light rays, spreading them apart so that the
+    light arriving at the eye appears to come from a much larger object.
+- question_num: 10
+  text: What is the definition of magnification?
+  A: The shortest distance between two points that can be distinguished as separate.
+  B: The factor by which the image is larger than the actual object.
+  C: The thickness of the specimen on the slide.
+  D: The amount of detail visible in an image.
+  answer: The factor by which the image is larger than the actual object.
+  points: 1
+  explanation: Magnification is a measure of how much larger the image is compared
+    to the actual size of the real object being viewed.
+- question_num: 11
+  text: What is the correct formula used to calculate magnification?
+  A: Magnification = Object size / Image size
+  B: Magnification = Image size x Object size
+  C: Magnification = Image size / Object size
+  D: Magnification = Object size + Image size
+  answer: Magnification = Image size / Object size
+  points: 1
+  explanation: To find the magnification, you divide the measured size of the image
+    by the actual physical size of the object (specimen).
+- question_num: 12
+  text: A student wants to calculate the actual size of a cell (the object size).
+    How should they rearrange the magnification formula?
+  A: Object size = Image size / Magnification
+  B: Object size = Magnification / Image size
+  C: Object size = Image size x Magnification
+  D: Object size = Magnification - Image size
+  answer: Object size = Image size / Magnification
+  points: 1
+  explanation: Rearranging the formula Magnification = Image size / Object size gives
+    Object size = Image size / Magnification.
+- question_num: 13
+  text: What is meant by the 'resolution' of a microscope?
+  A: The number of times larger an image is compared to the real object.
+  B: The length of the body tube of the microscope.
+  C: The shortest distance between two points on an object that can still be distinguished
+    as separate entities.
+  D: The brightness of the light source.
+  answer: The shortest distance between two points on an object that can still be
+    distinguished as separate entities.
+  points: 1
+  explanation: Resolution is the ability of a microscope to distinguish between two
+    points that are very close together. Higher resolution means greater detail can
+    be seen.
+- question_num: 14
+  text: What is the visual effect of using a microscope with a higher resolution?
+  A: The image will appear darker.
+  B: The image will have less blur and show more visible detail.
+  C: The image will always be larger.
+  D: The field of view will decrease.
+  answer: The image will have less blur and show more visible detail.
+  points: 1
+  explanation: Higher resolution reduces blur, allowing closely spaced structures
+    within the specimen to be resolved as separate, clear details.
+- question_num: 15
+  text: If a specimen has an actual size of 0.02 mm and is viewed under a magnification
+    of x400, what is the size of the image?
+  A: 0.00005 mm
+  B: 8 mm
+  C: 20 mm
+  D: 80 mm
+  answer: 8 mm
+  points: 1
+  explanation: 'Using the rearranged formula: Image size = Magnification x Object
+    size. Therefore, Image size = 400 x 0.02 mm = 8 mm.'
+long_answer:
+  question_num: 1
+  text: Describe how a student should prepare and use a light microscope to view a
+    specimen of plant cells, and explain the difference between the magnification
+    and resolution of the resulting image.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Simple statements are made about placing a slide on
+    the stage or turning focusing knobs. There may be a basic definition of magnification
+    or resolution, but the response lacks structure and scientific detail.
+
+
+    Level 2 (3-4 marks): The candidate describes several key steps in setting up and
+    focusing the microscope (e.g., starting with the lowest power objective, using
+    coarse and fine focus). There is a clear attempt to define or distinguish between
+    magnification and resolution, with some logical scientific sequencing.
+
+
+    Level 3 (5-6 marks): The candidate provides a detailed, structured, and logical
+    step-by-step method for preparing and focusing the microscope safely and effectively.
+    They also provide a clear, scientifically accurate distinction between magnification
+    and resolution, using correct terminology.
+
+
+    Indicative Content:
+
+    - Place the prepared slide onto the stage and secure it with the stage clips.
+
+    - Rotate the nosepiece to select the lowest power objective lens (usually x4 or
+    x10).
+
+    - Look from the side and use the coarse adjustment knob to move the stage up close
+    to the objective lens, taking care not to let the slide touch the lens.
+
+    - Look through the eyepiece lens and turn the coarse adjustment knob to move the
+    stage away from the lens until the cells come into focus.
+
+    - Turn the fine adjustment knob to sharpen the focus and obtain a clear image.
+
+    - To view with higher magnification, rotate the nosepiece to a higher power objective
+    lens and refocus using only the fine adjustment knob.
+
+    - Magnification is the measure of how much larger the image is compared to the
+    actual physical size of the object (calculated as Image size / Object size).
+
+    - Resolution is the ability to distinguish between two separate points on an object;
+    it determines the level of detail and clarity (less blur) in the image.
+
+    - Increasing magnification without sufficient resolution will only result in a
+    larger, blurry image where no extra detail can be seen.'
