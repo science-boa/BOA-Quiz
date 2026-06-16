@@ -27,29 +27,26 @@ class SubmissionPayload(BaseModel):
 
 async def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict):
     """
-    HTTP Email Delivery Engine.
+    HTTP Email Delivery Engine with structured Admin JSON.
     """
     print("\n--- STARTING DIAGNOSTIC EMAIL DISPATCH ---")
     try:
         quiz_data = payload.quiz_schema
         total_questions = len(quiz_data.get('multiple_choice', []))
         correct_count = sum(1 for item in quiz_data.get('multiple_choice', []) 
-                           if payload.mc_answers.get(str(item['question_num'])) == item.get('answer'))
+                            if payload.mc_answers.get(str(item['question_num'])) == item.get('answer'))
         
         percent = round((correct_count / total_questions) * 100) if total_questions > 0 else 0
-        body = f"Multiple Choice Score: {percent}%<br><br>"
         
+        # Build human-readable body for the student
+        body = f"Multiple Choice Score: {percent}%<br><br>"
         for item in quiz_data.get('multiple_choice', []):
             q_num = str(item['question_num'])
             user_ans = payload.mc_answers.get(q_num)
             correct = item.get('answer')
-            
-            body += f"Question Number: {item['text']}<br>"
+            body += f"Question: {item['text']}<br>"
             body += f"Your Answer: {user_ans}<br>"
-            if user_ans == correct:
-                body += "Correct<br><br>"
-            else:
-                body += f"The correct answer was: {correct}<br><br>"
+            body += "Correct<br><br>" if user_ans == correct else f"The correct answer was: {correct}<br><br>"
                 
         la_data = quiz_data.get('long_answer', {})
         body += "<b>Long Answer Question</b><br>"
@@ -57,8 +54,18 @@ async def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict
         body += f"Answer: {payload.la_input}<br>"
         body += f"Feedback: {grading.get('feedback')}<br>"
         
-        # Ensure the body ends with a single blank line
-        body = body.rstrip() + "<br>"
+        # STRUCTURED JSON for Admin (Easy for Power Automate)
+        admin_json = {
+            "quiz_id": payload.quiz_id,
+            "student_email": payload.student_email,
+            "mc_score_percent": percent,
+            "long_answer": {
+                "question": la_data.get('text'),
+                "student_answer": payload.la_input,
+                "feedback": grading.get('feedback')
+            }
+        }
+        admin_body = f"--- BEGIN DATA ---\n{json.dumps(admin_json, indent=2)}\n--- END DATA ---"
         
         bridge_url = os.environ.get("GMAIL_BRIDGE_URL", "").strip()
         bridge_key = os.environ.get("GMAIL_BRIDGE_KEY", "").strip()
@@ -68,13 +75,12 @@ async def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict
             return
 
         student_payload = {"key": bridge_key, "to": payload.student_email.strip(), "subject": f"Feedback: {quiz_data.get('title')}", "body": body}
-        admin_payload = {"key": bridge_key, "to": "science.boa@gmail.com", "subject": f"Result-{payload.quiz_id} from {payload.student_email.strip()}", "body": body}
+        admin_payload = {"key": bridge_key, "to": "richard.evans@boa-academy.co.uk", "subject": f"Result-{payload.quiz_id}", "body": admin_body}
 
+        # Send payloads
         for label, p in [("Student", student_payload), ("Admin", admin_payload)]:
-            print(f"[DIAGNOSTIC] Sending {label} email to {p['to']}...")
-            response = requests.post(bridge_url, json=p, timeout=20)
-            print(f"[DIAGNOSTIC] {label} Response Code: {response.status_code}")
-            print(f"[DIAGNOSTIC] {label} Raw Response Text: {response.text}")
+            print(f"[DIAGNOSTIC] Sending {label} email...")
+            requests.post(bridge_url, json=p, timeout=20)
 
     except Exception as e:
         print(f"HTTP MAIL ERROR: {str(e)}")
@@ -104,36 +110,21 @@ async def process_submission(payload: SubmissionPayload):
         prompt = f"Evaluate: Question: {la_data.get('text')}. Rubric: {la_data.get('rubric')}. Answer: {payload.la_input}. JSON format: {{'score': 0, 'feedback': ''}}"
         config = types.GenerateContentConfig(response_mime_type="application/json")
         
-        models_to_try = [
-            'gemma-4-26b-a4b-it', 
-            'gemini-3.1-flash-lite', 
-            'gemini-2.5-flash-lite', 
-            'gemini-3-flash', 
-            'gemini-2.5-flash'
-        ]
+        models_to_try = ['gemma-4-26b-a4b-it', 'gemini-3.1-flash-lite', 'gemini-2.5-flash-lite', 'gemini-3-flash', 'gemini-2.5-flash']
         success = False
-        last_error = ""
 
         for model_name in models_to_try:
             try:
-                print(f"[AI EVALUATOR] Attempting model: {model_name}")
-                response = ai_client.models.generate_content(
-                    model=model_name,
-                    contents=prompt,
-                    config=config
-                )
+                response = ai_client.models.generate_content(model=model_name, contents=prompt, config=config)
                 grading = json.loads(response.text)
                 success = True
                 active_model = model_name
-                print(f"[AI EVALUATOR] SUCCESS: Evaluated using model: {active_model}")
                 break
-            except Exception as e:
-                last_error = str(e)
-                print(f"[AI EVALUATOR] FAILED model {model_name}: {last_error}")
+            except Exception:
                 continue
         
         if not success:
-            raise HTTPException(status_code=502, detail=f"All AI models failed. Last error: {last_error}")
+            raise HTTPException(status_code=502, detail="All AI models failed.")
             
     await send_feedback_email_via_http(payload, grading)
     return {"status": "success", "model_used": active_model}
