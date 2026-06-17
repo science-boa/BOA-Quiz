@@ -55,13 +55,12 @@ async def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict
             
             body += f"<b>Question:</b> {item['text']}<br>"
             body += f"Your Answer: {user_ans}<br>"
-            body += f"<b>Your Explanation:</b> {user_exp or 'N/A'}<br>"
             
             if user_ans == correct:
                 body += "Result: Correct<br><br>"
             else:
-                body += f"Result: Incorrect (Correct answer was: {correct})<br><br>"
-                
+                body += f"Result: Incorrect (Correct answer was: {correct})<br>"
+                body += f"<b>Explanation:</b> {user_exp or 'N/A'}<br><br>"
         la_data = quiz_data.get('long_answer', {})
         body += "<b>Long Answer Question</b><br>"
         body += f"{la_data.get('text')}<br>"
