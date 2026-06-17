@@ -87,12 +87,10 @@
             const main = document.getElementById('scroll-container');
             
             if (isStacked) {
-                // Stacked View: Portal container becomes full flow, scroll is on the main element
                 container.classList.remove('md:flex-row', 'h-full');
                 container.classList.add('flex-col');
                 main.classList.add('overflow-y-auto');
             } else {
-                // Split View: Reset to side-by-side
                 container.classList.add('md:flex-row', 'h-full');
                 container.classList.remove('flex-col');
                 main.classList.remove('overflow-y-auto');
@@ -123,7 +121,6 @@
                 document.getElementById('portal').classList.remove('hidden');
                 renderQuiz();
                 
-                // Auto-detect mobile and stack if necessary
                 if (window.innerWidth < 768) {
                     toggleLayout();
                 }
@@ -160,14 +157,18 @@
 
             const mc_answers = {};
             let allAnswered = true;
+            
             quizData.multiple_choice?.forEach(q => {
                 const selected = document.querySelector(`input[name="mc_${q.question_num}"]:checked`);
                 if (!selected) {
                     allAnswered = false;
                 } else {
-                    // Option A Fix: Map selected option letter ('A', 'B', etc.) to the raw text value from the quiz schema.
                     const selectedLetter = selected.value;
-                    mc_answers[q.question_num] = q[selectedLetter];
+                    // Include both the selected text and the explanation field in the submission
+                    mc_answers[q.question_num] = {
+                        answer: q[selectedLetter],
+                        explanation: q.explanation || null
+                    };
                 }
             });
 
