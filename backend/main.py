@@ -32,21 +32,35 @@ async def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict
     print("\n--- STARTING DIAGNOSTIC EMAIL DISPATCH ---")
     try:
         quiz_data = payload.quiz_schema
-        total_questions = len(quiz_data.get('multiple_choice', []))
-        correct_count = sum(1 for item in quiz_data.get('multiple_choice', []) 
-                            if payload.mc_answers.get(str(item['question_num'])) == item.get('answer'))
+        mc_questions = quiz_data.get('multiple_choice', [])
         
-        percent = round((correct_count / total_questions) * 100) if total_questions > 0 else 0
+        # Calculate score
+        correct_count = 0
+        for item in mc_questions:
+            q_num = str(item['question_num'])
+            ans_data = payload.mc_answers.get(q_num, {})
+            if ans_data.get('answer') == item.get('answer'):
+                correct_count += 1
+        
+        percent = round((correct_count / len(mc_questions)) * 100) if mc_questions else 0
         
         # Build human-readable body for the student
         body = f"Multiple Choice Score: {percent}%<br><br>"
-        for item in quiz_data.get('multiple_choice', []):
+        for item in mc_questions:
             q_num = str(item['question_num'])
-            user_ans = payload.mc_answers.get(q_num)
+            ans_data = payload.mc_answers.get(q_num, {})
+            user_ans = ans_data.get('answer')
+            user_exp = ans_data.get('explanation')
             correct = item.get('answer')
-            body += f"Question: {item['text']}<br>"
+            
+            body += f"<b>Question:</b> {item['text']}<br>"
             body += f"Your Answer: {user_ans}<br>"
-            body += "Correct<br><br>" if user_ans == correct else f"The correct answer was: {correct}<br><br>"
+            body += f"<b>Your Explanation:</b> {user_exp or 'N/A'}<br>"
+            
+            if user_ans == correct:
+                body += "Result: Correct<br><br>"
+            else:
+                body += f"Result: Incorrect (Correct answer was: {correct})<br><br>"
                 
         la_data = quiz_data.get('long_answer', {})
         body += "<b>Long Answer Question</b><br>"
@@ -54,7 +68,7 @@ async def send_feedback_email_via_http(payload: SubmissionPayload, grading: dict
         body += f"Answer: {payload.la_input}<br>"
         body += f"Feedback: {grading.get('feedback')}<br>"
         
-        # STRUCTURED JSON for Admin (Easy for Power Automate)
+        # STRUCTURED JSON for Admin
         admin_json = {
             "quiz_id": payload.quiz_id,
             "student_email": payload.student_email,
