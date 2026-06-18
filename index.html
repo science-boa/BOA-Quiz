@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOA Science Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans h-screen overflow-hidden">
@@ -15,6 +15,10 @@
             <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">BOA Science Portal</h1>
             <div class="flex items-center space-x-4">
                 <a href="#" onclick="toggleLayout()" class="text-indigo-600 font-semibold underline text-sm">Rotate View</a>
+                <div id="server-status-container" class="flex items-center space-x-2 bg-white px-4 py-1.5 rounded-full border border-gray-150 text-sm">
+                    <span id="status-dot" class="inline-block rounded-full h-2.5 w-2.5 bg-yellow-500"></span>
+                    <span id="status-text" class="font-medium text-gray-600">Connecting...</span>
+                </div>
             </div>
         </header>
 
@@ -69,8 +73,7 @@
     </div>
 
     <script>
-        // UPDATED URL: Replaced with your exact trigger URL (reinstating the full signature ending with 'E' to prevent token rejection)
-        const BACKEND_URL = "https://default4a7dcc91048348f19bae8f17879c3c.f9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/69f994d9c442436d98293e9736d91e2f/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JSlxpAAXM7COgS_rD1r9wXUnW-H6sfZa1aIePHekJBYE"; 
+        const BACKEND_URL = "https://boa-quiz.onrender.com/submit"; 
         let quizData = null;
         let quizId = "101";
         let isStacked = false;
@@ -91,6 +94,21 @@
                 container.classList.add('md:flex-row', 'h-full');
                 container.classList.remove('flex-col');
                 main.classList.remove('overflow-y-auto');
+            }
+        }
+
+        async function checkServerStatus() {
+            const statusDot = document.getElementById('status-dot');
+            const statusText = document.getElementById('status-text');
+            try {
+                const response = await fetch("https://boa-quiz.onrender.com/health");
+                if (response.ok) {
+                    statusDot.className = "inline-block rounded-full h-2.5 w-2.5 bg-green-500";
+                    statusText.innerText = "Server: Online";
+                }
+            } catch (err) {
+                statusDot.className = "inline-block rounded-full h-2.5 w-2.5 bg-red-500";
+                statusText.innerText = "Server: Offline";
             }
         }
 
@@ -146,6 +164,7 @@
                     allAnswered = false;
                 } else {
                     const selectedLetter = selected.value;
+                    // Include both the selected text and the explanation field in the submission
                     mc_answers[q.question_num] = {
                         answer: q[selectedLetter],
                         explanation: q.explanation || null
@@ -169,16 +188,8 @@
             let seconds = 0;
             const timer = setInterval(() => {
                 seconds++;
-                btn.innerText = "Submitting... " + seconds + "s";
+                btn.innerText = `Submitting... ${seconds}s`;
             }, 1000);
-
-            // Generate rolling, daily secure token using date of birth and local date
-            const today = new Date();
-            const dd = String(today.getDate()).padStart(2, '0');
-            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-            const yyyy = today.getFullYear();
-            const dateNum = parseInt(dd + mm + yyyy, 10);
-            const dynamicSecret = 77913092 * dateNum;
 
             const payload = {
                 quiz_id: quizId,
@@ -191,12 +202,7 @@
             try {
                 const response = await fetch(BACKEND_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Portal-Token': String(dynamicSecret)
-                    },
-                    credentials: 'omit', // Crucial: strips out local cached school cookies/tokens
-                    mode: 'cors',
+                    headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(payload)
                 });
                 
@@ -207,7 +213,7 @@
                     document.getElementById('results-portal').classList.remove('hidden');
                 } else {
                     const errorText = await response.text();
-                    alert("Submission failed: " + errorText);
+                    alert(`Submission failed: ${errorText}`);
                     btn.disabled = false;
                     btn.innerText = "Submit Assignment";
                 }
@@ -219,7 +225,7 @@
             }
         }
 
-        window.onload = () => { loadQuiz(); };
+        window.onload = () => { loadQuiz(); checkServerStatus(); };
     </script>
 </body>
 </html>
