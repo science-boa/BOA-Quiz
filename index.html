@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOA Science Portal</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans h-screen overflow-hidden">
@@ -69,8 +69,8 @@
     </div>
 
     <script>
-        // Power Automate HTTP endpoint. Note: Make sure to append your secure signature parameter (&sig=...) if it isn't already included.
-        const BACKEND_URL = "https://default4a7dcc91048348f19bae8f17879c3c.f9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/69f994d9c442436d98293e9736d91e2f/triggers/manual/paths/invoke?api-version=1"; 
+        // IMPORTANT: Make sure to paste your complete URL containing the generated &sp=..., &sv=... and &sig=... parameters at the end.
+        const BACKEND_URL = "https://default4a7dcc91048348f19bae8f17879c3c.f9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/69f994d9c442436d98293e9736d91e2f/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JSlxpAAXM7COgS_rD1r9wXUnW-H6sfZa1aIePHekJBYE"; 
         let quizData = null;
         let quizId = "101";
         let isStacked = false;
@@ -207,7 +207,7 @@
                     document.getElementById('results-portal').classList.remove('hidden');
                 } else {
                     const errorText = await response.text();
-                    alert(`Submission failed: ${errorText}`);
+                    alert(`Submission failed: {errorText}`);
                     btn.disabled = false;
                     btn.innerText = "Submit Assignment";
                 }
@@ -226,7 +226,5 @@
 ```
 #eof
 
-### What Changed:
-1. **Dynamic Authentication Engine**: Added the rolling client-side mathematical token generation inside `submitAssignment()`.
-2. **Clean Webhooks**: Removed the background health check request that attempted to ping the inactive Render server.
-3. **Optimized `onload` Event**: The app boots immediately by focusing strictly on parsing the quiz structure directly from GitHub without intermediate pauses.
+### What you need to do next:
+Make sure to replace `YOUR_SIGNATURE_KEY_HERE` at the end of the `BACKEND_URL` in the editor with your flow's actual signature parameter (`sig=...`) that you copied from the Classic Designer. Once that is appended, everything will work perfectly!
