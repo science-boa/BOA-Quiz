@@ -181,10 +181,14 @@
             
             try {
                 const response = await fetch(BACKEND_URL, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(payload)
-                });
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    credentials: 'omit', // Crucial: Prevents school cookies/tokens from leaking into the request
+    mode: 'cors',
+    body: JSON.stringify(payload)
+});
                 
                 clearInterval(timer);
                 
