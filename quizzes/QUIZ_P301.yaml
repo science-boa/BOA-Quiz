@@ -1,0 +1,167 @@
+quiz_id: P301
+video_url: https://www.youtube.com/watch?v=GTpo1nAZqFE
+title: 'GCSE Physics: Atomic Structure and Radiation Assessment'
+multiple_choice:
+- question_num: 1
+  text: What is the relative mass of a neutron?
+  A: '0'
+  B: '1'
+  C: 1/2000
+  D: '2000'
+  answer: '1'
+  points: 1
+  explanation: Protons and neutrons both have a relative mass of 1, whereas electrons
+    have a negligible mass of approximately 1/2000.
+- question_num: 2
+  text: Which subatomic particle determines the identity of an element?
+  A: Proton
+  B: Neutron
+  C: Electron
+  D: Alpha particle
+  answer: Proton
+  points: 1
+  explanation: The atomic number, which is the number of protons in the nucleus, uniquely
+    identifies an element.
+- question_num: 3
+  text: What is the definition of an isotope?
+  A: Atoms with different numbers of protons and neutrons
+  B: Atoms with the same number of neutrons but different numbers of protons
+  C: Atoms with the same number of protons but different numbers of neutrons
+  D: Atoms with the same mass number but different atomic numbers
+  answer: Atoms with the same number of protons but different numbers of neutrons
+  points: 1
+  explanation: Isotopes are atoms of the same element (same proton number) that have
+    different mass numbers due to varying neutron counts.
+- question_num: 4
+  text: What is the result of an atom undergoing ionization?
+  A: It becomes a neutral atom
+  B: It becomes a negative ion
+  C: It becomes a positive ion
+  D: It becomes a different element
+  answer: It becomes a positive ion
+  points: 1
+  explanation: Ionization involves the loss of an electron, leaving the atom with
+    more protons than electrons, resulting in a net positive charge.
+- question_num: 5
+  text: Where is the mass number located in a nuclear symbol?
+  A: Bottom left
+  B: Bottom right
+  C: Top left
+  D: Top right
+  answer: Top left
+  points: 1
+  explanation: By convention, the mass number (protons + neutrons) is written at the
+    top left, and the atomic number (protons) is at the bottom left.
+- question_num: 6
+  text: What is the charge of an electron?
+  A: 1+
+  B: '0'
+  C: 1-
+  D: 2-
+  answer: 1-
+  points: 1
+  explanation: Electrons carry a relative charge of -1, balancing the +1 charge of
+    protons in a neutral atom.
+- question_num: 7
+  text: What is the process of an unstable isotope decaying into another element called?
+  A: Excitation
+  B: Radioactive decay
+  C: Ionization
+  D: Nuclear fusion
+  answer: Radioactive decay
+  points: 1
+  explanation: Radioactive decay is the process by which unstable nuclei emit radiation
+    to become more stable.
+- question_num: 8
+  text: How many electrons does a neutral lithium atom have if its atomic number is
+    3?
+  A: '1'
+  B: '3'
+  C: '4'
+  D: '7'
+  answer: '3'
+  points: 1
+  explanation: In a neutral atom, the number of electrons must equal the number of
+    protons.
+- question_num: 9
+  text: Which radiation is mentioned as a form of emission during radioactive decay?
+  A: Beta
+  B: Infrared
+  C: Visible light
+  D: Radio waves
+  answer: Beta
+  points: 1
+  explanation: Radioactive decay involves the emission of alpha, beta, or gamma radiation,
+    or neutrons.
+- question_num: 10
+  text: What is the relative mass of a proton?
+  A: 1/2000
+  B: '0'
+  C: '1'
+  D: '2'
+  answer: '1'
+  points: 1
+  explanation: Protons and neutrons are the heavy particles in the nucleus, both assigned
+    a relative mass of 1.
+- question_num: 11
+  text: What happens when an excited electron falls back to a lower energy level?
+  A: It absorbs more energy
+  B: It emits electromagnetic radiation
+  C: It becomes a positive ion
+  D: It leaves the atom
+  answer: It emits electromagnetic radiation
+  points: 1
+  explanation: Energy is conserved; when an electron drops to a lower shell, it releases
+    the energy difference as electromagnetic radiation.
+- question_num: 12
+  text: What is the charge of a neutron?
+  A: 1+
+  B: 1-
+  C: '0'
+  D: 2+
+  answer: '0'
+  points: 1
+  explanation: Neutrons are electrically neutral particles found within the nucleus.
+- question_num: 13
+  text: Which of the following is true regarding electron shells?
+  A: They are all at the same energy level
+  B: They get closer to the nucleus as energy increases
+  C: They get further from the nucleus as energy increases
+  D: They contain protons
+  answer: They get further from the nucleus as energy increases
+  points: 1
+  explanation: Electron shells represent discrete energy levels, with shells further
+    from the nucleus having higher energy.
+- question_num: 14
+  text: What defines ionizing radiation?
+  A: Radiation that adds electrons to atoms
+  B: Radiation that knocks electrons off atoms
+  C: Radiation that changes the number of protons
+  D: Radiation that only affects the nucleus
+  answer: Radiation that knocks electrons off atoms
+  points: 1
+  explanation: Ionizing radiation has sufficient energy to remove electrons from atoms,
+    creating ions.
+long_answer:
+  question_num: 1
+  text: Explain the process of electron excitation and ionization within an atom.
+    In your answer, describe how energy levels change, what happens to the electron
+    in each process, and the resulting effect on the atom.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Simple statements about electrons moving or atoms
+    becoming charged. Lacks detail on energy levels or the distinction between excitation
+    and ionization.
+
+    Level 2 (3-4 marks): Clear description of excitation as moving to a higher shell
+    and ionization as leaving the atom. Mentions the role of electromagnetic radiation.
+
+    Level 3 (5-6 marks): Detailed, structured explanation. Correctly identifies that
+    excitation involves absorbing specific energy to move to a higher shell and re-emitting
+    it to return. Correctly identifies ionization as the removal of an electron, resulting
+    in a positive ion. Uses scientific terminology accurately.
+
+    Indicative Content: Electrons exist in shells (energy levels). Excitation occurs
+    when an electron absorbs electromagnetic radiation and jumps to a higher shell.
+    The electron is unstable and falls back, re-emitting the radiation. Ionization
+    occurs when an electron absorbs enough energy to leave the atom entirely. This
+    leaves the atom with a net positive charge (positive ion).'
