@@ -1,0 +1,176 @@
+quiz_id: P302
+video_url: https://www.youtube.com/watch?v=wvgT52mwM3Y
+title: 'GCSE Physics: Radioactive Decay and Half-Life Assessment'
+multiple_choice:
+- question_num: 1
+  text: What is the definition of the activity of a radioactive sample?
+  A: The total number of unstable nuclei in the sample.
+  B: The overall rate of decay of all the isotopes in a sample.
+  C: The time taken for half of the radioactive nuclei to decay.
+  D: The energy released by a single alpha particle.
+  answer: The overall rate of decay of all the isotopes in a sample.
+  points: 1
+  explanation: Activity is defined as the rate at which a source of unstable nuclei
+    decays, measured in becquerels (Bq).
+- question_num: 2
+  text: What is the SI unit for radioactive activity?
+  A: Sievert (Sv)
+  B: Gray (Gy)
+  C: Becquerel (Bq)
+  D: Hertz (Hz)
+  answer: Becquerel (Bq)
+  points: 1
+  explanation: One becquerel is defined as one decay per second.
+- question_num: 3
+  text: Which statement best describes the nature of radioactive decay?
+  A: It is a predictable process that occurs at a constant rate.
+  B: It is a random process, making it impossible to predict when a single nucleus
+    will decay.
+  C: It only occurs when the sample is heated to high temperatures.
+  D: It stops once the sample reaches a stable state.
+  answer: It is a random process, making it impossible to predict when a single nucleus
+    will decay.
+  points: 1
+  explanation: Radioactive decay is inherently random; while we can predict the behavior
+    of large numbers of nuclei, individual decay events cannot be predicted.
+- question_num: 4
+  text: What is meant by the term 'half-life'?
+  A: The time taken for the activity of a sample to decrease by half.
+  B: The time taken for the mass of a sample to decrease by half.
+  C: The time taken for the temperature of a sample to decrease by half.
+  D: The time taken for half of the atoms to become stable.
+  answer: The time taken for the activity of a sample to decrease by half.
+  points: 1
+  explanation: Half-life is the time required for either the number of radioactive
+    nuclei or the activity of a sample to reduce to half its initial value.
+- question_num: 5
+  text: A sample has an activity of 800 Bq. After two half-lives, what will the activity
+    be?
+  A: 400 Bq
+  B: 200 Bq
+  C: 100 Bq
+  D: 50 Bq
+  answer: 200 Bq
+  points: 1
+  explanation: After one half-life, activity is 400 Bq. After a second half-life,
+    it halves again to 200 Bq.
+- question_num: 6
+  text: What instrument is used to measure the count rate of a radioactive source?
+  A: A voltmeter
+  B: A Geiger-Müller tube and counter
+  C: A cathode ray oscilloscope
+  D: A thermometer
+  answer: A Geiger-Müller tube and counter
+  points: 1
+  explanation: A Geiger-Müller tube detects ionizing radiation and records the number
+    of decays per second, which is used to estimate activity.
+- question_num: 7
+  text: Why does the activity of a radioactive sample decrease over time?
+  A: The half-life of the sample increases.
+  B: The remaining unstable nuclei become more stable.
+  C: There are fewer unstable nuclei remaining to decay.
+  D: The radiation emitted becomes less energetic.
+  answer: There are fewer unstable nuclei remaining to decay.
+  points: 1
+  explanation: As decay occurs, the number of parent radioactive nuclei decreases,
+    leading to a lower rate of decay (activity).
+- question_num: 8
+  text: If a sample has a half-life of 10 hours, how many half-lives occur in 40 hours?
+  A: '2'
+  B: '3'
+  C: '4'
+  D: '5'
+  answer: '4'
+  points: 1
+  explanation: 'The number of half-lives is calculated by dividing the total time
+    by the half-life duration: 40 / 10 = 4.'
+- question_num: 9
+  text: What shape does an activity-time graph for a radioactive sample typically
+    take?
+  A: A straight line with a positive gradient.
+  B: A straight line with a negative gradient.
+  C: A curve that levels off towards zero.
+  D: A horizontal line.
+  answer: A curve that levels off towards zero.
+  points: 1
+  explanation: Because the rate of decay is proportional to the number of remaining
+    nuclei, the activity decreases exponentially, resulting in a curve.
+- question_num: 10
+  text: If a sample starts with 1,000,000 nuclei and has a half-life of 5 years, how
+    many nuclei remain after 15 years?
+  A: 500,000
+  B: 250,000
+  C: 125,000
+  D: 62,500
+  answer: 125,000
+  points: 1
+  explanation: 15 years is 3 half-lives. 1,000,000 -> 500,000 -> 250,000 -> 125,000.
+- question_num: 11
+  text: Which of the following is a type of radiation emitted during radioactive decay?
+  A: Beta particles
+  B: X-rays
+  C: Infrared rays
+  D: Microwaves
+  answer: Beta particles
+  points: 1
+  explanation: Alpha particles, beta particles, and gamma rays are the primary forms
+    of ionizing radiation emitted during radioactive decay.
+- question_num: 12
+  text: What is the relationship between the number of remaining nuclei and the activity
+    of a sample?
+  A: They are inversely proportional.
+  B: They are perfectly correlated.
+  C: There is no relationship.
+  D: Activity increases as the number of nuclei decreases.
+  answer: They are perfectly correlated.
+  points: 1
+  explanation: Activity is directly proportional to the number of radioactive nuclei
+    present in the sample.
+- question_num: 13
+  text: A sample has an activity of 1200 Bq. After 3 half-lives, what is the activity?
+  A: 600 Bq
+  B: 300 Bq
+  C: 150 Bq
+  D: 75 Bq
+  answer: 150 Bq
+  points: 1
+  explanation: 1200 -> 600 (1) -> 300 (2) -> 150 (3).
+- question_num: 14
+  text: What does a Geiger-Müller counter actually measure?
+  A: The total mass of the sample.
+  B: The number of decays that reach the tube each second.
+  C: The energy of the emitted particles.
+  D: The time remaining until the sample is stable.
+  answer: The number of decays that reach the tube each second.
+  points: 1
+  explanation: The GM tube detects ionizing radiation events, which are counted to
+    estimate the activity of the source.
+- question_num: 15
+  text: Which sample will have a higher initial activity?
+  A: A sample that decays more slowly.
+  B: A sample that decays more quickly.
+  C: A sample with a longer half-life.
+  D: A sample with fewer unstable nuclei.
+  answer: A sample that decays more quickly.
+  points: 1
+  explanation: A sample that decays more quickly has a higher rate of decay, which
+    is defined as higher activity.
+long_answer:
+  question_num: 1
+  text: Explain the concept of half-life and describe how it can be determined from
+    an activity-time graph. In your answer, include why the activity of a radioactive
+    sample decreases over time.
+  points: 6
+  rubric: "Level 1 (1-2 marks): Simple statements about decay or half-life. Mentions\
+    \ that activity decreases but lacks detail.\nLevel 2 (3-4 marks): Clear description\
+    \ of half-life as the time for activity to halve. Explains that activity decreases\
+    \ because there are fewer nuclei left to decay. Mentions using a graph to find\
+    \ the time for activity to halve.\nLevel 3 (5-6 marks): Detailed, logical explanation.\
+    \ Defines half-life clearly. Explains the link between the number of unstable\
+    \ nuclei and activity. Describes the process of using an activity-time graph (identifying\
+    \ initial activity, finding the time for it to halve, and confirming with a second\
+    \ interval). Explains the random nature of decay and the resulting curve.\nIndicative\
+    \ Content: \n- Definition of half-life (time for activity/nuclei to halve).\n\
+    - Activity is the rate of decay.\n- Activity decreases because the number of unstable\
+    \ nuclei decreases.\n- Decay is random.\n- Graph is a curve.\n- Method: Identify\
+    \ initial activity, find time to reach half, verify with second half-life."
