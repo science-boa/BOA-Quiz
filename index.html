@@ -6,10 +6,30 @@
     <title>BOA Science Portal</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <style>
+        /* Prevent content from showing up if they try to Print or Save to PDF */
+        @media print {
+            body {
+                display: none !important;
+            }
+        }
+        
+        /* Smooth transition for the focus blur effect */
+        #portal-container {
+            transition: filter 0.2s ease;
+        }
+
+        /* Class to apply heavy blur when student clicks away */
+        .blur-lockout {
+            filter: blur(25px) grayscale(100%);
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans h-screen overflow-hidden">
 
-    <div class="h-screen flex flex-col">
+    <div id="portal-container" class="h-screen flex flex-col">
         <!-- Header (Fixed) -->
         <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shrink-0">
             <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">BOA Science Portal</h1>
@@ -52,6 +72,7 @@
                         <div id="la-section" class="space-y-4 pt-6 border-t border-gray-100">
                             <h2 class="text-xl font-bold text-indigo-900">Part 2: Long Answer</h2>
                             <p id="la-text" class="text-gray-700 font-medium select-none pointer-events-none"></p>
+                            <p id="ai-warning" class="hidden text-red-600 font-bold text-sm tracking-wide">⚠️ AI detection is enabled</p>
                             <textarea id="la-input" rows="5" placeholder="Type your full analysis here..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
                         </div>
 
@@ -66,6 +87,19 @@
                 <h2 class="text-2xl font-black text-gray-900">Assignment Submitted Successfully!</h2>
             </div>
         </main>
+    </div>
+
+    <div id="lockout-overlay" class="hidden fixed inset-0 bg-gray-900/60 backdrop-blur-md flex items-center justify-center z-50 text-center p-6">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-md border border-gray-100 space-y-4">
+            <div class="text-indigo-600 text-5xl font-extrabold animate-bounce">⚠️</div>
+            <h2 class="text-2xl font-black text-gray-900">Quiz Suspended</h2>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                The portal has been blurred because you switched windows or opened another tool. Click anywhere inside this window to resume your quiz.
+            </p>
+            <p class="text-xs text-indigo-500 font-semibold uppercase tracking-wider">
+                All tab switching and focus loss events are recorded.
+            </p>
+        </div>
     </div>
 
     <script>
@@ -86,6 +120,18 @@
             if (document.hidden) {
                 tabSwitchCount++;
             }
+        });
+
+        // Anti-Screenshot and Anti-Cheat: Blur everything when focus is lost
+        window.addEventListener('blur', () => {
+            document.getElementById('portal-container').classList.add('blur-lockout');
+            document.getElementById('lockout-overlay').classList.remove('hidden');
+        });
+
+        // Unblur when they click back into the window
+        window.addEventListener('focus', () => {
+            document.getElementById('portal-container').classList.remove('blur-lockout');
+            document.getElementById('lockout-overlay').classList.add('hidden');
         });
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -129,6 +175,7 @@
         function setupInputProtections() {
             const laInput = document.getElementById('la-input');
             const laText = document.getElementById('la-text');
+            const aiWarning = document.getElementById('ai-warning');
 
             if (laInput) {
                 // Block cut, copy, paste operations on the textbox
@@ -137,7 +184,26 @@
                         e.preventDefault();
                         if (eventName === 'paste') {
                             pasteAttemptCount++;
+                            if (aiWarning) {
+                                aiWarning.classList.remove('hidden');
+                            }
                             alert("Direct copying and pasting is disabled for this analysis section. Please hand-type your response.");
+                        }
+                    });
+                });
+
+                // Block drag-and-drop actions on the textbox
+                ['dragover', 'dragenter', 'drop'].forEach(eventName => {
+                    laInput.addEventListener(eventName, (e) => {
+                        if (eventName === 'drop') {
+                            e.preventDefault();
+                            pasteAttemptCount++; // Increment bypass/paste count
+                            if (aiWarning) {
+                                aiWarning.classList.remove('hidden');
+                            }
+                            alert("Direct dragging and dropping of text is disabled. Please hand-type your response.");
+                        } else if (eventName === 'dragover' || eventName === 'dragenter') {
+                            e.preventDefault(); // Required to allow drop interception
                         }
                     });
                 });
@@ -151,7 +217,7 @@
             }
 
             if (laText) {
-                // Devious block: Prevent copy events specifically on the question text
+                // Prevent copy events specifically on the question text
                 laText.addEventListener('copy', (e) => {
                     e.preventDefault();
                     alert("Copying assignment questions is disabled on this portal.");
