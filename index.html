@@ -248,10 +248,10 @@
 
         async function submitAssignment() {
             const btn = document.getElementById('submit-btn');
-            const email = document.getElementById('student-email').value;
+            const email = document.getElementById('student-email').value.trim().toLowerCase();
 
-            if (!email || !email.includes('@')) {
-                alert("Please enter a valid school email address.");
+            if (!email || !email.endsWith('@boa-academy.co.uk')) {
+                alert("Submission blocked. Please enter a valid school email address ending with @boa-academy.co.uk.");
                 return;
             }
 
