@@ -4,139 +4,271 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOA Science Portal</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Tailwind CSS (Direct Browser Script) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- JS-YAML to read assignment schemas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    
     <style>
-        /* Prevent content from showing up if they try to Print or Save to PDF */
+        /* Anti-Cheat: Prevent printing or saving the page to PDF to steal questions */
         @media print {
             body {
                 display: none !important;
             }
         }
         
-        /* Smooth transition for the focus blur effect */
+        /* Smooth transitions for lock and blur effects */
         #portal-container {
-            transition: filter 0.2s ease;
+            transition: filter 0.25s ease, transform 0.25s ease;
         }
 
-        /* Class to apply heavy blur when student clicks away */
+        /* Gray out and heavy blur when window focus is lost (Anti-Snipping/Tab Switch) */
         .blur-lockout {
-            filter: blur(25px) grayscale(100%);
+            filter: blur(20px) grayscale(100%);
             pointer-events: none;
             user-select: none;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans h-screen overflow-hidden">
+<body class="bg-slate-50 text-slate-800 font-sans h-screen overflow-hidden select-none">
 
     <div id="portal-container" class="h-screen flex flex-col">
-        <!-- Header (Fixed) -->
-        <header class="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shrink-0">
-            <h1 class="text-lg font-bold text-gray-500 tracking-wider uppercase">BOA Science Portal</h1>
+        <!-- Header (Fixed Top) -->
+        <header class="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between shrink-0 shadow-xs z-10">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indigo-600 text-white w-8 h-8 rounded-lg flex items-center justify-center font-black text-sm">B</div>
+                <h1 class="text-sm font-bold text-slate-500 tracking-wider uppercase">BOA Science Portal</h1>
+            </div>
             <div class="flex items-center space-x-4">
-                <a href="#" onclick="toggleLayout()" class="text-indigo-600 font-semibold underline text-sm">Rotate View</a>
+                <button onclick="toggleLayout()" class="text-indigo-600 hover:text-indigo-800 font-semibold underline text-xs cursor-pointer">
+                    Rotate Layout View
+                </button>
             </div>
         </header>
 
         <!-- Main Content Area -->
         <main id="scroll-container" class="flex-1 overflow-y-auto relative">
-            <div id="loading" class="text-center py-12">
-                <p class="text-xl font-semibold text-gray-600 animate-pulse">Loading Assignment...</p>
+            
+            <!-- Loading Indicator -->
+            <div id="loading" class="flex flex-col items-center justify-center py-24 space-y-3">
+                <div class="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+                <p class="text-lg font-semibold text-slate-600 animate-pulse">Loading Assignment...</p>
             </div>
 
-            <div id="error-container" class="hidden p-6 text-red-700">Error loading assignment.</div>
+            <!-- Error Portal UI -->
+            <div id="error-container" class="hidden max-w-md mx-auto my-12 p-6 bg-red-50 border border-red-100 rounded-2xl text-center space-y-4 shadow-sm">
+                <div class="text-red-500 text-5xl">⚠️</div>
+                <h3 class="text-lg font-bold text-red-900">Assignment Not Found</h3>
+                <p class="text-sm text-red-700 leading-relaxed">
+                    Could not fetch this assignment. Please check that you launched the correct link directly from Microsoft Teams.
+                </p>
+            </div>
 
-            <!-- Portal Grid -->
+            <!-- Quiz Grid Layout -->
             <div id="portal" class="hidden h-full flex flex-col md:flex-row">
                 
-                <!-- Fixed/Sidebar Content -->
-                <div id="left-panel" class="w-full md:w-1/2 p-8 bg-gray-50 flex flex-col gap-6 shrink-0 md:h-full">
-                    <h1 id="quiz-title" class="text-3xl font-black tracking-tight text-gray-900">Quiz Portal</h1>
-                    <div id="video-container" class="hidden aspect-video w-full rounded-xl overflow-hidden shadow-md bg-black">
+                <!-- Left Panel (Sidebar / Static Header Elements) -->
+                <div id="left-panel" class="w-full md:w-1/2 p-6 lg:p-8 bg-slate-50 flex flex-col gap-6 shrink-0 md:h-full md:overflow-y-auto">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-2.5 py-1 rounded-full">Science Assessment</span>
+                        <h1 id="quiz-title" class="text-3xl font-black tracking-tight text-slate-900 mt-3 leading-tight">Quiz Portal</h1>
+                    </div>
+
+                    <!-- Interactive Embedded Video Guide -->
+                    <div id="video-container" class="hidden aspect-video w-full rounded-2xl overflow-hidden shadow-md bg-black border border-slate-200">
                         <iframe id="quiz-video" class="w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
                     </div>
-                    <div class="bg-white p-6 rounded-xl shadow-xs border border-gray-100">
-                        <label class="block text-sm font-bold text-gray-700 mb-2">School Email Address</label>
-                        <input type="email" id="student-email" placeholder="you@boa-academy.co.uk" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none">
+
+                    <!-- Email Field Section (Always Open & Customizable) -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xs border border-slate-200/60 space-y-3">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">School Email Address</label>
+                        <div class="relative">
+                            <input type="email" id="student-email" placeholder="firstname.surname@boa-academy.co.uk" class="w-full p-3.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-150 text-slate-900 font-medium">
+                        </div>
+                        <p class="text-[11px] text-slate-400">Your email must follow the official <strong class="text-slate-500 font-semibold">firstname.surname</strong> structure.</p>
                     </div>
                 </div>
 
-                <!-- Scrollable Content -->
-                <div id="right-panel" class="w-full md:w-1/2 h-full overflow-y-auto p-8 bg-white border-l border-gray-100">
-                    <div class="max-w-xl mx-auto space-y-8 pb-20">
+                <!-- Right Panel (Scrollable Questions/Tasks) -->
+                <div id="right-panel" class="w-full md:w-1/2 h-full overflow-y-auto p-6 lg:p-8 bg-white border-t md:border-t-0 md:border-l border-slate-200/60">
+                    <div class="max-w-xl mx-auto space-y-8 pb-24">
+                        
+                        <!-- Multiple Choice Task Section -->
                         <div id="mc-section" class="space-y-6">
-                            <h2 class="text-xl font-bold border-b pb-2 text-indigo-900">Part 1: Multiple Choice</h2>
+                            <h2 class="text-lg font-black border-b pb-3 text-indigo-900 flex items-center gap-2">
+                                <span class="bg-indigo-100 text-indigo-700 w-6 h-6 rounded-md flex items-center justify-center text-xs">1</span>
+                                Part 1: Multiple Choice
+                            </h2>
                             <div id="mc-questions" class="space-y-6"></div>
                         </div>
 
-                        <div id="la-section" class="space-y-4 pt-6 border-t border-gray-100">
-                            <h2 class="text-xl font-bold text-indigo-900">Part 2: Long Answer</h2>
-                            <p id="la-text" class="text-gray-700 font-medium select-none pointer-events-none"></p>
-                            <p id="ai-warning" class="hidden text-red-600 font-bold text-sm tracking-wide">⚠️ AI detection is enabled</p>
-                            <textarea id="la-input" rows="5" placeholder="Type your full analysis here..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                        <!-- Long Answer Task Section -->
+                        <div id="la-section" class="space-y-4 pt-6 border-t border-slate-100">
+                            <h2 class="text-lg font-black text-indigo-900 flex items-center gap-2">
+                                <span class="bg-indigo-100 text-indigo-700 w-6 h-6 rounded-md flex items-center justify-center text-xs">2</span>
+                                Part 2: Analysis & Synthesis
+                            </h2>
+                            
+                            <!-- Prompt Question Box -->
+                            <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                                <p id="la-text" class="text-slate-700 font-medium leading-relaxed select-none"></p>
+                            </div>
+
+                            <!-- Context Warning Message (Reveals dynamically upon copy/paste/drag bypass events) -->
+                            <div id="ai-warning" class="hidden bg-red-50 text-red-700 border border-red-100 p-3 rounded-xl flex items-center gap-2 text-xs font-bold animate-pulse">
+                                <span>⚠️</span>
+                                <span>AI detection is active. Do not paste text from external tools.</span>
+                            </div>
+
+                            <!-- Text Area Input box -->
+                            <textarea id="la-input" rows="6" placeholder="Construct your analytical response here..." class="w-full p-4 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all duration-150 text-slate-800 leading-relaxed font-normal"></textarea>
                         </div>
 
-                        <button id="submit-btn" onclick="submitAssignment()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg shadow-md transition">
+                        <!-- Final Action Button -->
+                        <button id="submit-btn" onclick="submitAssignment()" class="w-full bg-indigo-600 hover:bg-indigo-700 active:scale-[0.98] text-white font-bold py-4 px-6 rounded-2xl shadow-md transition-all cursor-pointer">
                             Submit Assignment
                         </button>
                     </div>
                 </div>
             </div>
             
-            <div id="results-portal" class="hidden p-12 text-center space-y-4">
-                <h2 class="text-2xl font-black text-gray-900">Assignment Submitted Successfully!</h2>
+            <!-- Successful Submission Screen -->
+            <div id="results-portal" class="hidden max-w-md mx-auto my-20 p-8 text-center bg-white border border-slate-150 rounded-3xl shadow-xl space-y-6">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-100 rounded-full text-emerald-600 text-3xl font-bold animate-bounce">
+                    ✓
+                </div>
+                <div class="space-y-2">
+                    <h2 class="text-2xl font-black text-slate-900">Assignment Sent!</h2>
+                    <p class="text-sm text-slate-500 leading-relaxed">
+                        Your work has been securely logged and transmitted to your teacher's grading ledger. You can now close this tab.
+                    </p>
+                </div>
+                <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 text-left space-y-1.5">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest block">Logged Account</span>
+                    <strong id="final-email-receipt" class="text-sm text-slate-800 font-mono break-all"></strong>
+                </div>
             </div>
         </main>
     </div>
 
-    <div id="lockout-overlay" class="hidden fixed inset-0 bg-gray-900/60 backdrop-blur-md flex items-center justify-center z-50 text-center p-6">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-md border border-gray-100 space-y-4">
+    
+    <!-- Toast Popup System (Replaces default alerts securely and stylishly) -->
+    <div id="toast-container" class="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-sm flex flex-col gap-2 transition-all duration-300 pointer-events-none"></div>
+
+    <!-- Screen Blur Lockout Overlay (Anti-Cheat / Focus Switching Control) -->
+    <div id="lockout-overlay" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-md flex items-center justify-center z-50 text-center p-6">
+        <div class="bg-white p-8 rounded-3xl shadow-2xl max-w-md border border-slate-100 space-y-5 animate-in fade-in zoom-in duration-250">
             <div class="text-indigo-600 text-5xl font-extrabold animate-bounce">⚠️</div>
-            <h2 class="text-2xl font-black text-gray-900">Quiz Suspended</h2>
-            <p class="text-gray-600 text-sm leading-relaxed">
-                The portal has been blurred because you switched windows or opened another tool. Click anywhere inside this window to resume your quiz.
+            <h2 class="text-2xl font-black text-slate-900">Assessment Paused</h2>
+            <p class="text-slate-600 text-sm leading-relaxed">
+                The portal has been secured because you switched tabs, loaded a separate helper tool, or click away from this page.
             </p>
-            <p class="text-xs text-indigo-500 font-semibold uppercase tracking-wider">
-                All tab switching and focus loss events are recorded.
+            <button onclick="dismissLockout()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 px-4 rounded-xl shadow-md transition-all cursor-pointer text-sm">
+                Click here to resume your quiz
+            </button>
+            <p class="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">
+                All focus loss incidents are recorded in your grading log.
             </p>
         </div>
     </div>
 
+    <!-- First-Time Email Double Check / Confirmation Overlay -->
+    <div id="confirm-modal" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-md flex items-center justify-center z-50 text-center p-6">
+        <div class="bg-white p-8 rounded-3xl shadow-2xl max-w-md border border-slate-100 space-y-6 animate-in fade-in zoom-in duration-250">
+            <div class="text-indigo-600 text-5xl font-extrabold">📧</div>
+            <h2 class="text-2xl font-black text-slate-900">Confirm Your Identity</h2>
+            <p class="text-slate-600 text-sm leading-relaxed">
+                Is your official school email spelled exactly like this?
+                <strong id="confirm-email-display" class="text-indigo-600 text-lg block mt-2 font-mono break-all font-black select-all bg-indigo-50 py-2 px-4 rounded-xl border border-indigo-100"></strong>
+            </p>
+            <div class="p-3 bg-red-50 border border-red-100 rounded-xl">
+                <p class="text-xs text-red-600 font-bold leading-normal">
+                    ⚠️ If there is a typo (e.g., misspelled name), your grades will not connect to your profile.
+                </p>
+            </div>
+            <div class="flex gap-4">
+                <button onclick="closeConfirmModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3.5 px-4 rounded-xl transition text-sm cursor-pointer">
+                    No, Fix It
+                </button>
+                <button onclick="saveAndSubmit()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 px-4 rounded-xl transition text-sm shadow-md cursor-pointer">
+                    Yes, It's Correct!
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Set to your exact direct Power Automate workflow trigger URL
+        
+        // Target endpoint configuration (Direct Power Automate POST address)
         const BACKEND_URL = "https://default4a7dcc91048348f19bae8f17879c3c.f9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/69f994d9c442436d98293e9736d91e2f/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JSlxpAAXM7COgS_rD1r9wXUnW-H6sfZa1aIePHekJBY"; 
+        
         let quizData = null;
         let quizId = "101";
+        let classId = null;
+        let assignmentId = null;
         let isStacked = false;
 
-        // Telemetry Variables
+        // Interactive Anti-Cheat & Telemetry Tracking Datapoints
         const pageLoadTime = Date.now();
         let tabSwitchCount = 0;
         let textboxKeystrokes = 0;
         let pasteAttemptCount = 0;
 
-        // Listen for tab switching/leaving the window
+        // Extract deep-link environment query variables passed by Teams
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('quiz')) quizId = urlParams.get('quiz').trim();
+        if (urlParams.has('classId')) classId = urlParams.get('classId').trim();
+        if (urlParams.has('assignmentId')) assignmentId = urlParams.get('assignmentId').trim();
+
+
+        // Watch for window tab-switching or multi-screen setups
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
                 tabSwitchCount++;
             }
         });
 
-        // Anti-Screenshot and Anti-Cheat: Blur everything when focus is lost
+        // Trigger heavy blur lockout protection when focus is entirely pulled
         window.addEventListener('blur', () => {
             document.getElementById('portal-container').classList.add('blur-lockout');
             document.getElementById('lockout-overlay').classList.remove('hidden');
         });
 
-        // Unblur when they click back into the window
-        window.addEventListener('focus', () => {
+        function dismissLockout() {
             document.getElementById('portal-container').classList.remove('blur-lockout');
             document.getElementById('lockout-overlay').classList.add('hidden');
-        });
+        }
 
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('quiz')) quizId = urlParams.get('quiz').trim();
+        // Custom Toast System to gracefully alerts users
+        function showToast(message, type = "error") {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            const bgClass = type === "error" ? "bg-red-600 text-white" : "bg-slate-900 text-white";
+            
+            toast.className = `p-4 rounded-2xl shadow-xl flex items-center gap-3 text-xs font-semibold ${bgClass} transition-all duration-300 pointer-events-auto transform translate-y-2 opacity-0`;
+            toast.innerHTML = `
+                <span>${type === 'error' ? '⚠️' : 'ℹ️'}</span>
+                <span class="flex-1">${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation on next frame
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
 
+            // Disappear after a set period
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 4000);
+        }
+
+        // Layout controls (Switch left-right split screen to vertical scroll)
         function toggleLayout() {
             isStacked = !isStacked;
             const container = document.getElementById('portal');
@@ -153,15 +285,20 @@
             }
         }
 
+        // Load yaml resources dynamically based on specified quiz identifier
         async function loadQuiz() {
             const url = "https://raw.githubusercontent.com/science-boa/BOA-Quiz/main/quizzes/QUIZ_" + quizId + ".yaml";
             try {
                 const response = await fetch(url);
+                if (!response.ok) throw new Error('Network error loading quiz schema');
+                
                 quizData = jsyaml.load(await response.text());
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('portal').classList.remove('hidden');
+                
                 renderQuiz();
                 setupInputProtections();
+                checkCachedEmail();
                 
                 if (window.innerWidth < 768) {
                     toggleLayout();
@@ -172,43 +309,81 @@
             }
         }
 
+
+        // Check cache storage and retrieve student email on device loads
+        function checkCachedEmail() {
+            const cachedEmail = localStorage.getItem('boa_student_email');
+            const emailInput = document.getElementById('student-email');
+            if (cachedEmail && emailInput) {
+                emailInput.value = cachedEmail;
+            }
+        }
+
+        // Intelligent parser logic to auto-format email text & repair common mistakes
+        function normalizeEmail(email) {
+            let clean = email.trim().toLowerCase().replace(/\s+/g, '');
+            if (!clean) return "";
+
+            // Automatically append domain if missing
+            if (!clean.includes('@')) {
+                return clean + '@boa-academy.co.uk';
+            }
+
+            const parts = clean.split('@');
+            const username = parts[0];
+            const domain = parts[1];
+
+            // Resolve any domain misspellings to correct target
+            if (domain.includes('boa') || domain.includes('academy') || domain.includes('co.uk')) {
+                return username + '@boa-academy.co.uk';
+            }
+
+            return clean;
+        }
+
         function setupInputProtections() {
             const laInput = document.getElementById('la-input');
             const laText = document.getElementById('la-text');
             const aiWarning = document.getElementById('ai-warning');
+            const emailInput = document.getElementById('student-email');
+
+            // Format typing entries dynamically on blur
+            if (emailInput) {
+                emailInput.addEventListener('blur', () => {
+                    if (emailInput.value) {
+                        emailInput.value = normalizeEmail(emailInput.value);
+                    }
+                });
+            }
 
             if (laInput) {
-                // Block cut, copy, paste operations on the textbox
+                // Prevent clipboard/copy features inside assessment
                 ['copy', 'cut', 'paste'].forEach(eventName => {
                     laInput.addEventListener(eventName, (e) => {
                         e.preventDefault();
                         if (eventName === 'paste') {
                             pasteAttemptCount++;
-                            if (aiWarning) {
-                                aiWarning.classList.remove('hidden');
-                            }
-                            alert("Direct copying and pasting is disabled for this analysis section. Please hand-type your response.");
+                            if (aiWarning) aiWarning.classList.remove('hidden');
+                            showToast("Direct copy-pasting is blocked. Please hand-type your response.", "error");
                         }
                     });
                 });
 
-                // Block drag-and-drop actions on the textbox
+                // Halt file drop bypass operations
                 ['dragover', 'dragenter', 'drop'].forEach(eventName => {
                     laInput.addEventListener(eventName, (e) => {
                         if (eventName === 'drop') {
                             e.preventDefault();
-                            pasteAttemptCount++; // Increment bypass/paste count
-                            if (aiWarning) {
-                                aiWarning.classList.remove('hidden');
-                            }
-                            alert("Direct dragging and dropping of text is disabled. Please hand-type your response.");
+                            pasteAttemptCount++; 
+                            if (aiWarning) aiWarning.classList.remove('hidden');
+                            showToast("Dragging external text objects is blocked. Please hand-type.", "error");
                         } else if (eventName === 'dragover' || eventName === 'dragenter') {
-                            e.preventDefault(); // Required to allow drop interception
+                            e.preventDefault();
                         }
                     });
                 });
 
-                // Track user keystrokes
+                // Count student entry keyboard rates
                 laInput.addEventListener('keydown', (e) => {
                     if (e.key.length === 1) {
                         textboxKeystrokes++;
@@ -217,13 +392,12 @@
             }
 
             if (laText) {
-                // Prevent copy events specifically on the question text
+                // Intercept clicks on question content to protect resource values
                 laText.addEventListener('copy', (e) => {
                     e.preventDefault();
-                    alert("Copying assignment questions is disabled on this portal.");
+                    showToast("Duplication of quiz queries is restricted.", "error");
                 });
 
-                // Prevent right-click menu specifically on the question text
                 laText.addEventListener('contextmenu', (e) => {
                     e.preventDefault();
                 });
@@ -232,56 +406,120 @@
 
         function renderQuiz() {
             document.getElementById('quiz-title').innerText = quizData.title || "Quiz Portal";
+            
             if (quizData.video_url) {
                 document.getElementById('quiz-video').src = quizData.video_url.replace("watch?v=", "embed/");
                 document.getElementById('video-container').classList.remove('hidden');
             }
+            
             const mcContainer = document.getElementById('mc-questions');
             quizData.multiple_choice?.forEach(q => {
                 const qDiv = document.createElement('div');
-                qDiv.innerHTML = "<p class='font-semibold text-gray-900'>" + q.question_num + ". " + q.text + "</p>" +
-                    ['A', 'B', 'C', 'D'].map(l => "<label class='flex items-center space-x-3 p-2 border rounded-lg cursor-pointer hover:bg-gray-50'><input type='radio' name='mc_" + q.question_num + "' value='" + l + "'><span>" + l + ": " + q[l] + "</span></label>").join('');
+                qDiv.className = "space-y-3";
+                qDiv.innerHTML = `
+                    <p class="font-bold text-slate-800">${q.question_num}. ${q.text}</p>
+                    <div class="grid grid-cols-1 gap-2">
+                        ${['A', 'B', 'C', 'D'].map(l => `
+                            <label class="flex items-center space-x-3 p-3.5 border border-slate-200 rounded-xl cursor-pointer hover:bg-slate-50 hover:border-indigo-200 active:bg-indigo-50/50 transition duration-150">
+                                <input type="radio" name="mc_${q.question_num}" value="${l}" class="accent-indigo-600 w-4 h-4">
+                                <span class="text-sm text-slate-700 font-medium"><strong>${l}:</strong> ${q[l]}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
                 mcContainer.appendChild(qDiv);
             });
-            if (quizData.long_answer) document.getElementById('la-text').innerText = quizData.long_answer.text;
+            
+            if (quizData.long_answer) {
+                document.getElementById('la-text').innerText = quizData.long_answer.text;
+            }
         }
 
-        async function submitAssignment() {
-            const btn = document.getElementById('submit-btn');
-            const email = document.getElementById('student-email').value.trim().toLowerCase();
+        function closeConfirmModal() {
+            document.getElementById('confirm-modal').classList.add('hidden');
+        }
 
-            if (!email || !email.endsWith('@boa-academy.co.uk')) {
-                alert("Submission blocked. Please enter a valid school email address ending with @boa-academy.co.uk.");
+        function saveAndSubmit() {
+            const emailInput = document.getElementById('student-email');
+            const cleanEmail = normalizeEmail(emailInput.value);
+            
+            // Set device local storage profile for quick login next time
+            localStorage.setItem('boa_student_email', cleanEmail);
+            closeConfirmModal();
+            executePayloadSubmission();
+        }
+
+
+        async function submitAssignment() {
+            const emailInput = document.getElementById('student-email');
+            const rawEmail = emailInput.value.trim();
+            const email = normalizeEmail(rawEmail);
+
+            // 1. Validate that input is not empty
+            if (!email) {
+                showToast("Please enter your school email address to submit.", "error");
                 return;
             }
 
-            const mc_answers = {};
+            // 2. Enforce official school domain syntax restriction
+            if (!email.endsWith('@boa-academy.co.uk')) {
+                showToast("Submission denied. Must use a valid '@boa-academy.co.uk' address.", "error");
+                return;
+            }
+
+            // 3. Ensure the username part (before @) contains a '.' (first.last format check)
+            const usernamePart = email.split('@')[0];
+            if (!usernamePart.includes('.')) {
+                showToast("Invalid format. Please enter your email using the 'firstname.surname' format.", "error");
+                return;
+            }
+
+            // 4. Ensure all multiple-choice responses are checked
             let allAnswered = true;
-            
             quizData.multiple_choice?.forEach(q => {
-                const selected = document.querySelector("input[name='mc_" + q.question_num + "']:checked");
-                if (!selected) {
-                    allAnswered = false;
-                } else {
-                    const selectedLetter = selected.value;
-                    mc_answers[q.question_num] = {
-                        answer: q[selectedLetter],
-                        explanation: q.explanation || null
-                    };
-                }
+                const selected = document.querySelector(`input[name="mc_${q.question_num}"]:checked`);
+                if (!selected) allAnswered = false;
             });
 
             if (!allAnswered) {
-                alert("Please answer all multiple-choice questions.");
+                showToast("Please complete all multiple-choice questions before submitting.", "error");
                 return;
             }
 
+            // 5. Verify the long answer is filled in
             const laValue = document.getElementById('la-input').value;
             if (!laValue.trim()) {
-                alert("Please provide a response for the long answer question.");
+                showToast("Please complete the long answer prompt analysis.", "error");
                 return;
             }
 
+            // Verify if the typed email is cached. If changed or empty, prompt double confirmation
+            const cachedEmail = localStorage.getItem('boa_student_email');
+            if (!cachedEmail || cachedEmail !== email) {
+                document.getElementById('confirm-email-display').innerText = email;
+                document.getElementById('confirm-modal').classList.remove('hidden');
+            } else {
+                executePayloadSubmission();
+            }
+        }
+
+        async function executePayloadSubmission() {
+            const btn = document.getElementById('submit-btn');
+            const email = normalizeEmail(document.getElementById('student-email').value);
+            const laValue = document.getElementById('la-input').value;
+
+            // Bundle selected radio values securely
+            const mc_answers = {};
+            quizData.multiple_choice?.forEach(q => {
+                const selected = document.querySelector(`input[name="mc_${q.question_num}"]:checked`);
+                const selectedLetter = selected.value;
+                mc_answers[q.question_num] = {
+                    answer: q[selectedLetter],
+                    explanation: q.explanation || null
+                };
+            });
+
+            // Prevent double taps while transaction is active
             btn.disabled = true;
             btn.innerText = "Submitting... 0s";
             
@@ -291,12 +529,17 @@
                 btn.innerText = "Submitting... " + seconds + "s";
             }, 1000);
 
+            // Construct exact schema for storage triggers
             const payload = {
                 quiz_id: quizId,
                 student_email: email,
                 mc_answers: mc_answers, 
                 la_input: laValue,
                 quiz_schema: quizData,
+                teams_context: {
+                    class_id: classId,
+                    assignment_id: assignmentId
+                },
                 telemetry: {
                     total_page_seconds: Math.round((Date.now() - pageLoadTime) / 1000),
                     tab_switch_count: tabSwitchCount,
@@ -313,7 +556,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    credentials: 'omit', // Strips school single sign-on cookies that cause gateway authentication errors
+                    credentials: 'omit', // Bypasses corporate credentials and safe blocks
                     mode: 'cors',
                     body: JSON.stringify(payload)
                 });
@@ -321,17 +564,18 @@
                 clearInterval(timer);
                 
                 if (response.ok) {
+                    document.getElementById('final-email-receipt').innerText = email;
                     document.getElementById('portal').classList.add('hidden');
                     document.getElementById('results-portal').classList.remove('hidden');
                 } else {
                     const errorText = await response.text();
-                    alert("Submission failed: " + errorText);
+                    showToast("Server rejection: " + errorText, "error");
                     btn.disabled = false;
                     btn.innerText = "Submit Assignment";
                 }
             } catch (err) { 
                 clearInterval(timer);
-                alert("Network error. Please check your connection."); 
+                showToast("Transmission error. Please check your network connection and retry.", "error"); 
                 btn.disabled = false;
                 btn.innerText = "Submit Assignment";
             }
