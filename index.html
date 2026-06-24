@@ -51,7 +51,7 @@
 
                         <div id="la-section" class="space-y-4 pt-6 border-t border-gray-100">
                             <h2 class="text-xl font-bold text-indigo-900">Part 2: Long Answer</h2>
-                            <p id="la-text" class="text-gray-700 font-medium"></p>
+                            <p id="la-text" class="text-gray-700 font-medium select-none pointer-events-none"></p>
                             <textarea id="la-input" rows="5" placeholder="Type your full analysis here..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
                         </div>
 
@@ -74,6 +74,19 @@
         let quizData = null;
         let quizId = "101";
         let isStacked = false;
+
+        // Telemetry Variables
+        const pageLoadTime = Date.now();
+        let tabSwitchCount = 0;
+        let textboxKeystrokes = 0;
+        let pasteAttemptCount = 0;
+
+        // Listen for tab switching/leaving the window
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                tabSwitchCount++;
+            }
+        });
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('quiz')) quizId = urlParams.get('quiz').trim();
@@ -102,6 +115,7 @@
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('portal').classList.remove('hidden');
                 renderQuiz();
+                setupInputProtections();
                 
                 if (window.innerWidth < 768) {
                     toggleLayout();
@@ -109,6 +123,44 @@
             } catch (err) {
                 document.getElementById('loading').classList.add('hidden');
                 document.getElementById('error-container').classList.remove('hidden');
+            }
+        }
+
+        function setupInputProtections() {
+            const laInput = document.getElementById('la-input');
+            const laText = document.getElementById('la-text');
+
+            if (laInput) {
+                // Block cut, copy, paste operations on the textbox
+                ['copy', 'cut', 'paste'].forEach(eventName => {
+                    laInput.addEventListener(eventName, (e) => {
+                        e.preventDefault();
+                        if (eventName === 'paste') {
+                            pasteAttemptCount++;
+                            alert("Direct copying and pasting is disabled for this analysis section. Please hand-type your response.");
+                        }
+                    });
+                });
+
+                // Track user keystrokes
+                laInput.addEventListener('keydown', (e) => {
+                    if (e.key.length === 1) {
+                        textboxKeystrokes++;
+                    }
+                });
+            }
+
+            if (laText) {
+                // Devious block: Prevent copy events specifically on the question text
+                laText.addEventListener('copy', (e) => {
+                    e.preventDefault();
+                    alert("Copying assignment questions is disabled on this portal.");
+                });
+
+                // Prevent right-click menu specifically on the question text
+                laText.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                });
             }
         }
 
@@ -158,7 +210,8 @@
                 return;
             }
 
-            if (!document.getElementById('la-input').value.trim()) {
+            const laValue = document.getElementById('la-input').value;
+            if (!laValue.trim()) {
                 alert("Please provide a response for the long answer question.");
                 return;
             }
@@ -176,8 +229,15 @@
                 quiz_id: quizId,
                 student_email: email,
                 mc_answers: mc_answers, 
-                la_input: document.getElementById('la-input').value,
+                la_input: laValue,
                 quiz_schema: quizData,
+                telemetry: {
+                    total_page_seconds: Math.round((Date.now() - pageLoadTime) / 1000),
+                    tab_switch_count: tabSwitchCount,
+                    textbox_keystrokes: textboxKeystrokes,
+                    textbox_char_count: laValue.length,
+                    paste_attempt_count: pasteAttemptCount
+                },
                 KEY: 29031977
             };
             
