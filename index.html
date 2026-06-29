@@ -73,10 +73,12 @@
         const BACKEND_URL = "https://default4a7dcc91048348f19bae8f17879c3c.f9.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/69f994d9c442436d98293e9736d91e2f/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=JSlxpAAXM7COgS_rD1r9wXUnW-H6sfZa1aIePHekJBY"; 
         let quizData = null;
         let quizId = "101";
+        let userEmail = "";
         let isStacked = false;
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('quiz')) quizId = urlParams.get('quiz').trim();
+        if (urlParams.has('user')) userEmail = urlParams.get('user').trim();
 
         function toggleLayout() {
             isStacked = !isStacked;
@@ -211,7 +213,12 @@
             }
         }
 
-        window.onload = () => { loadQuiz(); };
+        window.onload = () => { 
+            loadQuiz(); 
+            if (userEmail) {
+                document.getElementById('student-email').value = userEmail;
+            }
+        };
     </script>
 </body>
 </html>
