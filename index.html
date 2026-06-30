@@ -51,7 +51,13 @@
 
                         <div id="la-section" class="space-y-4 pt-6 border-t border-gray-100">
                             <h2 class="text-xl font-bold text-indigo-900">Part 2: Long Answer</h2>
-                            <p id="la-text" class="text-gray-700 font-medium"></p>
+                            <p id="la-text" class="text-gray-700 font-medium select-all"></p>
+                            
+                            <!-- AI Abuse Prevention Warning Banner -->
+                            <div id="copy-paste-warning" class="hidden bg-red-50 border-l-4 border-red-500 p-3 text-red-800 text-sm font-semibold rounded-r-lg my-2 flex items-center space-x-2 transition-all duration-300">
+                                <span>⚠️ Copy/Paste blocked to prevent AI abuse</span>
+                            </div>
+
                             <textarea id="la-input" rows="5" placeholder="Type your full analysis here..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
                         </div>
 
@@ -75,6 +81,11 @@
         let quizId = "101";
         let userEmail = "";
         let isStacked = false;
+        let warningTimeout = null;
+
+        // Timing analysis variables
+        let pageOpenTime = null;
+        let firstKeystrokeTime = null;
 
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.has('quiz')) quizId = urlParams.get('quiz').trim();
@@ -130,6 +141,17 @@
             if (quizData.long_answer) document.getElementById('la-text').innerText = quizData.long_answer.text;
         }
 
+        // Show the security warning banner and automatically hide it after a few seconds
+        function triggerAbuseWarning() {
+            const banner = document.getElementById('copy-paste-warning');
+            banner.classList.remove('hidden');
+            
+            clearTimeout(warningTimeout);
+            warningTimeout = setTimeout(() => {
+                banner.classList.add('hidden');
+            }, 4000);
+        }
+
         async function submitAssignment() {
             const btn = document.getElementById('submit-btn');
             const email = document.getElementById('student-email').value;
@@ -174,13 +196,26 @@
                 btn.innerText = "Submitting... " + seconds + "s";
             }, 1000);
 
+            // Calculate timing metrics
+            const submitTime = Date.now();
+            const totalSecs = (submitTime - pageOpenTime) / 1000;
+            const total_time = parseFloat(totalSecs.toFixed(1));
+
+            let long_answer_time = null;
+            if (firstKeystrokeTime) {
+                const laSecs = (submitTime - firstKeystrokeTime) / 1000;
+                long_answer_time = parseFloat(laSecs.toFixed(1));
+            }
+
             const payload = {
                 quiz_id: quizId,
                 student_email: email,
                 mc_answers: mc_answers, 
                 la_input: document.getElementById('la-input').value,
                 quiz_schema: quizData,
-                KEY: 29031977
+                KEY: 29031977,
+                total_time: total_time,
+                long_answer_time: long_answer_time
             };
             
             try {
@@ -214,10 +249,34 @@
         }
 
         window.onload = () => { 
+            // Capture initial load time
+            pageOpenTime = Date.now();
+
             loadQuiz(); 
             if (userEmail) {
                 document.getElementById('student-email').value = userEmail;
             }
+
+            // Copy and Paste abuse prevention handlers
+            const laText = document.getElementById('la-text');
+            const laInput = document.getElementById('la-input');
+
+            laText.addEventListener('copy', (e) => {
+                e.preventDefault();
+                triggerAbuseWarning();
+            });
+
+            laInput.addEventListener('paste', (e) => {
+                e.preventDefault();
+                triggerAbuseWarning();
+            });
+
+            // Capture first keystroke in the long answer box
+            laInput.addEventListener('input', () => {
+                if (!firstKeystrokeTime) {
+                    firstKeystrokeTime = Date.now();
+                }
+            });
         };
     </script>
 </body>
