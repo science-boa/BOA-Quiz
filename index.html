@@ -51,7 +51,7 @@
 
                         <div id="la-section" class="space-y-4 pt-6 border-t border-gray-100">
                             <h2 class="text-xl font-bold text-indigo-900">Part 2: Long Answer</h2>
-                            <p id="la-text" class="text-gray-700 font-medium select-all"></p>
+                            <p id="la-text" class="text-gray-700 font-medium select-all" draggable="false"></p>
                             
                             <!-- AI Abuse Prevention Warning Banner -->
                             <div id="copy-paste-warning" class="hidden bg-red-50 border-l-4 border-red-500 p-3 text-red-800 text-sm font-semibold rounded-r-lg my-2 flex items-center space-x-2 transition-all duration-300">
@@ -271,12 +271,29 @@
                 triggerAbuseWarning();
             });
 
-            // Capture first keystroke in the long answer box
-            laInput.addEventListener('input', () => {
+            // Prevent dragging from the question text
+            laText.addEventListener('dragstart', (e) => {
+                e.preventDefault();
+            });
+
+            // Prevent dropping into the long-answer input field
+            laInput.addEventListener('drop', (e) => {
+                e.preventDefault();
+                triggerAbuseWarning();
+            });
+
+            // Robust keystroke registration
+            const recordFirstKeystroke = () => {
                 if (!firstKeystrokeTime) {
                     firstKeystrokeTime = Date.now();
                 }
-            });
+            };
+
+            // Bind to multiple events for maximum compatibility across devices, platforms and auto-fills
+            laInput.addEventListener('keydown', recordFirstKeystroke);
+            laInput.addEventListener('input', recordFirstKeystroke);
+            laInput.addEventListener('keyup', recordFirstKeystroke);
+            laInput.addEventListener('change', recordFirstKeystroke);
         };
     </script>
 </body>
