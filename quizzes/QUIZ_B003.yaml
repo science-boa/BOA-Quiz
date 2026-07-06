@@ -1,0 +1,132 @@
+quiz_id: B003
+video_url: https://www.youtube.com/watch?v=mZt1Gn0R22Q
+title: 'GCSE Biology: Mechanisms of Evolution and Natural Selection'
+multiple_choice:
+- question_num: 1
+  text: Which scientist proposed the theory that organisms evolve by passing on traits
+    acquired during their lifetime?
+  A: Charles Darwin
+  B: Jean-Baptiste Lamarck
+  C: Gregor Mendel
+  D: Alfred Russel Wallace
+  answer: Jean-Baptiste Lamarck
+  points: 1
+  explanation: Lamarck incorrectly proposed the theory of 'inheritance of acquired
+    characteristics', suggesting that traits developed during an organism's life could
+    be passed to offspring.
+- question_num: 2
+  text: What is the primary cause of variation within a population according to modern
+    evolutionary theory?
+  A: Intentional adaptation
+  B: Random genetic mutations
+  C: Environmental pressure
+  D: Organism desire
+  answer: Random genetic mutations
+  points: 1
+  explanation: Genetic mutations occur randomly in DNA, creating new alleles that
+    lead to variation in traits within a population.
+- question_num: 3
+  text: Which of the following best describes 'evolutionary fitness'?
+  A: The physical strength of an organism
+  B: The ability of an organism to survive for a long time
+  C: How well-suited an organism is to its current environment
+  D: The size of the organism
+  answer: How well-suited an organism is to its current environment
+  points: 1
+  explanation: Fitness in an evolutionary context refers to an organism's ability
+    to survive and reproduce in its specific environment.
+- question_num: 4
+  text: Why does evolution occur through reproduction rather than just survival?
+  A: Survival does not pass genes to the next generation
+  B: Reproduction is easier than survival
+  C: Only the strongest survive
+  D: Evolution requires death
+  answer: Survival does not pass genes to the next generation
+  points: 1
+  explanation: For a trait to be passed on and influence the evolution of a species,
+    the organism must successfully reproduce and pass its genes to offspring.
+- question_num: 5
+  text: Why do humans crave high-calorie foods?
+  A: Because evolution anticipated modern food abundance
+  B: Because it is a learned behavior
+  C: Because calories were historically scarce and it was an evolutionary advantage
+  D: Because it is a modern genetic mutation
+  answer: Because calories were historically scarce and it was an evolutionary advantage
+  points: 1
+  explanation: Evolutionary traits are often adaptations to past environments; the
+    craving for calories was beneficial when food was scarce, but is now maladaptive
+    in environments with excess food.
+- question_num: 6
+  text: What determines which genes are preserved in a population?
+  A: An external mechanism selecting the best genes
+  B: The ability of the gene to result in more copies being passed to the next generation
+  C: The intelligence of the organism
+  D: The physical size of the organism
+  answer: The ability of the gene to result in more copies being passed to the next
+    generation
+  points: 1
+  explanation: Natural selection acts on genes that increase the reproductive success
+    of the organism, leading to those genes becoming more common.
+- question_num: 7
+  text: Can an individual organism evolve during its lifetime?
+  A: Yes, by adapting to its environment
+  B: Yes, by developing new traits
+  C: No, evolution occurs at the population level over generations
+  D: Only if the organism is a plant
+  answer: No, evolution occurs at the population level over generations
+  points: 1
+  explanation: Evolution is defined as a change in the inherited characteristics of
+    a population over time, not changes within a single individual.
+- question_num: 8
+  text: What is the significance of the male anglerfish in the context of evolution?
+  A: It shows that survival is more important than reproduction
+  B: It demonstrates that traits can be poorly suited for survival if they aid reproduction
+  C: It proves that evolution has a plan
+  D: It shows that size is the most important factor in fitness
+  answer: It demonstrates that traits can be poorly suited for survival if they aid
+    reproduction
+  points: 1
+  explanation: The anglerfish example illustrates that reproductive success is the
+    ultimate driver of evolution, even if the organism is poorly adapted for long-term
+    survival.
+- question_num: 9
+  text: What is the unit of selection in natural selection?
+  A: The entire species
+  B: The individual organism
+  C: The gene
+  D: The ecosystem
+  answer: The gene
+  points: 1
+  explanation: Natural selection acts on the genetic level because it is the genes
+    that are passed on to the next generation.
+- question_num: 10
+  text: What is the outcome of any mutation that allows more copies of a gene to pass
+    to the next generation?
+  A: It will disappear
+  B: It will propagate
+  C: It will cause the organism to die
+  D: It will remain unchanged
+  answer: It will propagate
+  points: 1
+  explanation: If a mutation increases the reproductive success of an organism, the
+    gene will be passed on more frequently, causing it to spread through the population.
+long_answer:
+  question_num: 1
+  text: Explain the process of natural selection and why it is incorrect to say that
+    an individual organism evolves during its lifetime. In your answer, refer to the
+    role of genetic mutation, reproduction, and environmental pressure.
+  points: 6
+  rubric: "Level 1 (1-2 marks): Simple statements about evolution or survival. Mentions\
+    \ that organisms change but lacks scientific detail.\nLevel 2 (3-4 marks): Clear\
+    \ description of natural selection. Explains that mutations cause variation and\
+    \ that individuals with advantageous traits are more likely to survive and reproduce.\
+    \ Mentions that evolution happens over generations.\nLevel 3 (5-6 marks): Detailed,\
+    \ structured explanation. Correctly identifies that mutations are random and provide\
+    \ variation. Explains that environmental pressure selects for advantageous traits,\
+    \ which are then passed on through reproduction. Explicitly states that evolution\
+    \ is a change in the population's gene pool over time, not an individual's change.\n\
+    Indicative Content: \n- Mutations create random genetic variation.\n- Individuals\
+    \ do not evolve; populations do.\n- Environmental pressure acts as a selection\
+    \ factor.\n- Individuals with advantageous traits are more likely to survive and\
+    \ reproduce.\n- Genes are passed to offspring (reproduction).\n- Evolution is\
+    \ a change in allele frequency over generations."

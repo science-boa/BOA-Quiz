@@ -1,0 +1,155 @@
+quiz_id: B005
+video_url: https://www.youtube.com/watch?v=BnsZo4j1YvU
+title: 'GCSE Biology: The Nervous System and Reflex Arcs'
+multiple_choice:
+- question_num: 1
+  text: Which two systems are primarily responsible for coordination and control in
+    large multicellular organisms?
+  A: The digestive and respiratory systems
+  B: The nervous and endocrine systems
+  C: The circulatory and excretory systems
+  D: The skeletal and muscular systems
+  answer: The nervous and endocrine systems
+  points: 1
+  explanation: The nervous system uses electrical impulses for rapid response, while
+    the endocrine system uses chemical messengers (hormones) in the blood for slower,
+    longer-lasting effects.
+- question_num: 2
+  text: What is the function of a synapse?
+  A: To insulate the nerve cell
+  B: To generate electrical impulses
+  C: To allow chemical transmission between neurons
+  D: To store neurotransmitters permanently
+  answer: To allow chemical transmission between neurons
+  points: 1
+  explanation: A synapse is a gap between neurons where chemical messengers (neurotransmitters)
+    diffuse across to trigger an impulse in the next cell.
+- question_num: 3
+  text: What are the two main components of the central nervous system (CNS)?
+  A: Sensory and motor neurons
+  B: The brain and the spinal cord
+  C: The nerves and the glands
+  D: The receptors and the effectors
+  answer: The brain and the spinal cord
+  points: 1
+  explanation: The CNS acts as the processing centre of the body, consisting specifically
+    of the brain and the spinal cord.
+- question_num: 4
+  text: Which type of neuron carries impulses from receptors to the CNS?
+  A: Motor neuron
+  B: Relay neuron
+  C: Sensory neuron
+  D: Interneuron
+  answer: Sensory neuron
+  points: 1
+  explanation: Sensory neurons are specialized to detect stimuli and transmit the
+    information as electrical impulses to the central nervous system.
+- question_num: 5
+  text: What is the role of an effector in the nervous system?
+  A: To detect changes in the environment
+  B: To process information and coordinate a response
+  C: To transmit impulses to the brain
+  D: To carry out a response, such as muscle contraction or hormone secretion
+  answer: To carry out a response, such as muscle contraction or hormone secretion
+  points: 1
+  explanation: Effectors are muscles or glands that respond to nervous impulses to
+    bring about a change in the body.
+- question_num: 6
+  text: What is the primary purpose of a reflex arc?
+  A: To allow for conscious thought before acting
+  B: To provide a rapid, automatic response to prevent harm
+  C: To coordinate complex voluntary movements
+  D: To store memories of painful experiences
+  answer: To provide a rapid, automatic response to prevent harm
+  points: 1
+  explanation: Reflex arcs bypass the conscious brain to ensure a fast reaction to
+    dangerous stimuli, minimizing potential damage to the body.
+- question_num: 7
+  text: How do chemicals move across a synapse?
+  A: By active transport
+  B: By osmosis
+  C: By diffusion
+  D: By electrical conduction
+  answer: By diffusion
+  points: 1
+  explanation: Neurotransmitters are released into the synaptic cleft and move from
+    an area of high concentration to low concentration via diffusion.
+- question_num: 8
+  text: Which neuron connects the sensory neuron to the motor neuron in a reflex arc?
+  A: Relay neuron
+  B: Motor neuron
+  C: Sensory neuron
+  D: Effector neuron
+  answer: Relay neuron
+  points: 1
+  explanation: The relay neuron is located within the spinal cord and acts as a bridge
+    between sensory and motor neurons.
+- question_num: 9
+  text: What is a stimulus?
+  A: A muscle contraction
+  B: A change in the environment detected by receptors
+  C: A chemical released by a gland
+  D: An electrical impulse in a nerve
+  answer: A change in the environment detected by receptors
+  points: 1
+  explanation: A stimulus is any change in the internal or external environment, such
+    as heat, pressure, or light, that triggers a response.
+- question_num: 10
+  text: Which of the following is an example of an effector?
+  A: The spinal cord
+  B: A receptor cell
+  C: A bicep muscle
+  D: A sensory neuron
+  answer: A bicep muscle
+  points: 1
+  explanation: Muscles and glands are the two types of effectors that respond to impulses
+    from the motor neurons.
+- question_num: 11
+  text: What happens to the electrical impulse when it reaches the end of a neuron?
+  A: It continues directly into the next neuron
+  B: It is converted into a chemical signal
+  C: It stops and is lost as heat
+  D: It is stored in the synapse
+  answer: It is converted into a chemical signal
+  points: 1
+  explanation: The electrical impulse triggers the release of neurotransmitters, effectively
+    converting the signal into a chemical form to cross the synaptic gap.
+- question_num: 12
+  text: What is the correct sequence of a reflex arc?
+  A: Stimulus -> Motor -> Relay -> Sensory -> Effector
+  B: Stimulus -> Sensory -> Relay -> Motor -> Effector
+  C: Stimulus -> Relay -> Sensory -> Motor -> Effector
+  D: Stimulus -> Sensory -> Motor -> Relay -> Effector
+  answer: Stimulus -> Sensory -> Relay -> Motor -> Effector
+  points: 1
+  explanation: 'The pathway follows a logical flow: the stimulus is detected by a
+    receptor, sent via sensory neuron to the CNS (relay), then out via motor neuron
+    to the effector.'
+- question_num: 13
+  text: What is the role of the motor neuron?
+  A: To detect the stimulus
+  B: To transmit impulses from the CNS to the effector
+  C: To transmit impulses from the receptor to the CNS
+  D: To process the information in the brain
+  answer: To transmit impulses from the CNS to the effector
+  points: 1
+  explanation: Motor neurons carry the processed instructions from the central nervous
+    system to the muscles or glands to initiate a response.
+long_answer:
+  question_num: 1
+  text: Describe the pathway of a reflex arc when a person touches a hot surface and
+    explain why this process is important for survival.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Identifies some components of the nervous system (e.g.,
+    neurons, brain) but lacks a clear sequence or explanation of the reflex process.
+    Level 2 (3-4 marks): Describes the sequence of the reflex arc (stimulus, sensory,
+    relay, motor, effector) with some scientific terminology, but the explanation
+    of survival benefit is limited. Level 3 (5-6 marks): Provides a detailed, logical,
+    and sequential description of the reflex arc pathway. Clearly explains that the
+    process bypasses the conscious brain to ensure a rapid response, which is critical
+    for preventing tissue damage and survival. Indicative Content: 1. Stimulus (heat)
+    detected by receptors in the skin. 2. Electrical impulse travels along a sensory
+    neuron to the spinal cord. 3. Impulse crosses a synapse to a relay neuron. 4.
+    Impulse crosses another synapse to a motor neuron. 5. Motor neuron carries impulse
+    to the effector (muscle). 6. Muscle contracts to withdraw the hand. 7. Importance:
+    Rapid, automatic response prevents physical harm/burns.'

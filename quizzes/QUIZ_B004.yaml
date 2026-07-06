@@ -1,0 +1,158 @@
+quiz_id: B004
+video_url: https://www.youtube.com/watch?v=qRqa454ZIro
+title: 'GCSE Biology: Classification and Evolutionary Relationships'
+multiple_choice:
+- question_num: 1
+  text: Which of the following is the correct order of the Linnaean classification
+    hierarchy from largest to smallest?
+  A: Kingdom, Phylum, Class, Order, Family, Genus, Species
+  B: Species, Genus, Family, Order, Class, Phylum, Kingdom
+  C: Domain, Kingdom, Phylum, Class, Order, Family, Genus, Species
+  D: Kingdom, Domain, Phylum, Class, Order, Family, Genus, Species
+  answer: Domain, Kingdom, Phylum, Class, Order, Family, Genus, Species
+  points: 1
+  explanation: The modern classification system includes the Domain as the highest
+    taxonomic rank, followed by the traditional Linnaean hierarchy.
+- question_num: 2
+  text: What two parts of  a classification system are used to make the binomial name?
+  A: Kingdom and Phyllum
+  B: Class and Order
+  C: Genus and species
+  D: Family and Genus
+  answer: Genus and species
+  points: 1
+  explanation: 'The binomial name is the final two sections of the Linnean system
+    - the genus and species. '
+- question_num: 3
+  text: Which domain contains organisms with cells with a nucleus?
+  A: Bacteria
+  B: Archaea
+  C: Eukaryota
+  D: Prokaryota
+  answer: Eukaryota
+  points: 1
+  explanation: The Eukaryota domain includes all organisms whose cells contain a nucleus
+    and membrane-bound organelles, such as plants, animals, fungi, and protists.
+- question_num: 4
+  text: What evidence did Carl Woese use to propose the three-domain system?
+  A: Fossil records
+  B: Physical bone structure
+  C: Genetic sequences
+  D: Geographical distribution
+  answer: Genetic sequences
+  points: 1
+  explanation: Woese used biochemical evidence, specifically the analysis of genetic
+    sequences, to distinguish between the three domains of life.
+- question_num: 5
+  text: Where are organisms from the Archaea domain typically found?
+  A: In the human digestive tract only
+  B: In extreme environments like hot springs
+  C: Only in soil
+  D: In all aquatic environments
+  answer: In extreme environments like hot springs
+  points: 1
+  explanation: Archaea are often referred to as extremophiles because they are frequently
+    found in harsh conditions such as high salinity or high temperatures.
+- question_num: 6
+  text: In an evolutionary tree, what does a branch point represent?
+  A: The extinction of a species
+  B: A common ancestor splitting into two species
+  C: The mutation rate of DNA
+  D: The geographical separation of a population
+  answer: A common ancestor splitting into two species
+  points: 1
+  explanation: Branching points on an evolutionary tree indicate a speciation event
+    where a common ancestor diverged into two distinct lineages.
+- question_num: 7
+  text: Which of the following is a primary method used by scientists to determine
+    evolutionary relationships?
+  A: Comparing DNA sequences
+  B: Observing current weather patterns
+  C: Counting the number of offspring
+  D: Measuring the size of the organism
+  answer: Comparing DNA sequences
+  points: 1
+  explanation: Scientists compare DNA, physical structures, and fossil records to
+    establish how closely related different species are.
+- question_num: 8
+  text: Which taxonomic level is the most smallest?
+  A: Genus
+  B: Family
+  C: Species
+  D: Order
+  answer: Species
+  points: 1
+  explanation: The species level is the most smallest rank in the taxonomic hierarchy,
+    containing only organisms that can interbreed to produce fertile offspring.
+- question_num: 9
+  text: Why are birds considered more closely related to T-Rexes than to bats?
+  A: They share a more recent common ancestor
+  B: They both have feathers
+  C: They both live in similar habitats
+  D: They are both larger than bats
+  answer: They share a more recent common ancestor
+  points: 1
+  explanation: Evolutionary relationships are determined by the recency of a shared
+    common ancestor on an evolutionary tree.
+- question_num: 10
+  text: Which of these is NOT a domain in the three-domain system?
+  A: Eukaryota
+  B: Bacteria
+  C: Archaea
+  D: Animalia
+  answer: Animalia
+  points: 1
+  explanation: Animalia is a kingdom within the Eukaryota domain, not a domain itself.
+- question_num: 11
+  text: Which of the following organisms belongs to the Eukaryota domain?
+  A: True bacteria
+  B: Primitive bacteria
+  C: Fungi
+  D: Archaea
+  answer: Fungi
+  points: 1
+  explanation: Fungi are eukaryotic organisms, meaning their cells contain a nucleus,
+    placing them in the Eukaryota domain.
+- question_num: 12
+  text: What does the mnemonic 'Dear Kate please come over for great spaghetti' help
+    students remember?
+  A: The three domains of life
+  B: The order of the taxonomic hierarchy
+  C: The rules for binomial nomenclature
+  D: The steps of DNA sequencing
+  answer: The order of the taxonomic hierarchy
+  points: 1
+  explanation: The mnemonic represents Domain, Kingdom, Phylum, Class, Order, Family,
+    Genus, Species.
+- question_num: 13
+  text: Which statement about prokaryotic cells is correct?
+  A: They are found in the Eukaryota domain
+  B: They contain a nucleus
+  C: They are found in both Bacteria and Archaea domains
+  D: They are always multicellular
+  answer: They are found in both Bacteria and Archaea domains
+  points: 1
+  explanation: Both Bacteria and Archaea consist of single-celled prokaryotic organisms,
+    which lack a membrane-bound nucleus.
+long_answer:
+  question_num: 1
+  text: Explain how scientists classify organisms using the three-domain system and
+    how they determine the evolutionary relationships between these organisms.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Identifies the three domains or mentions that classification
+    uses physical characteristics. Points are disjointed.
+
+    Level 2 (3-4 marks): Describes the three-domain system (Eukaryota, Bacteria, Archaea)
+    and explains that classification is based on biochemical evidence like RNA. Shows
+    some understanding of evolutionary trees.
+
+    Level 3 (5-6 marks): Provides a detailed explanation of the three-domain system,
+    distinguishing between prokaryotic domains and Eukaryota. Explains that evolutionary
+    relationships are determined by comparing DNA, fossil records, and physical structures,
+    and that branch points on evolutionary trees represent common ancestors. The answer
+    is logical and well-structured.
+
+    Indicative Content: - Three domains: Eukaryota, Bacteria, Archaea. - Based on
+    RNA sequence analysis. - Eukaryota have nuclei; Bacteria and Archaea are prokaryotic.
+    - Evolutionary trees show relationships. - Relationships determined by comparing
+    DNA, fossils, and physical structures. - Branching points indicate common ancestors.'
