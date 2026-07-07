@@ -1,0 +1,156 @@
+quiz_id: B007
+video_url: https://www.youtube.com/watch?v=ayzN5f3qN8g
+title: 'GCSE Science: The Menstrual Cycle and Reproduction'
+multiple_choice:
+- question_num: 1
+  text: Which glands in the brain are responsible for releasing FSH and LH at the
+    start of the menstrual cycle?
+  A: Adrenal glands
+  B: Thyroid gland
+  C: Pituitary gland
+  D: Hypothalamus
+  answer: Pituitary gland
+  points: 1
+  explanation: Beginning around puberty, the pituitary gland in the brain releases
+    follicle-stimulating hormone (FSH) and luteinizing hormone (LH) into the bloodstream.
+    This identifies the pituitary gland as the source of these hormones.
+- question_num: 2
+  text: What is the primary role of Follicle-Stimulating Hormone (FSH) in the menstrual
+    cycle?
+  A: To thicken the uterine lining
+  B: To stimulate the growth and maturation of egg cells within follicles
+  C: To trigger ovulation
+  D: To inhibit the release of progesterone
+  answer: To stimulate the growth and maturation of egg cells within follicles
+  points: 1
+  explanation: When FSH and LH reach the ovaries, they stimulate the internal egg
+    cells to grow and mature. FSH is therefore crucial for developing the egg within
+    its follicle.
+- question_num: 3
+  text: What hormone is released by the follicles in response to FSH and LH?
+  A: Progesterone
+  B: Testosterone
+  C: Oestrogen
+  D: Oxytocin
+  answer: Oestrogen
+  points: 1
+  explanation: The video states, 'In response, the follicles release oestrogen.' This
+    indicates that oestrogen production is a direct consequence of FSH and LH action
+    on the follicles.
+- question_num: 4
+  text: What event is directly triggered by a surge in Luteinizing Hormone (LH)?
+  A: The thickening of the uterine lining
+  B: The release of progesterone
+  C: The shedding of the uterine lining
+  D: Ovulation
+  answer: Ovulation
+  points: 1
+  explanation: The surge in LH causes the most mature egg cell to burst from its follicle
+    and through the ovary wall in a process called ovulation.
+- question_num: 5
+  text: Which hormone is released by the empty follicle after ovulation and prepares
+    the uterine lining for implantation?
+  A: Estrogen
+  B: FSH
+  C: LH
+  D: Progesterone
+  answer: Progesterone
+  points: 1
+  explanation: Following ovulation, the empty follicle releases progesterone, a hormone
+    that signals the lining of the womb to thicken with blood and nutrients to prepare
+    for a potential fertilized egg to implant.
+- question_num: 6
+  text: What causes the uterine lining to degenerate and shed during menstruation?
+  A: A surge in LH
+  B: A drop in progesterone and estrogen levels
+  C: Increased FSH production
+  D: The release of FSH and LH
+  answer: A drop in progesterone and estrogen levels
+  points: 1
+  explanation: The video explains, 'If a fertilized egg does not embed, progesterone
+    and estrogen levels plummet a few days later. This drop in hormone levels causes
+    the uterine lining to degenerate and shed from the body.' This directly links
+    the hormone drop to menstruation.
+- question_num: 7
+  text: What is the typical duration of a menstrual period?
+  A: 1 to 3 days
+  B: 2 to 7 days
+  C: 5 to 10 days
+  D: 7 to 14 days
+  answer: 2 to 7 days
+  points: 1
+  explanation: 'The video provides this information directly: ''Periods typically
+    last between 2 and 7 days within a 28-day rotation.'''
+- question_num: 8
+  text: What is the term for the release of a mature egg from the ovary?
+  A: Fertilization
+  B: Implantation
+  C: Ovulation
+  D: Menstruation
+  answer: Ovulation
+  points: 1
+  explanation: The video defines ovulation as 'the most mature egg cell to burst from
+    its follicle and through the ovary wall'. This is the scientific term for egg
+    release.
+- question_num: 9
+  text: What is the approximate length of a typical menstrual cycle?
+  A: 14 days
+  B: 21 days
+  C: 28 days
+  D: 35 days
+  answer: 28 days
+  points: 1
+  explanation: The video mentions 'Periods typically last between 2 and 7 days within
+    a 28-day rotation.' This implies a 28-day cycle as the standard reference.
+- question_num: 10
+  text: What is the function of the follicles within the ovaries?
+  A: To produce progesterone
+  B: To store mature egg cells
+  C: To hold and nurture unfertilized egg cells
+  D: To release LH and FSH
+  answer: To hold and nurture unfertilized egg cells
+  points: 1
+  explanation: The ovaries contain follicles which are tiny sacs , each holding an
+    unfertilized egg cell.'  FSH stimulates them to 'grow and mature', indicating
+    their role in egg development.
+long_answer:
+  question_num: 1
+  text: Explain the hormonal control of the menstrual cycle, from the release of hormones
+    by the pituitary gland to the shedding of the uterine lining. Your answer should
+    describe the roles of key hormones and the sequence of events.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Provides a few correct statements about hormones or
+    events in the menstrual cycle but lacks clear sequence or detailed explanation.
+    May identify some hormones but not their specific roles or interactions.
+
+    Level 2 (3-4 marks): Describes the roles of some key hormones (e.g., FSH, LH,
+    estrogen, progesterone) and outlines some of the main events in the cycle. There
+    is some attempt at sequencing, but linkages may be unclear or incomplete.
+
+    Level 3 (5-6 marks): Provides a detailed and accurate explanation of the hormonal
+    control of the menstrual cycle. Clearly describes the roles of FSH, LH, estrogen,
+    and progesterone, and explains the sequence of events including ovulation and
+    menstruation. The explanation is logical, well-structured, and demonstrates a
+    good understanding of the interactions between hormones and reproductive organs.
+
+    Indicative Content:
+
+    - Pituitary gland releases FSH and LH.
+
+    - FSH stimulates follicle and egg maturation in the ovary.
+
+    - Maturing follicles release estrogen.
+
+    - Estrogen levels rise, inhibiting FSH and stimulating LH release.
+
+    - LH surge triggers ovulation (release of egg).
+
+    - Empty follicle becomes corpus luteum, releasing progesterone.
+
+    - Progesterone thickens and maintains the uterine lining for implantation.
+
+    - If no fertilisation, progesterone and estrogen levels drop.
+
+    - Drop in hormones causes uterine lining to break down and shed (menstruation).
+
+    - Cycle repeats.'

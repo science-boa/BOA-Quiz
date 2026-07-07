@@ -1,0 +1,144 @@
+quiz_id: C003
+video_url: https://www.youtube.com/watch?v=DnFcyhsSVGg
+title: The Evolution of Earth's Atmosphere
+multiple_choice:
+- question_num: 1
+  text: What is the approximate percentage of nitrogen in the Earth's current atmosphere?
+  A: 20%
+  B: 50%
+  C: 80%
+  D: 99%
+  answer: 80%
+  points: 1
+  explanation: The modern atmosphere is composed of approximately 80% nitrogen, 20%
+    oxygen, and small amounts of other gases like carbon dioxide and argon.
+- question_num: 2
+  text: Which gas was the primary component of the Earth's early atmosphere?
+  A: Oxygen
+  B: Carbon dioxide
+  C: Nitrogen
+  D: Methane
+  answer: Carbon dioxide
+  points: 1
+  explanation: During the first billion years, intense volcanic activity released
+    large amounts of carbon dioxide, making it the dominant gas, similar to modern-day
+    Mars and Venus.
+- question_num: 3
+  text: How did the formation of oceans affect the level of carbon dioxide in the
+    early atmosphere?
+  A: It increased carbon dioxide levels.
+  B: It had no effect on carbon dioxide levels.
+  C: It decreased carbon dioxide levels as it dissolved into the water.
+  D: It converted carbon dioxide into oxygen.
+  answer: It decreased carbon dioxide levels as it dissolved into the water.
+  points: 1
+  explanation: As the Earth cooled, water vapor condensed to form oceans, which acted
+    as a carbon sink by dissolving atmospheric carbon dioxide.
+- question_num: 4
+  text: Which process is responsible for the increase in atmospheric oxygen levels?
+  A: Volcanic activity
+  B: Respiration
+  C: Photosynthesis
+  D: Combustion
+  answer: Photosynthesis
+  points: 1
+  explanation: Algae and green plants evolved and used photosynthesis to consume carbon
+    dioxide and release oxygen as a byproduct.
+- question_num: 5
+  text: What is the chemical origin of limestone?
+  A: Compressed dead plant material
+  B: Remains of dead plankton
+  C: Calcium carbonate from marine shells and skeletons
+  D: Volcanic ash deposits
+  answer: Calcium carbonate from marine shells and skeletons
+  points: 1
+  explanation: Limestone is a sedimentary rock formed from the calcium carbonate shells
+    and skeletons of marine organisms that settled on the seabed.
+- question_num: 6
+  text: Which fossil fuel is primarily formed from the remains of dead plankton?
+  A: Coal
+  B: Crude oil
+  C: Peat
+  D: Limestone
+  answer: Crude oil
+  points: 1
+  explanation: Crude oil and natural gas are formed from the remains of plankton buried
+    in mud on the ocean floor over millions of years.
+- question_num: 7
+  text: What is the primary source of coal?
+  A: Compressed dead plant material
+  B: Marine shells
+  C: Volcanic gases
+  D: Atmospheric nitrogen
+  answer: Compressed dead plant material
+  points: 1
+  explanation: Coal is a sedimentary rock formed from thick deposits of plant material
+    that were buried and compressed over millions of years.
+- question_num: 8
+  text: Which gases were released by early volcanic activity?
+  A: Oxygen and nitrogen
+  B: Carbon dioxide, water vapor, and nitrogen
+  C: Argon and neon
+  D: Hydrogen and helium
+  answer: Carbon dioxide, water vapor, and nitrogen
+  points: 1
+  explanation: Early volcanic activity released gases including carbon dioxide, water
+    vapor, nitrogen, methane, and ammonia.
+- question_num: 9
+  text: What is the role of sedimentary rock in the carbon cycle?
+  A: It releases carbon dioxide into the air.
+  B: It stores carbon beneath the surface.
+  C: It produces oxygen.
+  D: It absorbs nitrogen.
+  answer: It stores carbon beneath the surface.
+  points: 1
+  explanation: Sedimentary rocks, such as limestone and coal, store carbon that was
+    originally part of atmospheric carbon dioxide or living organisms.
+- question_num: 10
+  text: What enabled the evolution of complex animal life?
+  A: The increase in atmospheric carbon dioxide.
+  B: The decrease in atmospheric nitrogen.
+  C: The steady increase in oxygen levels.
+  D: The formation of volcanic islands.
+  answer: The steady increase in oxygen levels.
+  points: 1
+  explanation: As photosynthetic organisms increased oxygen levels, the environment
+    became suitable for the evolution of complex animals.
+- question_num: 11
+  text: Which of these is a noble gas found in the atmosphere?
+  A: Nitrogen
+  B: Carbon dioxide
+  C: Argon
+  D: Methane
+  answer: Argon
+  points: 1
+  explanation: Noble gases, such as argon, neon, and helium, make up a small fraction
+    of the atmosphere alongside carbon dioxide and water vapor.
+- question_num: 12
+  text: What are the main environmental conditions that form fossil fuels from buried
+    sediments?
+  A: High oxygen levels
+  B: Heat and pressure
+  C: Exposure to sunlight
+  D: Rapid cooling
+  answer: Heat and pressure
+  points: 1
+  explanation: Over millions of years, heat and pressure compress buried organic matter
+    into fossil fuels like coal, oil, and gas.
+long_answer:
+  question_num: 1
+  text: Explain how the Earth's atmosphere has changed from its early state to its
+    current composition. In your answer, refer to the role of oceans, photosynthesis,
+    and the formation of sedimentary rocks.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Simple statements about the atmosphere changing or
+    mentioning one process like photosynthesis. Level 2 (3-4 marks): Clear description
+    of the transition from a carbon dioxide-rich atmosphere to an oxygen-rich one,
+    mentioning at least two key processes (e.g., oceans or photosynthesis). Level
+    3 (5-6 marks): Detailed, logical explanation covering the early volcanic atmosphere,
+    the cooling of Earth leading to oceans, the reduction of CO2 via dissolution and
+    photosynthesis, and the long-term storage of carbon in sedimentary rocks. Indicative
+    Content: - Early atmosphere was mostly CO2 from volcanoes. - Water vapor condensed
+    to form oceans. - CO2 dissolved in oceans and formed precipitates. - Algae/plants
+    evolved and used photosynthesis to remove CO2 and release O2. - Carbon was locked
+    away in sedimentary rocks and fossil fuels.'

@@ -1,0 +1,183 @@
+quiz_id: C002
+video_url: https://youtu.be/32fpuigclnw?si=X0FOappqLZ9Egato
+title: 'GCSE Chemistry: Hydrocarbons and Homologous Series Assessment'
+multiple_choice:
+- question_num: 1
+  text: What is the definition of a saturated hydrocarbon?
+  A: A molecule containing only carbon and hydrogen atoms with at least one double
+    bond.
+  B: A molecule containing only carbon and hydrogen atoms with only single covalent
+    bonds.
+  C: A molecule containing carbon, hydrogen, and oxygen atoms.
+  D: A molecule that contains only double covalent bonds.
+  answer: A molecule containing only carbon and hydrogen atoms with only single covalent
+    bonds.
+  points: 1
+  explanation: Saturated hydrocarbons, such as alkanes, contain only single covalent
+    bonds between carbon atoms, meaning they hold the maximum number of hydrogen atoms
+    possible.
+- question_num: 2
+  text: How many electrons are in the outer shell of a carbon atom?
+  A: '2'
+  B: '4'
+  C: '6'
+  D: '8'
+  answer: '4'
+  points: 1
+  explanation: Carbon has an atomic number of 6, with an electronic configuration
+    of 2,4, meaning it has 4 electrons in its outer shell.
+- question_num: 3
+  text: What is the general formula for the alkane homologous series?
+  A: CnHn
+  B: CnH2n
+  C: CnH2n+2
+  D: CnH2n-2
+  answer: CnH2n+2
+  points: 1
+  explanation: The general formula CnH2n+2 allows for the calculation of the number
+    of hydrogen atoms for any given number of carbon atoms (n) in an alkane.
+- question_num: 4
+  text: What is the molecular formula of decane?
+  A: C10H10
+  B: C10H20
+  C: C10H22
+  D: C10H24
+  answer: C10H22
+  points: 1
+  explanation: Using the alkane formula CnH2n+2, for n=10, the number of hydrogens
+    is (2 x 10) + 2 = 22.
+- question_num: 5
+  text: Which of the following describes an alkene?
+  A: A saturated hydrocarbon with a double bond.
+  B: An unsaturated hydrocarbon with at least one double covalent bond.
+  C: A saturated hydrocarbon with only single bonds.
+  D: An unsaturated hydrocarbon with only single bonds.
+  answer: An unsaturated hydrocarbon with at least one double covalent bond.
+  points: 1
+  explanation: Alkenes are unsaturated because they contain a carbon-carbon double
+    bond, which means they have fewer hydrogen atoms than the corresponding alkane.
+- question_num: 6
+  text: What is the general formula for the alkene homologous series?
+  A: CnH2n
+  B: CnH2n+2
+  C: CnHn
+  D: CnH2n-2
+  answer: CnH2n
+  points: 1
+  explanation: Alkenes have two fewer hydrogen atoms than alkanes due to the presence
+    of a double bond, resulting in the general formula CnH2n.
+- question_num: 7
+  text: What is the molecular formula of decene?
+  A: C10H18
+  B: C10H20
+  C: C10H22
+  D: C10H24
+  answer: C10H20
+  points: 1
+  explanation: Using the alkene formula CnH2n, for n=10, the number of hydrogens is
+    2 * 10 = 20.
+- question_num: 8
+  text: What does a single covalent bond consist of?
+  A: A shared pair of protons.
+  B: A transferred pair of electrons.
+  C: A shared pair of electrons.
+  D: A shared pair of neutrons.
+  answer: A shared pair of electrons.
+  points: 1
+  explanation: A covalent bond is formed when two atoms share a pair of electrons
+    to achieve a stable outer shell.
+- question_num: 9
+  text: Why is methane considered a useful fuel?
+  A: It is an unsaturated hydrocarbon.
+  B: It contains a double bond.
+  C: It is a saturated hydrocarbon that releases energy when burned.
+  D: It is produced by bacteria in cow stomachs.
+  answer: It is a saturated hydrocarbon that releases energy when burned.
+  points: 1
+  explanation: Methane is a simple alkane used extensively as a fuel for heating and
+    cooking due to the energy released during combustion.
+- question_num: 10
+  text: How many bonds must each carbon atom maintain in a stable hydrocarbon molecule?
+  A: '2'
+  B: '3'
+  C: '4'
+  D: '6'
+  answer: '4'
+  points: 1
+  explanation: Carbon has 4 electrons in its outer shell and requires 4 more to achieve
+    a stable octet, thus it always forms 4 covalent bonds.
+- question_num: 11
+  text: What is the difference between an alkane and an alkene with the same number
+    of carbon atoms?
+  A: Alkenes have more hydrogen atoms.
+  B: Alkanes have a double bond.
+  C: Alkenes have two fewer hydrogen atoms.
+  D: Alkanes are unsaturated.
+  answer: Alkenes have two fewer hydrogen atoms.
+  points: 1
+  explanation: Because alkenes contain a double bond, they cannot bond with as many
+    hydrogen atoms as the corresponding alkane.
+- question_num: 12
+  text: Which of these is the second molecule in the alkene series?
+  A: Ethane
+  B: Ethene
+  C: Propene
+  D: Butene
+  answer: Propene
+  points: 1
+  explanation: 'The alkene series starts with ethene (2 carbons), followed by propene
+    (3 carbons). Methene does not exist as there cannot be a carbon-carbon double
+    bond in a molecule with only 1 carbon. '
+- question_num: 13
+  text: What is the definition of a homologous series?
+  A: A group of chemicals that all contain oxygen.
+  B: A series of molecules that share a general formula.
+  C: A group of molecules that only contain double bonds.
+  D: A series of molecules that have the same number of atoms.
+  answer: A series of molecules that share a general formula.
+  points: 1
+  explanation: Members of a homologous series have the same general formula and similar
+    chemical properties, differing by a CH2 unit.
+- question_num: 14
+  text: What is the molecular formula of ethane?
+  A: CH4
+  B: C2H4
+  C: C2H6
+  D: C3H8
+  answer: C2H6
+  points: 1
+  explanation: Ethane is the second alkane (n=2). Using CnH2n+2, we get C2H(2*2+2)
+    = C2H6.
+long_answer:
+  question_num: 1
+  text: Compare and contrast the structures and bonding of alkanes and alkenes. In
+    your answer, refer to the general formulas, the nature of the covalent bonds,
+    and the concept of saturation.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Simple statements about alkanes or alkenes. Mentions
+    that alkanes have single bonds or alkenes have double bonds but lacks comparison.
+
+    Level 2 (3-4 marks): Clear description of the differences in bonding and saturation.
+    Correctly identifies the general formulas for both series.
+
+    Level 3 (5-6 marks): Detailed, structured explanation comparing both series. Correctly
+    identifies that alkanes are saturated (single bonds) and alkenes are unsaturated
+    (double bonds). Explains the impact of the double bond on the general formula
+    (CnH2n+2 vs CnH2n) and the requirement for carbon to form four bonds.
+
+
+    Indicative Content:
+
+    - Alkanes are saturated hydrocarbons with only single covalent bonds.
+
+    - Alkenes are unsaturated hydrocarbons containing at least one carbon-carbon double
+    bond.
+
+    - Alkanes follow the general formula CnH2n+2.
+
+    - Alkenes follow the general formula CnH2n.
+
+    - Carbon atoms must always form four covalent bonds in both series.
+
+    - The double bond in alkenes reduces the number of hydrogen atoms compared to
+    alkanes.'

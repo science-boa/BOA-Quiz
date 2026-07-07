@@ -1,0 +1,160 @@
+quiz_id: C001
+video_url: https://www.youtube.com/watch?v=NS16XfJ-MlU
+title: 'GCSE Chemistry: Giant Covalent Structures Assessment'
+multiple_choice:
+- question_num: 1
+  text: Why does graphite have a high melting point?
+  A: It has weak intermolecular forces.
+  B: It contains many strong covalent bonds that require significant energy to break.
+  C: It is a metal with a giant metallic lattice.
+  D: It has delocalized electrons that hold the structure together.
+  answer: It contains many strong covalent bonds that require significant energy to
+    break.
+  points: 1
+  explanation: Giant covalent structures consist of a network of atoms held together
+    by strong covalent bonds throughout the entire structure, requiring high energy
+    to overcome.
+- question_num: 2
+  text: How many covalent bonds does each carbon atom form in diamond?
+  A: Two
+  B: Three
+  C: Four
+  D: Five
+  answer: Four
+  points: 1
+  explanation: Carbon is in Group 4 and has four electrons in its outer shell, allowing
+    it to form four covalent bonds in the diamond lattice.
+- question_num: 3
+  text: Why can graphite conduct electricity?
+  A: It has layers that slide over each other.
+  B: It contains delocalized electrons that are free to move.
+  C: It is a soft non-metal.
+  D: It has a giant lattice structure.
+  answer: It contains delocalized electrons that are free to move.
+  points: 1
+  explanation: In graphite, each carbon atom is bonded to three others, leaving one
+    electron per atom delocalized, which can carry charge through the structure.
+- question_num: 4
+  text: Which property of graphite allows it to be used as a lubricant?
+  A: The presence of delocalized electrons.
+  B: Its high melting point.
+  C: The weak forces of attraction between layers allowing them to slide.
+  D: Its ability to conduct electricity.
+  answer: The weak forces of attraction between layers allowing them to slide.
+  points: 1
+  explanation: Graphite is arranged in hexagonal layers with weak intermolecular forces
+    between them, meaning the layers can easily slide over one another.
+- question_num: 5
+  text: Why does diamond not conduct electricity?
+  A: It is too hard.
+  B: It has no free electrons as all outer shell electrons are used in bonding.
+  C: It is a giant covalent structure.
+  D: It has a high melting point.
+  answer: It has no free electrons as all outer shell electrons are used in bonding.
+  points: 1
+  explanation: In diamond, every carbon atom uses all four of its outer electrons
+    to form covalent bonds, leaving no delocalized electrons to carry a current.
+- question_num: 6
+  text: What is the bonding arrangement in silicon dioxide?
+  A: Each silicon atom is bonded to four oxygen atoms.
+  B: Each silicon atom is bonded to two oxygen atoms.
+  C: Each oxygen atom is bonded to four silicon atoms.
+  D: Each silicon atom is bonded to three oxygen atoms.
+  answer: Each silicon atom is bonded to four oxygen atoms.
+  points: 1
+  explanation: Silicon dioxide forms a giant covalent lattice where each silicon atom
+    is covalently bonded to four oxygen atoms in a tetrahedral arrangement.
+- question_num: 7
+  text: Which of the following is a common use for silicon dioxide due to its properties?
+  A: Pencil cores.
+  B: Electrical wiring.
+  C: Heat-resistant bricks for furnaces.
+  D: Lubricants for machinery.
+  answer: Heat-resistant bricks for furnaces.
+  points: 1
+  explanation: Silicon dioxide has a very high melting point due to its strong covalent
+    bonds, making it suitable for high-temperature industrial applications.
+- question_num: 8
+  text: How many covalent bonds does each carbon atom form in graphite?
+  A: One
+  B: Two
+  C: Three
+  D: Four
+  answer: Three
+  points: 1
+  explanation: In graphite, each carbon atom is covalently bonded to three other carbon
+    atoms, forming hexagonal layers.
+- question_num: 9
+  text: What is another term for a giant covalent structure?
+  A: Macromolecule.
+  B: Small molecule.
+  C: Polymer.
+  D: Ionic lattice.
+  answer: Macromolecule.
+  points: 1
+  explanation: Giant covalent structures are often referred to as macromolecules because
+    they consist of a massive number of atoms bonded together.
+- question_num: 10
+  text: Why is diamond extremely hard?
+  A: It has weak forces between layers.
+  B: It has a rigid, giant lattice structure with strong covalent bonds.
+  C: It contains delocalized electrons.
+  D: It is made of silicon atoms.
+  answer: It has a rigid, giant lattice structure with strong covalent bonds.
+  points: 1
+  explanation: The tetrahedral arrangement of carbon atoms in diamond creates a very
+    rigid and stable structure, making it one of the hardest known materials.
+- question_num: 11
+  text: Which answer describes the forces between layers in graphite?
+  A: Strong covalent bonds.
+  B: Weak forces of attraction.
+  C: Strong metallic bonds.
+  D: No forces exist.
+  answer: Weak forces of attraction.
+  points: 1
+  explanation: The layers in graphite are held together by weak intermolecular forces,
+    which allow the layers to slide past each other.
+- question_num: 12
+  text: Which element is common to both diamond and graphite?
+  A: Silicon.
+  B: Oxygen.
+  C: Carbon.
+  D: Hydrogen.
+  answer: Carbon.
+  points: 1
+  explanation: Both diamond and graphite are allotropes of carbon, meaning they are
+    different structural forms of the same element.
+- question_num: 13
+  text: Why does silicon dioxide not conduct electricity?
+  A: It has no delocalized electrons.
+  B: It is a liquid at room temperature.
+  C: It has weak covalent bonds.
+  D: It is a metal.
+  answer: It has no delocalized electrons.
+  points: 1
+  explanation: Like diamond, silicon dioxide has all its outer shell electrons involved
+    in covalent bonding, leaving no free electrons to conduct electricity.
+- question_num: 14
+  text: What is the shape of the rings in the layers of graphite?
+  A: Pentagonal.
+  B: Hexagonal.
+  C: Square.
+  D: Triangular.
+  answer: Hexagonal.
+  points: 1
+  explanation: The carbon atoms in graphite are arranged in layers of hexagonal rings,
+    which contribute to its layered structure.
+long_answer:
+  question_num: 1
+  text: Compare the structures and properties of diamond and graphite. In your answer,
+    explain why they have different physical properties and electrical conductivities.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Identifies that both are made of carbon or mentions
+    one property (e.g., diamond is hard). Level 2 (3-4 marks): Describes the bonding
+    in diamond (4 bonds) and graphite (3 bonds) and links this to hardness or conductivity.
+    Level 3 (5-6 marks): Provides a detailed comparison: explains diamond''s hardness
+    due to its rigid 3D lattice and lack of free electrons, and explains graphite''s
+    softness due to layers with weak forces and its conductivity due to delocalized
+    electrons. Indicative Content: Diamond: 4 covalent bonds per carbon, rigid lattice,
+    no free electrons, hard, insulator. Graphite: 3 covalent bonds per carbon, hexagonal
+    layers, weak forces between layers, delocalized electrons, soft/slippery, conductor.'
