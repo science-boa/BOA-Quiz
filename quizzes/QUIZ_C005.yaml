@@ -116,13 +116,11 @@ multiple_choice:
     all carbon is converted to carbon dioxide.
 long_answer:
   question_num: 1
-  text: Compare the process of complete  and incomplete combustion.
+  text: Describe the process of complete combustion.
   points: 4
   rubric: 'Level 1 (1-2 marks): Simple statements about alkanes or combustion. Mentions
     reaction with oxygen or that combustion releases energy.
 
-    Level 2 (3-4 marks): Clear description of trends (boiling point, viscosity, flammability)
-    and identifies the products of combustion. Some logical links between chain length
-    and properties.
+    Level 2 (3-4 marks): Clear description of complete combustion, content may include the correct products of combustion (carbon dioxide and water), that it is exothermic, that it requires sufficient / enough / excess oxygen. Use of technical terms such as oxidation. 
 
     '
