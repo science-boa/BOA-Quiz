@@ -1,0 +1,136 @@
+quiz_id: C005
+video_url: https://www.youtube.com/watch?v=bOiYLKX9ZRY
+title: 'GCSE Chemistry: Hydrocarbons and Cracking Assessment'
+multiple_choice:
+- question_num: 1
+  text: What type of reaction is cracking?
+  A: Neutralisation
+  B: Thermal decomposition
+  C: Combustion
+  D: Addition
+  answer: Thermal decomposition
+  points: 1
+  explanation: Cracking is a thermal decomposition reaction because it uses heat to
+    break down large molecules into smaller ones.
+- question_num: 2
+  text: Why are long-chain alkanes less useful than short-chain alkanes?
+  A: They are too flammable
+  B: They are gases at room temperature
+  C: They are thick, viscous liquids with low flammability
+  D: They contain too many double bonds
+  answer: They are thick, viscous liquids with low flammability
+  points: 1
+  explanation: Long-chain alkanes have high viscosity and low volatility, making them
+    poor fuels compared to shorter-chain alkanes.
+- question_num: 3
+  text: What are the products of cracking a long-chain alkane?
+  A: Only shorter-chain alkanes
+  B: Shorter-chain alkanes and alkenes
+  C: Alkenes and water
+  D: Carbon dioxide and water
+  answer: Shorter-chain alkanes and alkenes
+  points: 1
+  explanation: Cracking breaks long alkanes into a mixture of smaller alkanes and
+    alkenes.
+- question_num: 4
+  text: Which catalyst is used in catalytic cracking?
+  A: Iron
+  B: Copper oxide
+  C: Powdered aluminium oxide
+  D: Nickel
+  answer: Powdered aluminium oxide
+  points: 1
+  explanation: Catalytic cracking specifically requires a hot powdered aluminium oxide
+    catalyst to speed up the reaction.
+- question_num: 5
+  text: What defines an alkene?
+  A: It contains only single bonds
+  B: It contains at least one carbon-carbon double bond
+  C: It is a saturated hydrocarbon
+  D: It has the general formula CnH2n+2
+  answer: It contains at least one carbon-carbon double bond
+  points: 1
+  explanation: Alkenes are defined by the presence of a C=C double bond, which makes
+    them unsaturated.
+- question_num: 6
+  text: What is the test for an alkene?
+  A: Limewater turning cloudy
+  B: Bromine water turning from orange to colorless
+  C: A glowing splint relighting
+  D: Bromine water remaining orange
+  answer: Bromine water turning from orange to colorless
+  points: 1
+  explanation: Alkenes react with bromine water, causing the orange color to disappear,
+    whereas alkanes do not react.
+- question_num: 7
+  text: What happens when bromine water is added to an alkane?
+  A: The solution turns colorless
+  B: The solution turns blue
+  C: The solution remains orange
+  D: The solution turns green
+  answer: The solution remains orange
+  points: 1
+  explanation: Alkanes are saturated and do not react with bromine water, so the color
+    does not change.
+- question_num: 8
+  text: What is a primary industrial use for alkenes?
+  A: Producing polymers
+  B: As a catalyst for cracking
+  C: To make bromine water
+  D: To increase the viscosity of fuels
+  answer: Producing polymers
+  points: 1
+  explanation: Alkenes are important monomers used as starting materials to manufacture
+    plastics and other polymers.
+- question_num: 9
+  text: In a balanced cracking equation, what must be true?
+  A: The number of molecules must be the same on both sides
+  B: The total number of carbon and hydrogen atoms must be equal on both sides
+  C: The catalyst must be included in the product side
+  D: Only alkanes can be on the product side
+  answer: The total number of carbon and hydrogen atoms must be equal on both sides
+  points: 1
+  explanation: The Law of Conservation of Mass dictates that atoms cannot be created
+    or destroyed in a chemical reaction.
+- question_num: 10
+  text: Why is cracking economically important?
+  A: It turns useless alkenes into useful alkanes
+  B: It converts low-demand long-chain alkanes into high-demand shorter-chain fuels
+  C: It removes the need for catalysts
+  D: It makes alkanes unsaturated
+  answer: It converts low-demand long-chain alkanes into high-demand shorter-chain
+    fuels
+  points: 1
+  explanation: Cracking matches the supply of hydrocarbons to the market demand for
+    fuels and chemical feedstocks.
+long_answer:
+  question_num: 1
+  text: Explain the process of cracking long-chain alkanes. In your answer, compare
+    the two methods of cracking, explain why cracking is necessary for the fuel industry,
+    and describe how you would distinguish between the products formed.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Simple statements about cracking or identifying one
+    method. Limited use of scientific terminology.
+
+    Level 2 (3-4 marks): Clear description of both cracking methods and why cracking
+    is useful. Some mention of the chemical test for products.
+
+    Level 3 (5-6 marks): Detailed, structured explanation covering both methods (catalytic
+    vs steam), the economic necessity (demand for short-chain fuels), and the chemical
+    test (bromine water) to distinguish alkanes from alkenes. Uses correct terminology
+    throughout.
+
+
+    Indicative Content:
+
+    - Cracking breaks long-chain alkanes into shorter-chain alkanes and alkenes.
+
+    - Catalytic cracking: uses heat and a powdered aluminium oxide catalyst.
+
+    - Steam cracking: uses heat and steam at very high temperatures.
+
+    - Economic necessity: long-chain alkanes are viscous and in low demand; short-chain
+    alkanes are better fuels.
+
+    - Chemical test: Bromine water turns from orange to colorless with alkenes, but
+    remains orange with alkanes.'
