@@ -1,0 +1,128 @@
+quiz_id: C005
+video_url: https://www.youtube.com/watch?v=MvC2nieIv3A&t=111s
+title: 'GCSE Chemistry: Properties and Combustion of Alkanes'
+multiple_choice:
+- question_num: 1
+  text: What is the general definition of an alkane?
+  A: A hydrocarbon with at least one double bond
+  B: A homologous series of hydrocarbons with only single bonds
+  C: A compound containing carbon, hydrogen, and oxygen
+  D: A substance that only exists as a gas
+  answer: A homologous series of hydrocarbons with only single bonds
+  points: 1
+  explanation: Alkanes are saturated hydrocarbons, meaning they contain only single
+    covalent bonds between carbon atoms.
+- question_num: 2
+  text: What happens to the boiling point of alkanes as the carbon chain length increases?
+  A: It decreases
+  B: It stays the same
+  C: It increases
+  D: It becomes unpredictable
+  answer: It increases
+  points: 1
+  explanation: As chain length increases, the intermolecular forces between molecules
+    become stronger, requiring more energy to overcome.
+- question_num: 3
+  text: Which state of matter are short alkanes with 1 to 4 carbon atoms at room temperature?
+  A: Solid
+  B: Liquid
+  C: Gas
+  D: Plasma
+  answer: Gas
+  points: 1
+  explanation: Short-chain alkanes have low boiling points, meaning they are already
+    in the gaseous state at room temperature.
+- question_num: 4
+  text: Which property describes how easily a liquid flows?
+  A: Volatility
+  B: Viscosity
+  C: Flammability
+  D: Combustion
+  answer: Viscosity
+  points: 1
+  explanation: Viscosity refers to the thickness or resistance to flow of a liquid;
+    longer alkanes are more viscous.
+- question_num: 5
+  text: Why are shorter alkanes more volatile (easy to evaporate) than longer alkanes?
+  A: They have higher boiling points
+  B: They have lower boiling points
+  C: They have more carbon atoms
+  D: They are less flammable
+  answer: They have lower boiling points
+  points: 1
+  explanation: Volatility is the tendency of a substance to vaporize; lower boiling
+    points mean shorter alkanes evaporate more easily.
+- question_num: 6
+  text: What are the products of the complete combustion of a hydrocarbon?
+  A: Carbon and hydrogen
+  B: Carbon monoxide and water
+  C: Carbon dioxide and hydrogen
+  D: Carbon dioxide and water
+  answer: Carbon dioxide and water
+  points: 1
+  explanation: In complete combustion, carbon is fully oxidized to carbon dioxide
+    and hydrogen is oxidized to water.
+- question_num: 7
+  text: What type of reaction is combustion?
+  A: Endothermic
+  B: Exothermic
+  C: Neutralization
+  D: Displacement
+  answer: Exothermic
+  points: 1
+  explanation: Combustion reactions release energy into the surroundings, which is
+    the definition of an exothermic reaction.
+- question_num: 8
+  text: Which of the following describes the trend in flammability as alkane chain
+    length increases?
+  A: Flammability increases
+  B: Flammability decreases
+  C: Flammability remains constant
+  D: Flammability is unrelated to chain length
+  answer: Flammability decreases
+  points: 1
+  explanation: Shorter alkanes are more flammable and easier to ignite than longer,
+    more viscous alkanes.
+- question_num: 9
+  text: Which state of matter are very long carbon chain alkanes (hundred or more
+    carbons)  at room temperature?
+  A: Gas
+  B: Liquid
+  C: Solid
+  D: Supercritical fluid
+  answer: Solid
+  points: 1
+  explanation: As the chain length increases, the boiling point increases significantly,
+    resulting in solids at room temperature.
+- question_num: 10
+  text: What is the primary use of hydrocarbons?
+  A: As catalysts
+  B: As fuels
+  C: As solvents
+  D: As building materials
+  answer: As fuels
+  points: 1
+  explanation: Hydrocarbons are widely used as fuels because they release significant
+    energy when burned.
+- question_num: 11
+  text: What is required for complete combustion to occur?
+  A: A catalyst
+  B: Sufficient oxygen
+  C: High pressure
+  D: A metal surface
+  answer: Sufficient oxygen
+  points: 1
+  explanation: Complete combustion requires an abundant supply of oxygen to ensure
+    all carbon is converted to carbon dioxide.
+long_answer:
+  question_num: 1
+  text: Compare the process of complete  and incomplete combustion.
+  points: 4
+  rubric: 'Level 1 (1-2 marks): Simple statements about alkanes or combustion. Mentions
+    reaction with oxygen or that combustion releases energy.
+
+    Level 2 (3-4 marks): Clear description of trends (boiling point, viscosity, flammability)
+    and identifies the products of combustion. Some logical links between chain length
+    and properties.
+
+    '
