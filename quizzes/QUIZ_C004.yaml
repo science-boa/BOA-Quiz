@@ -1,0 +1,148 @@
+quiz_id: C004
+video_url: https://www.youtube.com/watch?v=2UGgIZpglZQ
+title: 'GCSE Chemistry: Crude Oil and Fractional Distillation Assessment'
+multiple_choice:
+- question_num: 1
+  text: What is the primary chemical composition of crude oil?
+  A: A mixture of pure elements
+  B: A mixture of hydrocarbons
+  C: A compound of carbon and oxygen
+  D: A pure substance of alkanes
+  answer: A mixture of hydrocarbons
+  points: 1
+  explanation: Crude oil is a complex mixture of many different organic molecules,
+    specifically hydrocarbons, which consist only of carbon and hydrogen atoms.
+- question_num: 2
+  text: Why is crude oil classified as a non-renewable resource?
+  A: It is too expensive to extract
+  B: It is only found in specific locations
+  C: It takes millions of years to form and is used faster than it is replaced
+  D: It is a synthetic material
+  answer: It takes millions of years to form and is used faster than it is replaced
+  points: 1
+  explanation: Non-renewable resources are finite because their rate of consumption
+    far exceeds the geological timescale required for their formation.
+- question_num: 3
+  text: Which type of hydrocarbons make up the majority of  in crude oil?
+  A: Alkenes
+  B: Alcohols
+  C: Alkanes
+  D: Carboxylic acids
+  answer: Alkanes
+  points: 1
+  explanation: Alkanes are saturated hydrocarbons containing only single bonds between
+    carbon atoms, which are the primary components of crude oil.
+- question_num: 4
+  text: What happens to the boiling point of an alkane as the carbon chain length
+    increases?
+  A: It decreases
+  B: It increases
+  C: It stays the same
+  D: It becomes unpredictable
+  answer: It increases
+  points: 1
+  explanation: Longer carbon chains have greater surface contact, leading to stronger
+    intermolecular forces that require more energy to overcome.
+- question_num: 5
+  text: Which physical property allows crude oil to be separated by fractional distillation?
+  A: Density
+  B: Solubility
+  C: Boiling point
+  D: Reactivity
+  answer: Boiling point
+  points: 1
+  explanation: Fractional distillation relies on the different boiling points of the
+    various hydrocarbon fractions to separate them within a column.
+- question_num: 6
+  text: In a fractional distillation column, where is the temperature the highest?
+  A: At the top
+  B: At the bottom
+  C: In the middle
+  D: It is uniform throughout
+  answer: At the bottom
+  points: 1
+  explanation: The column features a temperature gradient that is hotter at the bottom
+    to ensure longer-chain hydrocarbons remain in the gas phase initially.
+- question_num: 7
+  text: Which of the following is a common use for a crude oil fraction?
+  A: Fertilizer
+  B: Petrol for cars
+  C: Building materials
+  D: Food additives
+  answer: Petrol for cars
+  points: 1
+  explanation: Petrol, diesel, and paraffin are common fractions of crude oil used
+    as fuels for transport and heating.
+- question_num: 8
+  text: What is the definition of a hydrocarbon?
+  A: A molecule containing carbon, hydrogen, and oxygen
+  B: A molecule containing only carbon and hydrogen atoms
+  C: A molecule containing carbon and nitrogen
+  D: A molecule containing only carbon atoms
+  answer: A molecule containing only carbon and hydrogen atoms
+  points: 1
+  explanation: Hydrocarbons are defined strictly as organic compounds consisting entirely
+    of carbon and hydrogen.
+- question_num: 9
+  text: What is the state of a short-chain alkane at room temperature?
+  A: Solid
+  B: Liquid
+  C: Gas
+  D: Plasma
+  answer: Gas
+  points: 1
+  explanation: Short-chain alkanes have weak intermolecular forces and low boiling
+    points, often below room temperature, meaning they exist as gases.
+- question_num: 10
+  text: What is the role of the temperature gradient in a fractionating column?
+  A: To increase the pressure
+  B: To allow fractions to condense at different heights
+  C: To break covalent bonds
+  D: To speed up the reaction
+  answer: To allow fractions to condense at different heights
+  points: 1
+  explanation: The gradient allows substances to cool and condense at the specific
+    height where the temperature is below their boiling point.
+- question_num: 11
+  text: Which type of covalent bond is found between carbon atoms in an alkane?
+  A: Double bonds
+  B: Triple bonds
+  C: Single bonds
+  D: Ionic bonds
+  answer: Single bonds
+  points: 1
+  explanation: Alkanes are saturated hydrocarbons, meaning they contain only single
+    covalent bonds between carbon atoms.
+- question_num: 12
+  text: What happens to the available amount of crude oil as it is used?
+  A: It increases
+  B: It stays the same
+  C: It decreases
+  D: It fluctuates
+  answer: It decreases
+  points: 1
+  explanation: Because crude oil is a finite resource that is not being replaced at
+    a rate comparable to its consumption, the total supply decreases.
+long_answer:
+  question_num: 1
+  text: Explain how fractional distillation is used to separate crude oil into useful
+    fractions. In your answer, refer to the physical properties of alkanes and the
+    structure of the fractionating column.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Identifies that crude oil is heated or that fractions
+    have different boiling points. Simple, disjointed statements.
+
+    Level 2 (3-4 marks): Describes the process of heating and the temperature gradient
+    in the column. Explains that fractions condense at different levels based on boiling
+    points.
+
+    Level 3 (5-6 marks): Provides a detailed, logical explanation. Links chain length
+    to the strength of intermolecular forces, explains the temperature gradient (hot
+    at bottom, cool at top), and describes how this leads to separation by condensation
+    at different heights.
+
+    Indicative Content: Crude oil is heated to vaporise; the column is hotter at the
+    bottom and cooler at the top; longer chains have stronger intermolecular forces
+    and higher boiling points; shorter chains have weaker intermolecular forces and
+    lower boiling points; fractions condense at different heights where the temperature
+    is below their boiling point.'
