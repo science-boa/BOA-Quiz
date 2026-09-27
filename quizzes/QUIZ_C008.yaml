@@ -1,0 +1,133 @@
+quiz_id: C008
+video_url: https://www.youtube.com/watch?v=nvVp0BqT82M
+title: 'GCSE Science: Sanitation, Microbiology, and Waste Treatment'
+multiple_choice:
+- question_num: 1
+  text: Which process in a sewage treatment plant specifically produces methane gas?
+  A: Sedimentation in tanks.
+  B: Screening of large objects.
+  C: Anaerobic digestion of sludge.
+  D: Reed bed filtration.
+  answer: Anaerobic digestion of sludge.
+  points: 1
+  explanation: Anaerobic digesters contain bacteria that break down organic sludge
+    in the absence of oxygen, producing methane as a byproduct.
+- question_num: 2
+  text: Why is industrial waste considered a problem for sewage treatment plants?
+  A: It increases the volume of water requiring treatment.
+  B: It prevents aerobic bacteria from growing.
+  C: It contaminates sludge with heavy metals, preventing its use as fertilizer.
+  D: It clogs the screens used for initial filtration.
+  answer: It contaminates sludge with heavy metals, preventing its use as fertilizer.
+  points: 1
+  explanation: Heavy metals are toxic and persistent; if they enter the sewage system,
+    they accumulate in the sludge, making it unsafe for agricultural use.
+- question_num: 3
+  text: What is the definition of a pathogen?
+  A: A chemical that pollutes water sources.
+  B: A microorganism that causes disease.
+  C: A type of bacteria used to generate electricity.
+  D: A solid waste product found in sewage.
+  answer: A microorganism that causes disease.
+  points: 1
+  explanation: Pathogens include bacteria, viruses, and fungi that can infect a host
+    and cause illness.
+- question_num: 4
+  text: What is the purpose of bubbling air through liquid water in a sewage treatment
+    plant?
+  A: To kill all bacteria present in the water.
+  B: To promote the growth of aerobic bacteria to break down organic matter.
+  C: To evaporate the water for easier transport.
+  D: To remove heavy metals from the liquid.
+  answer: To promote the growth of aerobic bacteria to break down organic matter.
+  points: 1
+  explanation: Aerobic bacteria are used in the secondary treatment stage to digest
+    dissolved organic pollutants, requiring a constant supply of oxygen.
+- question_num: 5
+  text: What happens to large objects in the initial stage of sewage treatment?
+  A: They are dissolved by chemicals.
+  B: They are removed by screens.
+  C: They are converted into methane.
+  D: They settle out in sedimentation tanks.
+  answer: They are removed by screens.
+  points: 1
+  explanation: Screening is the first stage of sewage treatment, designed to remove
+    debris like plastic and rags that could damage downstream machinery.
+- question_num: 6
+  text: What is the primary goal of sewage treatment?
+  A: To produce as much methane as possible.
+  B: To separate solids and pathogens so clean water can re-enter rivers.
+  C: To create fertilizer for industrial use.
+  D: To remove all oxygen from the water.
+  answer: To separate solids and pathogens so clean water can re-enter rivers.
+  points: 1
+  explanation: The fundamental objective is to return water to the environment that
+    is safe and does not cause pollution or disease.
+- question_num: 7
+  text: What is sludge in the context of sewage treatment?
+  A: The liquid remaining after treatment.
+  B: The methane gas produced by bacteria.
+  C: The solid waste that settles out in sedimentation tanks.
+  D: The water that has been treated by reed beds.
+  answer: The solid waste that settles out in sedimentation tanks.
+  points: 1
+  explanation: Sedimentation allows suspended solids, primarily feces, to sink to
+    the bottom of tanks, forming a thick substance known as sludge.
+- question_num: 8
+  text: Which condition is required for the bacteria in an anaerobic digester?
+  A: High levels of oxygen.
+  B: The presence of reed beds.
+  C: The absence of oxygen.
+  D: Constant exposure to sunlight.
+  answer: The absence of oxygen.
+  points: 1
+  explanation: Anaerobic means 'without air'. Anaerobic bacteria thrive in environments
+    where oxygen is excluded, allowing them to produce methane.
+- question_num: 9
+  text: What is the final fate of methane gas produced in a treatment plant?
+  A: It is released into the atmosphere.
+  B: It is burned to generate electricity.
+  C: It is used to fertilize soil.
+  D: It is dissolved into the treated water.
+  answer: It is burned to generate electricity.
+  points: 1
+  explanation: Methane is a fuel; burning it releases energy which is captured to
+    power the pumps and machinery of the treatment facility.
+- question_num: 10
+  text: Why is it important to treat sewage before it enters rivers?
+  A: To prevent the spread of waterborne diseases.
+  B: To increase the temperature of the river water.
+  C: To ensure the river has enough solid waste.
+  D: To provide food for fish.
+  answer: To prevent the spread of waterborne diseases.
+  points: 1
+  explanation: Untreated sewage contains high levels of pathogens that cause waterborne
+    diseases, posing a severe risk to public health.
+- question_num: 11
+  text: What happens to the sludge after it has been digested anaerobically?
+  A: It is dumped in the ocean.
+  B: It is dried and used as agricultural fertilizer.
+  C: It is returned to the sedimentation tanks.
+  D: It is converted into liquid water.
+  answer: It is dried and used as agricultural fertilizer.
+  points: 1
+  explanation: Once digested, the sludge is stabilized and nutrient-rich, making it
+    suitable for use as a fertilizer, provided it is not contaminated.
+long_answer:
+  question_num: 1
+  text: Compare the processes of flush toilet sewage treatment and composting toilets.
+    In your answer, explain the biological and physical methods used in each system
+    to manage human waste and evaluate the environmental impact of both methods.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Identifies basic differences, such as flush toilets
+    using water and composting toilets not. Mentions that both treat waste.
+
+    Level 2 (3-4 marks): Describes the processes in more detail, such as the use of
+    aerobic/anaerobic bacteria in sewage works and aerobic bacteria in composting.
+    Mentions the production of fertilizer or methane.
+
+    Level 3 (5-6 marks): Provides a structured comparison. Explains the physical (sedimentation/screening)
+    and biological (aerobic/anaerobic) stages of sewage treatment. Contrasts this
+    with the water-free, aerobic nature of composting. Evaluates the environmental
+    impact by discussing water/energy usage and the risk of contamination (e.g., industrial
+    waste in sewage vs. pathogen-free compost).'
