@@ -1,0 +1,177 @@
+quiz_id: C009
+video_url: https://www.youtube.com/watch?v=TdJ57SQ6GAQ
+title: 'GCSE Chemistry: Principles and Applications of Paper Chromatography'
+multiple_choice:
+- question_num: 1
+  text: Why is a pencil used to draw the baseline in paper chromatography?
+  A: Pencil lead is magnetic and helps the ink move.
+  B: Pencil graphite is insoluble and will not dissolve in the solvent.
+  C: Pencil marks are easier to see than ink marks.
+  D: Pencil lead reacts with the solvent to speed up separation.
+  answer: Pencil graphite is insoluble and will not dissolve in the solvent.
+  points: 1
+  explanation: Pencil graphite is insoluble in most solvents, ensuring it does not
+    dissolve and interfere with the chromatogram or the separation of the ink dyes.
+- question_num: 2
+  text: What is the stationary phase in paper chromatography?
+  A: The solvent
+  B: The beaker
+  C: The filter paper
+  D: The ink sample
+  answer: The filter paper
+  points: 1
+  explanation: The stationary phase is the material that does not move during the
+    experiment, which in paper chromatography is the filter paper.
+- question_num: 3
+  text: What is the mobile phase in paper chromatography?
+  A: The filter paper
+  B: The solvent
+  C: The pencil line
+  D: The chromatogram
+  answer: The solvent
+  points: 1
+  explanation: The mobile phase is the substance that moves through the stationary
+    phase, carrying the components of the mixture with it; in this case, it is the
+    solvent.
+- question_num: 4
+  text: Why must the ink spot be above the level of the solvent at the start?
+  A: To prevent the ink from dissolving into the bulk solvent in the beaker.
+  B: To ensure the solvent evaporates quickly.
+  C: To make the paper dry faster.
+  D: To allow the ink to react with the air.
+  answer: To prevent the ink from dissolving into the bulk solvent in the beaker.
+  points: 1
+  explanation: If the ink spot is submerged, the dyes will dissolve directly into
+    the solvent in the beaker rather than traveling up the paper, ruining the experiment.
+- question_num: 5
+  text: What is the purpose of placing a lid on the beaker?
+  A: To keep the beaker clean.
+  B: To prevent the solvent from evaporating.
+  C: To increase the pressure inside the beaker.
+  D: To stop the paper from falling over.
+  answer: To prevent the solvent from evaporating.
+  points: 1
+  explanation: A lid creates a saturated atmosphere, preventing the solvent from evaporating
+    and ensuring the experiment proceeds at a consistent rate.
+- question_num: 6
+  text: Which substance will travel the furthest up the paper?
+  A: The substance that is most soluble in the stationary phase.
+  B: The substance that is least soluble in the mobile phase.
+  C: The substance that is most soluble in the mobile phase.
+  D: The substance with the highest mass.
+  answer: The substance that is most soluble in the mobile phase.
+  points: 1
+  explanation: Substances that are more soluble in the mobile phase spend more time
+    moving with the solvent and therefore travel further up the paper.
+- question_num: 7
+  text: How is the Rf value calculated?
+  A: Distance moved by solvent / Distance moved by substance
+  B: Distance moved by substance / Distance moved by solvent
+  C: Distance moved by substance + Distance moved by solvent
+  D: Distance moved by substance × Distance moved by solvent
+  answer: Distance moved by substance / Distance moved by solvent
+  points: 1
+  explanation: The Rf value is a ratio defined as the distance traveled by the solute
+    (substance) divided by the distance traveled by the solvent front.
+- question_num: 8
+  text: What does a single spot on a chromatogram indicate?
+  A: The substance is a mixture.
+  B: The substance is pure.
+  C: The solvent was not effective.
+  D: The experiment was performed incorrectly.
+  answer: The substance is pure.
+  points: 1
+  explanation: A pure substance consists of only one type of chemical and will not
+    separate into different components, resulting in a single spot.
+- question_num: 9
+  text: Why might the Rf value of a substance change if the solvent is changed?
+  A: The solubility of the substance in the new solvent will be different.
+  B: The paper will change its chemical composition.
+  C: The pencil line will dissolve.
+  D: The beaker size will affect the Rf value.
+  answer: The solubility of the substance in the new solvent will be different.
+  points: 1
+  explanation: Rf values are specific to the solvent and stationary phase used; changing
+    the solvent changes the solubility of the components, thus changing their rate
+    of movement.
+- question_num: 10
+  text: What happens to chemicals that are not soluble in the solvent?
+  A: They evaporate.
+  B: They move to the top of the paper.
+  C: They remain on the baseline.
+  D: They react with the paper.
+  answer: They remain on the baseline.
+  points: 1
+  explanation: If a substance is insoluble in the chosen solvent, it cannot be carried
+    up the paper and will stay at the starting position.
+- question_num: 11
+  text: What is the final pattern of spots on the paper called?
+  A: A chromatogram
+  B: A solvent front
+  C: A baseline
+  D: A stationary phase
+  answer: A chromatogram
+  points: 1
+  explanation: The resulting pattern of separated substances on the paper after chromatography
+    is known as a chromatogram.
+- question_num: 12
+  text: If a substance travels 4cm and the solvent travels 8cm, what is the Rf value?
+  A: '0.2'
+  B: '0.5'
+  C: '2.0'
+  D: '4.0'
+  answer: '0.5'
+  points: 1
+  explanation: Rf = distance of substance / distance of solvent = 4 / 8 = 0.5.
+- question_num: 13
+  text: What determines the speed at which a chemical moves up the paper?
+  A: The color of the chemical.
+  B: The size of the beaker.
+  C: The balance between solubility in the mobile phase and attraction to the stationary
+    phase.
+  D: The temperature of the room.
+  answer: The balance between solubility in the mobile phase and attraction to the
+    stationary phase.
+  points: 1
+  explanation: The rate of movement is determined by how much time the substance spends
+    in the mobile phase (moving) versus the stationary phase (binding to the paper).
+- question_num: 14
+  text: Why is chromatography used in analytical chemistry?
+  A: To create new substances.
+  B: To separate and identify substances in a mixture.
+  C: To measure the mass of a substance.
+  D: To change the state of matter of a substance.
+  answer: To separate and identify substances in a mixture.
+  points: 1
+  explanation: Chromatography is a separation technique that allows chemists to identify
+    components of a mixture based on their different physical properties.
+- question_num: 15
+  text: Which of the following is true regarding the stationary phase?
+  A: It must always be a liquid.
+  B: It is the substance that moves.
+  C: It is usually a solid or thick liquid.
+  D: It is always water.
+  answer: It is usually a solid or thick liquid.
+  points: 1
+  explanation: The stationary phase is the fixed material that the mobile phase moves
+    through; in paper chromatography, this is the solid filter paper.
+long_answer:
+  question_num: 1
+  text: Explain how paper chromatography separates a mixture of dyes. In your answer,
+    refer to the mobile phase, the stationary phase, and the factors that determine
+    how far each dye travels.
+  points: 6
+  rubric: "Level 1 (1-2 marks): Identifies that chromatography separates mixtures.\
+    \ Mentions the solvent or paper but lacks detail on the mechanism.\nLevel 2 (3-4\
+    \ marks): Describes the process of the solvent moving up the paper. Explains that\
+    \ dyes move at different rates but lacks detail on the interaction between phases.\n\
+    Level 3 (5-6 marks): Provides a detailed explanation of the mobile phase (solvent)\
+    \ and stationary phase (paper). Explains that separation occurs because dyes have\
+    \ different solubilities in the solvent and different attractions to the paper,\
+    \ causing them to move at different rates. Mentions that the Rf value can be used\
+    \ for identification.\nIndicative Content: \n- Mobile phase is the solvent (liquid).\n\
+    - Stationary phase is the filter paper (solid).\n- Dyes dissolve in the solvent\
+    \ and move up the paper.\n- Separation occurs because dyes have different solubilities\
+    \ in the solvent.\n- Dyes have different attractions to the stationary phase.\n\
+    - More soluble dyes move faster/further; more attracted to paper dyes move slower/less\
+    \ distance."
