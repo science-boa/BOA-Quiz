@@ -1,0 +1,156 @@
+quiz_id: C005
+video_url: https://www.youtube.com/watch?v=td8WR_FOQc0
+title: 'GCSE Chemistry: Water Treatment and Potability'
+multiple_choice:
+- question_num: 1
+  text: Why is potable water considered chemically impure?
+  A: It contains dissolved substances.
+  B: It contains harmful bacteria.
+  C: It has a pH that is not exactly 7.
+  D: It is not made of H2O molecules.
+  answer: It contains dissolved substances.
+  points: 1
+  explanation: In chemistry, a pure substance consists of only one type of element
+    or compound. Potable water contains dissolved minerals and salts, meaning it is
+    a mixture, not a pure substance.
+- question_num: 2
+  text: What is the required pH range for potable water?
+  A: 5.0 to 7.0
+  B: 6.5 to 8.5
+  C: 7.0 to 9.0
+  D: 6.0 to 8.0
+  answer: 6.5 to 8.5
+  points: 1
+  explanation: The pH of potable water must be between 6.5 and 8.5 to ensure it is
+    safe for human consumption and not excessively acidic or alkaline.
+- question_num: 3
+  text: Which of the following is a method used to sterilize water?
+  A: Filtration through a wire mesh.
+  B: Passing water through a sand bed.
+  C: Treatment with ultraviolet light.
+  D: Distillation.
+  answer: Treatment with ultraviolet light.
+  points: 1
+  explanation: Sterilization is the process of killing microorganisms. Ultraviolet
+    light, chlorine gas, and ozone are all standard methods used to kill bacteria
+    and other microbes in water treatment.
+- question_num: 4
+  text: What is an aquifer?
+  A: A large body of surface water.
+  B: A permeable rock layer that traps groundwater.
+  C: A type of filtration membrane.
+  D: A reservoir used for desalination.
+  answer: A permeable rock layer that traps groundwater.
+  points: 1
+  explanation: Aquifers are underground layers of water-bearing permeable rock, gravel,
+    sand, or silt from which groundwater can be extracted.
+- question_num: 5
+  text: What is the primary disadvantage of desalination?
+  A: It produces water that is too acidic.
+  B: It requires high energy input and is expensive.
+  C: It cannot remove all dissolved salts.
+  D: It requires large amounts of chlorine.
+  answer: It requires high energy input and is expensive.
+  points: 1
+  explanation: Desalination processes like distillation and reverse osmosis are energy-intensive,
+    making them costly compared to treating freshwater sources.
+- question_num: 6
+  text: What is the function of the wire mesh screen in water treatment?
+  A: To kill bacteria.
+  B: To remove dissolved salts.
+  C: To filter out large objects like twigs.
+  D: To adjust the pH of the water.
+  answer: To filter out large objects like twigs.
+  points: 1
+  explanation: The first stage of freshwater treatment involves passing water through
+    a mesh screen to remove large debris that could damage downstream equipment.
+- question_num: 7
+  text: How does reverse osmosis desalinate seawater?
+  A: By boiling the water and condensing the steam.
+  B: By using chlorine to precipitate the salt.
+  C: By passing water through a membrane that traps salt ions.
+  D: By using sand beds to absorb salt.
+  answer: By passing water through a membrane that traps salt ions.
+  points: 1
+  explanation: Reverse osmosis uses a semi-permeable membrane that allows water molecules
+    to pass through while blocking larger salt ions and impurities.
+- question_num: 8
+  text: Which of these is a source of surface water?
+  A: Aquifers.
+  B: Reservoirs.
+  C: Groundwater.
+  D: Deep wells.
+  answer: Reservoirs.
+  points: 1
+  explanation: Surface water includes bodies of water exposed to the atmosphere, such
+    as lakes, rivers, and reservoirs.
+- question_num: 9
+  text: What is the definition of potable water?
+  A: Water that is chemically pure H2O.
+  B: Water that has been distilled.
+  C: Water that is safe for human consumption.
+  D: Water that contains no dissolved substances.
+  answer: Water that is safe for human consumption.
+  points: 1
+  explanation: Potable water is defined as water that is safe to drink, even though
+    it may contain low levels of dissolved substances.
+- question_num: 10
+  text: What is the purpose of a sand and gravel bed in water treatment?
+  A: To sterilize the water.
+  B: To remove large debris.
+  C: To filter out smaller solid particles.
+  D: To add minerals to the water.
+  answer: To filter out smaller solid particles.
+  points: 1
+  explanation: After large debris is removed, the water passes through sand and gravel
+    beds to remove smaller suspended solids and particles.
+- question_num: 11
+  text: Which process involves boiling water to produce pure water?
+  A: Reverse osmosis.
+  B: Filtration.
+  C: Distillation.
+  D: Sterilization.
+  answer: Distillation.
+  points: 1
+  explanation: Distillation involves heating water to its boiling point to create
+    steam, which is then condensed back into liquid water, leaving behind dissolved
+    salts.
+- question_num: 12
+  text: Why might a country rely on desalination?
+  A: They have an abundance of surface water.
+  B: They lack sufficient natural freshwater supplies.
+  C: They want to produce chemically pure water for industry.
+  D: They have no access to groundwater.
+  answer: They lack sufficient natural freshwater supplies.
+  points: 1
+  explanation: Desalination is primarily used in arid regions where natural freshwater
+    sources like rivers or aquifers are insufficient to meet demand.
+long_answer:
+  question_num: 1
+  text: Explain the processes involved in treating raw freshwater to make it potable,
+    and evaluate why desalination is not used as the primary source of water in all
+    countries.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Identifies one or two steps of water treatment or
+    mentions that desalination is expensive. Points are disjointed.
+
+    Level 2 (3-4 marks): Describes the three-step treatment process (filtration/sterilization)
+    and explains that desalination is costly due to energy requirements. Some logical
+    links are present.
+
+    Level 3 (5-6 marks): Provides a detailed, sequential explanation of the treatment
+    process (mesh, sand/gravel, sterilization) and a clear evaluation of desalination,
+    noting the high energy costs and technical requirements compared to freshwater
+    treatment. The answer is structured and uses scientific terminology correctly.
+
+
+    Indicative Content:
+
+    - Treatment: Filtration (mesh for large objects, sand/gravel for small particles).
+
+    - Sterilization: Chlorine, ozone, or UV light to kill microbes.
+
+    - Desalination: Distillation or reverse osmosis.
+
+    - Evaluation: Desalination is energy-intensive and expensive; freshwater is more
+    sustainable where available.'
