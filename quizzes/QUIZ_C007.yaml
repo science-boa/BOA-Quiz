@@ -1,0 +1,164 @@
+quiz_id: C007
+video_url: https://www.youtube.com/watch?v=A74Sf8U3v_E
+title: 'GCSE Science: Carbon Footprints and Climate Change Mitigation'
+multiple_choice:
+- question_num: 1
+  text: What is the definition of a carbon footprint?
+  A: The total mass of carbon in a product.
+  B: The total amount of greenhouse gases emitted over the life cycle of a product,
+    service, or event.
+  C: The amount of carbon dioxide absorbed by trees during a product's life.
+  D: The total energy used to manufacture a product.
+  answer: The total amount of greenhouse gases emitted over the life cycle of a product,
+    service, or event.
+  points: 1
+  explanation: A carbon footprint measures the total greenhouse gas emissions (including
+    CO2 and methane) produced by an activity or product from raw material extraction
+    to disposal.
+- question_num: 2
+  text: Why is it difficult to calculate an accurate carbon footprint for a mobile
+    phone?
+  A: The data is kept secret by manufacturers.
+  B: Mobile phones do not produce greenhouse gases.
+  C: The life cycle involves complex stages like raw material extraction, manufacturing,
+    transport, and disposal.
+  D: Carbon footprints only apply to large-scale industrial events.
+  answer: The life cycle involves complex stages like raw material extraction, manufacturing,
+    transport, and disposal.
+  points: 1
+  explanation: Life cycle assessments (LCA) are complex because they must account
+    for every stage of a product's existence, including international supply chains.
+- question_num: 3
+  text: Which gas is released by decomposers breaking down waste in landfills?
+  A: Oxygen
+  B: Nitrogen
+  C: Methane
+  D: Sulfur dioxide
+  answer: Methane
+  points: 1
+  explanation: When organic waste decomposes anaerobically in landfills, microorganisms
+    release methane, which is a potent greenhouse gas.
+- question_num: 4
+  text: What is the primary purpose of carbon capture technology?
+  A: To convert carbon dioxide into oxygen.
+  B: To prevent carbon dioxide from entering the atmosphere by storing it underground.
+  C: To increase the efficiency of fossil fuel combustion.
+  D: To remove methane from the atmosphere.
+  answer: To prevent carbon dioxide from entering the atmosphere by storing it underground.
+  points: 1
+  explanation: Carbon capture and storage (CCS) traps CO2 emissions at the source,
+    such as power stations, and stores them in geological formations.
+- question_num: 5
+  text: Which of the following is an alternative energy source to fossil fuels?
+  A: Coal
+  B: Natural gas
+  C: Wind power
+  D: Crude oil
+  answer: Wind power
+  points: 1
+  explanation: Wind, solar, and nuclear power are considered low-carbon alternatives
+    to fossil fuels, which release CO2 when burned.
+- question_num: 6
+  text: Why do governments sometimes hesitate to pass strict environmental legislation?
+  A: They believe climate change is not real.
+  B: They fear that prioritizing environmental measures could harm national economies.
+  C: They do not have the power to tax companies.
+  D: Environmental legislation is always free to implement.
+  answer: They fear that prioritizing environmental measures could harm national economies.
+  points: 1
+  explanation: Economic concerns, such as the cost of transitioning away from fossil
+    fuels, often create political barriers to environmental policy.
+- question_num: 7
+  text: What is a major obstacle to the global transition to renewable energy?
+  A: Renewable energy is often more expensive than fossil fuels.
+  B: Renewable energy produces more CO2 than fossil fuels.
+  C: There is no technology available to harness wind or solar energy.
+  D: Renewable energy is only available in one country.
+  answer: Renewable energy is often more expensive than fossil fuels.
+  points: 1
+  explanation: The high initial capital cost of renewable infrastructure compared
+    to established fossil fuel systems is a significant economic barrier.
+- question_num: 8
+  text: Why are international climate agreements difficult to achieve?
+  A: Countries cannot agree on the definition of a gas.
+  B: Countries hesitate to accept economic risks without guaranteed compliance from
+    others.
+  C: Climate change only affects one country at a time.
+  D: International agreements are illegal under global law.
+  answer: Countries hesitate to accept economic risks without guaranteed compliance
+    from others.
+  points: 1
+  explanation: The 'free-rider' problem and concerns over economic competitiveness
+    make it difficult for nations to commit to binding climate targets.
+- question_num: 9
+  text: What is the role of individuals in mitigating climate change?
+  A: Individuals have no role in climate change.
+  B: Individuals must take personal responsibility for their consumption and adjust
+    their lifestyles.
+  C: Individuals should only focus on government policy.
+  D: Individuals should increase their energy usage to boost the economy.
+  answer: Individuals must take personal responsibility for their consumption and
+    adjust their lifestyles.
+  points: 1
+  explanation: Personal choices regarding transport, diet, and energy consumption
+    contribute to the overall reduction of greenhouse gas emissions.
+- question_num: 10
+  text: Which of these is a greenhouse gas?
+  A: Argon
+  B: Carbon dioxide
+  C: Nitrogen
+  D: Helium
+  answer: Carbon dioxide
+  points: 1
+  explanation: Carbon dioxide is a primary greenhouse gas that traps heat in the atmosphere,
+    contributing to global warming.
+- question_num: 11
+  text: What is the benefit of calculating a rough carbon footprint?
+  A: It provides a perfect, error-free measurement.
+  B: It is required by law for every item sold.
+  C: It provides useful estimations for comparing emitters and developing reduction
+    strategies.
+  D: It eliminates the need for renewable energy.
+  answer: It provides useful estimations for comparing emitters and developing reduction
+    strategies.
+  points: 1
+  explanation: Even if not perfectly accurate, estimations allow for the identification
+    of high-impact areas where emission reductions can be most effective.
+- question_num: 12
+  text: What happens to carbon dioxide captured by carbon capture technology?
+  A: It is released into the upper atmosphere.
+  B: It is stored deep underground in rock crevices or depleted oil wells.
+  C: It is converted into plastic.
+  D: It is burned to create more energy.
+  answer: It is stored deep underground in rock crevices or depleted oil wells.
+  points: 1
+  explanation: Carbon capture and storage involves injecting captured CO2 into stable
+    geological formations to prevent it from reaching the atmosphere.
+- question_num: 13
+  text: Why is waste minimization critical for the environment?
+  A: Waste takes up too much space in factories.
+  B: Waste is expensive to transport.
+  C: Decomposers break down waste and release methane.
+  D: Waste is the only source of energy.
+  answer: Decomposers break down waste and release methane.
+  points: 1
+  explanation: Reducing waste prevents the anaerobic decomposition that leads to methane
+    emissions, a gas with a high global warming potential.
+long_answer:
+  question_num: 1
+  text: Evaluate the challenges associated with reducing global greenhouse gas emissions.
+    In your answer, discuss both the economic and technical difficulties, and explain
+    why international cooperation is essential.
+  points: 6
+  rubric: "Level 1 (1-2 marks): Identifies one or two challenges (e.g., cost or difficulty\
+    \ of technology). Points are disjointed.\nLevel 2 (3-4 marks): Describes economic\
+    \ and technical challenges with some logical links (e.g., renewable energy is\
+    \ expensive, and economies rely on fossil fuels). \nLevel 3 (5-6 marks): Provides\
+    \ a detailed, structured evaluation. Explains the economic reliance on fossil\
+    \ fuels, the technical cost of renewables, and the necessity of international\
+    \ agreements to prevent economic disadvantage for individual nations. \nIndicative\
+    \ Content: \n- Economic reliance on fossil fuels makes transition difficult.\n\
+    - Renewable energy costs are currently higher than fossil fuels.\n- Technical\
+    \ difficulty of carbon capture and storage.\n- International agreements are needed\
+    \ to ensure all nations comply to avoid economic disadvantage (the 'free-rider'\
+    \ problem)."
