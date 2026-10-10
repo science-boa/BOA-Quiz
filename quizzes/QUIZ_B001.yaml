@@ -105,7 +105,7 @@ multiple_choice:
   B: They only express (read) specific genes relevant to their function.
   C: They mutate their DNA to suit their environment.
   D: They discard the genes they do not need.
-  answer: They only express (read) specific genes relevant to their function
+  answer: They only express (read) specific genes relevant to their function.
   points: 1
   explanation: All somatic cells in the body contain the exact same genome, but cell
     differentiation occurs because different cells turn specific genes on or off (using
