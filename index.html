@@ -125,21 +125,30 @@
             }
         }
 
-        function renderQuiz() {
-            document.getElementById('quiz-title').innerText = quizData.title || "Quiz Portal";
-            if (quizData.video_url) {
-                document.getElementById('quiz-video').src = quizData.video_url.replace("watch?v=", "embed/");
-                document.getElementById('video-container').classList.remove('hidden');
-            }
-            const mcContainer = document.getElementById('mc-questions');
-            quizData.multiple_choice?.forEach(q => {
-                const qDiv = document.createElement('div');
-                qDiv.innerHTML = "<p class='font-semibold text-gray-900'>" + q.question_num + ". " + q.text + "</p>" +
-                    ['A', 'B', 'C', 'D'].map(l => "<label class='flex items-center space-x-3 p-2 border rounded-lg cursor-pointer hover:bg-gray-50'><input type='radio' name='mc_" + q.question_num + "' value='" + l + "'><span>" + l + ": " + q[l] + "</span></label>").join('');
-                mcContainer.appendChild(qDiv);
-            });
-            if (quizData.long_answer) document.getElementById('la-text').innerText = quizData.long_answer.text;
-        }
+function renderQuiz() {
+    document.getElementById('quiz-title').innerText = quizData.title || "Quiz Portal";
+    if (quizData.video_url) {
+        document.getElementById('quiz-video').src = quizData.video_url.replace("watch?v=", "embed/");
+        document.getElementById('video-container').classList.remove('hidden');
+    }
+    
+    const mcContainer = document.getElementById('mc-questions');
+    quizData.multiple_choice?.forEach(q => {
+        const qDiv = document.createElement('div');
+        qDiv.innerHTML = "<p class='font-semibold text-gray-900'>" + q.question_num + ". " + q.text + "</p>" +
+            ['A', 'B', 'C', 'D'].map(l => "<label class='flex items-center space-x-3 p-2 border rounded-lg cursor-pointer hover:bg-gray-50'><input type='radio' name='mc_" + q.question_num + "' value='" + l + "'><span>" + l + ": " + q[l] + "</span></label>").join('');
+        mcContainer.appendChild(qDiv);
+    });
+
+    // Conditionally handle the Long Answer section
+    const laSection = document.getElementById('la-section');
+    if (quizData.long_answer) {
+        document.getElementById('la-text').innerText = quizData.long_answer.text;
+        laSection.classList.remove('hidden');
+    } else {
+        laSection.classList.add('hidden');
+    }
+}
 
         // Show the security warning banner and automatically hide it after a few seconds
         function triggerAbuseWarning() {
@@ -182,10 +191,10 @@
                 return;
             }
 
-            if (!document.getElementById('la-input').value.trim()) {
-                alert("Please provide a response for the long answer question.");
-                return;
-            }
+if (quizData.long_answer && !document.getElementById('la-input').value.trim()) {
+    alert("Please provide a response for the long answer question.");
+    return;
+}
 
             btn.disabled = true;
             btn.innerText = "Submitting... 0s";
@@ -207,16 +216,16 @@
                 long_answer_time = parseFloat(laSecs.toFixed(1));
             }
 
-            const payload = {
-                quiz_id: quizId,
-                student_email: email,
-                mc_answers: mc_answers, 
-                la_input: document.getElementById('la-input').value,
-                quiz_schema: quizData,
-                KEY: 29031977,
-                total_time: total_time,
-                long_answer_time: long_answer_time
-            };
+const payload = {
+    quiz_id: quizId,
+    student_email: email,
+    mc_answers: mc_answers, 
+    la_input: quizData.long_answer ? document.getElementById('la-input').value : null,
+    quiz_schema: quizData,
+    KEY: 29031977,
+    total_time: total_time,
+    long_answer_time: long_answer_time
+};
             
             try {
                 const response = await fetch(BACKEND_URL, {
