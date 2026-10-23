@@ -129,21 +129,3 @@ multiple_choice:
   points: 1
   explanation: A shift to the right means reactants (nitrogen and hydrogen) are being
     consumed to form more product (ammonia).
-long_answer:
-  question_num: 1
-  text: 'Explain how changing the temperature and pressure affects the yield of ammonia
-    in the reversible reaction: N2(g) + 3H2(g) ⇌ 2NH3(g). The forward reaction is
-    exothermic.'
-  points: 6
-  rubric: 'Level 1 (1-2 marks): Identifies that temperature or pressure affects the
-    reaction but lacks detail or scientific reasoning. Level 2 (3-4 marks): Explains
-    the effect of either temperature or pressure correctly using Le Chatelier''s principle,
-    with some logical links. Level 3 (5-6 marks): Provides a detailed, logical explanation
-    for both temperature and pressure, correctly identifying the shifts and the reasons
-    based on the exothermic nature and the number of gas molecules. Indicative Content:
-    - Increasing temperature shifts equilibrium to the left (endothermic direction)
-    to absorb heat, decreasing yield. - Decreasing temperature shifts equilibrium
-    to the right (exothermic direction) to release heat, increasing yield. - Increasing
-    pressure shifts equilibrium to the right (side with fewer molecules: 2 vs 4),
-    increasing yield. - Decreasing pressure shifts equilibrium to the left (side with
-    more molecules), decreasing yield.'
