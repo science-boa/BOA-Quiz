@@ -1,0 +1,136 @@
+quiz_id: 101
+video_url: https://www.youtube.com/watch?v=JK7yPzO9POU
+title: 'GCSE Chemistry: Rates of Reaction and Collision Theory'
+multiple_choice:
+- question_num: 1
+  text: What is the minimum amount of energy required for particles to react upon
+    collision?
+  A: Kinetic energy
+  B: Activation energy
+  C: Thermal energy
+  D: Potential energy
+  answer: Activation energy
+  points: 1
+  explanation: Activation energy is defined as the minimum energy that particles must
+    possess in order to react when they collide.
+- question_num: 2
+  text: How does increasing the temperature affect the rate of reaction?
+  A: Particles move slower and collide less frequently.
+  B: Particles have less energy and collide less often.
+  C: Particles move faster and collide with more energy.
+  D: The activation energy of the reaction decreases.
+  answer: Particles move faster and collide with more energy.
+  points: 1
+  explanation: Higher temperatures increase the kinetic energy of particles, causing
+    them to move faster and collide more frequently with energy exceeding the activation
+    energy.
+- question_num: 3
+  text: Which term describes the number of particles per unit volume in a solution?
+  A: Surface area
+  B: Pressure
+  C: Concentration
+  D: Catalyst
+  answer: Concentration
+  points: 1
+  explanation: Concentration refers to the amount of solute dissolved in a given volume
+    of solvent; higher concentration means more particles in the same space.
+- question_num: 4
+  text: Why does increasing the pressure of a gas increase the rate of reaction?
+  A: It increases the activation energy.
+  B: It increases the frequency of successful collisions.
+  C: It makes the particles move slower.
+  D: It decreases the number of particles per unit volume.
+  answer: It increases the frequency of successful collisions.
+  points: 1
+  explanation: Increasing pressure forces gas particles closer together, increasing
+    the frequency of collisions per second.
+- question_num: 5
+  text: What is the effect of a catalyst on a chemical reaction?
+  A: It increases the activation energy.
+  B: It is consumed during the reaction.
+  C: It provides an alternative pathway with lower activation energy.
+  D: It changes the products of the reaction.
+  answer: It provides an alternative pathway with lower activation energy.
+  points: 1
+  explanation: Catalysts speed up reactions by lowering the activation energy required
+    for the reaction to occur, without being used up.
+- question_num: 6
+  text: Which of the following is true about catalysts?
+  A: They are always transition metals.
+  B: They are included in the chemical equation as reactants.
+  C: They are not permanently consumed in the reaction.
+  D: They increase the energy of the reactant particles.
+  answer: They are not permanently consumed in the reaction.
+  points: 1
+  explanation: Catalysts remain chemically unchanged at the end of a reaction, meaning
+    they are not consumed.
+- question_num: 7
+  text: What is the benefit of using a powder instead of a solid block in a reaction?
+  A: It increases the surface area-to-volume ratio.
+  B: It decreases the activation energy.
+  C: It reduces the number of collisions.
+  D: It changes the chemical identity of the reactant.
+  answer: It increases the surface area-to-volume ratio.
+  points: 1
+  explanation: Powdering a solid exposes more particles to the other reactant, increasing
+    the frequency of collisions.
+- question_num: 8
+  text: What are biological catalysts called?
+  A: Transition metals
+  B: Enzymes
+  C: Reactants
+  D: Products
+  answer: Enzymes
+  points: 1
+  explanation: Enzymes are specialized proteins that act as biological catalysts in
+    living organisms.
+- question_num: 9
+  text: According to collision theory, what must happen for a reaction to occur?
+  A: Particles must collide with energy equal to or greater than the activation energy.
+  B: Particles must collide with less energy than the activation energy.
+  C: Particles must not collide at all.
+  D: The temperature must be kept at absolute zero.
+  answer: Particles must collide with energy equal to or greater than the activation
+    energy.
+  points: 1
+  explanation: Only collisions with sufficient energy (activation energy) result in
+    a successful reaction.
+- question_num: 10
+  text: If you increase the surface area of a solid reactant, what happens to the
+    rate of reaction?
+  A: It decreases.
+  B: It stays the same.
+  C: It increases.
+  D: It stops completely.
+  answer: It increases.
+  points: 1
+  explanation: A larger surface area provides more sites for collisions to occur,
+    increasing the frequency of successful collisions.
+- question_num: 11
+  text: What happens to particles that collide with energy below the activation energy?
+  A: They react immediately.
+  B: They bounce apart without reacting.
+  C: They turn into a catalyst.
+  D: They lose all their kinetic energy.
+  answer: They bounce apart without reacting.
+  points: 1
+  explanation: Collisions with insufficient energy are unsuccessful and do not lead
+    to a chemical change.
+long_answer:
+  question_num: 1
+  text: Explain how increasing the temperature and adding a catalyst both increase
+    the rate of a chemical reaction. Refer to collision theory and activation energy
+    in your answer.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Identifies that temperature and catalysts increase
+    reaction rate. Mentions collisions briefly.
+
+    Level 2 (3-4 marks): Explains that temperature increases particle speed/energy
+    and catalysts lower activation energy. Links these to more frequent successful
+    collisions.
+
+    Level 3 (5-6 marks): Provides a detailed explanation: Temperature increases kinetic
+    energy, leading to more frequent collisions and a higher proportion of particles
+    exceeding activation energy. Catalysts provide an alternative pathway with lower
+    activation energy, meaning more collisions are successful. Both result in a higher
+    rate of reaction.'
