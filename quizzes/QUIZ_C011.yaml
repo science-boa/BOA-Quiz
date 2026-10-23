@@ -72,28 +72,3 @@ multiple_choice:
   points: 1
   explanation: The defining feature of a reversible reaction is the ability of the
     products to react to reform the original reactants.
-long_answer:
-  question_num: 1
-  text: Explain why the thermal decomposition of ammonium chloride is classified as
-    a reversible chemical reaction rather than a physical sublimation process. In
-    your answer, refer to the observations made during the heating and cooling stages
-    of the experiment.
-  points: 6
-  rubric: 'Level 1 (1-2 marks): Identifies that the reaction involves heating and
-    cooling. Mentions that substances change form.
-
-    Level 2 (3-4 marks): Explains that heating causes decomposition into ammonia and
-    hydrogen chloride. Mentions that cooling reforms the original solid. Identifies
-    that this is a chemical change.
-
-    Level 3 (5-6 marks): Provides a detailed explanation: Heating provides energy
-    to break chemical bonds (decomposition). The formation of two distinct gases (ammonia
-    and HCl) is confirmed by litmus tests. Cooling allows these gases to react and
-    reform the original solid (ammonium chloride). Concludes that because new substances
-    are formed and the process is reversible, it is a chemical reaction, not physical
-    sublimation.
-
-    Indicative Content: - Thermal decomposition is a chemical change. - Heating breaks
-    bonds to form ammonia and hydrogen chloride. - Litmus tests confirm the presence
-    of two different gases. - Cooling allows the reverse reaction to occur. - Sublimation
-    is only a physical change (no new substances).'
