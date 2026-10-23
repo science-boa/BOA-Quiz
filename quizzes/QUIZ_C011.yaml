@@ -1,0 +1,99 @@
+quiz_id: C011
+video_url: https://www.youtube.com/watch?v=br8lKynV1Hc
+title: 'GCSE Chemistry: Reversible Reactions and Thermal Decomposition'
+multiple_choice:
+- question_num: 1
+  text: What is the defining characteristic of a reversible reaction?
+  A: The reaction only proceeds in one direction.
+  B: The products can react to reform the original reactants.
+  C: The reaction requires a catalyst to proceed.
+  D: The reaction releases energy to the surroundings.
+  answer: The products can react to reform the original reactants.
+  points: 1
+  explanation: A reversible reaction is one where the products can react with each
+    other to reform the original reactants under the right conditions.
+- question_num: 2
+  text: Which of the following is an example of an irreversible reaction?
+  A: Thermal decomposition of ammonium chloride
+  B: Combustion of magnesium
+  C: Evaporation of water
+  D: Melting of ice
+  answer: Combustion of magnesium
+  points: 1
+  explanation: Combustion reactions are typically irreversible because the products
+    cannot easily be converted back into the original fuel and oxygen.
+- question_num: 3
+  text: What symbol is used to represent a reversible reaction in a chemical equation?
+  A: A single arrow pointing right
+  B: An equals sign
+  C: Two half-arrows pointing in opposite directions
+  D: A plus sign
+  answer: Two half-arrows pointing in opposite directions
+  points: 1
+  explanation: The double-headed arrow (or two half-arrows) indicates that the reaction
+    can proceed in both the forward and backward directions.
+- question_num: 4
+  text: What is observed when the boiling tube is removed from the heat and allowed
+    to cool?
+  A: The gases disappear completely.
+  B: White crystals of ammonium chloride form near the mouth of the tube.
+  C: The tube turns black.
+  D: The reaction becomes irreversible.
+  answer: White crystals of ammonium chloride form near the mouth of the tube.
+  points: 1
+  explanation: As the gases cool, they react to reform the solid ammonium chloride,
+    which deposits as white crystals.
+- question_num: 5
+  text: What is the definition of sublimation?
+  A: A chemical reaction where a solid turns into a gas.
+  B: A physical phase change from solid directly to gas.
+  C: A process where a gas turns into a liquid.
+  D: A reaction that releases heat.
+  answer: A physical phase change from solid directly to gas.
+  points: 1
+  explanation: Sublimation is the transition of a substance directly from the solid
+    to the gas state without passing through the liquid state.
+- question_num: 6
+  text: In the reaction NH4Cl(s) ⇌ NH3(g) + HCl(g), what does the 's' represent?
+  A: Solution
+  B: Solid
+  C: Sublimation
+  D: Synthesis
+  answer: Solid
+  points: 1
+  explanation: In chemical equations, (s) denotes the solid state of the substance.
+- question_num: 7
+  text: If a reaction is reversible, what can be said about the products?
+  A: They are always gases.
+  B: They are always solids.
+  C: They can react to reform the reactants.
+  D: They cannot be separated.
+  answer: They can react to reform the reactants.
+  points: 1
+  explanation: The defining feature of a reversible reaction is the ability of the
+    products to react to reform the original reactants.
+long_answer:
+  question_num: 1
+  text: Explain why the thermal decomposition of ammonium chloride is classified as
+    a reversible chemical reaction rather than a physical sublimation process. In
+    your answer, refer to the observations made during the heating and cooling stages
+    of the experiment.
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Identifies that the reaction involves heating and
+    cooling. Mentions that substances change form.
+
+    Level 2 (3-4 marks): Explains that heating causes decomposition into ammonia and
+    hydrogen chloride. Mentions that cooling reforms the original solid. Identifies
+    that this is a chemical change.
+
+    Level 3 (5-6 marks): Provides a detailed explanation: Heating provides energy
+    to break chemical bonds (decomposition). The formation of two distinct gases (ammonia
+    and HCl) is confirmed by litmus tests. Cooling allows these gases to react and
+    reform the original solid (ammonium chloride). Concludes that because new substances
+    are formed and the process is reversible, it is a chemical reaction, not physical
+    sublimation.
+
+    Indicative Content: - Thermal decomposition is a chemical change. - Heating breaks
+    bonds to form ammonia and hydrogen chloride. - Litmus tests confirm the presence
+    of two different gases. - Cooling allows the reverse reaction to occur. - Sublimation
+    is only a physical change (no new substances).'
