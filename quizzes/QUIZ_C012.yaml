@@ -1,0 +1,149 @@
+quiz_id: C012
+video_url: https://www.youtube.com/watch?v=KZPO23kia_o
+title: 'GCSE Chemistry: Reversible Reactions and Le Chatelier''s Principle'
+multiple_choice:
+- question_num: 1
+  text: What does Le Chatelier's principle describe?
+  A: The rate of reaction in an open system
+  B: How the position of equilibrium changes when conditions are altered
+  C: The total energy change of a chemical reaction
+  D: The speed at which a catalyst works
+  answer: How the position of equilibrium changes when conditions are altered
+  points: 1
+  explanation: Le Chatelier's principle states that if a system at equilibrium is
+    subjected to a change in conditions, the position of equilibrium shifts to counteract
+    that change.
+- question_num: 2
+  text: If the position of equilibrium lies to the right, what does this indicate?
+  A: There are more reactant particles than product particles
+  B: The reaction is irreversible
+  C: There are more product particles than reactant particles
+  D: The temperature is too low
+  answer: There are more product particles than reactant particles
+  points: 1
+  explanation: The position of equilibrium describes the relative amounts of reactants
+    and products; a shift to the right indicates a higher concentration of products.
+- question_num: 3
+  text: In the Haber process (N2 + 3H2 ⇌ 2NH3), the forward reaction is exothermic.
+    What happens if the temperature is increased?
+  A: The equilibrium shifts to the left
+  B: The equilibrium shifts to the right
+  C: The equilibrium remains unchanged
+  D: The reaction stops
+  answer: The equilibrium shifts to the left
+  points: 1
+  explanation: Increasing temperature favors the endothermic direction to absorb the
+    excess heat. Since the forward reaction is exothermic, the backward reaction is
+    endothermic.
+- question_num: 4
+  text: Why does decreasing the temperature shift the equilibrium to the right in
+    the Haber reaction?
+  A: It increases the pressure
+  B: It favors the exothermic direction to release heat
+  C: It favors the endothermic direction to absorb heat
+  D: It removes ammonia from the system
+  answer: It favors the exothermic direction to release heat
+  points: 1
+  explanation: Decreasing temperature causes the system to shift in the exothermic
+    direction to counteract the cooling by releasing heat energy.
+- question_num: 5
+  text: How does increasing pressure affect the position of equilibrium in the reaction
+    N2 + 3H2 ⇌ 2NH3?
+  A: It shifts to the left because there are more molecules on the left
+  B: It shifts to the right because there are fewer molecules on the right
+  C: It has no effect on the position of equilibrium
+  D: It shifts to the right because there are more molecules on the right
+  answer: It shifts to the right because there are fewer molecules on the right
+  points: 1
+  explanation: Increasing pressure causes the equilibrium to shift toward the side
+    with fewer gas molecules to reduce the pressure.
+- question_num: 6
+  text: What happens to the equilibrium if the concentration of nitrogen is increased?
+  A: The equilibrium shifts to the left
+  B: The equilibrium shifts to the right
+  C: The equilibrium remains unchanged
+  D: The reaction becomes endothermic
+  answer: The equilibrium shifts to the right
+  points: 1
+  explanation: Increasing the concentration of a reactant causes the system to shift
+    to the right to consume the added reactant and form more product.
+- question_num: 7
+  text: Which of the following is true about a reversible reaction at equilibrium?
+  A: The reaction has stopped
+  B: The rate of the forward reaction equals the rate of the backward reaction
+  C: The concentration of reactants is zero
+  D: The concentration of products is zero
+  answer: The rate of the forward reaction equals the rate of the backward reaction
+  points: 1
+  explanation: At equilibrium, the forward and backward reactions occur at the same
+    rate, so the concentrations of reactants and products remain constant.
+- question_num: 8
+  text: What is the effect of a catalyst on the position of equilibrium?
+  A: It shifts the equilibrium to the right
+  B: It shifts the equilibrium to the left
+  C: It has no effect on the position of equilibrium
+  D: It increases the yield of products
+  answer: It has no effect on the position of equilibrium
+  points: 1
+  explanation: Catalysts increase the rate of both forward and backward reactions
+    equally, so they do not change the position of equilibrium.
+- question_num: 9
+  text: In the reaction N2(g) + 3H2(g) ⇌ 2NH3(g), how many gas molecules are on the
+    left side?
+  A: '1'
+  B: '2'
+  C: '3'
+  D: '4'
+  answer: '4'
+  points: 1
+  explanation: There is 1 molecule of nitrogen and 3 molecules of hydrogen, totaling
+    4 molecules on the left side.
+- question_num: 10
+  text: What does the term 'closed system' imply in this context?
+  A: No energy can enter or leave
+  B: No matter can enter or leave
+  C: The pressure is always constant
+  D: The temperature is always constant
+  answer: No matter can enter or leave
+  points: 1
+  explanation: A sealed system prevents reactants or products from escaping, which
+    is necessary for a reversible reaction to reach equilibrium.
+- question_num: 11
+  text: If the backward reaction is endothermic, what must be true about the forward
+    reaction?
+  A: It is also endothermic
+  B: It is exothermic
+  C: It has no energy change
+  D: It is irreversible
+  answer: It is exothermic
+  points: 1
+  explanation: In a reversible reaction, if one direction is endothermic, the opposite
+    direction must be exothermic.
+- question_num: 12
+  text: What happens to the amount of nitrogen if the equilibrium shifts to the right?
+  A: It increases
+  B: It decreases
+  C: It stays the same
+  D: It becomes zero
+  answer: It decreases
+  points: 1
+  explanation: A shift to the right means reactants (nitrogen and hydrogen) are being
+    consumed to form more product (ammonia).
+long_answer:
+  question_num: 1
+  text: 'Explain how changing the temperature and pressure affects the yield of ammonia
+    in the reversible reaction: N2(g) + 3H2(g) ⇌ 2NH3(g). The forward reaction is
+    exothermic.'
+  points: 6
+  rubric: 'Level 1 (1-2 marks): Identifies that temperature or pressure affects the
+    reaction but lacks detail or scientific reasoning. Level 2 (3-4 marks): Explains
+    the effect of either temperature or pressure correctly using Le Chatelier''s principle,
+    with some logical links. Level 3 (5-6 marks): Provides a detailed, logical explanation
+    for both temperature and pressure, correctly identifying the shifts and the reasons
+    based on the exothermic nature and the number of gas molecules. Indicative Content:
+    - Increasing temperature shifts equilibrium to the left (endothermic direction)
+    to absorb heat, decreasing yield. - Decreasing temperature shifts equilibrium
+    to the right (exothermic direction) to release heat, increasing yield. - Increasing
+    pressure shifts equilibrium to the right (side with fewer molecules: 2 vs 4),
+    increasing yield. - Decreasing pressure shifts equilibrium to the left (side with
+    more molecules), decreasing yield.'
